@@ -1,4 +1,5 @@
 #include <iostream>
+#include <gtk/gtk.h>
 
 using namespace std ;
 
@@ -6,7 +7,7 @@ struct tile {
             bool    empty ;
             bool    lock ;
             char *  name ;
-            }
+            } ;
 
 const int dim_X = 12 ;
 const int dim_Y = 8 ;
@@ -41,7 +42,7 @@ void initialize_cube ( tile *** cube )
 
 void delete_cube ( tile *** cube )
 {
-    for ( int x = 0 ; x < dim_x ; x++ )
+    for ( int x = 0 ; x < dim_X ; x++ )
     {
         for ( int y = 0 ; y < dim_Y ; y++ )
         {
@@ -59,8 +60,47 @@ void delete_cube ( tile *** cube )
 
     delete [] cube ;
 }
-int main ()
-{
 
+extern "C" gboolean handler_delete_event ( GtkWidget * widget, GdkEvent * event,
+                                         gpointer user_data)  
+{
+    gtk_main_quit() ;
+    cout<<"programma terminato regolarmente\n" ;
+    return TRUE ;
+}
+
+int main ( int argc, char * argv[] )
+{
+    GtkBuilder * builder ;
+
+    gtk_init ( &argc, &argv) ;
+
+    builder = gtk_builder_new () ;
+
+    gtk_builder_add_from_file ( builder, "./gui.glade", NULL ) ;
+
+    gtk_builder_connect_signals(builder, NULL);
+
+    gtk_main () ;
+    /*
+     * non inserire nulla qui in mezzo.
+     * questa parte viene eseguita quando si chiude la finestra.
+     */
     return 0 ;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
