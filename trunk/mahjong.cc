@@ -12,6 +12,9 @@ struct tile {
 const int dim_X = 12 ;
 const int dim_Y = 8 ;
 const int dim_Z = 4 ;
+
+static GtkBuilder * builder ;
+
 /*
  * Funzione che crea uno spazio tridimensionale (x, y, z) di tessere.
  */
@@ -62,16 +65,50 @@ void delete_cube ( tile *** cube )
 }
 
 extern "C" gboolean handler_delete_event ( GtkWidget * widget, GdkEvent * event,
-                                         gpointer user_data)  
+                                           gpointer user_data)  
 {
     gtk_main_quit() ;
     cout<<"programma terminato regolarmente\n" ;
     return TRUE ;
 }
 
+extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
+                                                   GdkEvent * event,
+                                                   gpointer user_data )
+{
+    /*
+     * widget       -> the object which received the signal
+     * event        -> the GdkEventButton which triggered this signal.
+     * user_data    -> user data set when the signal handler was connected.
+     */
+    if      ( widget == GTK_WIDGET(gtk_builder_get_object( builder, "new" )))
+    {    cerr<<"new pressed"<<endl ; }
+    else if ( widget == GTK_WIDGET(gtk_builder_get_object( builder, "mix" )))
+    {    cerr<<"mix pressed"<<endl ; }
+    else if ( widget == GTK_WIDGET(gtk_builder_get_object( builder, "undo" )))
+    {    cerr<<"undo pressed"<<endl ; }
+    else if ( widget == GTK_WIDGET(gtk_builder_get_object( builder, "redo" )))
+    {    cerr<<"redo pressed"<<endl ; }
+    else if ( widget == GTK_WIDGET(gtk_builder_get_object( builder, "load" )))
+    {    cerr<<"load pressed"<<endl ; }
+    else if ( widget == GTK_WIDGET(gtk_builder_get_object( builder, "save" )))
+    {    cerr<<"save pressed"<<endl ; }
+    else if ( widget == GTK_WIDGET(gtk_builder_get_object( builder, "exit" )))
+    {    cerr<<"exit pressed"<<endl ; }
+
+    return TRUE ;
+}
+
+extern "C" gboolean draw_play_ground ( GtkWidget * widget, CairoContext * cr,
+                                       gpointer user_data )
+{
+
+
+    return TRUE ;
+}
+
 int main ( int argc, char * argv[] )
 {
-    GtkBuilder * builder ;
 
     gtk_init ( &argc, &argv) ;
 
@@ -88,19 +125,3 @@ int main ( int argc, char * argv[] )
      */
     return 0 ;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
