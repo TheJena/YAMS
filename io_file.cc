@@ -1,27 +1,29 @@
 #include <fstream>
 #include "data_structure.h"
+
 using namespace std ;
 
+const char* F_TILES = "./tiles_names.dat" ;
 const int MAXWORD = 20 ;
 
 /*deallocare correttamente a chiusura applicazione
   array 2d con nomi tessere*/
 
-void import_tiles_names (string * name)
+void import_tiles_names ()
 {
     if ( name != NULL )
         delete[] name ;
-    name = new string [TILES] ;
+    name = new _string [TILES] ;
 
     ifstream file ( F_TILES ) ;
         //debuggare se apertura fallita
 
     char temp ;
-    while (file.peek != '@')
-        temp = file.get() ;
+    while ( file.peek() != '@' )
+        file.get ( temp ) ;
 
-    temp = file.get() ;
-    temp = file.get() ;
+    file.get ( temp ) ;
+    file.get ( temp ) ;
 
     char buffer[MAXWORD] ;
 
@@ -34,13 +36,11 @@ void import_tiles_names (string * name)
             name[i].word[j] = buffer[j] ;
         //debuggare presenza terminatore
 
-        while (file.peek != '\n')
-            temp = file.get() ;
+        while (file.peek() != '\n')
+            file.get ( temp ) ;
 
-        temp = file.get() ;
+        file.get ( temp ) ;
     }
-    temp = file.get() ;
+    file.get ( temp ) ;
     file.close () ;
 }
-
-
