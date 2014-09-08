@@ -5,6 +5,8 @@
 #include "data_structure.h"
 #include "gui.h"
 #include "initializations_operations.h"
+#include "io_file.h"
+#include <fstream>
 
 using namespace std ;
 
@@ -35,6 +37,49 @@ GtkBuilder * builder ;
 colour green_forest = { 34.0/255, 139.0/255, 34.0/255 } ;
 colour peach = { 255.0/255, 229.0/255, 180.0/255 } ;
 
+bool check_position ( const tile * punt, const int &x, const int &y )
+{
+    if ( ( punt->x1 ) >= x )
+        return false ;
+    if ( ( punt->y1 ) >= y )
+        return false ;
+
+    if ( ( punt->x2 ) <= x )
+        return false ;
+    if ( ( punt->y2 ) <= y )
+        return false ;
+
+    return true ;
+
+}
+extern "C" gboolean handler_click_on_widget (GtkWidget *widget,
+               GdkEventButton  *event,
+               gpointer   user_data)
+{
+    const int _x = event->x ;
+    const int _y = event->y ;
+
+    bool quit = false ;
+    for ( int z = dim_Z-1 ; (z >= 0)&&(!quit) ; z-- )
+        for ( int y = 0 ; (y < dim_Y)&&(!quit) ; y++ )
+            for ( int x = 0 ; (x < dim_X)&&(!quit) ; x++ )
+            {
+
+                if ( ( !cube[x][y][z].empty )&&( !cube[x][y][z].lock ) )
+                {
+                    if ( check_position( &cube[x][y][z], _x, _y ) )
+                    {
+                        insert_half_pair( cube[x][y][z].num, x, y, z ) ;
+
+
+                        quit = true ;
+                    }
+                }
+            }
+
+return TRUE ;
+}
+
 
 extern "C" gboolean handler_delete_event ( GtkWidget * widget,
                                            GdkEvent * event,
@@ -42,6 +87,8 @@ extern "C" gboolean handler_delete_event ( GtkWidget * widget,
 {
 	if ( cube != NULL )
 		delete_cube () ;
+    if ( name != NULL )
+        delete_tiles_names () ;
 
 /*deallocare correttamente a chiusura applicazione
   array 2d con nomi tessere*/
@@ -71,10 +118,12 @@ extern "C" gboolean handler_set_new_game ( GtkWidget * widget,
     else if ( gtk_toggle_button_get_active ( tb_from_name ( "rb_difficult" ) ) )
         level = difficult ;
 
+
     if      ( gtk_toggle_button_get_active ( tb_from_name ( "rb_h-c" ) ) )
-        /*modalita' umano vs computer*/ ;
+        mode = h_c ;
     else if ( gtk_toggle_button_get_active ( tb_from_name ( "rb_h-h" ) ) )
-        /*modalita' umano vs umano*/ ;
+        mode = h_h ;
+
 
     if      ( gtk_toggle_button_get_active ( tb_from_name ( "rb_airhead" ) ) )
         ai = airhead ;
@@ -86,7 +135,6 @@ extern "C" gboolean handler_set_new_game ( GtkWidget * widget,
     initialize_cube() ;
     fill_cube() ;
     check_cube() ;
-    unlocked[0] = NULL ;
     refresh_unlocked() ;
 
     redraw_widget ( "playground" ) ;
@@ -245,8 +293,8 @@ void draw_number_on_tile ( cairo_t * &cr_tile,
         cairo_paint ( cr_tile ) ;
 }
 
-cairo_surface_t * number_on_tile ( cairo_surface_t * _obj,
-                                   const int &number )
+cairo_surface_t * number_on_tile (  cairo_surface_t * _obj,
+                                    const int &number )
 {
     cairo_surface_t * _surf_50x50 = cairo_image_surface_create
                                     ( CAIRO_FORMAT_RGB24, 50, 50 ) ;
@@ -258,7 +306,10 @@ cairo_surface_t * number_on_tile ( cairo_surface_t * _obj,
  
     draw_number_on_tile( cr_tile, _obj, number ) ;
 
+    cairo_destroy ( cr_tile ) ;
+
     return _surf_50x50 ;
+    /*la surface la dealloco nella funzione chiamante*/
 }
 
 int number_from_string ( const char * word )
@@ -272,10 +323,10 @@ int number_from_string ( const char * word )
     return (output-'0') ;
 }
 
-cairo_surface_t * paint_tile ( const int &num,
-                               const int &x,
-                               const int &y,
-                               const int &z )
+cairo_surface_t * paint_tile (  const int &num,
+                                const int &x,
+                                const int &y,
+                                const int &z )
 {
     cairo_surface_t * surface ;
     cairo_t * context ;
@@ -283,30 +334,31 @@ cairo_surface_t * paint_tile ( const int &num,
     surface = cairo_image_surface_create ( CAIRO_FORMAT_ARGB32, 62, 62 ) ;
     context = cairo_create ( surface ) ;
 
-    cairo_set_source_surface ( context,
-                               cairo_image_surface_create_from_png ( I_TILE ),
-                               0,
-                               0
-                             ) ;
+    cairo_surface_t * _surface_tile = cairo_image_surface_create_from_png ( I_TILE ) ;
+    cairo_set_source_surface ( context, _surface_tile , 0, 0 ) ;
+
+    cairo_surface_destroy ( _surface_tile ) ;
+
     cairo_paint ( context ) ;
 
-    cairo_surface_t * temp ;
+    cairo_surface_t * temp = NULL ;
+    cairo_surface_t * _surface_from_png = NULL ;
     if (num<=35)
     {
-        temp = number_on_tile ( cairo_image_surface_create_from_png ( I_CIRCLE ),
-                                number_from_string ( name[num].word ) ) ;
+        _surface_from_png = cairo_image_surface_create_from_png ( I_CIRCLE ) ;
+        temp = number_on_tile ( _surface_from_png, number_from_string ( name[num].word ) ) ;
         cairo_set_source_surface ( context, temp, 11, 1 ) ;
     }
     else if (num<=71)
     {
-        temp = number_on_tile ( cairo_image_surface_create_from_png ( I_BAMBOO ),
-                                number_from_string ( name[num].word ) ) ;
+        _surface_from_png = cairo_image_surface_create_from_png ( I_BAMBOO ) ;
+        temp = number_on_tile ( _surface_from_png, number_from_string ( name[num].word ) ) ;
         cairo_set_source_surface ( context, temp, 11, 1 ) ;
     }
     else if (num<=107)
  	{
-        temp = number_on_tile ( cairo_image_surface_create_from_png ( I_CROSS ),
-                                number_from_string ( name[num].word ) ) ;
+        _surface_from_png = cairo_image_surface_create_from_png ( I_CROSS ) ;
+        temp = number_on_tile ( _surface_from_png, number_from_string ( name[num].word ) ) ;
         cairo_set_source_surface ( context, temp, 11, 1 ) ;
     }
     else if(num<=123)
@@ -314,23 +366,27 @@ cairo_surface_t * paint_tile ( const int &num,
         const int wind = (num-108)%4 ; /*0==east 1==sud 2==west 3==north*/
         switch (wind)
         {
-            case 0: cairo_set_source_surface
-                    ( context, cairo_image_surface_create_from_png ( I_EAST ),
+            case 0: _surface_from_png = cairo_image_surface_create_from_png ( I_EAST ) ;
+                    cairo_set_source_surface
+                    ( context, _surface_from_png ,
                       10, 0
                     ) ;
                     break ;
-            case 1: cairo_set_source_surface
-                    ( context, cairo_image_surface_create_from_png ( I_SUD ),
+            case 1: _surface_from_png = cairo_image_surface_create_from_png ( I_SUD ) ;
+                    cairo_set_source_surface
+                    ( context, _surface_from_png,
                       10, 0 
                     ) ;
                     break ;
-            case 2: cairo_set_source_surface
-                    ( context, cairo_image_surface_create_from_png ( I_WEST ),
+            case 2: _surface_from_png = cairo_image_surface_create_from_png ( I_WEST ) ;
+                    cairo_set_source_surface
+                    ( context, _surface_from_png,
                       10, 0
                     ) ;
                     break ;
-            case 3: cairo_set_source_surface
-                    ( context, cairo_image_surface_create_from_png ( I_NORTH ),
+            case 3: _surface_from_png = cairo_image_surface_create_from_png ( I_NORTH ) ;
+                    cairo_set_source_surface
+                    ( context, _surface_from_png,
                       10, 0
                     ) ;
                     break ;
@@ -341,23 +397,26 @@ cairo_surface_t * paint_tile ( const int &num,
         const int dragon = (num-124)%3 /*0==red 1==green 2==white*/;
         switch (dragon)
         {
-            case 0: cairo_set_source_surface
+            case 0: _surface_from_png = cairo_image_surface_create_from_png ( I_RED_DRAGON ) ;
+                    cairo_set_source_surface
                     ( context,
-                      cairo_image_surface_create_from_png ( I_RED_DRAGON ),
+                      _surface_from_png,
                       10,
                       0
                     ) ;
                     break ;
-            case 1: cairo_set_source_surface
+            case 1: _surface_from_png = cairo_image_surface_create_from_png ( I_GREEN_DRAGON ) ;
+                    cairo_set_source_surface
                     ( context, 
-                      cairo_image_surface_create_from_png ( I_GREEN_DRAGON ),
+                      _surface_from_png,
                       10,
                       0
                     ) ;
                     break ;
-            case 2: cairo_set_source_surface
+            case 2: _surface_from_png = cairo_image_surface_create_from_png ( I_WHITE_DRAGON ) ;
+                    cairo_set_source_surface
                     ( context,
-                      cairo_image_surface_create_from_png ( I_WHITE_DRAGON ),
+                      _surface_from_png,
                       10,
                       0
                     ) ;
@@ -369,65 +428,73 @@ cairo_surface_t * paint_tile ( const int &num,
         switch (num)
         {
             case 136:/*spring*/
+                     _surface_from_png = cairo_image_surface_create_from_png ( I_SPRING ) ;
                      cairo_set_source_surface
                      ( context,
-                       cairo_image_surface_create_from_png ( I_SPRING ),
+                       _surface_from_png,
                        10,
                        0
                      ) ;
                      break ;
             case 137:/*summer*/
+                     _surface_from_png = cairo_image_surface_create_from_png ( I_SUMMER ) ;
                      cairo_set_source_surface
                      ( context,
-                       cairo_image_surface_create_from_png ( I_SUMMER ),
+                       _surface_from_png,
                        10,
                        0
                      ) ;
                      break ;
             case 138:/*autumn*/
+                     _surface_from_png = cairo_image_surface_create_from_png ( I_AUTUMN ) ;
                      cairo_set_source_surface
                      ( context,
-                       cairo_image_surface_create_from_png ( I_AUTUMN ),
+                       _surface_from_png,
                        10,
                        0
                      ) ;
                      break ;
             case 139:/*winter*/
+                     _surface_from_png = cairo_image_surface_create_from_png ( I_WINTER ) ;
                      cairo_set_source_surface
                      ( context,
-                       cairo_image_surface_create_from_png ( I_WINTER ),
+                       _surface_from_png,
                        10,
                        0
                      ) ;
                      break ;
             case 140:/*plumb*/
+                     _surface_from_png = cairo_image_surface_create_from_png ( I_PLUMB ) ;
                      cairo_set_source_surface
                      ( context,
-                       cairo_image_surface_create_from_png ( I_PLUMB ),
+                       _surface_from_png,
                        10,
                        0
                      ) ;
                      break ;
             case 141:/*orchid*/
+                     _surface_from_png = cairo_image_surface_create_from_png ( I_ORCHID ) ;
                      cairo_set_source_surface
                      ( context,
-                       cairo_image_surface_create_from_png ( I_ORCHID ),
+                       _surface_from_png,
                        10,
                        0
                      ) ;
                      break ;
             case 142:/*chrysantemum*/
+                     _surface_from_png = cairo_image_surface_create_from_png ( I_CHRYSANTEMUM ) ;
                      cairo_set_source_surface
                      ( context,
-                       cairo_image_surface_create_from_png ( I_CHRYSANTEMUM ),
+                       _surface_from_png,
                        10,
                        0
                      ) ;
                      break ;
             case 143:/*bamboo_forest*/
+                     _surface_from_png = cairo_image_surface_create_from_png ( I_BAMBOO_FOREST ) ;
                      cairo_set_source_surface
                      ( context,
-                       cairo_image_surface_create_from_png ( I_BAMBOO_FOREST ),
+                       _surface_from_png,
                        10,
                        0
                      ) ;
@@ -437,7 +504,14 @@ cairo_surface_t * paint_tile ( const int &num,
 
     cairo_paint ( context ) ;
 
+    if ( temp != NULL )
+        cairo_surface_destroy ( temp ) ;
+    if ( _surface_from_png != NULL )
+        cairo_surface_destroy ( _surface_from_png ) ;
+    cairo_destroy ( context ) ;
+
     return ( surface ) ;
+    /* la surface la dealloco nella funzione chiamante*/
 }
 
 void calculate_coor_x_y ( const int &x,
@@ -446,10 +520,10 @@ void calculate_coor_x_y ( const int &x,
                           int &_dx,
                           int &_dy )
 {
-    _dx = 50 ;
+    _dx = 24 ;
     _dy = 50 ;
-    _dx += x*50 ;
-    _dy += y*50 ;
+    _dx += x*51 ;
+    _dy += y*51 ;
     _dx += z*10 ;
     _dy -= z*10 ;
 }
@@ -472,8 +546,22 @@ extern "C" gboolean draw_play_ground ( GtkWidget * widget,
                                                       x, y, z ) ;
                 int coor_x, coor_y ;
                 calculate_coor_x_y ( x, y, z, coor_x, coor_y ) ;
+
+                set_coor_tile ( &cube[x][y][z], coor_x, coor_y ) ;
+
                 cairo_set_source_surface ( cr, tile, coor_x, coor_y ) ;
                 cairo_paint (cr) ;
+
+                cairo_surface_destroy ( tile ) ;
             }
     return TRUE ;
+}
+
+void set_coor_tile ( tile * punt, const int &x, const int &y )
+{
+    punt->x1 = x + 10 ;
+    punt->y1 = y ;
+
+    punt->x2 = x + 10 + 50 ;
+    punt->y2 = y + 50 ;
 }

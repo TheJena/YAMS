@@ -29,3 +29,5 @@ GtkWidget * widget_from_name ( const char * name ) ;
  * dato in input il nome del togglebutton
  */
 GtkToggleButton * tb_from_name ( const char * name ) ;
+
+void set_coor_tile ( tile * punt, const int &x, const int &y ) ;

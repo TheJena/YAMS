@@ -16,10 +16,13 @@ const int   SEASONVALUE = 12 ;
 const int   FLOWERVALUE = 14 ;
 
 layout level = medium ;
-
-computer ai = greedy ;
+computer ai = airhead ;
+game mode = h_c ;
 
 tile *** cube = NULL ;
-tile *    unlocked[TILES] ;
+
+const int FREE  = dim_X * dim_Y ;
+
+tile *    unlocked[FREE] ;
 
 _string * name = NULL ;

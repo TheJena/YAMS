@@ -1,4 +1,4 @@
-
+#include "game.h"
 
 /*
  * Funzione che crea uno spazio tridimensionale (x, y, z) di tessere.
@@ -35,6 +35,8 @@ void check_cube () ;
  */
 void refresh_unlocked () ;
 
+void extract_pair ( couple *  pair ) ;
+
 /*
  * Funzione che ordina alfabeticamente un sotto array
  */
@@ -49,6 +51,17 @@ bool left_cell ( const int &x, const int &y, const int &z ) ;
  * Funzione che ritorna true se la cella destra e' libera
  */
 bool right_cell ( const int &x, const int &y, const int &z ) ;
+
+bool check_pair ( const tile * const a, const tile * const b,
+                  tile * &first, tile * &second ) ;
+
+void extract_pair ( couple *  pair ) ;
+
+void find_coord ( const int &num, int &_x, int &_y, int &_z ) ;
+
+bool check_solvability ( int counter ) ;
+
+bool between ( const int &min, const int &middle, const int &max ) ;
 
 /*
  * Funzione che aggiorna la removibilita' di una singola tessera
@@ -119,7 +132,7 @@ void fill_floor( const int &x1, const int &x2, const int &y1, const int &y2,
  */
 void delete_cube ( ) ;
 
-
+void reset_cell ( const int &x, const int &y, const int &z ) ;
 
 
 
