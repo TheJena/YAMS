@@ -26,7 +26,7 @@ int main ( int argc, char * argv[] )
     check_cube () ;
     unlocked[0] = NULL ;
     refresh_unlocked () ; /* nota: chiama gia la sort_unlocked()*/
-
+    start_game () ;
 
     gtk_main () ;
     /*

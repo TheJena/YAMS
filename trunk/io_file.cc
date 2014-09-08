@@ -44,3 +44,15 @@ void import_tiles_names ()
     file.get ( temp ) ;
     file.close () ;
 }
+
+void delete_tiles_names ()
+{
+    for ( int i = 0 ; i < TILES ; i++ )
+    {
+        delete [] name[i].word ;
+        name[i].word = NULL ;
+    }
+
+    delete [] name ;
+    name = NULL ;
+}
