@@ -30,26 +30,33 @@ void start_game ()
         }
 }
 
-void check_couple ( int &row )
+void check_couple ( )
 {
-
-    if ( ( strcmp ( mov[row][col].name1, mov[row][col].name2 ) == 0 )
-         && ( mov[row][col].t1 != mov[row][col].t2 ) )
+    if ( ( mov[row][col].t1 != -1 )&&( mov[row][col].t2 != -1 ) )
     {
-        reset_cell ( mov[row][col].x1, mov[row][col].y1, mov[row][col].z1 ) ;
-        reset_cell ( mov[row][col].x2, mov[row][col].y2, mov[row][col].z2 ) ;
-        check_cube () ;
-        check_solvability(0) ;
+        if ( ( ( strcmp ( mov[row][col].name1, mov[row][col].name2 ) == 0 )
+                       && ( mov[row][col].t1 != mov[row][col].t2 ) )
+                     || ( ( between (136, mov[row][col].t1, 139 ) )
+                          && ( between (136, mov[row][col].t2  , 139 ) ) )
+                     || ( ( between (140, mov[row][col].t1, 143 ) )
+                          && ( between (140, mov[row][col].t2  , 143 ) ) ) )
+        {
 
-        /*ora tocca all'avversario*/
-        opponent_round () ;
-    }
-    else
-    {
-        mov[row][col].t1 = -1 ;
-        mov[row][col].t2 = -1 ;
-    }
+            reset_cell ( mov[row][col].x1, mov[row][col].y1, mov[row][col].z1 ) ;
+            reset_cell ( mov[row][col].x2, mov[row][col].y2, mov[row][col].z2 ) ;
+            check_cube () ;
+            check_solvability(0) ;
 
+            /*ora tocca all'avversario*/
+            opponent_round () ;
+        }
+        else
+        {
+            mov[row][col].t1 = -1 ;
+            mov[row][col].t2 = -1 ;
+            reset_highlighted_cell() ;
+        }
+    }
 }
 
 void opponent_round ()
@@ -69,10 +76,22 @@ cerr<<mov[row][1].name1<<" "<<mov[row][1].t1<<" "<<mov[row][1].name2<<" "<<mov[r
         reset_cell ( mov[row][1].x2, mov[row][1].y2, mov[row][1].z2 ) ;
 
         row++ ;
-        check_cube () ;
-        check_solvability(0) ;
-        redraw_widget ( "playground" ) ;
+
+        if ( row == TILES/4)
+                    end_game();
+        else
+        {
+            check_cube () ;
+            check_solvability(0) ;
+            redraw_widget ( "playground" ) ;
+        }
     }
+}
+
+void reset_row()
+{
+    mov[row][col].t1 = -1 ;
+    mov[row][col].t2 = -1 ;
 }
 
 void insert_half_pair ( const int &num, const int &x, const int &y, const int &z )
@@ -89,6 +108,11 @@ void insert_half_pair ( const int &num, const int &x, const int &y, const int &z
         mov[row][col].x1 = x ;
         mov[row][col].y1 = y ;
         mov[row][col].z1 = z ;
+
+        set_highlighted_cell ( 1, x, y, z ) ;
+        redraw_widget ( "playground" ) ;
+
+        check_couple ( ) ;
     }
     else if ( mov[row][col].t2 == -1 )
     {
@@ -98,12 +122,16 @@ void insert_half_pair ( const int &num, const int &x, const int &y, const int &z
         mov[row][col].y2 = y ;
         mov[row][col].z2 = z ;
 
-        check_couple ( row ) ;
+        set_highlighted_cell ( 2, x, y, z ) ;
+        redraw_widget ( "playground" ) ;
+
+        check_couple ( ) ;
     }
 }
 
 void end_game ()
 {
+cout<<"end game\n";
     for ( int x = 0 ; x < TILES/4 ; x++ )
         delete [] mov[x] ;
     delete [] mov ;

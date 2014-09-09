@@ -16,10 +16,12 @@ struct couple   {
 
 void start_game () ;
 
-void check_couple ( int &row ) ;
+void check_couple ( ) ;
 
 void insert_half_pair ( const int &num, const int &x, const int &y, const int &z ) ;
 
 void end_game () ;
 
 void opponent_round () ;
+
+void reset_row() ;
