@@ -28,6 +28,8 @@ int main ( int argc, char * argv[] )
     refresh_unlocked () ; /* nota: chiama gia la sort_unlocked()*/
     start_game () ;
 
+    redraw_widget ( "playground" ) ;
+
     gtk_main () ;
     /*
      * non inserire nulla qui in mezzo.

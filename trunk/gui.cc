@@ -36,6 +36,43 @@ GtkBuilder * builder ;
 
 colour green_forest = { 34.0/255, 139.0/255, 34.0/255 } ;
 colour peach = { 255.0/255, 229.0/255, 180.0/255 } ;
+colour black = { 0.0/255, 0.0/255, 0.0/255 } ;
+colour red = { 255.0/255, 0.0/255, 0.0/255 } ;
+
+int h_x1 = -1 ;
+int h_y1 = -1 ;
+int h_z1 = -1 ;
+
+int h_x2 = -1 ;
+int h_y2 = -1 ;
+int h_z2 = -1 ;
+
+void set_highlighted_cell ( const int &n, const int &x, const int &y, const int &z )
+{
+    if ( n == 1 )
+    {
+        h_x1 = x ;
+        h_y1 = y ;
+        h_z1 = z ;
+    } else
+    if ( n == 2 )
+    {
+        h_x2 = x ;
+        h_y2 = y ;
+        h_z2 = z ;
+    } else { /*debug this case*/ ; }
+}
+
+void reset_highlighted_cell ()
+{
+    h_x1 = -1 ;
+    h_y1 = -1 ;
+    h_z1 = -1 ;
+
+    h_x2 = -1 ;
+    h_y2 = -1 ;
+    h_z2 = -1 ;
+}
 
 bool check_position ( const tile * punt, const int &x, const int &y )
 {
@@ -76,6 +113,13 @@ extern "C" gboolean handler_click_on_widget (GtkWidget *widget,
                     }
                 }
             }
+
+    if ( !quit )
+    {
+        reset_highlighted_cell() ;
+        reset_row() ;
+        redraw_widget ( "playground" ) ;
+    }
 
 return TRUE ;
 }
@@ -217,6 +261,8 @@ void redraw_widget ( const char * name )
         height  = gtk_widget_get_allocated_height ( _widget ) ;
 
         gtk_widget_queue_draw_area( _widget, 0, 0, width, height ) ;
+
+cout<<'3';
 }
 
 
@@ -508,6 +554,19 @@ cairo_surface_t * paint_tile (  const int &num,
         cairo_surface_destroy ( temp ) ;
     if ( _surface_from_png != NULL )
         cairo_surface_destroy ( _surface_from_png ) ;
+
+
+
+    if ( ( ( h_x1 == x )&&( h_y1 == y )&&( h_z1 == z ) ) ||
+         ( ( h_x2 == x )&&( h_y2 == y )&&( h_z2 == z ) )
+       )
+    {
+        cairo_set_line_width ( context, 1.5 ) ;
+        cairo_set_source_rgb ( context, red.r, red.g, red.b ) ;
+        cairo_rectangle ( context, 13, 3, 46, 46 ) ;
+        cairo_stroke ( context ) ;
+    }
+
     cairo_destroy ( context ) ;
 
     return ( surface ) ;

@@ -226,7 +226,14 @@ void extract_pair ( couple *  pair )
                                                         second ) ;
                             } while ( ! exit ) ;
                             break ;
-        case greedy :       
+
+        case greedy :       for ( int h = 1 ; ((h<FREE)&&(!exit)) ; h++ )
+                            {
+                                exit = check_pair( unlocked[h-1], unlocked[h],
+                                                   first, second ) ;
+                            }
+                            if ( !exit )
+                                cout<<"errore_in_extract_pair\n" ;
                             break ;
         case thoughtful :   
                             break ;
@@ -269,7 +276,7 @@ cerr<<"mosse finite" ;
     }
 
     bool ret = false ;
-    for ( int i = 1 ; ((i < TILES)&&(!ret)) ; i++ )
+    for ( int i = 1 ; ((i < FREE)&&(!ret)) ; i++ )
     {
         if ( ( unlocked[i] == NULL ) || ( unlocked[i-1] == NULL ) )
             continue ;

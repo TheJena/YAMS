@@ -10,6 +10,14 @@ struct colour {
                 double b ;
               } ;
 
+extern int h_x1 ;
+extern int h_y1 ;
+extern int h_z1 ;
+
+extern int h_x2 ;
+extern int h_y2 ;
+extern int h_z2 ;
+
 extern "C" gboolean draw_play_ground ( GtkWidget * widget,
                                        cairo_t * cr,
                                        gpointer user_data ) ;
@@ -31,3 +39,7 @@ GtkWidget * widget_from_name ( const char * name ) ;
 GtkToggleButton * tb_from_name ( const char * name ) ;
 
 void set_coor_tile ( tile * punt, const int &x, const int &y ) ;
+
+void set_highlighted_cell ( const int &n, const int &x, const int &y, const int &z ) ;
+
+void reset_highlighted_cell () ;
