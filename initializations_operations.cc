@@ -4,6 +4,7 @@
 #include <cstring>
 #include "data_structure.h"
 #include "initializations_operations.h"
+#include "gui.h"
 
 using namespace std ;
 
@@ -76,8 +77,6 @@ void fill_cube ()
     /*debug se last != 144*/
     }
 
-    mix_cube () ;
-
 }
 
 /*
@@ -86,6 +85,8 @@ void fill_cube ()
  */
 void mix_cube ()
 {
+    reset_highlighted_cell( ) ;
+
     srand ( time(0) ) ;
 
     /* genero un numero massimo di swap tra le tessere
@@ -101,7 +102,6 @@ void mix_cube ()
         generate_random ( x1, y1, z1, x2, y2, z2 ) ;
         swap_tiles( x1, y1, z1, x2, y2, z2, i ) ;
     }
-    check_cube() ;
 }
 
 /*
@@ -142,7 +142,6 @@ void check_cube ()
                 else
                     cube[x][y][z].lock = true ;
             }
-    refresh_unlocked () ;
 }
 
 /*
@@ -166,14 +165,13 @@ void refresh_unlocked ()
                         u++ ;
                     }
 /*debug se u > FREE*/
-
-    sort_unlocked() ;
 }
 
 bool check_pair ( tile* a, tile* b, tile* &first, tile* &second )
 {
 
-    if ( 0 == strcmp ( name[a->num].word, name[b->num].word ) )
+    if ( ( a->num != b->num ) &&
+         ( 0 == strcmp ( name[a->num].word, name[b->num].word ) ) )
     {
         first = a ;
         second = b ;
@@ -196,46 +194,201 @@ bool check_pair ( tile* a, tile* b, tile* &first, tile* &second )
     }
 }
 
+void initialize_neighbor ( tile * &left_a, tile * &right_a, tile * &under_a,
+                           tile * &left_b, tile * &right_b, tile * &under_b,
+                           const int &xa, const int &ya, const int &za,
+                           const int &xb, const int &yb, const int &zb,
+                           tile * &a, tile * &b )
+{
+    if ((xa-1 >= 0)&&( !cube[xa-1][ya][za].empty ))
+        left_a = &(cube[xa-1][ya][za]) ;
+    if ((xa+1 < dim_X)&&( !cube[xa+1][ya][za].empty ))
+        right_a = &(cube[xa+1][ya][za]) ;
+    if ((za-1 >= 0)&&( !cube[xa][ya][za-1].empty ))
+        under_a = &(cube[xa][ya][za-1]) ;
+
+    if ((xb-1 >= 0)&&( !cube[xb-1][yb][zb].empty ))
+        left_b = &(cube[xb-1][yb][zb]) ;
+    if ((xb+1 < dim_X)&&( !cube[xb+1][yb][zb].empty ))
+        right_b = &(cube[xb+1][yb][zb]) ;
+    if ((zb-1 >= 0)&&( !cube[xb][yb][zb-1].empty ))
+        under_b = &(cube[xb][yb][zb-1]) ;
+    /*controllo i casi particolari ed escludo le tessere comuni*/
+    if (( left_a == right_b )||( left_b == right_a ))
+    {
+        if ( left_b == right_a )
+        {
+            tile * temp = a ;
+            a = b ;
+            b = temp ;
+        }
+        right_b = NULL ;
+    } else 
+    if (( left_a == b )||(left_b == a))
+    {
+        if ( left_b ==a )
+        {
+            tile * temp = a ;
+            a = b ;
+            b = temp ;
+        }
+        left_a  = NULL ;
+        right_b = NULL ;
+    } else
+    if ( ( under_a == right_b )||( under_b == right_a ) )
+    {
+        if ( under_b == left_a )
+        {
+            tile * temp = a ;
+            a = b ;
+            b = temp ;
+        }
+        left_a  = NULL ;
+        right_b = NULL ;
+    } else
+    if ( ( under_a == left_b )||( under_b == left_a ) )
+    {
+        if ( under_b == left_a )
+        {
+            tile * temp = a ;
+            a = b ;
+            b = temp ;
+        }
+        right_a = NULL ;
+        left_a  = NULL ;
+    }
+}
+
+
+void check_convenience ( tile * a, tile * b, bool &exit )
+{
+cout<<"%\n";
+    int xa, ya, za, xb, yb, zb ;
+    find_coord ( a->num, xa, ya, za ) ;
+    find_coord ( b->num, xb, yb, zb ) ;
+
+    tile * left_a=NULL;
+    tile * right_a=NULL;
+    tile * under_a=NULL;
+    tile * left_b=NULL;
+    tile * right_b=NULL;
+    tile * under_b=NULL ;
+
+    initialize_neighbor ( left_a, right_a, under_a,
+                          left_b, right_b, under_b,
+                          xa, ya, za, xb, yb, zb, a, b    ) ;
+
+    int temp_x, temp_y, temp_z ;
+
+    if ( (exit)&&( left_a != NULL )&&( left_a->value > a->value ) )
+    {
+cout<<"01\n";
+        find_coord( left_a->num, temp_x, temp_y, temp_z ) ;
+        if ( ( temp_x-1 >= 0 )&&( cube[temp_x-1][temp_y][temp_z].empty ) )
+            exit = false ;
+cout<<"-01\n";
+    }
+    if ( (exit)&&( right_a != NULL )&&( right_a->value > a->value ) )
+    {
+cout<<"02\n";
+        find_coord( right_a->num, temp_x, temp_y, temp_z ) ;
+        if ( ( temp_x+1 < dim_X )&&( cube[temp_x+1][temp_y][temp_z].empty ) )
+            exit = false ;
+cout<<"-02\n";
+    }
+    if ( (exit)&&( under_a != NULL )&&( under_a->value > a->value) )
+    {
+cout<<"03\n";
+        find_coord( under_a->num, temp_x, temp_y, temp_z ) ;
+        if ( ( ( temp_x-1 >= 0 )&&( cube[temp_x-1][temp_y][temp_z].empty) ) ||
+             ( ( temp_x+1 < dim_X)&&(cube[temp_x+1][temp_y][temp_z].empty) )  )
+            exit = false ;
+cout<<"-03\n";
+    }
+    if ( (exit)&&( left_b != NULL )&&( left_b->value > b->value ) )
+    {
+cout<<"04\n";
+        find_coord( left_b->num, temp_x, temp_y, temp_z ) ;
+        if ( ( temp_x-1 >= 0 )&&( cube[temp_x-1][temp_y][temp_z].empty ) )
+            exit = false ;
+cout<<"-04\n";
+    }
+    if ( (exit)&&( right_b != NULL )&&( right_b->value > b->value ) )
+    {
+cout<<"05\n";
+        find_coord( right_b->num, temp_x, temp_y, temp_z ) ;
+        if ( ( temp_x+1 < dim_X )&&( cube[temp_x+1][temp_y][temp_z].empty ) )
+            exit = false ;
+cout<<"-05\n";
+    }
+    if ( (exit)&&( under_b != NULL )&&( under_b->value > b->value) )
+    {
+cout<<"06\n";
+        find_coord( under_b->num, temp_x, temp_y, temp_z ) ;
+        if ( ( ( temp_x-1 >= 0 )&&( cube[temp_x-1][temp_y][temp_z].empty) ) ||
+             ( ( temp_x+1 < dim_X)&&(cube[temp_x+1][temp_y][temp_z].empty) )  )
+            exit = false ;
+cout<<"-06\n";
+    }
+}
+
+void airhead_extraction ( tile * &first, tile * &second, bool &exit )
+{
+cout<<"07\n";
+    int temp = 0 ;
+    do
+    {
+        do
+        {   /*
+             * genero un random tra 1 e 142 cosi'
+             * evito di dover controllare che le
+             * celle attigue non siano fuori dall'array
+             */
+            temp = 1 + rand()%(FREE-2) ;
+        } while ( unlocked[temp] == NULL ) ;
+        if ( unlocked[temp-1] != NULL )
+            exit = check_pair(unlocked[temp], unlocked[temp-1], first, second);
+        if ( ( !exit ) && ( unlocked[temp+1] != NULL ) )
+            exit = check_pair(unlocked[temp], unlocked[temp+1], first, second);
+    } while ( ! exit ) ;
+cout<<"08\n";
+}
+
 void extract_pair ( couple *  pair )
 {
-    int temp = 0 ;
     bool exit = false ;
     tile * first = NULL ;
     tile * second = NULL ;
     switch ( ai )
     {
-        case airhead :      do
-                            {
-                                do
-                                {   /*
-                                     * genero un random tra 1 e 142 cosi'
-                                     * evito di dover controllare che le
-                                     * celle attigue non siano fuori dall'array
-                                     */
-                                    temp = 1 + rand()%(FREE-2) ;
-                                } while ( unlocked[temp] == NULL ) ;
-                                if ( unlocked[temp-1] != NULL )
-                                    exit = check_pair ( unlocked[temp],
-                                                        unlocked[temp-1],
-                                                        first,
-                                                        second ) ;
-                                if ( ( !exit ) && ( unlocked[temp+1] != NULL ) )
-                                    exit = check_pair ( unlocked[temp],
-                                                        unlocked[temp+1],
-                                                        first,
-                                                        second ) ;
-                            } while ( ! exit ) ;
+        case airhead :      airhead_extraction( first, second, exit ) ;
                             break ;
 
         case greedy :       for ( int h = 1 ; ((h<FREE)&&(!exit)) ; h++ )
                             {
-                                exit = check_pair( unlocked[h-1], unlocked[h],
-                                                   first, second ) ;
+                                if ((unlocked[h-1]!=NULL )&&(unlocked[h]!=NULL))
+                                    exit = check_pair( unlocked[h-1],
+                                                       unlocked[h], first,
+                                                       second ) ;
                             }
                             if ( !exit )
                                 cout<<"errore_in_extract_pair\n" ;
                             break ;
-        case thoughtful :   
+
+        case thoughtful :   for ( int h = 1 ; ((h<FREE)&&(!exit)) ; h++ )
+                            {
+                                if ((unlocked[h-1]!=NULL )&&(unlocked[h]!=NULL))
+                                    exit = check_pair( unlocked[h-1],
+                                                       unlocked[h], first,
+                                                       second ) ;
+                                if (exit)
+                                    check_convenience ( first, second, exit ) ;
+                            }
+                            if ( !exit )
+                            {
+                                airhead_extraction( first, second, exit ) ;
+cerr<<"a casoooooooooo\n";
+                            }
                             break ;
     } ;
 
@@ -266,12 +419,19 @@ void find_coord ( const int &num, int &_x, int &_y, int &_z )
             }
 }
 
+
+/*bool check_pair ( tile* a, tile* b, tile* &first, tile* &second )*/
+
 bool check_solvability ( int counter )
 {
-    if ( counter == 5 )
+    tile * do_not_use1 = NULL ;
+    tile * do_not_use2 = NULL ;
+
+    if ( counter == 2 )
     {
 /*debug se partita impossibile*/
 cerr<<"mosse finite" ;
+    end_game () ;
     return false ;
     }
 
@@ -282,32 +442,21 @@ cerr<<"mosse finite" ;
             continue ;
         else
         {
-            if ( ( 0 == strcmp ( name[unlocked[i-1]->num].word,
-                                 name[unlocked[i]->num].word    )   ) )
-            {
-                ret = true ;
-            }
-            else if ( between( 136, unlocked[i-1]->num, 139 ) &&
-                      between( 136, unlocked[i]->num  , 139 )    )
-            {
-                ret = true ;
-            }
-            else if ( between( 140, unlocked[i-1]->num, 143 ) &&
-                      between( 140, unlocked[i]->num  , 143 )    )
-            {
-                ret = true ;
-            }
-
+            ret = check_pair( unlocked[i-1], unlocked[i],
+                              do_not_use1, do_not_use2) ;
         }
     }
 
     if ( ret == false )
     {
         mix_cube() ;
+        check_cube() ;
+        refresh_unlocked() ;
+        sort_unlocked() ;
         return check_solvability( counter+1 ) ;
     }
     else
-        return ret ;
+        return true ;
 }
 
 bool between ( const int &min, const int &middle, const int &max )
@@ -462,6 +611,31 @@ void sort_unlocked()
         unlocked[q] = NULL ;
 
     delete [] _output ;
+
+    count_pairs_removable() ;
+}
+
+void count_pairs_removable ()
+{
+    int couples = 0 ;
+    for ( int i = 1 ; i < FREE ; i++ )
+    {
+        if ( ( unlocked[i-1] != NULL )&&( unlocked[i] != NULL ) )
+        {
+            if ( ( 0 == strcmp( name[unlocked[i-1]->num].word,
+                                name[unlocked[i]->num].word))    ||
+                 ( ( between (136, unlocked[i-1]->num, 139 ) ) &&
+                   ( between (136, unlocked[i]->num  , 139 ) ) ) ||
+                 ( ( between (140, unlocked[i-1]->num, 143 ) ) &&
+                   ( between (140, unlocked[i]->num  , 143 ) ) ) )
+            {
+                couples++;
+                i++;
+            }
+        }
+    }
+
+    refresh_down_label ( couples ) ;
 }
 
 /*

@@ -297,21 +297,6 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolButton" id="bgcolor">
-                <property name="use_action_appearance">False</property>
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
-                <property name="label" translatable="yes">background</property>
-                <property name="use_underline">True</property>
-                <property name="stock_id">gtk-color-picker</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkToolButton" id="exit">
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
@@ -323,6 +308,23 @@
                 <property name="label" translatable="yes">exit</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-quit</property>
+                <signal name="clicked" handler="handler_button_pressed_event" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton" id="tip">
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="use_action_appearance">False</property>
+                <property name="action_name">tip</property>
+                <property name="label" translatable="yes">tip</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-info</property>
                 <signal name="clicked" handler="handler_button_pressed_event" swapped="no"/>
               </object>
               <packing>

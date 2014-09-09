@@ -1,12 +1,13 @@
+#include <fstream>
 #include <iostream>
 #include <gtk/gtk.h>
-#include <cstdlib>
 #include <ctime>
+#include <cstdlib>
 #include "data_structure.h"
 #include "gui.h"
 #include "initializations_operations.h"
 #include "io_file.h"
-#include <fstream>
+
 
 using namespace std ;
 
@@ -154,6 +155,8 @@ extern "C" gboolean handler_set_new_game ( GtkWidget * widget,
                                            GdkEvent * event,
                                            gpointer user_data)
 {
+    reset_highlighted_cell() ;
+    end_game();
 /*handler per rendere effettive le disposizioni per la nuova partita*/
     if      ( gtk_toggle_button_get_active ( tb_from_name ( "rb_easy" ) ) )
         level = easy ;
@@ -178,8 +181,11 @@ extern "C" gboolean handler_set_new_game ( GtkWidget * widget,
 
     initialize_cube() ;
     fill_cube() ;
+    mix_cube() ;
     check_cube() ;
     refresh_unlocked() ;
+    sort_unlocked() ;
+    start_game () ;
 
     redraw_widget ( "playground" ) ;
 
@@ -188,6 +194,41 @@ extern "C" gboolean handler_set_new_game ( GtkWidget * widget,
     gtk_widget_hide ( w_new_game ) ;
     return TRUE ;
 }
+
+void refresh_down_label ( const int & couples )
+{
+    char before[] = "Sono rimaste " ;
+    char after[] = " coppie rimuovibili" ;
+
+    if ( couples == 1 )
+    {
+        char b[] = "E' rimasta " ;
+        char a[] = " coppia disponibile" ;
+        int x, y ;
+        for ( x = 0 ; b[x] != '\0' ; x++ )
+            before[x]= b[x] ;
+        before[x] = '\0';
+        for ( y = 0 ; a[y] != '\0' ; y++ )
+            after[y]= a[y] ;
+        after[y] = '\0';
+    }
+    char sum[100] ;
+
+    sprintf ( sum, "%s %d %s", before, couples, after ) ;
+
+    gtk_label_set_text ( label_from_name("label_down"), sum ) ;
+
+}
+
+/*
+ * Funzione che ritorna un puntatore a label
+ * dato in input il nome della label
+ */
+GtkLabel * label_from_name ( const char * name )
+{
+    return GTK_LABEL(gtk_builder_get_object(builder, name ) ) ;
+}
+
 
 /*
  * Funzione che ritorna un puntatore a widget
@@ -222,6 +263,9 @@ extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
     else if ( widget == (widget_from_name ( "mix" ) ) )
     {
         mix_cube () ;
+        check_cube() ;
+        refresh_unlocked() ;
+        sort_unlocked() ;
         redraw_widget ( "playground" ) ;
 	}
     else if ( widget == (widget_from_name ( "undo" ) ) )
@@ -244,6 +288,17 @@ extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
     {
 		cerr<<"exit pressed"<<endl ;
 	}
+    else if ( widget == (widget_from_name ( "tip" ) ) )
+    {
+		cerr<<"tip pressed"<<endl ;
+        tile * a = NULL ;
+        tile * b = NULL ;
+        bool do_not_use = false ;
+        airhead_extraction ( a, b, do_not_use ) ;
+        find_coord ( a->num, h_x1, h_y1, h_z1 ) ;
+        find_coord ( b->num, h_x2, h_y2, h_z2 ) ;
+        redraw_widget ( "playground" ) ;
+	}
 
     return TRUE ;
 }
@@ -261,8 +316,6 @@ void redraw_widget ( const char * name )
         height  = gtk_widget_get_allocated_height ( _widget ) ;
 
         gtk_widget_queue_draw_area( _widget, 0, 0, width, height ) ;
-
-cout<<'3';
 }
 
 

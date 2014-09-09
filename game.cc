@@ -16,6 +16,8 @@ int col = 0 ;
 
 void start_game ()
 {
+    row = 0 ;
+    col = 0 ;
     mov = new couple *[TILES/4] ;
     for ( int x = 0 ; x < TILES/4 ; x++ )
         mov[x] = new couple[2] ;
@@ -34,18 +36,21 @@ void check_couple ( )
 {
     if ( ( mov[row][col].t1 != -1 )&&( mov[row][col].t2 != -1 ) )
     {
-        if ( ( ( strcmp ( mov[row][col].name1, mov[row][col].name2 ) == 0 )
-                       && ( mov[row][col].t1 != mov[row][col].t2 ) )
+        if ( ( mov[row][col].t1 != mov[row][col].t2 ) &&
+             ( ( ( strcmp ( mov[row][col].name1, mov[row][col].name2 ) == 0 ) )
                      || ( ( between (136, mov[row][col].t1, 139 ) )
                           && ( between (136, mov[row][col].t2  , 139 ) ) )
                      || ( ( between (140, mov[row][col].t1, 143 ) )
-                          && ( between (140, mov[row][col].t2  , 143 ) ) ) )
+                          && ( between (140, mov[row][col].t2  , 143 ) ) ) ) )
         {
 
             reset_cell ( mov[row][col].x1, mov[row][col].y1, mov[row][col].z1 ) ;
             reset_cell ( mov[row][col].x2, mov[row][col].y2, mov[row][col].z2 ) ;
             check_cube () ;
+            refresh_unlocked () ;
+            sort_unlocked () ;
             check_solvability(0) ;
+            redraw_widget ( "playground" ) ;
 
             /*ora tocca all'avversario*/
             opponent_round () ;
@@ -78,10 +83,15 @@ cerr<<mov[row][1].name1<<" "<<mov[row][1].t1<<" "<<mov[row][1].name2<<" "<<mov[r
         row++ ;
 
         if ( row == TILES/4)
+        {
                     end_game();
+                    start_game();
+        }
         else
         {
             check_cube () ;
+            refresh_unlocked () ;
+            sort_unlocked () ;
             check_solvability(0) ;
             redraw_widget ( "playground" ) ;
         }
@@ -132,7 +142,16 @@ void insert_half_pair ( const int &num, const int &x, const int &y, const int &z
 void end_game ()
 {
 cout<<"end game\n";
+
     for ( int x = 0 ; x < TILES/4 ; x++ )
         delete [] mov[x] ;
     delete [] mov ;
+
+    initialize_cube() ;
+    fill_cube() ;
+    mix_cube() ;
+    check_cube() ;
+    refresh_unlocked() ;
+    sort_unlocked() ;
+    start_game () ;
 }

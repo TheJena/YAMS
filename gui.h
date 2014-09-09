@@ -43,3 +43,10 @@ void set_coor_tile ( tile * punt, const int &x, const int &y ) ;
 void set_highlighted_cell ( const int &n, const int &x, const int &y, const int &z ) ;
 
 void reset_highlighted_cell () ;
+/*
+ * Funzione che ritorna un puntatore a label
+ * dato in input il nome della label
+ */
+GtkLabel * label_from_name ( const char * name ) ;
+
+void refresh_down_label ( const int & couples ) ;
