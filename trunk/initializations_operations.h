@@ -134,7 +134,9 @@ void delete_cube ( ) ;
 
 void reset_cell ( const int &x, const int &y, const int &z ) ;
 
+void count_pairs_removable () ;
 
+void airhead_extraction ( tile * &first, tile * &second, bool &exit ) ;
 
 
 

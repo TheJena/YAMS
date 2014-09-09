@@ -20,12 +20,12 @@ int main ( int argc, char * argv[] )
 
     create_cube () ;
     initialize_cube () ;
-
     import_tiles_names () ;
-    fill_cube () ; /* nota: chiama gia la mix_cube()*/
+    fill_cube () ;
+    mix_cube () ;
     check_cube () ;
-    unlocked[0] = NULL ;
-    refresh_unlocked () ; /* nota: chiama gia la sort_unlocked()*/
+    refresh_unlocked () ;
+    sort_unlocked () ;
     start_game () ;
 
     redraw_widget ( "playground" ) ;

@@ -16,7 +16,7 @@ const int   SEASONVALUE = 12 ;
 const int   FLOWERVALUE = 14 ;
 
 layout level = medium ;
-computer ai = airhead ;
+computer ai = thoughtful ;
 game mode = h_c ;
 
 tile *** cube = NULL ;
