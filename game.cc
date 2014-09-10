@@ -13,23 +13,72 @@ couple ** mov ;
 int row = 0 ;
 int col = 0 ;
 
+bool playing = false ;
 
 void start_game ()
 {
-    row = 0 ;
-    col = 0 ;
-    mov = new couple *[TILES/4] ;
-    for ( int x = 0 ; x < TILES/4 ; x++ )
-        mov[x] = new couple[2] ;
+    if (!playing)
+    {
+        playing = true ;
+        initialize_cube () ;
+        fill_cube () ;
+        mix_cube () ;
+        check_cube () ;
+        refresh_unlocked () ;
+        sort_unlocked () ;
 
-    for ( int r = 0 ; r < TILES/4 ; r++ )
-        for ( int c = 0 ; c < 2 ; c++ )
-        {
-            mov[r][c].t1 = -1 ;
-            mov[r][c].t2 = -1 ;
-            mov[r][c].name1 = NULL ;
-            mov[r][c].name2 = NULL ;
-        }
+        row = 0 ;
+        col = 0 ;
+        mov = new couple *[TILES/4] ;
+        for ( int x = 0 ; x < TILES/4 ; x++ )
+            mov[x] = new couple[2] ;
+
+        for ( int r = 0 ; r < TILES/4 ; r++ )
+            for ( int c = 0 ; c < 2 ; c++ )
+            {
+                mov[r][c].t1 = -1 ;
+                mov[r][c].t2 = -1 ;
+                mov[r][c].name1 = NULL ;
+                mov[r][c].name2 = NULL ;
+            }
+
+        reset_highlighted_cell() ;
+        display_tiles() ;
+    }
+    else
+cerr<<"error game is alredy active\n";
+
+}
+
+void undo_last_two_couples ()
+{
+    if ( row >= 1 )
+    {
+        row-- ;
+        if ( mov[row][0].t1 != -1 )
+            fill_cell(mov[row][0].x1, mov[row][0].y1, mov[row][0].z1, mov[row][0].t1);
+        if ( mov[row][0].t2 != -1 )
+            fill_cell(mov[row][0].x2, mov[row][0].y2, mov[row][0].z2, mov[row][0].t2);
+        if ( mov[row][1].t1 != -1 )
+            fill_cell(mov[row][1].x1, mov[row][1].y1, mov[row][1].z1, mov[row][1].t1);
+        if ( mov[row][1].t2 != -1 )
+            fill_cell(mov[row][1].x2, mov[row][1].y2, mov[row][1].z2, mov[row][1].t2);
+
+        mov[row][0].t1 = -1 ;
+        mov[row][0].t2 = -1 ;
+        mov[row][1].t1 = -1 ;
+        mov[row][1].t2 = -1 ;
+
+        reset_highlighted_cell() ;
+
+        col = 0 ;
+
+        check_cube () ;
+        refresh_unlocked () ;
+        sort_unlocked () ;
+
+        redraw_widget("playground") ;
+    }
 }
 
 void check_couple ( )
@@ -141,17 +190,16 @@ void insert_half_pair ( const int &num, const int &x, const int &y, const int &z
 
 void end_game ()
 {
-cout<<"end game\n";
+    if ( playing )
+    {
+        reset_highlighted_cell() ;
+        display_end () ;
 
-    for ( int x = 0 ; x < TILES/4 ; x++ )
-        delete [] mov[x] ;
-    delete [] mov ;
-
-    initialize_cube() ;
-    fill_cube() ;
-    mix_cube() ;
-    check_cube() ;
-    refresh_unlocked() ;
-    sort_unlocked() ;
-    start_game () ;
+        for ( int x = 0 ; x < TILES/4 ; x++ )
+            delete [] mov[x] ;
+        delete [] mov ;
+        row = 0 ;
+        col = 0 ;
+        playing = false ;
+    }
 }

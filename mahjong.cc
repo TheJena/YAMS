@@ -19,16 +19,9 @@ int main ( int argc, char * argv[] )
     gtk_builder_connect_signals(builder, NULL);
 
     create_cube () ;
-    initialize_cube () ;
     import_tiles_names () ;
-    fill_cube () ;
-    mix_cube () ;
-    check_cube () ;
-    refresh_unlocked () ;
-    sort_unlocked () ;
-    start_game () ;
 
-    redraw_widget ( "playground" ) ;
+    display_rules () ;
 
     gtk_main () ;
     /*

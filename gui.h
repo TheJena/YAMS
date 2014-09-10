@@ -50,3 +50,11 @@ void reset_highlighted_cell () ;
 GtkLabel * label_from_name ( const char * name ) ;
 
 void refresh_down_label ( const int & couples ) ;
+
+void display_rules () ;
+
+void display_tiles () ;
+
+void display_end () ;
+
+void display_empty () ;
