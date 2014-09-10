@@ -3,6 +3,7 @@
 #include <gtk/gtk.h>
 #include <ctime>
 #include <cstdlib>
+#include <cstring>
 #include "data_structure.h"
 #include "gui.h"
 #include "initializations_operations.h"
@@ -30,8 +31,11 @@ const char* I_TILE              = "./tile_shape.png" ;
 const char* I_WEST              = "./west.png" ;
 const char* I_WHITE_DRAGON      = "./white_dragon.png" ;
 const char* I_WINTER            = "./winter.png" ;
+const char* I_DUMMY             = "./dummy.png" ;
 
 const char* W_newgame           = "window_new_game" ;
+
+const int MAXLUN = 100 ;
 
 enum event_box { empty, rules, tiles, end } play_ground ;
 
@@ -123,6 +127,9 @@ extern "C" gboolean handler_click_on_widget (GtkWidget *widget,
     const int _x = event->x ;
     const int _y = event->y ;
 
+    if ( mode == h_c )
+        remove_dummies() ;
+
     bool quit = false ;
     for ( int z = dim_Z-1 ; (z >= 0)&&(!quit) ; z-- )
         for ( int y = 0 ; (y < dim_Y)&&(!quit) ; y++ )
@@ -134,8 +141,6 @@ extern "C" gboolean handler_click_on_widget (GtkWidget *widget,
                     if ( check_position( &cube[x][y][z], _x, _y ) )
                     {
                         insert_half_pair( cube[x][y][z].num, x, y, z ) ;
-
-
                         quit = true ;
                     }
                 }
@@ -163,8 +168,6 @@ extern "C" gboolean handler_delete_event ( GtkWidget * widget,
     if ( playing )
         end_game() ;
 
-/*deallocare correttamente a chiusura applicazione
-  array 2d con nomi tessere*/
     gtk_main_quit() ;
     cout<<"programma terminato regolarmente\n" ;
     return TRUE ;
@@ -224,17 +227,66 @@ extern "C" gboolean handler_set_new_game ( GtkWidget * widget,
     return TRUE ;
 }
 
+void refresh_turn_label ( bool _switch)
+{
+    if (playing)
+    {
+        char pl_1[MAXLUN] = "Player 1" ;
+        char pl_2a[MAXLUN] = "Computer" ;
+        char pl_2b[MAXLUN] = "Player 2" ;
+
+        char * pl_2 = NULL ;
+        if ( mode == h_c )
+            pl_2 = pl_2a ;
+        else if ( mode == h_h )
+            pl_2 = pl_2b ;
+
+        char markup_normal_string[MAXLUN] = "<span weight=\"normal\" size=\"medium\">" ;
+        char markup_bold_string[MAXLUN] = "<span weight=\"bold\" size=\"larger\">" ;
+        char end_markup[MAXLUN] = "</span>" ;
+
+
+        if ( _switch == false )
+        {
+        /*player 1*/
+        strcat( markup_bold_string, pl_1 ) ;
+        strcat( markup_bold_string, end_markup ) ;
+        gtk_label_set_markup( label_from_name("player1"), markup_bold_string ) ;
+
+        strcat( markup_normal_string, pl_2 ) ;
+        strcat( markup_normal_string, end_markup ) ;
+        gtk_label_set_markup( label_from_name("player2"), markup_normal_string ) ;
+        }
+        else if ( _switch == true )
+        {
+        /*player 2*/
+        strcat( markup_normal_string, pl_1 ) ;
+        strcat( markup_normal_string, end_markup ) ;
+        gtk_label_set_markup( label_from_name("player1"), markup_normal_string ) ;
+
+        strcat( markup_bold_string, pl_2 ) ;
+        strcat( markup_bold_string, end_markup ) ;
+        gtk_label_set_markup( label_from_name("player2"), markup_bold_string ) ;
+        }
+    }
+    else
+    {
+        gtk_label_set_text ( label_from_name("player1"), " " ) ;
+        gtk_label_set_text ( label_from_name("player2"), " " ) ;
+    }
+}
+
 void refresh_down_label ( const int & couples )
 {
     if ((playing)&&( play_ground == tiles ))
     {
-        char before[] = "Sono rimaste " ;
-        char after[] = " coppie rimuovibili" ;
+        char before[MAXLUN] = "Sono rimaste " ;
+        char after[MAXLUN] = " coppie rimuovibili" ;
 
         if ( couples == 1 )
         {
-            char b[] = "E' rimasta " ;
-            char a[] = " coppia disponibile" ;
+            char b[MAXLUN] = "E' rimasta " ;
+            char a[MAXLUN] = " coppia disponibile" ;
             int x, y ;
             for ( x = 0 ; b[x] != '\0' ; x++ )
                 before[x]= b[x] ;
@@ -243,7 +295,7 @@ void refresh_down_label ( const int & couples )
                 after[y]= a[y] ;
             after[y] = '\0';
         }
-        char sum[100] ;
+        char sum[MAXLUN] ;
 
         sprintf ( sum, "%s %d %s", before, couples, after ) ;
 
@@ -659,6 +711,10 @@ cairo_surface_t * paint_tile (  const int &num,
                      ) ;
                      break ;
         }
+    } else if (( num == TILES )||( num == TILES+1 ))
+    {
+        _surface_from_png = cairo_image_surface_create_from_png ( I_DUMMY ) ;
+        cairo_set_source_surface ( context, _surface_from_png, 10, 0 ) ;
     }
 
     cairo_paint ( context ) ;
@@ -713,7 +769,6 @@ extern "C" gboolean draw_play_ground ( GtkWidget * widget,
                     break ;
         case rules:
 /*disegnare regole*/
-cerr<<"WE\n";
                     break ;
         case tiles:
                     for (int z = 0 ; z < 4 ; z++ )
@@ -726,9 +781,11 @@ cerr<<"WE\n";
                                 cairo_surface_t* tile=paint_tile(cube[x][y][z].num,
                                                                       x, y, z ) ;
                                 int coor_x, coor_y ;
+
                                 calculate_coor_x_y ( x, y, z, coor_x, coor_y ) ;
 
-                                set_coor_tile ( &cube[x][y][z], coor_x, coor_y ) ;
+                                if ( cube[x][y][z].num < TILES )
+                                    set_coor_tile ( &cube[x][y][z], coor_x, coor_y ) ;
 
                                 cairo_set_source_surface(cr, tile, coor_x, coor_y);
                                 cairo_paint (cr) ;

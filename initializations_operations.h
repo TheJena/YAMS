@@ -138,5 +138,5 @@ void count_pairs_removable () ;
 
 void airhead_extraction ( tile * &first, tile * &second, bool &exit ) ;
 
-
+void remove_dummies() ;
 

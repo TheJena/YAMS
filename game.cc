@@ -44,6 +44,7 @@ void start_game ()
 
         reset_highlighted_cell() ;
         display_tiles() ;
+        refresh_turn_label(false);
     }
     else
 cerr<<"error game is alredy active\n";
@@ -81,8 +82,11 @@ void undo_last_two_couples ()
     }
 }
 
+
+
 void check_couple ( )
 {
+
     if ( ( mov[row][col].t1 != -1 )&&( mov[row][col].t2 != -1 ) )
     {
         if ( ( mov[row][col].t1 != mov[row][col].t2 ) &&
@@ -92,9 +96,13 @@ void check_couple ( )
                      || ( ( between (140, mov[row][col].t1, 143 ) )
                           && ( between (140, mov[row][col].t2  , 143 ) ) ) ) )
         {
-
             reset_cell ( mov[row][col].x1, mov[row][col].y1, mov[row][col].z1 ) ;
             reset_cell ( mov[row][col].x2, mov[row][col].y2, mov[row][col].z2 ) ;
+
+            if ((mode == h_h)&&( col == 0 ))
+                refresh_turn_label(true) ;
+            if ((mode == h_h)&&( col == 1 ))
+                refresh_turn_label(false) ;
             check_cube () ;
             refresh_unlocked () ;
             sort_unlocked () ;
@@ -102,6 +110,7 @@ void check_couple ( )
             redraw_widget ( "playground" ) ;
 
             /*ora tocca all'avversario*/
+
             opponent_round () ;
         }
         else
@@ -115,19 +124,28 @@ void check_couple ( )
 
 void opponent_round ()
 {
+    static int dummy = TILES ;
     if ( mode == h_h )
     {
         col = (col+1)%2 ;
         if ( col == 0 )
             row++ ;
+
 /*debug se row troppo grande*/
     }
     else if ( mode == h_c )
     {
+        refresh_turn_label(true) ;
         extract_pair ( &mov[row][1] ) ;
 cerr<<mov[row][1].name1<<" "<<mov[row][1].t1<<" "<<mov[row][1].name2<<" "<<mov[row][1].t2<<endl;
         reset_cell ( mov[row][1].x1, mov[row][1].y1, mov[row][1].z1 ) ;
         reset_cell ( mov[row][1].x2, mov[row][1].y2, mov[row][1].z2 ) ;
+
+        dummy = TILES ;
+        fill_cell ( mov[row][1].x1, mov[row][1].y1, mov[row][1].z1, dummy ) ;
+        fill_cell ( mov[row][1].x2, mov[row][1].y2, mov[row][1].z2, dummy ) ;
+
+
 
         row++ ;
 
@@ -138,6 +156,7 @@ cerr<<mov[row][1].name1<<" "<<mov[row][1].t1<<" "<<mov[row][1].name2<<" "<<mov[r
         }
         else
         {
+            refresh_turn_label(false);
             check_cube () ;
             refresh_unlocked () ;
             sort_unlocked () ;

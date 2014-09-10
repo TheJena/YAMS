@@ -58,3 +58,5 @@ void display_tiles () ;
 void display_end () ;
 
 void display_empty () ;
+
+void refresh_turn_label ( bool _switch) ;
