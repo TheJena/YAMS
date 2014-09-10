@@ -33,6 +33,8 @@ const char* I_WINTER            = "./winter.png" ;
 
 const char* W_newgame           = "window_new_game" ;
 
+enum event_box { empty, rules, tiles, end } play_ground ;
+
 GtkBuilder * builder ;
 
 colour green_forest = { 34.0/255, 139.0/255, 34.0/255 } ;
@@ -47,6 +49,30 @@ int h_z1 = -1 ;
 int h_x2 = -1 ;
 int h_y2 = -1 ;
 int h_z2 = -1 ;
+
+void display_end ()
+{
+    play_ground = end ;
+    redraw_widget ("playground") ;
+}
+
+void display_empty ()
+{
+    play_ground = empty ;
+    redraw_widget ("playground") ;
+}
+
+void display_tiles ()
+{
+    play_ground = tiles ;
+    redraw_widget ("playground") ;
+}
+
+void display_rules ()
+{
+    play_ground = rules ;
+    redraw_widget ("playground") ;
+}
 
 void set_highlighted_cell ( const int &n, const int &x, const int &y, const int &z )
 {
@@ -134,6 +160,8 @@ extern "C" gboolean handler_delete_event ( GtkWidget * widget,
 		delete_cube () ;
     if ( name != NULL )
         delete_tiles_names () ;
+    if ( playing )
+        end_game() ;
 
 /*deallocare correttamente a chiusura applicazione
   array 2d con nomi tessere*/
@@ -148,6 +176,12 @@ extern "C" gboolean handler_hide_window ( GtkWidget * widget,
 {
     GtkWidget * w_new_game = widget_from_name ( W_newgame ) ;
     gtk_widget_hide ( w_new_game ) ;
+
+    if ( playing )
+        display_tiles() ;
+    else
+        display_empty() ;
+
     return TRUE ;
 }
 
@@ -155,8 +189,8 @@ extern "C" gboolean handler_set_new_game ( GtkWidget * widget,
                                            GdkEvent * event,
                                            gpointer user_data)
 {
-    reset_highlighted_cell() ;
     end_game();
+
 /*handler per rendere effettive le disposizioni per la nuova partita*/
     if      ( gtk_toggle_button_get_active ( tb_from_name ( "rb_easy" ) ) )
         level = easy ;
@@ -179,44 +213,44 @@ extern "C" gboolean handler_set_new_game ( GtkWidget * widget,
     else if ( gtk_toggle_button_get_active ( tb_from_name ( "rb_thoughtful") ) )
         ai = thoughtful ;
 
-    initialize_cube() ;
-    fill_cube() ;
-    mix_cube() ;
-    check_cube() ;
-    refresh_unlocked() ;
-    sort_unlocked() ;
     start_game () ;
-
-    redraw_widget ( "playground" ) ;
 
 /*alla fine nascondo la finestra*/
     GtkWidget * w_new_game = widget_from_name ( W_newgame ) ;
     gtk_widget_hide ( w_new_game ) ;
+
+    display_tiles() ;
+
     return TRUE ;
 }
 
 void refresh_down_label ( const int & couples )
 {
-    char before[] = "Sono rimaste " ;
-    char after[] = " coppie rimuovibili" ;
-
-    if ( couples == 1 )
+    if ((playing)&&( play_ground == tiles ))
     {
-        char b[] = "E' rimasta " ;
-        char a[] = " coppia disponibile" ;
-        int x, y ;
-        for ( x = 0 ; b[x] != '\0' ; x++ )
-            before[x]= b[x] ;
-        before[x] = '\0';
-        for ( y = 0 ; a[y] != '\0' ; y++ )
-            after[y]= a[y] ;
-        after[y] = '\0';
+        char before[] = "Sono rimaste " ;
+        char after[] = " coppie rimuovibili" ;
+
+        if ( couples == 1 )
+        {
+            char b[] = "E' rimasta " ;
+            char a[] = " coppia disponibile" ;
+            int x, y ;
+            for ( x = 0 ; b[x] != '\0' ; x++ )
+                before[x]= b[x] ;
+            before[x] = '\0';
+            for ( y = 0 ; a[y] != '\0' ; y++ )
+                after[y]= a[y] ;
+            after[y] = '\0';
+        }
+        char sum[100] ;
+
+        sprintf ( sum, "%s %d %s", before, couples, after ) ;
+
+        gtk_label_set_text ( label_from_name("label_down"), sum ) ;
     }
-    char sum[100] ;
-
-    sprintf ( sum, "%s %d %s", before, couples, after ) ;
-
-    gtk_label_set_text ( label_from_name("label_down"), sum ) ;
+    else
+    gtk_label_set_text ( label_from_name("label_down"), " " ) ;
 
 }
 
@@ -257,47 +291,73 @@ extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
      */
     if      ( widget == (widget_from_name ( "new" ) ) )
     {
+        display_empty() ;
         GtkWidget * w_new_game = widget_from_name ( W_newgame ) ;
         gtk_widget_show ( w_new_game ) ;
 	}
     else if ( widget == (widget_from_name ( "mix" ) ) )
     {
-        mix_cube () ;
-        check_cube() ;
-        refresh_unlocked() ;
-        sort_unlocked() ;
-        redraw_widget ( "playground" ) ;
+        if ((playing)&&( play_ground == tiles ))
+        {
+            mix_cube () ;
+            check_cube() ;
+            refresh_unlocked() ;
+            sort_unlocked() ;
+            redraw_widget ( "playground" ) ;
+        }
 	}
     else if ( widget == (widget_from_name ( "undo" ) ) )
     {
-		cerr<<"undo pressed"<<endl ;
+        if ((playing)&&( play_ground == tiles ))
+        {
+	    	cerr<<"undo pressed"<<endl ;
+            undo_last_two_couples() ;
+        }
 	}
-    else if ( widget == (widget_from_name ( "redo" ) ) )
+    else if ( widget == (widget_from_name ( "tip" ) ) )
     {
-		cerr<<"redo pressed"<<endl ;
+        if ((playing)&&( play_ground == tiles ))
+        {
+cerr<<"tip pressed"<<endl ;
+            tile * a = NULL ;
+            tile * b = NULL ;
+            bool do_not_use = false ;
+            airhead_extraction ( a, b, do_not_use ) ;
+            find_coord ( a->num, h_x1, h_y1, h_z1 ) ;
+            find_coord ( b->num, h_x2, h_y2, h_z2 ) ;
+            redraw_widget ( "playground" ) ;
+        }
+	}
+    else if ( widget == (widget_from_name ( "rules" ) ) )
+    {
+        if ((playing)&&( play_ground == tiles ))
+            display_rules();
+        else if ((playing)&&( play_ground == rules ))
+            display_tiles() ;
+
+        if ( !playing )
+            display_empty() ;
+
+		cerr<<"rules pressed"<<endl ;
 	}
     else if ( widget == (widget_from_name ( "load" ) ) )
     {
-		cerr<<"load pressed"<<endl ;
+        if ((playing)&&( play_ground == tiles ))
+        {
+cerr<<"load pressed"<<endl ;
+
+        }
 	}
     else if ( widget == (widget_from_name ( "save" ) ) )
     {
-		cerr<<"save pressed"<<endl ;
+        if ((playing)&&( play_ground == tiles ))
+        {
+cerr<<"save pressed"<<endl ;
+        }
 	}
     else if ( widget == (widget_from_name ( "exit" ) ) )
     {
 		cerr<<"exit pressed"<<endl ;
-	}
-    else if ( widget == (widget_from_name ( "tip" ) ) )
-    {
-		cerr<<"tip pressed"<<endl ;
-        tile * a = NULL ;
-        tile * b = NULL ;
-        bool do_not_use = false ;
-        airhead_extraction ( a, b, do_not_use ) ;
-        find_coord ( a->num, h_x1, h_y1, h_z1 ) ;
-        find_coord ( b->num, h_x2, h_y2, h_z2 ) ;
-        redraw_widget ( "playground" ) ;
 	}
 
     return TRUE ;
@@ -647,25 +707,39 @@ extern "C" gboolean draw_play_ground ( GtkWidget * widget,
     cairo_set_source_rgb(cr, green_forest.r, green_forest.g, green_forest.b ) ;
     cairo_paint(cr) ;
 
-    for (int z = 0 ; z < 4 ; z++ )
-        for ( int y = 0 ; y < 8 ; y++ )
-            for ( int x = 11 ; x >= 0 ; x-- )
-            {
-                if (cube[x][y][z].empty)
-                    continue ;
+    switch ( play_ground )
+    {
+        case empty:
+                    break ;
+        case rules:
+/*disegnare regole*/
+cerr<<"WE\n";
+                    break ;
+        case tiles:
+                    for (int z = 0 ; z < 4 ; z++ )
+                        for ( int y = 0 ; y < 8 ; y++ )
+                            for ( int x = 11 ; x >= 0 ; x-- )
+                            {
+                                if (cube[x][y][z].empty)
+                                    continue ;
 
-                cairo_surface_t * tile = paint_tile ( cube[x][y][z].num,
-                                                      x, y, z ) ;
-                int coor_x, coor_y ;
-                calculate_coor_x_y ( x, y, z, coor_x, coor_y ) ;
+                                cairo_surface_t* tile=paint_tile(cube[x][y][z].num,
+                                                                      x, y, z ) ;
+                                int coor_x, coor_y ;
+                                calculate_coor_x_y ( x, y, z, coor_x, coor_y ) ;
 
-                set_coor_tile ( &cube[x][y][z], coor_x, coor_y ) ;
+                                set_coor_tile ( &cube[x][y][z], coor_x, coor_y ) ;
 
-                cairo_set_source_surface ( cr, tile, coor_x, coor_y ) ;
-                cairo_paint (cr) ;
+                                cairo_set_source_surface(cr, tile, coor_x, coor_y);
+                                cairo_paint (cr) ;
 
-                cairo_surface_destroy ( tile ) ;
-            }
+                                cairo_surface_destroy ( tile ) ;
+                            }
+                    break ;
+        case end:
+/*disegnare winner loser*/
+                    break ;
+    }
     return TRUE ;
 }
 

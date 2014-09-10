@@ -14,6 +14,8 @@ struct couple   {
                     int z2 ;
                 } ;
 
+extern bool playing ;
+
 void start_game () ;
 
 void check_couple ( ) ;
@@ -25,3 +27,5 @@ void end_game () ;
 void opponent_round () ;
 
 void reset_row() ;
+
+void undo_last_two_couples () ;

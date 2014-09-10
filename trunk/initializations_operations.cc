@@ -399,6 +399,11 @@ cerr<<"a casoooooooooo\n";
     pair->t2    = second->num ;
     pair->name2 = name[ second->num ].word ;
     find_coord ( second->num, pair->x2, pair->y2, pair->z2 ) ;
+
+    set_highlighted_cell ( 1, pair->x1, pair->y1, pair->z1 ) ;
+    set_highlighted_cell ( 2, pair->x2, pair->y2, pair->z2 ) ;
+
+    redraw_widget("playground") ;
 }
 
 void find_coord ( const int &num, int &_x, int &_y, int &_z )
