@@ -86,6 +86,7 @@ void fill_cube ()
 void mix_cube ()
 {
     reset_highlighted_cell( ) ;
+    remove_dummies() ;
 
     srand ( time(0) ) ;
 
@@ -134,7 +135,7 @@ void check_cube ()
             for ( int z = dim_Z-1 ; z >= 0 ; z--)
             {
 
-                if ( ( ! cube[x][y][z].empty ) && ( ! visited[x][y] ) )
+                if ( ( ! cube[x][y][z].empty ) && ( ! visited[x][y] )&&( cube[x][y][z].num < TILES ) )
                 {
                     visited[x][y] = true ;
                     check_cell ( x,y,z ) ;
@@ -282,59 +283,46 @@ cout<<"%\n";
 
     if ( (exit)&&( left_a != NULL )&&( left_a->value > a->value ) )
     {
-cout<<"01\n";
         find_coord( left_a->num, temp_x, temp_y, temp_z ) ;
         if ( ( temp_x-1 >= 0 )&&( cube[temp_x-1][temp_y][temp_z].empty ) )
             exit = false ;
-cout<<"-01\n";
     }
     if ( (exit)&&( right_a != NULL )&&( right_a->value > a->value ) )
     {
-cout<<"02\n";
         find_coord( right_a->num, temp_x, temp_y, temp_z ) ;
         if ( ( temp_x+1 < dim_X )&&( cube[temp_x+1][temp_y][temp_z].empty ) )
             exit = false ;
-cout<<"-02\n";
     }
     if ( (exit)&&( under_a != NULL )&&( under_a->value > a->value) )
     {
-cout<<"03\n";
         find_coord( under_a->num, temp_x, temp_y, temp_z ) ;
         if ( ( ( temp_x-1 >= 0 )&&( cube[temp_x-1][temp_y][temp_z].empty) ) ||
              ( ( temp_x+1 < dim_X)&&(cube[temp_x+1][temp_y][temp_z].empty) )  )
             exit = false ;
-cout<<"-03\n";
     }
     if ( (exit)&&( left_b != NULL )&&( left_b->value > b->value ) )
     {
-cout<<"04\n";
         find_coord( left_b->num, temp_x, temp_y, temp_z ) ;
         if ( ( temp_x-1 >= 0 )&&( cube[temp_x-1][temp_y][temp_z].empty ) )
             exit = false ;
-cout<<"-04\n";
     }
     if ( (exit)&&( right_b != NULL )&&( right_b->value > b->value ) )
     {
-cout<<"05\n";
         find_coord( right_b->num, temp_x, temp_y, temp_z ) ;
         if ( ( temp_x+1 < dim_X )&&( cube[temp_x+1][temp_y][temp_z].empty ) )
             exit = false ;
-cout<<"-05\n";
     }
     if ( (exit)&&( under_b != NULL )&&( under_b->value > b->value) )
     {
-cout<<"06\n";
         find_coord( under_b->num, temp_x, temp_y, temp_z ) ;
         if ( ( ( temp_x-1 >= 0 )&&( cube[temp_x-1][temp_y][temp_z].empty) ) ||
              ( ( temp_x+1 < dim_X)&&(cube[temp_x+1][temp_y][temp_z].empty) )  )
             exit = false ;
-cout<<"-06\n";
     }
 }
 
 void airhead_extraction ( tile * &first, tile * &second, bool &exit )
 {
-cout<<"07\n";
     int temp = 0 ;
     do
     {
@@ -351,7 +339,6 @@ cout<<"07\n";
         if ( ( !exit ) && ( unlocked[temp+1] != NULL ) )
             exit = check_pair(unlocked[temp], unlocked[temp+1], first, second);
     } while ( ! exit ) ;
-cout<<"08\n";
 }
 
 void extract_pair ( couple *  pair )
@@ -671,7 +658,7 @@ void swap_tiles ( const int &x1, const int &y1, const int &z1,
 {
     tile &rif_a = cube[x1][y1][z1] ;
     tile &rif_b = cube[x2][y2][z2] ;
-    if ( (rif_a.empty)||(rif_b.empty)||(rif_a.num==rif_b.num) )
+    if ( (rif_a.empty)||(rif_b.empty)||(rif_a.num==rif_b.num)||(rif_a.num >= TILES)||(rif_b.num >= TILES ) )
         i-- ;
     else
     {
@@ -845,7 +832,10 @@ void fill_cell ( const int &x, const int &y, const int &z, int &last)
 /*debug se valori x, y, z consoni*/
     cube[x][y][z].empty = false ;
     cube[x][y][z].num = last ;
-    cube[x][y][z].value = tile_value (last) ;
+    if ( last < TILES )
+        cube[x][y][z].value = tile_value (last) ;
+    else
+        cube[x][y][z].value = 0 ;
 
     last++ ;
 
@@ -877,7 +867,22 @@ void reset_cell ( const int &x, const int &y, const int &z )
     cube[x][y][z].y2    = -1 ;
 }
 
-
+void remove_dummies()
+{
+    for ( int x = 0 ; x < dim_X ; x++)
+        for ( int y = 0 ; y < dim_Y ; y++)
+            for ( int z = 0 ; z < dim_Z ; z++)
+            {
+                if ( cube[x][y][z].num >= TILES )
+                    reset_cell ( x, y, z ) ;
+            }
+    reset_highlighted_cell() ;
+    check_cube () ;
+    refresh_unlocked () ;
+    sort_unlocked () ;
+    check_solvability(0) ;
+    redraw_widget("playground") ;
+}
 
 
 
