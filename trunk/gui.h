@@ -26,6 +26,8 @@ extern int last_removed_pl1_b ;
 extern int last_removed_pl2_a ;
 extern int last_removed_pl2_b ;
 
+const int MAXLINE = 80 ;
+
 void display_end () ;
 
 void display_empty () ;
@@ -100,6 +102,11 @@ void calculate_coor_x_y ( const int &x,
 extern "C" gboolean draw_removed_tiles  ( GtkWidget * widget,
                                           cairo_t * cr,
                                           gpointer user_data ) ;
+
+void draw_text_on_play_ground ( const colour &bg, const colour &text_color,
+                                GtkWidget * &widget, cairo_t * &cr,
+                                char* title, char line[][MAXLINE], const int &h_title,
+                                const int &h_text                             ) ;
 
 extern "C" gboolean draw_play_ground ( GtkWidget * widget,
                                        cairo_t * cr,

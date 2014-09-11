@@ -37,7 +37,7 @@ const char* W_newgame           = "window_new_game" ;
 
 const int MAXLUN = 100 ;
 
-enum event_box { empty, rules, tiles, end } play_ground ;
+enum event_box { empty, rules, tiles, end } play_ground = rules ;
 
 
 
@@ -51,7 +51,6 @@ colour ferrari = { 204.0/255, 0.0/255, 0.0/255 } ;
 colour gold = { 255.0/255, 215.0/255, 0.0/255 } ;
 colour green_forest = { 34.0/255, 139.0/255, 34.0/255 } ;
 colour lapislazuli = { 38.0/255, 97.0/255, 156.0/255 } ;
-colour light_blue = { 0.0/255, 127.0/255, 255.0/255 } ;
 colour light_orange = { 255.0/255, 153.0/255, 0.0/255 } ;
 colour peach = { 255.0/255, 229.0/255, 180.0/255 } ;
 colour sand = { 244.0/255, 164.0/255, 96.0/255 } ;
@@ -290,6 +289,9 @@ extern "C" gboolean handler_set_new_game ( GtkWidget * widget,
         lock_undo = true ;
     }
 
+    if ( mode == h_h )
+        ai = airhead ;
+
     start_game () ;
 
 /*alla fine nascondo la finestra*/
@@ -444,13 +446,15 @@ extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
     /*
      * widget       -> the object which received the signal
      */
-    if      ( widget == (widget_from_name ( "new" ) ) )
+    if    ( ( widget == (widget_from_name ( "new" ) ) ) ||
+            ( widget == (widget_from_name ( "menuitem_new" ) ) ) )
     {
         display_empty() ;
         GtkWidget * w_new_game = widget_from_name ( W_newgame ) ;
         gtk_widget_show ( w_new_game ) ;
 	}
-    else if ( widget == (widget_from_name ( "mix" ) ) )
+    else if ( ( widget == (widget_from_name ( "mix" ) ) ) ||
+              ( widget == (widget_from_name ( "menuitem_mix" ) ) ) )
     {
         if ((playing)&&( play_ground == tiles )&&(!lock_mix))
         {
@@ -467,12 +471,13 @@ extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
                 lock_mix = true ;
             }
         }
-        else if ( lock_mix )
+        else if ((playing)&&( play_ground == tiles )&&( lock_mix ))
         {
             gtk_label_set_text ( label_from_name("label_down"), "mix not allowed just after a mix and vs ai different from airhead" ) ;
         }
 	}
-    else if ( widget == (widget_from_name ( "undo" ) ) )
+    else if ( ( widget == (widget_from_name ( "undo" ) ) ) ||
+              ( widget == (widget_from_name ( "menuitem_undo" ) ) ) )
     {
         if ((playing)&&( play_ground == tiles )&&(!lock_undo))
         {
@@ -480,14 +485,15 @@ extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
             clear_pair_removed () ;
             refresh_scores(_score1, _score2) ;
         }
-        else if ( lock_undo )
+        else if ((playing)&&( play_ground == tiles )&&( lock_undo ))
         {
             gtk_label_set_text ( label_from_name("label_down"), "undo not allowed after mix and vs thoughtful ai" ) ;
         }
 	}
-    else if ( widget == (widget_from_name ( "tip" ) ) )
+    else if ( ( widget == (widget_from_name ( "tip" ) ) ) ||
+              ( widget == (widget_from_name ( "menuitem_tip" ) ) ) )
     {
-        if ((playing)&&( play_ground == tiles ))
+        if ((playing)&&( play_ground == tiles )&&( ai != thoughtful))
         {
             tile * a = NULL ;
             tile * b = NULL ;
@@ -499,8 +505,11 @@ extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
                 redraw_widget ( "playground" ) ;
             }
         }
+        if ((playing)&&( play_ground == tiles )&&( ai == thoughtful ))
+            gtk_label_set_text ( label_from_name("label_down"), "tips not allowed vs thoughtful ai" ) ;
 	}
-    else if ( widget == (widget_from_name ( "rules" ) ) )
+    else if ( ( widget == (widget_from_name ( "rules" ) ) ) ||
+              ( widget == (widget_from_name ( "menuitem_rules" ) ) ) )
     {
         if ((playing)&&( play_ground == tiles ))
             display_rules();
@@ -510,19 +519,24 @@ extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
         if ( !playing )
             display_empty() ;
 	}
-    else if ( widget == (widget_from_name ( "load" ) ) )
+    else if ( ( widget == (widget_from_name ( "load" ) ) ) ||
+              ( widget == (widget_from_name ( "menuitem_load" ) ) ) )
     {
         if ((playing)&&( play_ground == tiles ))
         {
         }
 	}
-    else if ( widget == (widget_from_name ( "save" ) ) )
+    else if ( ( widget == (widget_from_name ( "save" ) ) ) || 
+              ( widget == (widget_from_name ( "menuitem_save" ) ) ) )
     {
         if ((playing)&&( play_ground == tiles ))
         {
         }
 	}
-    else if ( widget == (widget_from_name ( "exit" ) ) )
+    else if ( widget == (widget_from_name ( "menuitem_man" ) ) )
+    {
+	}
+    else if ( widget == (widget_from_name ( "menuitem_about" ) ) )
     {
 	}
 
@@ -871,14 +885,75 @@ extern "C" gboolean draw_removed_tiles  ( GtkWidget * widget,
     D9(cerr<<"D9 draw removed tiles\n")
 }
 
+void draw_text_on_play_ground ( const colour &bg, const colour &text_color,
+                                GtkWidget * &widget, cairo_t * &cr,
+                                char* title, char _line[][MAXLINE],
+                                const int &h_title, const int &h_text      )
+
+{
+    static const int title_x = 252 ;
+    static const int title_y = 50 ;
+    static const int newline = 30 ;
+
+    static const int line_x = 60 ;
+    static const int line_y = title_y + newline ;
+
+    cairo_set_source_rgb(cr, bg.r, bg.g, bg.b ) ;
+	cairo_paint(cr) ;
+
+	cairo_surface_t * surface ;
+	cairo_t * cont ;
+
+	cairo_font_extents_t fe;
+	cairo_text_extents_t te;
+
+    surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
+                                          gtk_widget_get_allocated_width ( widget ),
+                                          gtk_widget_get_allocated_height ( widget ));
+	cont = cairo_create (surface);
+
+	cairo_set_source_rgb(cont, text_color.r, text_color.g, text_color.b ) ;
+	cairo_select_font_face (cont, "sans-serif", CAIRO_FONT_SLANT_ITALIC,
+                            CAIRO_FONT_WEIGHT_NORMAL);
+	cairo_font_extents (cont, &fe);
+
+    if ( title != NULL )
+    {
+
+
+    	cairo_set_font_size (cont, h_title);
+
+        if ( _line == NULL )
+        	cairo_move_to (cont, 185, title_y);
+        else
+        	cairo_move_to (cont, title_x, title_y);
+	    cairo_text_extents (cont, title, &te);
+    	cairo_show_text (cont, title);
+    }
+    if ( _line != NULL )
+    {
+	    cairo_select_font_face (cont, "sans-serif", CAIRO_FONT_SLANT_NORMAL,
+                                CAIRO_FONT_WEIGHT_NORMAL);
+	    cairo_set_font_size (cont, h_text);
+	    for ( int i = 0 ; i < 13 ; i++ )
+	    {
+	        cairo_move_to (cont, line_x, line_y+newline*i);
+        	cairo_text_extents (cont, _line[i], &te);
+	        cairo_show_text (cont, _line[i]);
+	    }
+    }
+	cairo_set_source_surface ( cr, surface, 0, 0 ) ;
+	cairo_paint(cr);
+
+	cairo_destroy (cont);
+	cairo_surface_destroy (surface);
+}
+
 extern "C" gboolean draw_play_ground ( GtkWidget * widget,
                                        cairo_t * cr,
                                        gpointer user_data )
 {
     D2(cerr<<"D2 draw play ground\n")
-
-    cairo_set_source_rgb(cr, green_forest.r, green_forest.g, green_forest.b ) ;
-    cairo_paint(cr) ;
 
     switch ( play_ground )
     {
@@ -888,47 +963,33 @@ extern "C" gboolean draw_play_ground ( GtkWidget * widget,
                     break ;
         case rules:
                     {
-                        cairo_set_source_rgb(cr, light_blue.r, light_blue.g, light_blue.b ) ;
-                        cairo_paint(cr) ;
-
-                        cairo_surface_t * surface ;
-	                    cairo_t * cont ;
-	                    char line_1[]="Mahjong rules";
-	                    char line_2[]="Prima riga";
-	                    char line_3[]="Seconda riga";
-	                    cairo_font_extents_t fe;
-	                    cairo_text_extents_t te;
-
-	                    surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, gtk_widget_get_allocated_width ( widget ), gtk_widget_get_allocated_height ( widget ));
-	                    cont = cairo_create (surface);
-
-	                    cairo_set_font_size (cont, 28);
-	                    cairo_select_font_face (cont, "sans-serif", CAIRO_FONT_SLANT_ITALIC, CAIRO_FONT_WEIGHT_NORMAL);
-	                    cairo_font_extents (cont, &fe);
-	                    cairo_text_extents (cont, line_1, &te);
-
-	                    cairo_move_to (cont, 252, 50);
-	                    cairo_set_source_rgb(cont, light_orange.r, light_orange.g, light_orange.b ) ;
-	                    cairo_show_text (cont, line_1);
-
-	                    cairo_set_font_size (cont, 18);
-	                    cairo_move_to (cont, 60, 80);
-	                    cairo_text_extents (cont, line_2, &te);
-	                    cairo_show_text (cont, line_2);
-
-	                    cairo_set_font_size (cont, 18);
-	                    cairo_move_to (cont, 60, 110);
-	                    cairo_text_extents (cont, line_3, &te);
-	                    cairo_show_text (cont, line_3);
-
-                        cairo_set_source_surface ( cr, surface, 0, 0 ) ;
-                        cairo_paint(cr);
-
-	                    cairo_destroy (cont);
-	                    cairo_surface_destroy (surface);
+                    char title[] = "Mahjong rules";
+                    char lines[13][MAXLINE] =
+        	{ {"In this game you have to remove couples of tiles."},
+        	{"You can play against three level of artificial intelligence, or "},
+        	{"against a friend, anyway try to collect couples with values as "},
+        	{"great as possible."},
+        	{"( Flowers = 14, Seasons = 12, Dragons = 5, Winds = 3,"},
+        	{"Bamboos / Circles / Crosses = 1 )"},
+        	{"Against airhead AI, you can mix tiles, use tips and undo"},
+        	{"movements, against greedy AI, you cannotmix tiles, and against"},
+        	{"thoughtful AI you cannot undo movements and use tips too."},
+        	{"Choose also your tiles layout between the three ones"},
+        	{"available: easy~pyramid, medium~cloud, difficult~throneroom."},
+        	{""},
+        	{""}
+        	} ;
+            /*_______________max_lun_with_characters_______________*/
+            /*                       max lun with spaces                        */
+                    draw_text_on_play_ground ( white, light_orange, widget,
+                                               cr, title, lines, 28, 18 ) ;
                     }
                     break ;
         case tiles:
+                    {
+                    cairo_set_source_rgb(cr, green_forest.r, green_forest.g, green_forest.b ) ;
+                    cairo_paint(cr) ;
+
                     for (int z = 0 ; z < 4 ; z++ )
                         for ( int y = 0 ; y < 8 ; y++ )
                             for ( int x = 11 ; x >= 0 ; x-- )
@@ -950,53 +1011,49 @@ extern "C" gboolean draw_play_ground ( GtkWidget * widget,
 
                                 cairo_surface_destroy ( tile ) ;
                             }
+                    }
                     break ;
         case end:
+                    {
                     const int score_1 = _score1 ;
                     const int score_2 = _score2 ;
                     if (( score_1 > score_2 )&&( mode == h_c ))
                     {
-                        /* Player 1 won against ai */
-                        cairo_set_source_rgb(cr, gold.r, gold.g, gold.b ) ;
-                        cairo_paint(cr) ;
-/*scrivere in carmine*/
+                        char title[] = "Player 1 won against AI" ;
+                        draw_text_on_play_ground ( gold, carmine, widget, cr,
+                                                   title, NULL, 28, 0 ) ;
                     }
                     else if (( score_1 < score_2 )&&( mode == h_c ))
                     {
-                        /* Player 1 lost against ai */
-                        cairo_set_source_rgb(cr, coffe.r, coffe.g, coffe.b ) ;
-                        cairo_paint(cr) ;
-/*scrivere in white*/
+                        char title[] = "Player 1 lost against AI" ;
+                        draw_text_on_play_ground ( coffe, white, widget, cr,
+                                                   title, NULL, 28, 0 ) ;
                     }
                     else if (( score_1 == score_2 )&&( mode == h_c ))
                     {
-                        /* Player 1 equalized ai */
-                        cairo_set_source_rgb(cr, lapislazuli.r, lapislazuli.g, lapislazuli.b ) ;
-                        cairo_paint(cr) ;
-/*scrivere in gold*/
+                        char title[] = "Player 1 equalized AI" ;
+                        draw_text_on_play_ground ( lapislazuli, gold, widget,cr,
+                                                   title, NULL, 28, 0 ) ;
                     }
                     else if (( score_1 > score_2 )&&( mode == h_h ))
                     {
-                        /* Player 1 won against Player 2 */
-                        cairo_set_source_rgb(cr, ferrari.r, ferrari.g, ferrari.b ) ;
-                        cairo_paint(cr) ;
-/*scrivere in peach*/
+                        char title[] = "Player 1 won against Player 2" ;
+                        draw_text_on_play_ground ( ferrari, peach, widget, cr,
+                                                   title, NULL, 28, 0 ) ;
                     }
                     else if (( score_1 < score_2 )&&( mode == h_h ))
                     {
-                        /* Player 1 lost against Player 2 */
-                        cairo_set_source_rgb(cr, carmine.r, carmine.g, carmine.b ) ;
-                        cairo_paint(cr) ;
-/*scrivere in bianco*/
+                        char title[] = "Player 1 lost against Player 2" ;
+                        draw_text_on_play_ground ( carmine, white, widget, cr,
+                                                   title, NULL, 28, 0 ) ;
                     }
                     else if (( score_1 == score_2 )&&( mode == h_h ))
                     {
-                        /* Player 1 equalized Player 2 */
-                        cairo_set_source_rgb(cr, blue_persia.r, blue_persia.g, blue_persia.b ) ;
-                        cairo_paint(cr) ;
-/*scrivere in yellow*/
+                        char title[] = "Player 1 equalized Player 2" ;
+                        draw_text_on_play_ground(blue_persia, yellow, widget,cr,
+                                                   title, NULL, 28, 0 ) ;
                     }
-/*disegnare winner loser*/
+                    }
                     break ;
     }
     return TRUE ;
