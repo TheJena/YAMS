@@ -157,7 +157,7 @@ bool check_couple ( )
                 if ( ai == airhead )
                     lock_mix = false ;
             }
-            if ( ai )
+
             refresh_scores(_score1, _score2) ;
 
             reset_cell ( mov[row][col].x1, mov[row][col].y1, mov[row][col].z1 ) ;
@@ -166,12 +166,12 @@ bool check_couple ( )
             if ((mode == h_h)&&( col == 0 ))
             {
                 refresh_turn_label(true) ;
-                refresh_pair_removed( p_human1, mov[row][1].t1, mov[row][1].t2 ) ;
+                refresh_pair_removed( p_human1, mov[row][col].t1, mov[row][col].t2 ) ;
             }
             if ((mode == h_h)&&( col == 1 ))
             {
                 refresh_turn_label(false) ;
-                refresh_pair_removed( p_human2, mov[row][1].t1, mov[row][1].t2 ) ;
+                refresh_pair_removed( p_human2, mov[row][col].t1, mov[row][col].t2 ) ;
             }
             if ( mode == h_c )
                 refresh_pair_removed( p_human1, mov[row][col].t1, mov[row][col].t2 ) ;
@@ -351,12 +351,14 @@ void end_game ()
         clear_pair_removed () ;
         display_end () ;
 
+
         for ( int x = 0 ; x < TILES/4 ; x++ )
             delete [] mov[x] ;
         delete [] mov ;
         row = 0 ;
         col = 0 ;
         playing = false ;
+        refresh_down_label(0) ;
     }
 
     D10(cerr<<"D10 end game\n")

@@ -7,6 +7,12 @@
     <property name="stock">gtk-new</property>
     <property name="icon-size">1</property>
   </object>
+  <object class="GtkImage" id="image10">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-orientation-portrait</property>
+    <property name="icon-size">1</property>
+  </object>
   <object class="GtkImage" id="image2">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -66,6 +72,7 @@
     <property name="window_position">center</property>
     <property name="default_width">600</property>
     <property name="default_height">400</property>
+    <property name="gravity">center</property>
     <signal name="delete-event" handler="handler_delete_event" swapped="no"/>
     <child>
       <object class="GtkBox" id="box1">
@@ -98,6 +105,7 @@
                         <property name="image">image1</property>
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
+                        <signal name="button-press-event" handler="handler_button_pressed_event" swapped="no"/>
                       </object>
                     </child>
                     <child>
@@ -116,6 +124,7 @@
                         <property name="image">image2</property>
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
+                        <signal name="button-press-event" handler="handler_button_pressed_event" swapped="no"/>
                       </object>
                     </child>
                     <child>
@@ -127,6 +136,7 @@
                         <property name="image">image3</property>
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
+                        <signal name="button-press-event" handler="handler_button_pressed_event" swapped="no"/>
                       </object>
                     </child>
                     <child>
@@ -145,6 +155,7 @@
                         <property name="image">image4</property>
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
+                        <signal name="button-press-event" handler="handler_delete_event" swapped="no"/>
                       </object>
                     </child>
                   </object>
@@ -171,6 +182,7 @@
                         <property name="image">image5</property>
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
+                        <signal name="button-press-event" handler="handler_button_pressed_event" swapped="no"/>
                       </object>
                     </child>
                     <child>
@@ -182,6 +194,7 @@
                         <property name="image">image6</property>
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
+                        <signal name="button-press-event" handler="handler_button_pressed_event" swapped="no"/>
                       </object>
                     </child>
                     <child>
@@ -193,6 +206,7 @@
                         <property name="image">image7</property>
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
+                        <signal name="button-press-event" handler="handler_button_pressed_event" swapped="no"/>
                       </object>
                     </child>
                     <child>
@@ -204,6 +218,7 @@
                         <property name="image">image9</property>
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
+                        <signal name="button-press-event" handler="handler_button_pressed_event" swapped="no"/>
                       </object>
                     </child>
                   </object>
@@ -230,6 +245,19 @@
                         <property name="image">image8</property>
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
+                        <signal name="button-press-event" handler="handler_button_pressed_event" swapped="no"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="menuitem_about">
+                        <property name="label">About</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="image">image10</property>
+                        <property name="use_stock">False</property>
+                        <property name="always_show_image">True</property>
+                        <signal name="button-press-event" handler="handler_button_pressed_event" swapped="no"/>
                       </object>
                     </child>
                   </object>
@@ -245,7 +273,7 @@
         </child>
         <child>
           <object class="GtkToolbar" id="top_toolbar">
-            <property name="width_request">600</property>
+            <property name="width_request">460</property>
             <property name="height_request">25</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
@@ -261,6 +289,7 @@
                 <property name="has_tooltip">True</property>
                 <property name="tooltip_markup" translatable="yes">new</property>
                 <property name="tooltip_text" translatable="yes">new</property>
+                <property name="halign">center</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">New</property>
                 <property name="use_underline">True</property>
@@ -277,6 +306,7 @@
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="halign">center</property>
                 <property name="use_action_appearance">False</property>
               </object>
               <packing>
@@ -291,6 +321,7 @@
                 <property name="has_tooltip">True</property>
                 <property name="tooltip_markup" translatable="yes">mix tiles</property>
                 <property name="tooltip_text" translatable="yes">mix tiles</property>
+                <property name="halign">center</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Mix</property>
                 <property name="use_underline">True</property>
@@ -310,6 +341,7 @@
                 <property name="has_tooltip">True</property>
                 <property name="tooltip_markup" translatable="yes">undo</property>
                 <property name="tooltip_text" translatable="yes">undo</property>
+                <property name="halign">center</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Undo</property>
                 <property name="use_underline">True</property>
@@ -329,6 +361,7 @@
                 <property name="has_tooltip">True</property>
                 <property name="tooltip_markup" translatable="yes">tip</property>
                 <property name="tooltip_text" translatable="yes">tip</property>
+                <property name="halign">center</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Tip</property>
                 <property name="use_underline">True</property>
@@ -347,6 +380,7 @@
                 <property name="can_focus">False</property>
                 <property name="tooltip_markup" translatable="yes">rules</property>
                 <property name="tooltip_text" translatable="yes">rules</property>
+                <property name="halign">center</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Rules</property>
                 <property name="use_underline">True</property>
@@ -363,6 +397,7 @@
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="halign">center</property>
                 <property name="use_action_appearance">False</property>
               </object>
               <packing>
@@ -377,6 +412,7 @@
                 <property name="has_tooltip">True</property>
                 <property name="tooltip_markup" translatable="yes">import / load</property>
                 <property name="tooltip_text" translatable="yes">import / load</property>
+                <property name="halign">center</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Import / Load</property>
                 <property name="use_underline">True</property>
@@ -396,6 +432,7 @@
                 <property name="has_tooltip">True</property>
                 <property name="tooltip_markup" translatable="yes">export / save</property>
                 <property name="tooltip_text" translatable="yes">export / save</property>
+                <property name="halign">center</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Export / Save</property>
                 <property name="use_underline">True</property>
@@ -412,6 +449,7 @@
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="halign">center</property>
                 <property name="use_action_appearance">False</property>
               </object>
               <packing>
@@ -426,11 +464,12 @@
                 <property name="has_tooltip">True</property>
                 <property name="tooltip_markup" translatable="yes">exit</property>
                 <property name="tooltip_text" translatable="yes">exit</property>
+                <property name="halign">center</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Exit</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-quit</property>
-                <signal name="clicked" handler="handler_button_pressed_event" swapped="no"/>
+                <signal name="clicked" handler="handler_delete_event" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
