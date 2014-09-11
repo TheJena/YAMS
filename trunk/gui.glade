@@ -215,7 +215,7 @@
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Documentazione</property>
+                <property name="label" translatable="yes">Documentation</property>
                 <property name="use_underline">True</property>
                 <child type="submenu">
                   <object class="GtkMenu" id="menu3">
@@ -578,7 +578,6 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="hexpand">True</property>
-            <property name="label" translatable="yes">label_down</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -593,12 +592,17 @@
     <property name="width_request">450</property>
     <property name="height_request">200</property>
     <property name="can_focus">False</property>
-    <property name="type">popup</property>
     <property name="title" translatable="yes">Nuova partita</property>
     <property name="resizable">False</property>
+    <property name="modal">True</property>
     <property name="window_position">center</property>
     <property name="default_width">450</property>
     <property name="default_height">200</property>
+    <property name="hide_titlebar_when_maximized">True</property>
+    <property name="urgency_hint">True</property>
+    <property name="deletable">False</property>
+    <property name="gravity">center</property>
+    <property name="has_resize_grip">False</property>
     <signal name="delete-event" handler="handler_hide_window" swapped="no"/>
     <child>
       <object class="GtkGrid" id="new_game_grid">

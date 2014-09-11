@@ -1,7 +1,12 @@
 #include <cstdlib>
+#include "debug_macros.h"
 #include "data_structure.h"
 
 using namespace std ;
+
+#ifdef DEBUG_MODE
+    unsigned int MASK = 1|10 ;
+#endif
 
 const int TILES = 144 ;
 

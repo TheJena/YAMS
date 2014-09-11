@@ -4,15 +4,15 @@
 #include <cstring>
 #include "gui.h"
 #include "game.h"
+#include "debug_macros.h"
 
 using namespace std ;
 
+bool lock_mix = false ;
 
-/*
- * Funzione che crea uno spazio tridimensionale (x, y, z) di tessere.
- */
 void create_cube ()
 {
+    D1(cerr<<"D1 create cube\n")
     cube = new tile ** [dim_X] ;
 
     for ( int x = 0 ; x < dim_X ; x++ )
@@ -22,13 +22,14 @@ void create_cube ()
         for ( int y = 0 ; y < dim_Y ; y++ )
             cube[x][y] = new tile [dim_Z] ;
     }
+
+    D10(cerr<<"D10 create cube\n")
 }
 
-/*
- * Funzione che dealloca lo spazio 3D (x, y, z) di celle per tessere
- */
 void delete_cube ()
 {
+    D1(cerr<<"D1 delete cube\n")
+
     for ( int x = 0 ; x < dim_X ; x++ )
     {
         for ( int y = 0 ; y < dim_Y ; y++ )
@@ -38,27 +39,25 @@ void delete_cube ()
     }
     delete [] cube ;
     cube = NULL ;
+
+    D10(cerr<<"D10 delete cube\n")
 }
 
-/*
- * Funzione che inizializza tutte le celle del cubo
- */
 void initialize_cube ()
 {
+    D1(cerr<<"D1 initialize cube\n")
+
     for ( int x = 0 ; x < dim_X ; x++)
         for ( int y = 0 ; y < dim_Y ; y++)
             for ( int z = 0 ; z < dim_Z ; z++)
                 reset_cell ( x, y, z ) ;
 
+    D10(cerr<<"D10 initialize cube\n")
 }
 
-/*
- * Funzione che inserisce nelle celle del cubo le tessere secondo il livello
- * easy, medium, difficult
- */
 void fill_cube ()
 {
-    /*debug controllo array nomi tessere non vuoto*/
+    D1(cerr<<"D1 fill cube\n")
 
     int last = 0 ;
 
@@ -76,53 +75,84 @@ void fill_cube ()
     /*debug se last != 144*/
     }
 
+    D10(cerr<<"D10 fill cube\n")
 }
 
-/*
- * Funzione che mischia le tessere del cubo
- * (in un numero random di scambi)
- */
-void mix_cube ()
+bool mix_cube ()
 {
-    remove_dummies() ;
+    D1(cerr<<"D1 mixcube\n")
+
+    if ( !remove_dummies() )
+        return false ;
 
     srand ( time(0) ) ;
 
-    /* genero un numero massimo di swap tra le tessere
-     * compreso tra 719 e 1009
-     * nota: 719 e 1009 sono numeri primi, mentre 291 non lo e'.
-     * in media ci saranno tra i 5 e i 7 swap per tessera.
-     */
-    int max = 719 + ( rand() % 291 ) ;
+    int n_tile = 0 ;
 
-    int x1, x2, y1, y2, z1, z2 ;
-    for ( int i = 0 ; i < max ; i++ )
+    for ( int x = 0 ; x < dim_X ; x++)
+        for ( int y = 0 ; y < dim_Y ; y++)
+            for ( int z = 0 ; z < dim_Z ; z++)
+            {
+                if ( !cube[x][y][z].empty )
+                    n_tile++ ;
+            }
+
+    if ( n_tile > 0 )
     {
-        generate_random ( x1, y1, z1, x2, y2, z2 ) ;
-        swap_tiles( x1, y1, z1, x2, y2, z2, i ) ;
+        tile ** aus = new tile * [n_tile] ;
+
+        int i = 0 ;
+        for ( int x = 0 ; x < dim_X ; x++)
+            for ( int y = 0 ; y < dim_Y ; y++)
+                for ( int z = 0 ; z < dim_Z ; z++)
+                {
+                    if ( !cube[x][y][z].empty )
+                    {
+                        aus[i] = &(cube[x][y][z]) ;
+                        i++ ;
+                    }
+                }
+/* debug se i > n_tile */
+
+        const int min = n_tile * 4 ;
+        const int max = n_tile * 7 ;
+        const int swaps = min + rand()%max ;
+
+        int x1, x2, y1, y2, z1, z2 ;
+        int index_a, index_b ;
+        for ( int j = 0 ; j < swaps ; j++ )
+        {
+            index_a = rand()%n_tile ;
+            do
+            {
+                index_b = rand()%n_tile ;
+            }
+            while ( index_a == index_b ) ;
+
+            find_coord ( aus[index_a]->num, x1, y1, z1 ) ;
+            find_coord ( aus[index_b]->num, x2, y2, z2 ) ;
+
+            swap_tiles ( x1, y1, z1, x2, y2, z2, i ) ;
+
+        }
+
+        delete [] aus ;
+
+        return true ;
     }
+    else
+    {
+        end_game() ;
+        return false ;
+    }
+
+    D10(cerr<<"D10 mix cube\n")
 }
 
-/*
- * Funzione che genera due coordinate random
- */
-void generate_random ( int &x1, int &y1, int &z1, int &x2, int &y2, int &z2 )
-{
-    x1 = rand()%dim_X ;
-    y1 = rand()%dim_Y ;
-    z1 = rand()%dim_Z ;
-
-    x2 = rand()%dim_X ;
-    y2 = rand()%dim_Y ;
-    z2 = rand()%dim_Z ;
-}
-
-/*
- * Funzione che aggiorna la removibilita' delle celle
- * controllando che almeno una delle due adiacenti sia libera
- */
 void check_cube ()
 {
+    D1(cerr<<"D1 check cube\n")
+
     bool visited[dim_X][dim_Y] ;
     for ( int x = 0 ; x < dim_X ; x++ )
         for ( int y = 0 ; y < dim_Y ; y++ )
@@ -141,15 +171,14 @@ void check_cube ()
                 else
                     cube[x][y][z].lock = true ;
             }
+
+    D10(cerr<<"D10 check cube\n")
 }
 
-/*
- * Funzione che ricalcola l'array unlocked di puntatori alle tessere
- * rimuovibili (solo se il primo elemento e' a NULL), e ordina
- * quest'ultimo in ordine decrescente di valore.
- */
 void refresh_unlocked ()
 {
+    D1(cerr<<"D1 refresh unlocked\n")
+
     for ( int x = 0 ; x < FREE ; x++ )
         unlocked[x] = NULL ;
 
@@ -164,10 +193,14 @@ void refresh_unlocked ()
                         u++ ;
                     }
 /*debug se u > FREE*/
+
+    D10(cerr<<"D10 refresh unlocked\n")
 }
 
 bool check_pair ( tile* a, tile* b, tile* &first, tile* &second )
 {
+    D2(cerr<<"D2 check pair\n")
+
     if ( a->num == b->num )
         return false ;
     else if ( 0 == strcmp ( name[a->num].word, name[b->num].word ) )
@@ -191,6 +224,8 @@ bool check_pair ( tile* a, tile* b, tile* &first, tile* &second )
     {
         return false ;
     }
+
+    D9(cerr<<"D9 check pair\n")
 }
 
 void initialize_neighbor ( tile * &left_a, tile * &right_a, tile * &under_a,
@@ -199,6 +234,8 @@ void initialize_neighbor ( tile * &left_a, tile * &right_a, tile * &under_a,
                            const int &xb, const int &yb, const int &zb,
                            tile * &a, tile * &b )
 {
+    D2(cerr<<"D2 initialize neighbor\n")
+
     if ((xa-1 >= 0)&&( !cube[xa-1][ya][za].empty ))
         left_a = &(cube[xa-1][ya][za]) ;
     if ((xa+1 < dim_X)&&( !cube[xa+1][ya][za].empty ))
@@ -256,12 +293,15 @@ void initialize_neighbor ( tile * &left_a, tile * &right_a, tile * &under_a,
         right_a = NULL ;
         left_a  = NULL ;
     }
+
+    D9(cerr<<"D9 initialize neighbor\n")
 }
 
 
 void check_convenience ( tile * a, tile * b, bool &exit )
 {
-cout<<"%\n";
+    D2(cerr<<"D2 check convenience\n")
+
     int xa, ya, za, xb, yb, zb ;
     find_coord ( a->num, xa, ya, za ) ;
     find_coord ( b->num, xb, yb, zb ) ;
@@ -317,36 +357,54 @@ cout<<"%\n";
              ( ( temp_x+1 < dim_X)&&(cube[temp_x+1][temp_y][temp_z].empty) )  )
             exit = false ;
     }
+
+    D9(cerr<<"D9 check convenience\n")
 }
 
-void airhead_extraction ( tile * &first, tile * &second, bool &exit )
+bool airhead_extraction ( tile * &first, tile * &second, bool &exit )
 {
-    int temp = 0 ;
-    do
+    D2(cerr<<"D2 airhead extraction\n")
+
+    if ( count_pairs_removable(0) >= 1)
     {
+        int temp = 0 ;
         do
-        {   /*
-             * genero un random tra 1 e 142 cosi'
-             * evito di dover controllare che le
-             * celle attigue non siano fuori dall'array
-             */
-            temp = 1 + rand()%(FREE-2) ;
-        } while ( unlocked[temp] == NULL ) ;
-        if ( unlocked[temp-1] != NULL )
-            exit = check_pair(unlocked[temp], unlocked[temp-1], first, second);
-        if ( ( !exit ) && ( unlocked[temp+1] != NULL ) )
-            exit = check_pair(unlocked[temp], unlocked[temp+1], first, second);
-    } while ( ! exit ) ;
+        {
+            do
+            {   /*
+                 * genero un random tra 1 e 142 cosi'
+                 * evito di dover controllare che le
+                 * celle attigue non siano fuori dall'array
+                 */
+                temp = 1 + rand()%(FREE-2) ;
+            } while ( unlocked[temp] == NULL ) ;
+            if ( unlocked[temp-1] != NULL )
+                exit = check_pair(unlocked[temp], unlocked[temp-1], first, second);
+            if ( ( !exit ) && ( unlocked[temp+1] != NULL ) )
+                exit = check_pair(unlocked[temp], unlocked[temp+1], first, second);
+        } while ( ! exit ) ;
+        return true ;
+    }
+    else
+    {
+        end_game() ;
+        return false ;
+    }
+
+    D9(cerr<<"D9 airhead extraction\n")
 }
 
-void extract_pair ( couple *  pair )
+bool extract_pair ( couple *  pair )
 {
+    D2(cerr<<"D2 extract pair\n")
+
     bool exit = false ;
     tile * first = NULL ;
     tile * second = NULL ;
     switch ( ai )
     {
-        case airhead :      airhead_extraction( first, second, exit ) ;
+        case airhead :      if ( !airhead_extraction( first, second, exit ) )
+                                return false ;
                             break ;
 
         case greedy :       for ( int h = 1 ; ((h<FREE)&&(!exit)) ; h++ )
@@ -357,7 +415,7 @@ void extract_pair ( couple *  pair )
                                                        second ) ;
                             }
                             if ( !exit )
-                                cout<<"errore_in_extract_pair\n" ;
+                                end_game() ;
                             break ;
 
         case thoughtful :   for ( int h = 1 ; ((h<FREE)&&(!exit)) ; h++ )
@@ -371,8 +429,10 @@ void extract_pair ( couple *  pair )
                             }
                             if ( !exit )
                             {
-                                airhead_extraction( first, second, exit ) ;
+                                if ( !airhead_extraction( first, second, exit ) )
+                                    return false ;
 cerr<<"a casoooooooooo\n";
+
                             }
                             break ;
     } ;
@@ -389,10 +449,16 @@ cerr<<"a casoooooooooo\n";
     set_highlighted_cell ( 2, pair->x2, pair->y2, pair->z2 ) ;
 
     redraw_widget("playground") ;
+
+    return true ;
+
+    D9(cerr<<"D9 extract pair\n")
 }
 
 void find_coord ( const int &num, int &_x, int &_y, int &_z )
 {
+    D2(cerr<<"D2 find coord\n")
+
     for ( int x = 0 ; x < dim_X ; x++)
         for ( int y = 0 ; y < dim_Y ; y++)
             for ( int z = 0 ; z < dim_Z ; z++)
@@ -407,10 +473,14 @@ void find_coord ( const int &num, int &_x, int &_y, int &_z )
                     _z = z ;
                 }
             }
+
+    D9(cerr<<"D9 find coord\n")
 }
 
 bool between ( const int &min, const int &middle, const int &max )
 {
+    D2(cerr<<"D2 between\n")
+
     if ( min > max )
         return between( max, middle, min ) ;
 
@@ -418,48 +488,50 @@ bool between ( const int &min, const int &middle, const int &max )
         return true ;
     else
         return false ;
+
+    D9(cerr<<"D9 between\n")
 }
 
-/*
- * Funzione che aggiorna la removibilita' di una singola tessera
- * visitando le celle destra e sinistra
- */
 void check_cell ( const int &x, const int &y, const int &z )
 {
+    D2(cerr<<"D2 check cell\n")
+
     if ( left_cell ( x,y,z ) || right_cell ( x,y,z ) )
         cube[x][y][z].lock = false ;
     else
         cube[x][y][z].lock = true ;
+
+    D9(cerr<<"D9 check cell\n")
 }
 
-/*
- * Funzione che ritorna true se la cella sinistra e' libera
- */
 bool left_cell ( const int &x, const int &y, const int &z )
 {
+    D2(cerr<<"D2 left cell\n")
+
     if ( x == 0 )
         return true ;
     else
         return cube[x-1][y][z].empty ;
+
+    D9(cerr<<"D9 left cell\n")
 }
 
-/*
- * Funzione che ritorna true se la cella destra e' libera
- */
 bool right_cell ( const int &x, const int &y, const int &z )
 {
+    D2(cerr<<"D2 right cell\n")
+
     if ( x == ( dim_X-1 ) )
         return true ;
     else
         return cube[x+1][y][z].empty ;
+
+    D9(cerr<<"D9 right cell\n")
 }
 
-/*
- * Funzione che ordina l'array di puntatori a tessere rimuovibili "unlocked"
- * in ordine decrescente di valore
- */
-void sort_unlocked()
+bool sort_unlocked()
 {
+    D2(cerr<<"D2 sort unlocked\n")
+
     int n_seed      = 0 ;
     int n_wind      = 0 ;
     int n_dragon    = 0 ;
@@ -562,17 +634,18 @@ void sort_unlocked()
 
     delete [] _output ;
 
-    count_pairs_removable(0) ;
+    if ( count_pairs_removable(0) == -1 )
+        return false ;
+    else
+        return true ;
+
+    D9(cerr<<"D9 sort unlocked\n")
 }
 
-int count_pairs_removable (const int &counter)
+int count_pairs_removable ( const int &count)
 {
-    if ( counter == 3 )
-    {
-        return 0 ;
-cerr<<"mosse finite\n" ;
-        end_game() ;
-    }
+    D2(cerr<<"D2 count pairs removable\n")
+
     int couples = 0 ;
     for ( int i = 1 ; i < FREE ; i++ )
     {
@@ -601,26 +674,31 @@ cerr<<"error in count pairs removable, couples negative\n" ;
     }
     else if ( couples == 0 )
     {
-        mix_cube() ;
-        check_cube() ;
-        refresh_unlocked() ;
-        sort_unlocked() ;
-        return count_pairs_removable ( counter+1 ) ;
+        if ( count == 0 )
+        {
+            cerr<<"mosse finite\n" ;
+            end_game () ;
+            return -1 ;
+        }
+        else
+        {
+            mix_cube() ;
+            return count_pairs_removable ( count-1 ) ;
+        }
     }
     else
     {
         refresh_down_label ( couples ) ;
         return couples ;
     }
+
+    D9(cerr<<"D9 count pairs removable\n")
 }
 
-
-
-/*
- * Funzione che ordina alfabeticamente un sotto array
- */
 void sort_sub_array ( tile ** out, int start, int end )
 {
+    D2(cerr<<"D2 sort sub array\n")
+
     tile * temp = NULL ;
 
     for ( int i = start ; i<=end ; i++ )
@@ -633,15 +711,15 @@ void sort_sub_array ( tile ** out, int start, int end )
                 out[j] = temp ;
             }
         }
+
+    D9(cerr<<"D9 sort sub array\n")
 }
 
-/*
- * Funzione che scambia due tessere passate tramite le coordinate
- * x1, y1, z1 <--> x2, y2, z2
- */
 void swap_tiles ( const int &x1, const int &y1, const int &z1,
                   const int &x2, const int &y2, const int &z2, int &i )
 {
+    D2(cerr<<"D2 swap tiles\n")
+
     tile &rif_a = cube[x1][y1][z1] ;
     tile &rif_b = cube[x2][y2][z2] ;
     if ( (rif_a.empty)||(rif_b.empty)||(rif_a.num==rif_b.num)||(rif_a.num >= TILES)||(rif_b.num >= TILES ) )
@@ -665,15 +743,14 @@ void swap_tiles ( const int &x1, const int &y1, const int &z1,
         rif_b.value = rif_a.value ^ rif_b.value ;
         rif_a.value = rif_a.value ^ rif_b.value ;
     }
+
+    D9(cerr<<"D9 swap tiles\n")
 }
 
-
-
-/*
- * Funzione di popolamento del cubo con disposizione livello easy
- */
 void fill_easy_layout ( int &last )
 {
+    D1(cerr<<"D1 fill easy layout\n")
+
     /*primo strato*/
 	fill_floor ( 2, 9, 1, 6, 0, last ) ;
 	fill_floor ( 0,11, 0, 0, 0, last ) ;
@@ -694,13 +771,14 @@ void fill_easy_layout ( int &last )
 	fill_floor ( 4, 7, 2, 5, 2, last ) ;
     /*quarto strato*/
 	fill_floor ( 5, 6, 3, 4, 3, last ) ;
+
+    D10(cerr<<"D10 fill easy layout\n")
 }
 
-/*
- * Funzione di popolamento del cubo con disposizione livello medium
- */
 void fill_medium_layout ( int &last )
 {
+    D1(cerr<<"D1 fill medium layout\n")
+
     /*primo strato*/
 	fill_floor ( 0,11, 0, 5, 0, last ) ;
 	fill_floor ( 1,10, 7, 7, 0, last ) ;
@@ -720,13 +798,14 @@ void fill_medium_layout ( int &last )
 	fill_floor ( 8, 8, 0, 3, 2, last ) ;
 	fill_floor (10,10, 0, 3, 2, last ) ;
     /*quarto strato VUOTO volutamente*/
+
+    D10(cerr<<"D10 fill medium layout\n")
 }
 
-/*
- * Funzione di popolamento del cubo con disposizione livello difficult
- */
 void fill_difficult_layout ( int &last )
 {
+    D1(cerr<<"D1 fill difficult layout\n")
+
     /*primo strato*/
 	fill_floor ( 0, 4, 4, 7, 0, last ) ;
 	fill_floor ( 7,11, 4, 7, 0, last ) ;
@@ -761,14 +840,14 @@ void fill_difficult_layout ( int &last )
 	fill_cell  ( 4, 1, 3, last ) ;
 	fill_cell  ( 7, 1, 3, last ) ;
 	fill_floor ( 4, 7, 0, 0, 3, last ) ;
+
+    D10(cerr<<"D10 fill difficult layout\n")
 }
 
-/*
- * Funzione che passato in ingresso il numero della tessera
- * ritorna il valore della stessa
- */
 int tile_value (const int &name_position)
 {
+    D2(cerr<<"D2 tile value\n")
+
 /*debug se name_position e' una posizione dell'array*/
 
     /* si tratta delle prime 108 tessere:
@@ -805,16 +884,14 @@ int tile_value (const int &name_position)
      */
 /*debug se name_position eccede l'array*/
         return -1 ;
-        
+
+    D9(cerr<<"D9 tile value\n")
 }
 
-/*
- * Funzione che prende in ingresso le coordinate x, y, z e il numero di tessera,
- * ed inserisce nella cella x, y, z la tessera corrispondente;
- * inoltre incrementa il numero di tessera di uno.
- */
 void fill_cell ( const int &x, const int &y, const int &z, int &last)
 {
+    D1(cerr<<"D1 fill cell\n")
+
 /*debug se valori x, y, z consoni*/
     cube[x][y][z].empty = false ;
     cube[x][y][z].num = last ;
@@ -825,24 +902,26 @@ void fill_cell ( const int &x, const int &y, const int &z, int &last)
 
     last++ ;
 
+    D10(cerr<<"D10 fill cell\n")
 }
 
-/*
- * Funzione che riempie un rettangolo di celle tali che
- * x1 <= x <= x2 e y1 <= y <= y2 e altezza = z
- * con numeri di tessera progressivi
- */
 void fill_floor( const int &x1, const int &x2, const int &y1, const int &y2,
                  const int &z, int &last )
 {
+    D1(cerr<<"D1 fill floor\n")
+
 /*debug se valori x, y, z consoni*/
     for ( int x = x1 ; x <= x2 ; x++ )
         for ( int y = y1 ; y <=y2 ; y++ )
             fill_cell ( x, y, z, last ) ;
+
+    D10(cerr<<"D10 fill floor\n")
 }
 
 void reset_cell ( const int &x, const int &y, const int &z )
 {
+    D2(cerr<<"D2 reset cell\n")
+
     cube[x][y][z].empty = true ;
     cube[x][y][z].lock  = true ;
     cube[x][y][z].num   = -1 ;
@@ -851,10 +930,14 @@ void reset_cell ( const int &x, const int &y, const int &z )
     cube[x][y][z].y1    = -1 ;
     cube[x][y][z].x2    = -1 ;
     cube[x][y][z].y2    = -1 ;
+
+    D9(cerr<<"D9 reset cell\n")
 }
 
-void remove_dummies()
+bool remove_dummies()
 {
+    D1(cerr<<"D1 remove dummies\n")
+
     for ( int x = 0 ; x < dim_X ; x++)
         for ( int y = 0 ; y < dim_Y ; y++)
             for ( int z = 0 ; z < dim_Z ; z++)
@@ -865,10 +948,12 @@ void remove_dummies()
     reset_highlighted_cell() ;
     check_cube () ;
     refresh_unlocked () ;
-    sort_unlocked () ;
-    count_pairs_removable(0) ;
+    if ( !sort_unlocked () )
+        return false ;
+    if ( count_pairs_removable(0) == -1 )
+        return false ;
     redraw_widget("playground") ;
+
+    D10(cerr<<"D10 remove dummies\n")
+    return true ;
 }
-
-
-
