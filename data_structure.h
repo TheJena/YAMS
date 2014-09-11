@@ -2,6 +2,8 @@
 
 using namespace std ;
 
+extern unsigned int MASK ;
+
 extern const int TILES ;
 
 extern const int dim_X ;

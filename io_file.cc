@@ -1,6 +1,7 @@
 #include <fstream>
 #include "io_file.h"
 #include "data_structure.h"
+#include "debug_macros.h"
 
 using namespace std ;
 
@@ -9,6 +10,8 @@ const int MAXWORD = 20 ;
 
 void import_tiles_names ()
 {
+    D1(cerr<<"D1 import tiles names\n")
+
     if ( name != NULL )
         delete[] name ;
     name = new _string [TILES] ;
@@ -41,10 +44,14 @@ void import_tiles_names ()
     }
     file.get ( temp ) ;
     file.close () ;
+
+    D10(cerr<<"D10 import tiles names\n")
 }
 
 void delete_tiles_names ()
 {
+    D1(cerr<<"D1 delete tiles names\n")
+
     for ( int i = 0 ; i < TILES ; i++ )
     {
         delete [] name[i].word ;
@@ -53,4 +60,6 @@ void delete_tiles_names ()
 
     delete [] name ;
     name = NULL ;
+
+    D10(cerr<<"D10 delete tiles names\n")
 }

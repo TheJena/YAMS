@@ -6,6 +6,8 @@
 #include "gui.h"
 #include "game.h"
 #include "io_file.h"
+#include "debug_macros.h"
+
 
 
 using namespace std ;
@@ -37,22 +39,25 @@ const int MAXLUN = 100 ;
 
 enum event_box { empty, rules, tiles, end } play_ground ;
 
+
+
 GtkBuilder * builder ;
 
-colour green_forest = { 34.0/255, 139.0/255, 34.0/255 } ;
-colour peach = { 255.0/255, 229.0/255, 180.0/255 } ;
 colour black = { 0.0/255, 0.0/255, 0.0/255 } ;
-colour white = { 255.0/255, 255.0/255, 255.0/255 } ;
-colour light_blue = { 0.0/255, 127.0/255, 255.0/255 } ;
-colour light_orange = { 255.0/255, 153.0/255, 0.0/255 } ;
-colour sand = { 244.0/255, 164.0/255, 96.0/255 } ;
-colour gold = { 255.0/255, 215.0/255, 0.0/255 } ;
+colour blue_persia = { 28.0/255, 57.0/255, 187.0/255 } ;
+colour carmine = { 150.0/255, 0.0/255, 24.0/255 } ;
 colour coffe = { 111.0/255, 78.0/255, 55.0/255 } ;
 colour ferrari = { 204.0/255, 0.0/255, 0.0/255 } ;
-colour yellow = { 255.0/255, 255.0/255, 0.0/255 } ;
-colour blue_persia = { 28.0/255, 57.0/255, 187.0/255 } ;
+colour gold = { 255.0/255, 215.0/255, 0.0/255 } ;
+colour green_forest = { 34.0/255, 139.0/255, 34.0/255 } ;
 colour lapislazuli = { 38.0/255, 97.0/255, 156.0/255 } ;
-colour carmine = { 150.0/255, 0.0/255, 24.0/255 } ;
+colour light_blue = { 0.0/255, 127.0/255, 255.0/255 } ;
+colour light_orange = { 255.0/255, 153.0/255, 0.0/255 } ;
+colour peach = { 255.0/255, 229.0/255, 180.0/255 } ;
+colour sand = { 244.0/255, 164.0/255, 96.0/255 } ;
+colour white = { 255.0/255, 255.0/255, 255.0/255 } ;
+colour yellow = { 255.0/255, 255.0/255, 0.0/255 } ;
+
 
 int h_x1 = -1 ;
 int h_y1 = -1 ;
@@ -69,31 +74,49 @@ int last_removed_pl2_b = -1 ;     // removed by ai or player 2
 
 void display_end ()
 {
+    D1(cerr<<"D1 display end\n")
+
     refresh_scores(_score1, _score2) ;
     play_ground = end ;
     redraw_widget ("playground") ;
+
+    D10(cerr<<"D10 display end\n")
 }
 
 void display_empty ()
 {
+    D1(cerr<<"D1 display empty\n")
+
     play_ground = empty ;
     redraw_widget ("playground") ;
+
+    D10(cerr<<"D10 display empty\n")
 }
 
 void display_tiles ()
 {
+    D1(cerr<<"D1 display tiles\n")
+
     play_ground = tiles ;
     redraw_widget ("playground") ;
+
+    D10(cerr<<"D10 display tiles\n")
 }
 
 void display_rules ()
 {
+    D1(cerr<<"D1 display rules\n")
+
     play_ground = rules ;
     redraw_widget ("playground") ;
+
+    D10(cerr<<"D10 display rules\n")
 }
 
 void set_highlighted_cell ( const int &n, const int &x, const int &y, const int &z )
 {
+    D1(cerr<<"D1 set highlighted cell\n")
+
     if ( n == 1 )
     {
         h_x1 = x ;
@@ -106,10 +129,14 @@ void set_highlighted_cell ( const int &n, const int &x, const int &y, const int 
         h_y2 = y ;
         h_z2 = z ;
     } else { /*debug this case*/ ; }
+
+    D10(cerr<<"D10 set highlighted cell\n")
 }
 
 void reset_highlighted_cell ()
 {
+    D1(cerr<<"D1 reset highlighted cell\n")
+
     h_x1 = -1 ;
     h_y1 = -1 ;
     h_z1 = -1 ;
@@ -117,10 +144,14 @@ void reset_highlighted_cell ()
     h_x2 = -1 ;
     h_y2 = -1 ;
     h_z2 = -1 ;
+
+    D10(cerr<<"D10 reset highlighted cell\n")
 }
 
 bool check_position ( const tile * punt, const int &x, const int &y )
 {
+    D1(cerr<<"D1 check position\n")
+
     if ( ( punt->x1 ) >= x )
         return false ;
     if ( ( punt->y1 ) >= y )
@@ -133,18 +164,22 @@ bool check_position ( const tile * punt, const int &x, const int &y )
 
     return true ;
 
+    D10(cerr<<"D10 check position\n")
 }
 extern "C" gboolean handler_click_on_widget (GtkWidget *widget,
                GdkEventButton  *event,
                gpointer   user_data)
 {
+    D1(cerr<<"D1 handler click on widget\n")
+
     if ( play_ground != tiles )
         return TRUE ;
     const int _x = event->x ;
     const int _y = event->y ;
 
     if ( mode == h_c )
-        remove_dummies() ;
+        if ( !remove_dummies() )
+            return TRUE ;
 
     bool quit = false ;
     for ( int z = dim_Z-1 ; (z >= 0)&&(!quit) ; z-- )
@@ -156,7 +191,8 @@ extern "C" gboolean handler_click_on_widget (GtkWidget *widget,
                 {
                     if ( check_position( &cube[x][y][z], _x, _y ) )
                     {
-                        insert_half_pair( cube[x][y][z].num, x, y, z ) ;
+                        if ( !insert_half_pair( cube[x][y][z].num, x, y, z ) )
+                            return TRUE ;
                         quit = true ;
                     }
                 }
@@ -170,6 +206,8 @@ extern "C" gboolean handler_click_on_widget (GtkWidget *widget,
     }
 
 return TRUE ;
+
+    D10(cerr<<"D10 handler click on widget\n")
 }
 
 
@@ -177,6 +215,8 @@ extern "C" gboolean handler_delete_event ( GtkWidget * widget,
                                            GdkEvent * event,
                                            gpointer user_data)  
 {
+    D1(cerr<<"D1 handler delete event\n")
+
 	if ( cube != NULL )
 		delete_cube () ;
     if ( name != NULL )
@@ -187,12 +227,16 @@ extern "C" gboolean handler_delete_event ( GtkWidget * widget,
     gtk_main_quit() ;
     cout<<"programma terminato regolarmente\n" ;
     return TRUE ;
+
+    D10(cerr<<"D10 handler delete event\n")
 }
 
 extern "C" gboolean handler_hide_window ( GtkWidget * widget,
                                            GdkEvent * event,
                                            gpointer user_data)
 {
+    D1(cerr<<"D1 handler hide window\n")
+
     GtkWidget * w_new_game = widget_from_name ( W_newgame ) ;
     gtk_widget_hide ( w_new_game ) ;
 
@@ -202,12 +246,16 @@ extern "C" gboolean handler_hide_window ( GtkWidget * widget,
         display_empty() ;
 
     return TRUE ;
+
+    D10(cerr<<"D10 handler hide window\n")
 }
 
 extern "C" gboolean handler_set_new_game ( GtkWidget * widget,
                                            GdkEvent * event,
                                            gpointer user_data)
 {
+    D1(cerr<<"D1 handler set new game\n")
+
     end_game();
 
 /*handler per rendere effettive le disposizioni per la nuova partita*/
@@ -226,11 +274,21 @@ extern "C" gboolean handler_set_new_game ( GtkWidget * widget,
 
 
     if      ( gtk_toggle_button_get_active ( tb_from_name ( "rb_airhead" ) ) )
+    {
         ai = airhead ;
+        lock_mix = false ;
+    }
     else if ( gtk_toggle_button_get_active ( tb_from_name ( "rb_greedy" ) ) )
+    {
         ai = greedy ;
+        lock_mix = true ;
+    }
     else if ( gtk_toggle_button_get_active ( tb_from_name ( "rb_thoughtful") ) )
+    {
         ai = thoughtful ;
+        lock_mix = true ;
+        lock_undo = true ;
+    }
 
     start_game () ;
 
@@ -241,10 +299,14 @@ extern "C" gboolean handler_set_new_game ( GtkWidget * widget,
     display_tiles() ;
 
     return TRUE ;
+
+    D10(cerr<<"D10 handler set new game\n")
 }
 
 void refresh_turn_label ( bool _switch)
 {
+    D2(cerr<<"D2 refresh turn label\n")
+
     if (playing)
     {
         char pl_1[MAXLUN] = "Player 1" ;
@@ -290,10 +352,14 @@ void refresh_turn_label ( bool _switch)
         gtk_label_set_text ( label_from_name("player1"), " " ) ;
         gtk_label_set_text ( label_from_name("player2"), " " ) ;
     }
+
+    D9(cerr<<"D9 refresh turn label\n")
 }
 
 void refresh_scores_labels( const int &score1, const int &score2 )
 {
+    D2(cerr<<"D2 refresh scores label\n")
+
     char text_pl1[MAXLUN] ;
     char text_pl2[MAXLUN] ;
 
@@ -305,19 +371,23 @@ void refresh_scores_labels( const int &score1, const int &score2 )
 
     gtk_label_set_text ( label_from_name("score1"), text_pl1 ) ;
     gtk_label_set_text ( label_from_name("score2"), text_pl2 ) ;
+
+    D9(cerr<<"D9 refresh scores label\n")
 }
 
 void refresh_down_label ( const int & couples )
 {
+    D2(cerr<<"D2 refresh down label\n")
+
     if ((playing)&&( play_ground == tiles ))
     {
-        char before[MAXLUN] = "Sono rimaste " ;
-        char after[MAXLUN] = " coppie rimuovibili" ;
+        char before[MAXLUN] = "" ;
+        char after[MAXLUN] = " removable couples left" ;
 
         if ( couples == 1 )
         {
-            char b[MAXLUN] = "E' rimasta " ;
-            char a[MAXLUN] = " coppia disponibile" ;
+            char b[MAXLUN] = "" ;
+            char a[MAXLUN] = " removable couple left" ;
             int x, y ;
             for ( x = 0 ; b[x] != '\0' ; x++ )
                 before[x]= b[x] ;
@@ -335,40 +405,42 @@ void refresh_down_label ( const int & couples )
     else
     gtk_label_set_text ( label_from_name("label_down"), " " ) ;
 
+    D9(cerr<<"D9 refresh down label\n")
 }
 
-/*
- * Funzione che ritorna un puntatore a label
- * dato in input il nome della label
- */
 GtkLabel * label_from_name ( const char * name )
 {
+    D2(cerr<<"D2 label from name\n")
+
     return GTK_LABEL(gtk_builder_get_object(builder, name ) ) ;
+
+    D9(cerr<<"D9 label from name\n")
 }
 
-
-/*
- * Funzione che ritorna un puntatore a widget
- * dato in input il nome del widget
- */
 GtkWidget * widget_from_name ( const char * name )
 {
+    D2(cerr<<"D2 widget from name\n")
+
     return GTK_WIDGET(gtk_builder_get_object(builder, name ) ) ;
+
+    D9(cerr<<"D9 widget from name\n")
 }
 
-/*
- * Funzione che ritorna un puntatore a toggle button
- * dato in input il nome del togglebutton
- */
 GtkToggleButton * tb_from_name ( const char * name )
 {
+    D2(cerr<<"D2 togglebutton from name\n")
+
     return GTK_TOGGLE_BUTTON ( gtk_builder_get_object ( builder, name ) ) ;
+
+    D9(cerr<<"D9 togglebutton from name\n")
 }
 
 extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
                                                    GdkEvent * event,
                                                    gpointer user_data )
 {
+    D1(cerr<<"D1 handler button pressed event\n")
+
     /*
      * widget       -> the object which received the signal
      */
@@ -380,36 +452,52 @@ extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
 	}
     else if ( widget == (widget_from_name ( "mix" ) ) )
     {
-        if ((playing)&&( play_ground == tiles ))
+        if ((playing)&&( play_ground == tiles )&&(!lock_mix))
         {
-            mix_cube () ;
-            check_cube() ;
-            refresh_unlocked() ;
-            sort_unlocked() ;
-            redraw_widget ( "playground" ) ;
+            if ( !mix_cube () )
+                return TRUE ;
+            else
+            {
+                check_cube() ;
+                refresh_unlocked() ;
+                if ( !sort_unlocked() )
+                    return TRUE ;
+                redraw_widget ( "playground" ) ;
+                lock_undo = true ;
+                lock_mix = true ;
+            }
+        }
+        else if ( lock_mix )
+        {
+            gtk_label_set_text ( label_from_name("label_down"), "mix not allowed just after a mix and vs ai different from airhead" ) ;
         }
 	}
     else if ( widget == (widget_from_name ( "undo" ) ) )
     {
-        if ((playing)&&( play_ground == tiles ))
+        if ((playing)&&( play_ground == tiles )&&(!lock_undo))
         {
-	    	cerr<<"undo pressed"<<endl ;
             undo_last_two_couples() ;
             clear_pair_removed () ;
+            refresh_scores(_score1, _score2) ;
+        }
+        else if ( lock_undo )
+        {
+            gtk_label_set_text ( label_from_name("label_down"), "undo not allowed after mix and vs thoughtful ai" ) ;
         }
 	}
     else if ( widget == (widget_from_name ( "tip" ) ) )
     {
         if ((playing)&&( play_ground == tiles ))
         {
-cerr<<"tip pressed"<<endl ;
             tile * a = NULL ;
             tile * b = NULL ;
             bool do_not_use = false ;
-            airhead_extraction ( a, b, do_not_use ) ;
-            find_coord ( a->num, h_x1, h_y1, h_z1 ) ;
-            find_coord ( b->num, h_x2, h_y2, h_z2 ) ;
-            redraw_widget ( "playground" ) ;
+            if ( airhead_extraction ( a, b, do_not_use ) )
+            {
+                find_coord ( a->num, h_x1, h_y1, h_z1 ) ;
+                find_coord ( b->num, h_x2, h_y2, h_z2 ) ;
+                redraw_widget ( "playground" ) ;
+            }
         }
 	}
     else if ( widget == (widget_from_name ( "rules" ) ) )
@@ -421,37 +509,32 @@ cerr<<"tip pressed"<<endl ;
 
         if ( !playing )
             display_empty() ;
-
-		cerr<<"rules pressed"<<endl ;
 	}
     else if ( widget == (widget_from_name ( "load" ) ) )
     {
         if ((playing)&&( play_ground == tiles ))
         {
-cerr<<"load pressed"<<endl ;
-
         }
 	}
     else if ( widget == (widget_from_name ( "save" ) ) )
     {
         if ((playing)&&( play_ground == tiles ))
         {
-cerr<<"save pressed"<<endl ;
         }
 	}
     else if ( widget == (widget_from_name ( "exit" ) ) )
     {
-		cerr<<"exit pressed"<<endl ;
 	}
 
     return TRUE ;
+
+    D10(cerr<<"D10 handler button pressed event\n")
 }
 
-/*
- * Funzione che ridisegna il widget passato per nome
- */
 void redraw_widget ( const char * name )
 {
+    D2(cerr<<"D2 redraw widget\n")
+
         GtkWidget * _widget = widget_from_name ( name ) ;
 
         int width   = 0 ;
@@ -460,6 +543,8 @@ void redraw_widget ( const char * name )
         height  = gtk_widget_get_allocated_height ( _widget ) ;
 
         gtk_widget_queue_draw_area( _widget, 0, 0, width, height ) ;
+
+    D9(cerr<<"D9 redraw widget\n")
 }
 
 
@@ -467,6 +552,7 @@ void draw_number_on_tile ( cairo_t * &cr_tile,
                            cairo_surface_t * &_obj,
                            const int &num )
 {
+    D2(cerr<<"D2 draw number on tile\n")
 
     bool point[10] ;
     #define P(a) point[(a)]=true ;
@@ -534,11 +620,15 @@ void draw_number_on_tile ( cairo_t * &cr_tile,
  	if (point[9])
         cairo_set_source_surface ( cr_tile, _obj, 19, 11 ) ;
         cairo_paint ( cr_tile ) ;
+
+    D9(cerr<<"D9 draw number on tile\n")
 }
 
 cairo_surface_t * number_on_tile (  cairo_surface_t * _obj,
                                     const int &number )
 {
+    D2(cerr<<"D2 number on tile\n")
+
     cairo_surface_t * _surf_50x50 = cairo_image_surface_create
                                     ( CAIRO_FORMAT_RGB24, 50, 50 ) ;
 
@@ -553,10 +643,14 @@ cairo_surface_t * number_on_tile (  cairo_surface_t * _obj,
 
     return _surf_50x50 ;
     /*la surface la dealloco nella funzione chiamante*/
+
+    D9(cerr<<"D9 number on tile\n")
 }
 
 int number_from_string ( const char * word )
 {
+    D2(cerr<<"D2 number from string\n")
+
     int i = 0 ;
     while ( word[i]!= '\0' ) 
         i++;
@@ -564,15 +658,40 @@ int number_from_string ( const char * word )
     const char output = word[i-1];
 
     return (output-'0') ;
+
+    D9(cerr<<"D9 number from string\n")
 }
 
+void sub_paint_tile ( cairo_t * &context, cairo_surface_t * &surf1, cairo_surface_t * &surf2,
+                      const int &num, const char * &image_name, const tile_type &tt )
+{
+    surf1 = cairo_image_surface_create_from_png ( image_name ) ;
+    if ( tt == tt_number )
+    {
+        surf2 = number_on_tile ( surf1, number_from_string ( name[num].word) ) ;
+        cairo_set_source_surface ( context, surf2, 11, 1 ) ;
+    }
+    else if ( tt == tt_image )
+    {
+        cairo_set_source_surface ( context, surf1, 10, 0 ) ;
+    }
+    else
+    /*debug this case*/ ;
 
+    cairo_paint( context ) ;
+    cairo_surface_destroy ( surf1 ) ;
+    surf1 = NULL ;
+    cairo_surface_destroy ( surf2 ) ;
+    surf2 = NULL ;
+}
 
 cairo_surface_t * paint_tile (  const int &num,
                                 const int &x,
                                 const int &y,
                                 const int &z )
 {
+    D2(cerr<<"D2 paint tile\n")
+
     cairo_surface_t * surface ;
     cairo_t * context ;
 
@@ -590,50 +709,28 @@ cairo_surface_t * paint_tile (  const int &num,
     cairo_surface_t * _surface_from_png = NULL ;
     if (num<=35)
     {
-        _surface_from_png = cairo_image_surface_create_from_png ( I_CIRCLE ) ;
-        temp = number_on_tile ( _surface_from_png, number_from_string ( name[num].word ) ) ;
-        cairo_set_source_surface ( context, temp, 11, 1 ) ;
+        sub_paint_tile( context, _surface_from_png, temp, num, I_CIRCLE, tt_number ) ;
     }
     else if (num<=71)
     {
-        _surface_from_png = cairo_image_surface_create_from_png ( I_BAMBOO ) ;
-        temp = number_on_tile ( _surface_from_png, number_from_string ( name[num].word ) ) ;
-        cairo_set_source_surface ( context, temp, 11, 1 ) ;
+        sub_paint_tile( context, _surface_from_png, temp, num, I_BAMBOO, tt_number ) ;
     }
     else if (num<=107)
  	{
-        _surface_from_png = cairo_image_surface_create_from_png ( I_CROSS ) ;
-        temp = number_on_tile ( _surface_from_png, number_from_string ( name[num].word ) ) ;
-        cairo_set_source_surface ( context, temp, 11, 1 ) ;
+        sub_paint_tile( context, _surface_from_png, temp, num, I_CROSS, tt_number ) ;
     }
     else if(num<=123)
     {
         const int wind = (num-108)%4 ; /*0==east 1==sud 2==west 3==north*/
         switch (wind)
         {
-            case 0: _surface_from_png = cairo_image_surface_create_from_png ( I_EAST ) ;
-                    cairo_set_source_surface
-                    ( context, _surface_from_png ,
-                      10, 0
-                    ) ;
+            case 0: sub_paint_tile( context, _surface_from_png, temp, num, I_EAST, tt_image ) ;
                     break ;
-            case 1: _surface_from_png = cairo_image_surface_create_from_png ( I_SUD ) ;
-                    cairo_set_source_surface
-                    ( context, _surface_from_png,
-                      10, 0 
-                    ) ;
+            case 1: sub_paint_tile( context, _surface_from_png, temp, num, I_SUD, tt_image ) ;
                     break ;
-            case 2: _surface_from_png = cairo_image_surface_create_from_png ( I_WEST ) ;
-                    cairo_set_source_surface
-                    ( context, _surface_from_png,
-                      10, 0
-                    ) ;
+            case 2: sub_paint_tile( context, _surface_from_png, temp, num, I_WEST, tt_image ) ;
                     break ;
-            case 3: _surface_from_png = cairo_image_surface_create_from_png ( I_NORTH ) ;
-                    cairo_set_source_surface
-                    ( context, _surface_from_png,
-                      10, 0
-                    ) ;
+            case 3: sub_paint_tile( context, _surface_from_png, temp, num, I_NORTH, tt_image ) ;
                     break ;
         };
     }
@@ -642,29 +739,11 @@ cairo_surface_t * paint_tile (  const int &num,
         const int dragon = (num-124)%3 /*0==red 1==green 2==white*/;
         switch (dragon)
         {
-            case 0: _surface_from_png = cairo_image_surface_create_from_png ( I_RED_DRAGON ) ;
-                    cairo_set_source_surface
-                    ( context,
-                      _surface_from_png,
-                      10,
-                      0
-                    ) ;
+            case 0: sub_paint_tile( context, _surface_from_png, temp, num, I_RED_DRAGON, tt_image ) ;
                     break ;
-            case 1: _surface_from_png = cairo_image_surface_create_from_png ( I_GREEN_DRAGON ) ;
-                    cairo_set_source_surface
-                    ( context, 
-                      _surface_from_png,
-                      10,
-                      0
-                    ) ;
+            case 1: sub_paint_tile( context, _surface_from_png, temp, num, I_GREEN_DRAGON, tt_image ) ;
                     break ;
-            case 2: _surface_from_png = cairo_image_surface_create_from_png ( I_WHITE_DRAGON ) ;
-                    cairo_set_source_surface
-                    ( context,
-                      _surface_from_png,
-                      10,
-                      0
-                    ) ;
+            case 2: sub_paint_tile( context, _surface_from_png, temp, num, I_WHITE_DRAGON, tt_image ) ;
                     break ;
         };
     }
@@ -673,85 +752,34 @@ cairo_surface_t * paint_tile (  const int &num,
         switch (num)
         {
             case 136:/*spring*/
-                     _surface_from_png = cairo_image_surface_create_from_png ( I_SPRING ) ;
-                     cairo_set_source_surface
-                     ( context,
-                       _surface_from_png,
-                       10,
-                       0
-                     ) ;
+                     sub_paint_tile( context, _surface_from_png, temp, num, I_SPRING, tt_image ) ;
                      break ;
             case 137:/*summer*/
-                     _surface_from_png = cairo_image_surface_create_from_png ( I_SUMMER ) ;
-                     cairo_set_source_surface
-                     ( context,
-                       _surface_from_png,
-                       10,
-                       0
-                     ) ;
+                     sub_paint_tile( context, _surface_from_png, temp, num, I_SUMMER, tt_image ) ;
                      break ;
             case 138:/*autumn*/
-                     _surface_from_png = cairo_image_surface_create_from_png ( I_AUTUMN ) ;
-                     cairo_set_source_surface
-                     ( context,
-                       _surface_from_png,
-                       10,
-                       0
-                     ) ;
+                     sub_paint_tile( context, _surface_from_png, temp, num, I_AUTUMN, tt_image ) ;
                      break ;
             case 139:/*winter*/
-                     _surface_from_png = cairo_image_surface_create_from_png ( I_WINTER ) ;
-                     cairo_set_source_surface
-                     ( context,
-                       _surface_from_png,
-                       10,
-                       0
-                     ) ;
+                     sub_paint_tile( context, _surface_from_png, temp, num, I_WINTER, tt_image ) ;
                      break ;
             case 140:/*plumb*/
-                     _surface_from_png = cairo_image_surface_create_from_png ( I_PLUMB ) ;
-                     cairo_set_source_surface
-                     ( context,
-                       _surface_from_png,
-                       10,
-                       0
-                     ) ;
+                     sub_paint_tile( context, _surface_from_png, temp, num, I_PLUMB, tt_image ) ;
                      break ;
             case 141:/*orchid*/
-                     _surface_from_png = cairo_image_surface_create_from_png ( I_ORCHID ) ;
-                     cairo_set_source_surface
-                     ( context,
-                       _surface_from_png,
-                       10,
-                       0
-                     ) ;
+                     sub_paint_tile( context, _surface_from_png, temp, num, I_ORCHID, tt_image ) ;
                      break ;
             case 142:/*chrysantemum*/
-                     _surface_from_png = cairo_image_surface_create_from_png ( I_CHRYSANTEMUM ) ;
-                     cairo_set_source_surface
-                     ( context,
-                       _surface_from_png,
-                       10,
-                       0
-                     ) ;
+                     sub_paint_tile( context, _surface_from_png, temp, num, I_CHRYSANTEMUM, tt_image ) ;
                      break ;
             case 143:/*bamboo_forest*/
-                     _surface_from_png = cairo_image_surface_create_from_png ( I_BAMBOO_FOREST ) ;
-                     cairo_set_source_surface
-                     ( context,
-                       _surface_from_png,
-                       10,
-                       0
-                     ) ;
+                     sub_paint_tile( context, _surface_from_png, temp, num, I_BAMBOO_FOREST, tt_image ) ;
                      break ;
         }
     } else if (( num == TILES )||( num == TILES+1 ))
     {
-        _surface_from_png = cairo_image_surface_create_from_png ( I_DUMMY ) ;
-        cairo_set_source_surface ( context, _surface_from_png, 10, 0 ) ;
+        sub_paint_tile( context, _surface_from_png, temp, num, I_DUMMY, tt_image ) ;
     }
-
-    cairo_paint ( context ) ;
 
     if ( temp != NULL )
         cairo_surface_destroy ( temp ) ;
@@ -774,6 +802,8 @@ cairo_surface_t * paint_tile (  const int &num,
 
     return ( surface ) ;
     /* la surface la dealloco nella funzione chiamante*/
+
+    D9(cerr<<"D9 paint tile\n")
 }
 
 void calculate_coor_x_y ( const int &x,
@@ -782,22 +812,25 @@ void calculate_coor_x_y ( const int &x,
                           int &_dx,
                           int &_dy )
 {
+    D2(cerr<<"D2 calculate coor x y\n")
+
     _dx = 24 ;
     _dy = 50 ;
     _dx += x*51 ;
     _dy += y*51 ;
     _dx += z*10 ;
     _dy -= z*10 ;
+
+    D9(cerr<<"D9 calculate coor x y\n")
 }
 
 extern "C" gboolean draw_removed_tiles  ( GtkWidget * widget,
                                           cairo_t * cr,
                                           gpointer user_data )
 {
-    cairo_surface_t* tile = NULL ;
+    D2(cerr<<"D2 draw removed tiles\n")
 
-//    cairo_set_source_rgb(cr, sand.r, sand.g, sand.b ) ;
-//    cairo_paint(cr) ;
+    cairo_surface_t* tile = NULL ;
 
     /*nota: 112 e' la larghezza di due tessere vicine*/
     int border_x = (gtk_widget_get_allocated_width ( widget ) - 112 )/2 ;
@@ -807,13 +840,16 @@ extern "C" gboolean draw_removed_tiles  ( GtkWidget * widget,
          ( last_removed_pl1_b >= 0 ) && ( last_removed_pl1_b < TILES )    )
     {
         // removed by player 1
+
         tile = paint_tile ( last_removed_pl1_b, -2, -2, -2 ) ;
         cairo_set_source_surface ( cr, tile, border_x+51, border_y ) ;
         cairo_paint(cr) ;
+        cairo_surface_destroy ( tile ) ;
 
         tile = paint_tile ( last_removed_pl1_a, -2, -2, -2 ) ;
         cairo_set_source_surface ( cr, tile, border_x, border_y ) ;
         cairo_paint(cr) ;
+        cairo_surface_destroy ( tile ) ;
     }
     if ( ( last_removed_pl2_a >= 0 ) && ( last_removed_pl2_a < TILES ) &&
          ( last_removed_pl2_b >= 0 ) && ( last_removed_pl2_b < TILES )    )
@@ -823,19 +859,24 @@ extern "C" gboolean draw_removed_tiles  ( GtkWidget * widget,
         tile = paint_tile ( last_removed_pl2_b, -2, -2, -2 ) ;
         cairo_set_source_surface ( cr, tile, border_x+51, y ) ;
         cairo_paint(cr) ;
+        cairo_surface_destroy ( tile ) ;
 
         tile = paint_tile ( last_removed_pl2_a, -2, -2, -2 ) ;
         cairo_set_source_surface ( cr, tile, border_x, y ) ;
         cairo_paint(cr) ;
+        cairo_surface_destroy ( tile ) ;
     }
-    cairo_surface_destroy ( tile ) ;
     return TRUE ;
+
+    D9(cerr<<"D9 draw removed tiles\n")
 }
 
 extern "C" gboolean draw_play_ground ( GtkWidget * widget,
                                        cairo_t * cr,
                                        gpointer user_data )
 {
+    D2(cerr<<"D2 draw play ground\n")
+
     cairo_set_source_rgb(cr, green_forest.r, green_forest.g, green_forest.b ) ;
     cairo_paint(cr) ;
 
@@ -959,13 +1000,19 @@ extern "C" gboolean draw_play_ground ( GtkWidget * widget,
                     break ;
     }
     return TRUE ;
+
+    D9(cerr<<"D9 draw play ground\n")
 }
 
 void set_coor_tile ( tile * punt, const int &x, const int &y )
 {
+    D2(cerr<<"D2 set coor tile\n")
+
     punt->x1 = x + 10 ;
     punt->y1 = y ;
 
     punt->x2 = x + 10 + 50 ;
     punt->y2 = y + 50 ;
+
+    D9(cerr<<"D9 set coor tile\n")
 }

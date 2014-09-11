@@ -11,6 +11,8 @@ struct colour {
                 double b ;
               } ;
 
+enum tile_type { tt_number, tt_image } ;
+
 extern int h_x1 ;
 extern int h_y1 ;
 extern int h_z1 ;
@@ -60,31 +62,16 @@ void refresh_scores_labels( const int &score1, const int &score2 ) ;
 
 void refresh_down_label ( const int & couples ) ;
 
-/*
- * Funzione che ritorna un puntatore a label
- * dato in input il nome della label
- */
 GtkLabel * label_from_name ( const char * name ) ;
 
-/*
- * Funzione che ritorna un puntatore a widget
- * dato in input il nome del widget
- */
 GtkWidget * widget_from_name ( const char * name ) ;
 
-/*
- * Funzione che ritorna un puntatore a toggle button
- * dato in input il nome del togglebutton
- */
 GtkToggleButton * tb_from_name ( const char * name ) ;
 
 extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
                                                    GdkEvent * event,
                                                    gpointer user_data ) ;
 
-/*
- * Funzione che ridisegna il widget passato per nome
- */
 void redraw_widget ( const char * name ) ;
 
 void draw_number_on_tile ( cairo_t * &cr_tile,
@@ -95,6 +82,9 @@ cairo_surface_t * number_on_tile (  cairo_surface_t * _obj,
                                     const int &number ) ;
 
 int number_from_string ( const char * word ) ;
+
+void sub_paint_tile ( cairo_t * &context, cairo_surface_t * &surf1, cairo_surface_t * &surf2,
+                      const int &num, const char * &image_name, const tile_type &tt ) ;
 
 cairo_surface_t * paint_tile (  const int &num,
                                 const int &x,
