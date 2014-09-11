@@ -2,9 +2,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <cstring>
-#include "data_structure.h"
-#include "initializations_operations.h"
 #include "gui.h"
+#include "game.h"
 
 using namespace std ;
 
@@ -85,7 +84,6 @@ void fill_cube ()
  */
 void mix_cube ()
 {
-    reset_highlighted_cell( ) ;
     remove_dummies() ;
 
     srand ( time(0) ) ;
@@ -170,9 +168,9 @@ void refresh_unlocked ()
 
 bool check_pair ( tile* a, tile* b, tile* &first, tile* &second )
 {
-
-    if ( ( a->num != b->num ) &&
-         ( 0 == strcmp ( name[a->num].word, name[b->num].word ) ) )
+    if ( a->num == b->num )
+        return false ;
+    else if ( 0 == strcmp ( name[a->num].word, name[b->num].word ) )
     {
         first = a ;
         second = b ;
@@ -411,46 +409,6 @@ void find_coord ( const int &num, int &_x, int &_y, int &_z )
             }
 }
 
-
-/*bool check_pair ( tile* a, tile* b, tile* &first, tile* &second )*/
-
-bool check_solvability ( int counter )
-{
-    tile * do_not_use1 = NULL ;
-    tile * do_not_use2 = NULL ;
-
-    if ( counter == 2 )
-    {
-/*debug se partita impossibile*/
-cerr<<"mosse finite" ;
-    end_game () ;
-    return false ;
-    }
-
-    bool ret = false ;
-    for ( int i = 1 ; ((i < FREE)&&(!ret)) ; i++ )
-    {
-        if ( ( unlocked[i] == NULL ) || ( unlocked[i-1] == NULL ) )
-            continue ;
-        else
-        {
-            ret = check_pair( unlocked[i-1], unlocked[i],
-                              do_not_use1, do_not_use2) ;
-        }
-    }
-
-    if ( ret == false )
-    {
-        mix_cube() ;
-        check_cube() ;
-        refresh_unlocked() ;
-        sort_unlocked() ;
-        return check_solvability( counter+1 ) ;
-    }
-    else
-        return true ;
-}
-
 bool between ( const int &min, const int &middle, const int &max )
 {
     if ( min > max )
@@ -604,15 +562,22 @@ void sort_unlocked()
 
     delete [] _output ;
 
-    count_pairs_removable() ;
+    count_pairs_removable(0) ;
 }
 
-void count_pairs_removable ()
+int count_pairs_removable (const int &counter)
 {
+    if ( counter == 3 )
+    {
+        return 0 ;
+cerr<<"mosse finite\n" ;
+        end_game() ;
+    }
     int couples = 0 ;
     for ( int i = 1 ; i < FREE ; i++ )
     {
-        if ( ( unlocked[i-1] != NULL )&&( unlocked[i] != NULL ) )
+        if ( ( unlocked[i-1] != NULL )&&( unlocked[i] != NULL )&&
+             (unlocked[i-1]->num != unlocked[i]->num )            )
         {
             if ( ( 0 == strcmp( name[unlocked[i-1]->num].word,
                                 name[unlocked[i]->num].word))    ||
@@ -627,8 +592,29 @@ void count_pairs_removable ()
         }
     }
 
-    refresh_down_label ( couples ) ;
+    if ( couples < 0)
+    {
+        /*debug here*/ ;
+        return 0 ;
+cerr<<"error in count pairs removable, couples negative\n" ;
+        end_game() ;
+    }
+    else if ( couples == 0 )
+    {
+        mix_cube() ;
+        check_cube() ;
+        refresh_unlocked() ;
+        sort_unlocked() ;
+        return count_pairs_removable ( counter+1 ) ;
+    }
+    else
+    {
+        refresh_down_label ( couples ) ;
+        return couples ;
+    }
 }
+
+
 
 /*
  * Funzione che ordina alfabeticamente un sotto array
@@ -788,7 +774,7 @@ int tile_value (const int &name_position)
     /* si tratta delle prime 108 tessere:
      * circle, bamboo, cross, numerati da 1 a 9
      */
-    if      ( name_position <= 107 )
+    if ( ( name_position >= 0 ) && ( name_position <= 107 ) )
         return SEEDVALUE ;
     else
     /* si tratta delle 16 tessere dei venti:
@@ -880,7 +866,7 @@ void remove_dummies()
     check_cube () ;
     refresh_unlocked () ;
     sort_unlocked () ;
-    check_solvability(0) ;
+    count_pairs_removable(0) ;
     redraw_widget("playground") ;
 }
 

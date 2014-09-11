@@ -326,8 +326,10 @@
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="has_tooltip">True</property>
+                <property name="tooltip_markup" translatable="yes">tip</property>
+                <property name="tooltip_text" translatable="yes">tip</property>
                 <property name="use_action_appearance">False</property>
-                <property name="action_name">tip</property>
                 <property name="label" translatable="yes">Tip</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-info</property>
@@ -343,8 +345,9 @@
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="tooltip_markup" translatable="yes">rules</property>
+                <property name="tooltip_text" translatable="yes">rules</property>
                 <property name="use_action_appearance">False</property>
-                <property name="action_name">rules</property>
                 <property name="label" translatable="yes">Rules</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-index</property>
@@ -457,6 +460,7 @@
                 <property name="can_focus">False</property>
                 <property name="halign">end</property>
                 <property name="vexpand">True</property>
+                <signal name="draw" handler="draw_removed_tiles" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -499,6 +503,7 @@
                     <property name="can_focus">False</property>
                     <property name="halign">start</property>
                     <property name="vexpand">True</property>
+                    <property name="yalign">0.94999998807907104</property>
                     <signal name="button-press-event" handler="handler_click_on_widget" swapped="no"/>
                   </object>
                   <packing>
@@ -513,6 +518,7 @@
                     <property name="height_request">200</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="yalign">0.0099999997764825821</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -528,6 +534,7 @@
                     <property name="can_focus">False</property>
                     <property name="halign">start</property>
                     <property name="vexpand">True</property>
+                    <property name="yalign">0.94999998807907104</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -541,6 +548,7 @@
                     <property name="height_request">200</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="yalign">0.0099999997764825821</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>

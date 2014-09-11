@@ -1,13 +1,11 @@
 #include <fstream>
+#include "io_file.h"
 #include "data_structure.h"
 
 using namespace std ;
 
 const char* F_TILES = "./tiles_names.dat" ;
 const int MAXWORD = 20 ;
-
-/*deallocare correttamente a chiusura applicazione
-  array 2d con nomi tessere*/
 
 void import_tiles_names ()
 {
