@@ -1,31 +1,28 @@
 using namespace std ;
 
-struct couple   {
-                    int t1 ;
-                    const char * name1 ;
-                    int x1 ;
-                    int y1 ;
-                    int z1 ;
+enum p_player { p_human1, p_human2, p_ai } ;
 
-                    int t2 ;
-                    const char * name2 ;
-                    int x2 ;
-                    int y2 ;
-                    int z2 ;
-                } ;
+extern int _score1 ;
+extern int _score2 ;
 
 extern bool playing ;
 
 void start_game () ;
 
+void undo_last_two_couples () ;
+
+void refresh_scores( int &score1, int &score2) ;
+
 void check_couple ( ) ;
 
-void insert_half_pair ( const int &num, const int &x, const int &y, const int &z ) ;
+void clear_pair_removed () ;
 
-void end_game () ;
+void refresh_pair_removed( const p_player &temp, const int &a, const int &b ) ;
 
 void opponent_round () ;
 
 void reset_row() ;
 
-void undo_last_two_couples () ;
+void insert_half_pair ( const int &num, const int &x, const int &y, const int &z ) ;
+
+void end_game () ;

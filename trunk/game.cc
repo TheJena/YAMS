@@ -1,9 +1,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <cstring>
-#include "data_structure.h"
-#include "initializations_operations.h"
 #include "gui.h"
+#include "game.h"
 
 using namespace std ;
 
@@ -14,6 +13,9 @@ int row = 0 ;
 int col = 0 ;
 
 bool playing = false ;
+
+int _score1 = 0 ;
+int _score2 = 0 ;
 
 void start_game ()
 {
@@ -45,6 +47,7 @@ void start_game ()
         reset_highlighted_cell() ;
         display_tiles() ;
         refresh_turn_label(false);
+        refresh_scores(_score1, _score2) ;
     }
     else
 cerr<<"error game is alredy active\n";
@@ -53,8 +56,10 @@ cerr<<"error game is alredy active\n";
 
 void undo_last_two_couples ()
 {
+
     if ( row >= 1 )
     {
+        refresh_scores(_score1, _score2) ;
         row-- ;
         if ( mov[row][0].t1 != -1 )
             fill_cell(mov[row][0].x1, mov[row][0].y1, mov[row][0].z1, mov[row][0].t1);
@@ -82,6 +87,23 @@ void undo_last_two_couples ()
     }
 }
 
+void refresh_scores( int &score1, int &score2)
+{
+    score1 = 0 ;
+    score2 = 0 ;
+    for ( int c = 0 ; c < 2 ; c++ )
+        for (int r = 0 ; r < TILES/4 ; r++ )
+        {
+            if ( ( c == 0 )&&( mov[r][c].t1 != -1 ) )
+                score1 += tile_value(mov[r][c].t1) ;
+
+            if ( ( c == 1 )&&( mov[r][c].t1 != -1 ) )
+                score2 += tile_value(mov[r][c].t1) ;
+        }
+
+    refresh_scores_labels( score1, score2 ) ;
+}
+
 
 
 void check_couple ( )
@@ -96,17 +118,28 @@ void check_couple ( )
                      || ( ( between (140, mov[row][col].t1, 143 ) )
                           && ( between (140, mov[row][col].t2  , 143 ) ) ) ) )
         {
+
+            refresh_scores(_score1, _score2) ;
+
             reset_cell ( mov[row][col].x1, mov[row][col].y1, mov[row][col].z1 ) ;
             reset_cell ( mov[row][col].x2, mov[row][col].y2, mov[row][col].z2 ) ;
 
             if ((mode == h_h)&&( col == 0 ))
+            {
                 refresh_turn_label(true) ;
+                refresh_pair_removed( p_human1, mov[row][1].t1, mov[row][1].t2 ) ;
+            }
             if ((mode == h_h)&&( col == 1 ))
+            {
                 refresh_turn_label(false) ;
+                refresh_pair_removed( p_human2, mov[row][1].t1, mov[row][1].t2 ) ;
+            }
+            if ( mode == h_c )
+                refresh_pair_removed( p_human1, mov[row][col].t1, mov[row][col].t2 ) ;
             check_cube () ;
             refresh_unlocked () ;
             sort_unlocked () ;
-            check_solvability(0) ;
+            count_pairs_removable(0) ;
             redraw_widget ( "playground" ) ;
 
             /*ora tocca all'avversario*/
@@ -120,6 +153,28 @@ void check_couple ( )
             reset_highlighted_cell() ;
         }
     }
+}
+
+void clear_pair_removed ()
+{
+    refresh_pair_removed( p_human1, -1, -1 ) ;
+    refresh_pair_removed( p_ai, -1, -1 ) ;
+}
+
+void refresh_pair_removed( const p_player &temp, const int &a, const int &b )
+{
+    if ( ( temp == p_ai ) || ( temp == p_human2 ) )
+    {
+        last_removed_pl2_a = a ;        // removed by ai or player 2
+        last_removed_pl2_b = b ;        // removed by ai or player 2
+    }
+    else if ( temp == p_human1 )
+    {
+        last_removed_pl1_a = a ;        // removed by player 1
+        last_removed_pl1_b = b ;        // removed by player 1
+    }
+
+    redraw_widget("drawingarea_right") ;
 }
 
 void opponent_round ()
@@ -138,14 +193,17 @@ void opponent_round ()
         refresh_turn_label(true) ;
         extract_pair ( &mov[row][1] ) ;
 cerr<<mov[row][1].name1<<" "<<mov[row][1].t1<<" "<<mov[row][1].name2<<" "<<mov[row][1].t2<<endl;
+
+        refresh_pair_removed( p_ai, mov[row][1].t1, mov[row][1].t2 ) ;
+
+        refresh_scores(_score1, _score2) ;
+
         reset_cell ( mov[row][1].x1, mov[row][1].y1, mov[row][1].z1 ) ;
         reset_cell ( mov[row][1].x2, mov[row][1].y2, mov[row][1].z2 ) ;
 
         dummy = TILES ;
         fill_cell ( mov[row][1].x1, mov[row][1].y1, mov[row][1].z1, dummy ) ;
         fill_cell ( mov[row][1].x2, mov[row][1].y2, mov[row][1].z2, dummy ) ;
-
-
 
         row++ ;
 
@@ -160,7 +218,7 @@ cerr<<mov[row][1].name1<<" "<<mov[row][1].t1<<" "<<mov[row][1].name2<<" "<<mov[r
             check_cube () ;
             refresh_unlocked () ;
             sort_unlocked () ;
-            check_solvability(0) ;
+            count_pairs_removable (0) ;
             redraw_widget ( "playground" ) ;
         }
     }
@@ -212,6 +270,7 @@ void end_game ()
     if ( playing )
     {
         reset_highlighted_cell() ;
+        clear_pair_removed () ;
         display_end () ;
 
         for ( int x = 0 ; x < TILES/4 ; x++ )

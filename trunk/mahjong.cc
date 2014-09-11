@@ -1,7 +1,3 @@
-#include <iostream>
-#include <gtk/gtk.h>
-#include "data_structure.h"
-#include "initializations_operations.h"
 #include "gui.h"
 #include "io_file.h"
 

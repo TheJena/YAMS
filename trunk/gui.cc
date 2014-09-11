@@ -1,12 +1,10 @@
 #include <fstream>
 #include <iostream>
-#include <gtk/gtk.h>
 #include <ctime>
 #include <cstdlib>
 #include <cstring>
-#include "data_structure.h"
 #include "gui.h"
-#include "initializations_operations.h"
+#include "game.h"
 #include "io_file.h"
 
 
@@ -44,7 +42,17 @@ GtkBuilder * builder ;
 colour green_forest = { 34.0/255, 139.0/255, 34.0/255 } ;
 colour peach = { 255.0/255, 229.0/255, 180.0/255 } ;
 colour black = { 0.0/255, 0.0/255, 0.0/255 } ;
-colour red = { 255.0/255, 0.0/255, 0.0/255 } ;
+colour white = { 255.0/255, 255.0/255, 255.0/255 } ;
+colour light_blue = { 0.0/255, 127.0/255, 255.0/255 } ;
+colour light_orange = { 255.0/255, 153.0/255, 0.0/255 } ;
+colour sand = { 244.0/255, 164.0/255, 96.0/255 } ;
+colour gold = { 255.0/255, 215.0/255, 0.0/255 } ;
+colour coffe = { 111.0/255, 78.0/255, 55.0/255 } ;
+colour ferrari = { 204.0/255, 0.0/255, 0.0/255 } ;
+colour yellow = { 255.0/255, 255.0/255, 0.0/255 } ;
+colour blue_persia = { 28.0/255, 57.0/255, 187.0/255 } ;
+colour lapislazuli = { 38.0/255, 97.0/255, 156.0/255 } ;
+colour carmine = { 150.0/255, 0.0/255, 24.0/255 } ;
 
 int h_x1 = -1 ;
 int h_y1 = -1 ;
@@ -54,8 +62,14 @@ int h_x2 = -1 ;
 int h_y2 = -1 ;
 int h_z2 = -1 ;
 
+int last_removed_pl1_a = -1 ;     // removed by player 1
+int last_removed_pl1_b = -1 ;     // removed by player 1
+int last_removed_pl2_a = -1 ;     // removed by ai or player 2
+int last_removed_pl2_b = -1 ;     // removed by ai or player 2
+
 void display_end ()
 {
+    refresh_scores(_score1, _score2) ;
     play_ground = end ;
     redraw_widget ("playground") ;
 }
@@ -124,6 +138,8 @@ extern "C" gboolean handler_click_on_widget (GtkWidget *widget,
                GdkEventButton  *event,
                gpointer   user_data)
 {
+    if ( play_ground != tiles )
+        return TRUE ;
     const int _x = event->x ;
     const int _y = event->y ;
 
@@ -276,6 +292,21 @@ void refresh_turn_label ( bool _switch)
     }
 }
 
+void refresh_scores_labels( const int &score1, const int &score2 )
+{
+    char text_pl1[MAXLUN] ;
+    char text_pl2[MAXLUN] ;
+
+    char before[MAXLUN] = "Punteggio = " ;
+    char after[MAXLUN] = " ." ;
+
+    sprintf ( text_pl1, "%s%d%s", before, score1, after ) ;
+    sprintf ( text_pl2, "%s%d%s", before, score2, after ) ;
+
+    gtk_label_set_text ( label_from_name("score1"), text_pl1 ) ;
+    gtk_label_set_text ( label_from_name("score2"), text_pl2 ) ;
+}
+
 void refresh_down_label ( const int & couples )
 {
     if ((playing)&&( play_ground == tiles ))
@@ -364,6 +395,7 @@ extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
         {
 	    	cerr<<"undo pressed"<<endl ;
             undo_last_two_couples() ;
+            clear_pair_removed () ;
         }
 	}
     else if ( widget == (widget_from_name ( "tip" ) ) )
@@ -533,6 +565,8 @@ int number_from_string ( const char * word )
 
     return (output-'0') ;
 }
+
+
 
 cairo_surface_t * paint_tile (  const int &num,
                                 const int &x,
@@ -731,7 +765,7 @@ cairo_surface_t * paint_tile (  const int &num,
        )
     {
         cairo_set_line_width ( context, 1.5 ) ;
-        cairo_set_source_rgb ( context, red.r, red.g, red.b ) ;
+        cairo_set_source_rgb ( context, ferrari.r, ferrari.g, ferrari.b ) ;
         cairo_rectangle ( context, 13, 3, 46, 46 ) ;
         cairo_stroke ( context ) ;
     }
@@ -756,6 +790,48 @@ void calculate_coor_x_y ( const int &x,
     _dy -= z*10 ;
 }
 
+extern "C" gboolean draw_removed_tiles  ( GtkWidget * widget,
+                                          cairo_t * cr,
+                                          gpointer user_data )
+{
+    cairo_surface_t* tile = NULL ;
+
+//    cairo_set_source_rgb(cr, sand.r, sand.g, sand.b ) ;
+//    cairo_paint(cr) ;
+
+    /*nota: 112 e' la larghezza di due tessere vicine*/
+    int border_x = (gtk_widget_get_allocated_width ( widget ) - 112 )/2 ;
+    int border_y = 50 ;
+
+    if ( ( last_removed_pl1_a >= 0 ) && ( last_removed_pl1_a < TILES ) &&
+         ( last_removed_pl1_b >= 0 ) && ( last_removed_pl1_b < TILES )    )
+    {
+        // removed by player 1
+        tile = paint_tile ( last_removed_pl1_b, -2, -2, -2 ) ;
+        cairo_set_source_surface ( cr, tile, border_x+51, border_y ) ;
+        cairo_paint(cr) ;
+
+        tile = paint_tile ( last_removed_pl1_a, -2, -2, -2 ) ;
+        cairo_set_source_surface ( cr, tile, border_x, border_y ) ;
+        cairo_paint(cr) ;
+    }
+    if ( ( last_removed_pl2_a >= 0 ) && ( last_removed_pl2_a < TILES ) &&
+         ( last_removed_pl2_b >= 0 ) && ( last_removed_pl2_b < TILES )    )
+    {
+        int y = ( gtk_widget_get_allocated_height ( widget ) / 2 ) ;
+        // removed by ai or player 2
+        tile = paint_tile ( last_removed_pl2_b, -2, -2, -2 ) ;
+        cairo_set_source_surface ( cr, tile, border_x+51, y ) ;
+        cairo_paint(cr) ;
+
+        tile = paint_tile ( last_removed_pl2_a, -2, -2, -2 ) ;
+        cairo_set_source_surface ( cr, tile, border_x, y ) ;
+        cairo_paint(cr) ;
+    }
+    cairo_surface_destroy ( tile ) ;
+    return TRUE ;
+}
+
 extern "C" gboolean draw_play_ground ( GtkWidget * widget,
                                        cairo_t * cr,
                                        gpointer user_data )
@@ -766,9 +842,50 @@ extern "C" gboolean draw_play_ground ( GtkWidget * widget,
     switch ( play_ground )
     {
         case empty:
+                    cairo_set_source_rgb(cr, sand.r, sand.g, sand.b ) ;
+                    cairo_paint(cr) ;
                     break ;
         case rules:
-/*disegnare regole*/
+                    {
+                        cairo_set_source_rgb(cr, light_blue.r, light_blue.g, light_blue.b ) ;
+                        cairo_paint(cr) ;
+
+                        cairo_surface_t * surface ;
+	                    cairo_t * cont ;
+	                    char line_1[]="Mahjong rules";
+	                    char line_2[]="Prima riga";
+	                    char line_3[]="Seconda riga";
+	                    cairo_font_extents_t fe;
+	                    cairo_text_extents_t te;
+
+	                    surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, gtk_widget_get_allocated_width ( widget ), gtk_widget_get_allocated_height ( widget ));
+	                    cont = cairo_create (surface);
+
+	                    cairo_set_font_size (cont, 28);
+	                    cairo_select_font_face (cont, "sans-serif", CAIRO_FONT_SLANT_ITALIC, CAIRO_FONT_WEIGHT_NORMAL);
+	                    cairo_font_extents (cont, &fe);
+	                    cairo_text_extents (cont, line_1, &te);
+
+	                    cairo_move_to (cont, 252, 50);
+	                    cairo_set_source_rgb(cont, light_orange.r, light_orange.g, light_orange.b ) ;
+	                    cairo_show_text (cont, line_1);
+
+	                    cairo_set_font_size (cont, 18);
+	                    cairo_move_to (cont, 60, 80);
+	                    cairo_text_extents (cont, line_2, &te);
+	                    cairo_show_text (cont, line_2);
+
+	                    cairo_set_font_size (cont, 18);
+	                    cairo_move_to (cont, 60, 110);
+	                    cairo_text_extents (cont, line_3, &te);
+	                    cairo_show_text (cont, line_3);
+
+                        cairo_set_source_surface ( cr, surface, 0, 0 ) ;
+                        cairo_paint(cr);
+
+	                    cairo_destroy (cont);
+	                    cairo_surface_destroy (surface);
+                    }
                     break ;
         case tiles:
                     for (int z = 0 ; z < 4 ; z++ )
@@ -794,6 +911,50 @@ extern "C" gboolean draw_play_ground ( GtkWidget * widget,
                             }
                     break ;
         case end:
+                    const int score_1 = _score1 ;
+                    const int score_2 = _score2 ;
+                    if (( score_1 > score_2 )&&( mode == h_c ))
+                    {
+                        /* Player 1 won against ai */
+                        cairo_set_source_rgb(cr, gold.r, gold.g, gold.b ) ;
+                        cairo_paint(cr) ;
+/*scrivere in carmine*/
+                    }
+                    else if (( score_1 < score_2 )&&( mode == h_c ))
+                    {
+                        /* Player 1 lost against ai */
+                        cairo_set_source_rgb(cr, coffe.r, coffe.g, coffe.b ) ;
+                        cairo_paint(cr) ;
+/*scrivere in white*/
+                    }
+                    else if (( score_1 == score_2 )&&( mode == h_c ))
+                    {
+                        /* Player 1 equalized ai */
+                        cairo_set_source_rgb(cr, lapislazuli.r, lapislazuli.g, lapislazuli.b ) ;
+                        cairo_paint(cr) ;
+/*scrivere in gold*/
+                    }
+                    else if (( score_1 > score_2 )&&( mode == h_h ))
+                    {
+                        /* Player 1 won against Player 2 */
+                        cairo_set_source_rgb(cr, ferrari.r, ferrari.g, ferrari.b ) ;
+                        cairo_paint(cr) ;
+/*scrivere in peach*/
+                    }
+                    else if (( score_1 < score_2 )&&( mode == h_h ))
+                    {
+                        /* Player 1 lost against Player 2 */
+                        cairo_set_source_rgb(cr, carmine.r, carmine.g, carmine.b ) ;
+                        cairo_paint(cr) ;
+/*scrivere in bianco*/
+                    }
+                    else if (( score_1 == score_2 )&&( mode == h_h ))
+                    {
+                        /* Player 1 equalized Player 2 */
+                        cairo_set_source_rgb(cr, blue_persia.r, blue_persia.g, blue_persia.b ) ;
+                        cairo_paint(cr) ;
+/*scrivere in yellow*/
+                    }
 /*disegnare winner loser*/
                     break ;
     }
