@@ -683,6 +683,9 @@ cerr<<"error in count pairs removable, couples negative\n" ;
         else
         {
             mix_cube() ;
+            check_cube() ;
+            refresh_unlocked() ;
+            sort_unlocked() ;
             return count_pairs_removable ( count-1 ) ;
         }
     }
