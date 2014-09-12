@@ -2,6 +2,8 @@ using namespace std ;
 
 enum p_player { p_human1, p_human2, p_ai } ;
 
+extern const int max_couple_row ;
+
 extern int _score1 ;
 extern int _score2 ;
 
@@ -9,6 +11,10 @@ extern bool playing ;
 extern bool lock_undo ;
 
 bool start_game () ;
+
+bool save_game( char * filename ) ;
+
+bool load_game( char * filename ) ;
 
 void undo_last_two_couples () ;
 

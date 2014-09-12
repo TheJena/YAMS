@@ -10,6 +10,8 @@ using namespace std ;
 
 couple ** mov ;
 
+const int max_couple_row = TILES/4 ;
+
 int row = 0 ;
 int col = 0 ;
 
@@ -45,11 +47,11 @@ bool start_game ()
 
             row = 0 ;
             col = 0 ;
-            mov = new couple *[TILES/4] ;
-            for ( int x = 0 ; x < TILES/4 ; x++ )
+            mov = new couple *[max_couple_row] ;
+            for ( int x = 0 ; x < max_couple_row ; x++ )
                 mov[x] = new couple[2] ;
 
-            for ( int r = 0 ; r < TILES/4 ; r++ )
+            for ( int r = 0 ; r < max_couple_row ; r++ )
                 for ( int c = 0 ; c < 2 ; c++ )
                 {
                     mov[r][c].t1 = -1 ;
@@ -72,6 +74,17 @@ cerr<<"error game is alredy active\n";
 
     D10(cerr<<"D10 start game\n")
 }
+
+bool save_game(char * filename )
+{
+    return save_game_on_file ( const_cast<const couple**>(mov), filename, row, col ) ;
+}
+
+bool load_game( char * filename )
+{
+    return load_game_from_file ( mov, filename, row, col ) ;
+}
+
 
 void undo_last_two_couples ()
 {
@@ -122,7 +135,7 @@ void refresh_scores( int &score1, int &score2)
     score1 = 0 ;
     score2 = 0 ;
     for ( int c = 0 ; c < 2 ; c++ )
-        for (int r = 0 ; r < TILES/4 ; r++ )
+        for (int r = 0 ; r < max_couple_row ; r++ )
         {
             if ( ( c == 0 )&&( mov[r][c].t1 != -1 ) )
                 score1 += tile_value(mov[r][c].t1) ;
@@ -261,7 +274,7 @@ bool opponent_round ()
 
             row++ ;
 
-            if ( row == TILES/4)
+            if ( row == max_couple_row)
             {
                         end_game();
                             
@@ -352,7 +365,7 @@ void end_game ()
         display_end () ;
 
 
-        for ( int x = 0 ; x < TILES/4 ; x++ )
+        for ( int x = 0 ; x < max_couple_row ; x++ )
             delete [] mov[x] ;
         delete [] mov ;
         row = 0 ;

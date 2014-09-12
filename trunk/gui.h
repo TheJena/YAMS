@@ -54,6 +54,14 @@ extern "C" gboolean handler_hide_window ( GtkWidget * widget,
                                            GdkEvent * event,
                                            gpointer user_data) ;
 
+extern "C" gboolean handler_set_save_game ( GtkWidget * widget,
+                                           GdkEvent * event,
+                                           gpointer user_data) ;
+
+extern "C" gboolean handler_set_load_game ( GtkWidget * widget,
+                                            GdkEvent * event,
+                                            gpointer user_data) ;
+
 extern "C" gboolean handler_set_new_game ( GtkWidget * widget,
                                            GdkEvent * event,
                                            gpointer user_data) ;
@@ -63,6 +71,8 @@ void refresh_turn_label ( bool _switch) ;
 void refresh_scores_labels( const int &score1, const int &score2 ) ;
 
 void refresh_down_label ( const int & couples ) ;
+
+GtkEntry * entry_from_name ( const char * name ) ;
 
 GtkLabel * label_from_name ( const char * name ) ;
 
