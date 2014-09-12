@@ -286,7 +286,7 @@ bool opponent_round ()
                 refresh_unlocked () ;
                 if ( sort_unlocked () )
                     return false ;
-                if ( count_pairs_removable (0) == -1 )
+                if ( count_pairs_removable (3) == -1 )
                     return false ;
                 redraw_widget ( "playground" ) ;
             }
