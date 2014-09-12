@@ -45,19 +45,3 @@ struct _string  {
                     char * word ;
                 } ;
 extern _string * name ;
-
-struct couple   {
-                    int t1 ;
-                    const char * name1 ;
-                    int x1 ;
-                    int y1 ;
-                    int z1 ;
-
-                    int t2 ;
-                    const char * name2 ;
-                    int x2 ;
-                    int y2 ;
-                    int z2 ;
-                } ;
-
-

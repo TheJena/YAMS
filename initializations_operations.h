@@ -1,4 +1,5 @@
 #include "data_structure.h"
+#include "io_file.h"
 
 extern bool lock_mix ;
 

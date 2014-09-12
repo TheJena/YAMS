@@ -5,7 +5,6 @@
 #include <cstring>
 #include "gui.h"
 #include "game.h"
-#include "io_file.h"
 #include "debug_macros.h"
 
 
@@ -34,6 +33,8 @@ const char* I_WINTER            = "./winter.png" ;
 const char* I_DUMMY             = "./dummy.png" ;
 
 const char* W_newgame           = "window_new_game" ;
+const char* W_savegame          = "window_save_game" ;
+const char* W_loadgame          = "window_load_game" ;
 
 const int MAXLUN = 100 ;
 
@@ -236,8 +237,7 @@ extern "C" gboolean handler_hide_window ( GtkWidget * widget,
 {
     D1(cerr<<"D1 handler hide window\n")
 
-    GtkWidget * w_new_game = widget_from_name ( W_newgame ) ;
-    gtk_widget_hide ( w_new_game ) ;
+    gtk_widget_hide ( gtk_widget_get_toplevel(widget) ) ;
 
     if ( playing )
         display_tiles() ;
@@ -247,6 +247,40 @@ extern "C" gboolean handler_hide_window ( GtkWidget * widget,
     return TRUE ;
 
     D10(cerr<<"D10 handler hide window\n")
+}
+
+extern "C" gboolean handler_set_save_game ( GtkWidget * widget,
+                                            GdkEvent * event,
+                                            gpointer user_data)
+{
+    GtkEntry* aus = entry_from_name( "text_save_on_file" ) ;
+    char * filename = const_cast<char*>(gtk_entry_get_text( aus )) ;
+
+    if ( save_game ( filename ) )
+        gtk_label_set_text ( label_from_name("label_down"), "file saved successfully" ) ;
+    else
+        gtk_label_set_text ( label_from_name("label_down"), "an error occurred while saving" ) ;
+
+    gtk_widget_hide ( gtk_widget_get_toplevel(widget) ) ;
+
+    return TRUE ;
+}
+
+extern "C" gboolean handler_set_load_game ( GtkWidget * widget,
+                                            GdkEvent * event,
+                                            gpointer user_data)
+{
+    GtkEntry* aus = entry_from_name( "text_load_from_file" ) ;
+    char * filename = const_cast<char*>(gtk_entry_get_text( aus )) ;
+
+    if ( load_game ( filename ) )
+        gtk_label_set_text ( label_from_name("label_down"), "file loaded successfully" ) ;
+    else
+        gtk_label_set_text ( label_from_name("label_down"), "an error occurred while loading" ) ;
+
+    gtk_widget_hide ( gtk_widget_get_toplevel(widget) ) ;
+
+    return TRUE ;
 }
 
 extern "C" gboolean handler_set_new_game ( GtkWidget * widget,
@@ -410,6 +444,15 @@ void refresh_down_label ( const int & couples )
     D9(cerr<<"D9 refresh down label\n")
 }
 
+GtkEntry * entry_from_name ( const char * name )
+{
+    D2(cerr<<"D2 entry from name\n")
+
+    return GTK_ENTRY(gtk_builder_get_object(builder, name ) ) ;
+
+    D9(cerr<<"D9 entry from name\n")
+}
+
 GtkLabel * label_from_name ( const char * name )
 {
     D2(cerr<<"D2 label from name\n")
@@ -522,15 +565,16 @@ extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
     else if ( ( widget == (widget_from_name ( "load" ) ) ) ||
               ( widget == (widget_from_name ( "menuitem_load" ) ) ) )
     {
-        if ((playing)&&( play_ground == tiles ))
-        {
-        }
+        GtkWidget * w_load_game = widget_from_name ( W_loadgame ) ;
+        gtk_widget_show ( w_load_game ) ;
 	}
     else if ( ( widget == (widget_from_name ( "save" ) ) ) || 
               ( widget == (widget_from_name ( "menuitem_save" ) ) ) )
     {
         if ((playing)&&( play_ground == tiles ))
         {
+            GtkWidget * w_save_game = widget_from_name ( W_savegame ) ;
+            gtk_widget_show ( w_save_game ) ;
         }
 	}
     else if ( widget == (widget_from_name ( "menuitem_man" ) ) )
