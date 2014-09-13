@@ -1,0 +1,872 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Mahjong: Riferimenti per il file game.cc</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Mahjong
+   </div>
+   <div id="projectbrief">Simple board game</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.1.2 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Pagina&#160;Principale</span></a></li>
+      <li><a href="annotated.html"><span>Classi</span></a></li>
+      <li class="current"><a href="files.html"><span>File</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Cerca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Elenco&#160;dei&#160;file</span></a></li>
+      <li><a href="globals.html"><span>Elementi&#160;dei&#160;file</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tutto</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classi</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>File</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funzioni</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variabili</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Definizioni</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pagine</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funzioni</a> &#124;
+<a href="#var-members">Variabili</a>  </div>
+  <div class="headertitle">
+<div class="title">Riferimenti per il file game.cc</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;iostream&gt;</code><br/>
+<code>#include &lt;cstring&gt;</code><br/>
+<code>#include &quot;<a class="el" href="debug__macros_8h_source.html">debug_macros.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="game_8h_source.html">game.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="io__file_8h_source.html">io_file.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="cube_8h_source.html">cube.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="movements_8h_source.html">movements.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="gui_8h_source.html">gui.h</a>&quot;</code><br/>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
+Funzioni</h2></td></tr>
+<tr class="memitem:af764be509d6d656189b4211d02cef767"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8cc.html#af764be509d6d656189b4211d02cef767">check_couple</a> ()</td></tr>
+<tr class="memitem:af1c6f007dae07fb8eecce4c664a8fcb1"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8cc.html#af1c6f007dae07fb8eecce4c664a8fcb1">opponent_round</a> ()</td></tr>
+<tr class="memitem:ad39fcaf7ee3bceadee96b0da22919849"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8cc.html#ad39fcaf7ee3bceadee96b0da22919849">start_game</a> ()</td></tr>
+<tr class="memitem:af558e3f525b0074b822ee6927b4467e9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8cc.html#af558e3f525b0074b822ee6927b4467e9">save_game</a> (char *filename)</td></tr>
+<tr class="memitem:a1e1dd2330c68191b8a43de87056b196a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8cc.html#a1e1dd2330c68191b8a43de87056b196a">load_game</a> (char *filename)</td></tr>
+<tr class="memitem:a5817aa88950e75d367e13635d2a72a8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8cc.html#a5817aa88950e75d367e13635d2a72a8f">undo_last_two_couples</a> ()</td></tr>
+<tr class="memitem:a6d71742a4f6bf95ed5a9f35e5b24f0c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8cc.html#a6d71742a4f6bf95ed5a9f35e5b24f0c0">refresh_scores</a> ()</td></tr>
+<tr class="memitem:a7c6eb3e4a7b7a457376c13e5bd2488e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8cc.html#a7c6eb3e4a7b7a457376c13e5bd2488e7">reset_row</a> ()</td></tr>
+<tr class="memitem:a27a2696c29164bf08a0706e9d6be8b38"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8cc.html#a27a2696c29164bf08a0706e9d6be8b38">insert_half_pair</a> (const int &amp;num, const int &amp;x, const int &amp;y, const int &amp;z)</td></tr>
+<tr class="memitem:a4202fa5c5191c7e387d7570da6c8cd8c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8cc.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a> ()</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2><a name="var-members"></a>
+Variabili</h2></td></tr>
+<tr class="memitem:aa81af6873000d183cbda5b4d0dd7fd22"><td class="memItemLeft" align="right" valign="top">game&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> = h_c</td></tr>
+<tr class="memitem:a26971deff94cc6872e8bc340303923be"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8cc.html#a26971deff94cc6872e8bc340303923be">max_couple_row</a> = <a class="el" href="cube_8h.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a>/4</td></tr>
+<tr class="memitem:a0448fec049217e428b9ec21c03e51d52"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a> = false</td></tr>
+<tr class="memitem:ac4270932e53ca1f01055730603581ed5"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8cc.html#ac4270932e53ca1f01055730603581ed5">_score1</a> = 0</td></tr>
+<tr class="memitem:a54340bce4f156f70290ea284f25165ce"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8cc.html#a54340bce4f156f70290ea284f25165ce">_score2</a> = 0</td></tr>
+<tr class="memitem:af1d3cff2e4538e23400e260bae3dadad"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a> = 0</td></tr>
+<tr class="memitem:afb52e720f5f0c483db5861f9e42e924e"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a> = 0</td></tr>
+<tr class="memitem:a393611d05133138bb732c017eb5e6782"><td class="memItemLeft" align="right" valign="top">static couple **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a></td></tr>
+</table>
+<a name="details" id="details"></a><h2>Descrizione dettagliata</h2>
+<div class="textblock"><p>File che contiene l'implementazione del modulo GAME. Qui vengono definite le funzioni che operano sulla struttura dati mov, nonche' la struttura dati stessa. </p>
+</div><h2>Documentazione delle funzioni</h2>
+<a class="anchor" id="af764be509d6d656189b4211d02cef767"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool check_couple </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Funzione privata che verifica se agli indici di riga, colonna e' presente una coppia valida o meno, quindi decide se spostare gli indici o reinizializzare la zona dove era memorizzata la coppia. </p>
+<dl class="section return"><dt>Restituisce</dt><dd>false se occorrono complicazioni durante l'esecuzione delle funzioni: <a class="el" href="movements_8h.html#a8d312079de155515dca7e89bb7d65771">sort_unlocked</a>, <a class="el" href="movements_8h.html#ac1ab19e53ac2166573cb5e81edd4df9a">count_pairs_removable</a> e <a class="el" href="game_8cc.html#af1c6f007dae07fb8eecce4c664a8fcb1">opponent_round</a>. Altrimenti true. </dd></dl>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    <a class="code" href="debug__macros_8h.html#a975397c373ae2a9dc28d0297fa18da56">D2</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D2 check couple\n&quot;</span>)</div>
+<div class="line"></div>
+<div class="line">    if ( <a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a> )</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span> ( ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].t1 != <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].t2 )&amp;&amp;(<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].name1 != NULL)&amp;&amp;(<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].name2 != NULL)&amp;&amp;</div>
+<div class="line">             ( ( ( strcmp ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].name1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].name2 ) == 0 ) )</div>
+<div class="line">                     || ( ( <a class="code" href="movements_8cc.html#a983b47fd27e78a38e5a4e38ea5a2913c">between</a> (136, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].t1, 139 ) )</div>
+<div class="line">                          &amp;&amp; ( <a class="code" href="movements_8cc.html#a983b47fd27e78a38e5a4e38ea5a2913c">between</a> (136, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].t2  , 139 ) ) )</div>
+<div class="line">                     || ( ( <a class="code" href="movements_8cc.html#a983b47fd27e78a38e5a4e38ea5a2913c">between</a> (140, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].t1, 143 ) )</div>
+<div class="line">                          &amp;&amp; ( <a class="code" href="movements_8cc.html#a983b47fd27e78a38e5a4e38ea5a2913c">between</a> (140, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].t2  , 143 ) ) ) ) )</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">if</span> ( <a class="code" href="movements_8cc.html#af73c15f79e771441c611bd9933877bf2">ai</a> != thoughtful )</div>
+<div class="line">            {</div>
+<div class="line">                <a class="code" href="gui_8cc.html#a38ec949d4b21e41328cbd5c945ace68c">lock_undo</a> = false ;</div>
+<div class="line">                <span class="keywordflow">if</span> ( <a class="code" href="movements_8cc.html#af73c15f79e771441c611bd9933877bf2">ai</a> == airhead )</div>
+<div class="line">                    <a class="code" href="gui_8cc.html#aad21a67694236e8b04cfa41aad293253">lock_mix</a> = false ;</div>
+<div class="line">            }</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line">            <a class="code" href="cube_8cc.html#a2ac814685fc40e4f78c8556c8e1112ce">reset_cell</a> ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].x1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].y1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].z1 ) ;</div>
+<div class="line">            <a class="code" href="cube_8cc.html#a2ac814685fc40e4f78c8556c8e1112ce">reset_cell</a> ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].x2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].y2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].z2 ) ;</div>
+<div class="line"></div>
+<div class="line">            <span class="keywordflow">if</span> ((<a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> == h_h)&amp;&amp;( <a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a> == 0 ))</div>
+<div class="line">            {</div>
+<div class="line">                <a class="code" href="gui_8cc.html#a66894b02aa54394e24efddd4e0a8618c">refresh_turn_label</a>(<span class="keyword">true</span>) ;</div>
+<div class="line">                <a class="code" href="gui_8cc.html#ababb1e75110f02986338b4fbce1cc8b9">refresh_pair_removed</a>( p_human1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].t1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].t2 ) ;</div>
+<div class="line">            }</div>
+<div class="line">            <span class="keywordflow">if</span> ((<a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> == h_h)&amp;&amp;( <a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a> == 1 ))</div>
+<div class="line">            {</div>
+<div class="line">                <a class="code" href="gui_8cc.html#a66894b02aa54394e24efddd4e0a8618c">refresh_turn_label</a>(<span class="keyword">false</span>) ;</div>
+<div class="line">                <a class="code" href="gui_8cc.html#ababb1e75110f02986338b4fbce1cc8b9">refresh_pair_removed</a>( p_human2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].t1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].t2 ) ;</div>
+<div class="line">            }</div>
+<div class="line">            <span class="keywordflow">if</span> ( <a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> == h_c )</div>
+<div class="line">                <a class="code" href="gui_8cc.html#ababb1e75110f02986338b4fbce1cc8b9">refresh_pair_removed</a>( p_human1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].t1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].t2 ) ;</div>
+<div class="line">            <a class="code" href="cube_8cc.html#a4f894e1b050b78df900502f825671049">check_cube</a> () ;</div>
+<div class="line">            <a class="code" href="movements_8cc.html#a0c6790abf4708d31085f7f9f1ce5cf11">refresh_unlocked</a> () ;</div>
+<div class="line">            <span class="keywordflow">if</span> ( !<a class="code" href="movements_8cc.html#a8d312079de155515dca7e89bb7d65771">sort_unlocked</a> () )</div>
+<div class="line">            {</div>
+<div class="line">                <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D3 check couple\n&quot;</span>)</div>
+<div class="line">                <a class="code" href="debug__macros_8h.html#a7c7b4a73697cde8a842bb82959be2811">D6</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a7c7b4a73697cde8a842bb82959be2811">D6</a> sort <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a> returned false\n&quot;)</div>
+<div class="line">                return false ;</div>
+<div class="line">            }</div>
+<div class="line">            if ( <a class="code" href="movements_8cc.html#ac1ab19e53ac2166573cb5e81edd4df9a">count_pairs_removable</a>(3) == -1 )</div>
+<div class="line">            {</div>
+<div class="line">                <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D3 check couple\n&quot;</span>)</div>
+<div class="line">                <a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a> count pairs removable returned -1\n&quot;)</div>
+<div class="line">                return false ;</div>
+<div class="line">            }</div>
+<div class="line">            <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a> ( &quot;playground&quot; ) ;</div>
+<div class="line"></div>
+<div class="line">            <span class="comment">/*ora tocca all&#39;avversario*/</span></div>
+<div class="line"></div>
+<div class="line">            if ( !<a class="code" href="game_8cc.html#af1c6f007dae07fb8eecce4c664a8fcb1">opponent_round</a> () )</div>
+<div class="line">            {</div>
+<div class="line">                <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D3 check couple\n&quot;</span>)</div>
+<div class="line">                <a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a> opponent round returned false\n&quot;)</div>
+<div class="line">                return false ;</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+<div class="line">        else</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">if</span> ((<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].name1 != NULL)&amp;&amp;(<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].name2 != NULL))</div>
+<div class="line">            {</div>
+<div class="line">               <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].t1 = -1 ;</div>
+<div class="line">               <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].name1 = NULL ;</div>
+<div class="line">               <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].t2 = -1 ;</div>
+<div class="line">               <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].name2 = NULL ;</div>
+<div class="line">               <a class="code" href="gui_8cc.html#a069e7212b25e5b8067dca2e396d2e864">reset_highlighted_cell</a>() ;</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+<div class="line">        <a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D9 check couple\n&quot;</span>)</div>
+<div class="line"></div>
+<div class="line">    return true ;</div>
+<div class="line">    }</div>
+<div class="line"></div>
+<div class="line">    <a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a> check couple\n&quot;)</div>
+<div class="line"></div>
+<div class="line">    return true ;</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a4202fa5c5191c7e387d7570da6c8cd8c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void end_game </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Funzione che predispone il termine della partita. </p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 end game\n&quot;</span>)</div>
+<div class="line"></div>
+<div class="line">    if ( <a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a> )</div>
+<div class="line">    {</div>
+<div class="line">        <a class="code" href="game_8cc.html#a6d71742a4f6bf95ed5a9f35e5b24f0c0">refresh_scores</a>() ;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#a71a1ac39fe89b4eaf3a7d4b0bc8c4633">refresh_scores_labels</a>(<a class="code" href="game_8cc.html#ac4270932e53ca1f01055730603581ed5">_score1</a>, <a class="code" href="game_8cc.html#a54340bce4f156f70290ea284f25165ce">_score2</a>) ;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#a069e7212b25e5b8067dca2e396d2e864">reset_highlighted_cell</a>() ;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#ad0c3b4925225878be8e12b0c43678fb4">clear_pair_removed</a> () ;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#aa71b9b7a6c50c446fb4e4bb3f0179e98">display_end</a> () ;</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line">        <span class="keywordflow">for</span> ( <span class="keywordtype">int</span> x = 0 ; x &lt; <a class="code" href="game_8cc.html#a26971deff94cc6872e8bc340303923be">max_couple_row</a> ; x++ )</div>
+<div class="line">            <span class="keyword">delete</span> [] <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[x] ;</div>
+<div class="line">        <span class="keyword">delete</span> [] <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a> ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a> = 0 ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a> = 0 ;</div>
+<div class="line">        playing = false ;</div>
+<div class="line">    }</div>
+<div class="line"></div>
+<div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D10 end game\n&quot;</span>)</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a27a2696c29164bf08a0706e9d6be8b38"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool insert_half_pair </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>num</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>z</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Funzione che inserice nella tabella mov, la tessera passata in input. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">num,x,y,z</td><td>valore numerico identificativo della tessera e coordinate della medesima. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Restituisce</dt><dd>il valore di ritorno della <a class="el" href="game_8cc.html#af764be509d6d656189b4211d02cef767">check_couple</a>. </dd></dl>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 insert half pair\n&quot;</span>)</div>
+<div class="line"></div>
+<div class="line">    if ( <a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a> == <a class="code" href="game_8cc.html#a26971deff94cc6872e8bc340303923be">max_couple_row</a>-1 )</div>
+<div class="line">        <a class="code" href="game_8cc.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a>() ;</div>
+<div class="line"></div>
+<div class="line">    if ( <a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> == h_c )</div>
+<div class="line">        <a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a> = 0 ;</div>
+<div class="line"></div>
+<div class="line">    if ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][col].t1 == -1)</div>
+<div class="line">    {</div>
+<div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].t1 = num ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].name1 = <a class="code" href="game_8h.html#af63b296d18a03f7e91badc96a015fac7">name</a>[num].word ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].x1 = x ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].y1 = y ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].z1 = z ;</div>
+<div class="line"></div>
+<div class="line">        <a class="code" href="gui_8cc.html#a8c97ed9e56d6d00d8e301c26c89eb411">set_highlighted_cell</a> ( 1, x, y, z ) ;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a> ( <span class="stringliteral">&quot;playground&quot;</span> ) ;</div>
+<div class="line"></div>
+<div class="line">        <span class="keywordflow">if</span> ( !<a class="code" href="game_8cc.html#af764be509d6d656189b4211d02cef767">check_couple</a> ( ) )</div>
+<div class="line">        {</div>
+<div class="line">            <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D3 insert half pair\n&quot;</span>)</div>
+<div class="line">            <a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a> check couple returned false1\n&quot;)</div>
+<div class="line">            return false ;</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line">    else if ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][col].t2 == -1 )</div>
+<div class="line">    {</div>
+<div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].t2 = num ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].name2 = <a class="code" href="game_8h.html#af63b296d18a03f7e91badc96a015fac7">name</a>[num].word ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].x2 = x ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].y2 = y ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].z2 = z ;</div>
+<div class="line"></div>
+<div class="line">        <a class="code" href="gui_8cc.html#a8c97ed9e56d6d00d8e301c26c89eb411">set_highlighted_cell</a> ( 2, x, y, z ) ;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a> ( <span class="stringliteral">&quot;playground&quot;</span> ) ;</div>
+<div class="line"></div>
+<div class="line">        <span class="keywordflow">if</span> ( !<a class="code" href="game_8cc.html#af764be509d6d656189b4211d02cef767">check_couple</a> ( ) )</div>
+<div class="line">        {</div>
+<div class="line">            <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D3 insert half pair\n&quot;</span>)</div>
+<div class="line">            <a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a> check couple returned false2\n&quot;)</div>
+<div class="line">            return false ;</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line"></div>
+<div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a> insert half pair\n&quot;)</div>
+<div class="line"></div>
+<div class="line">    return true ;</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a1e1dd2330c68191b8a43de87056b196a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool load_game </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Funzione che passa al modulo io_file, i dati necessari per caricare una partita. </p>
+<dl class="section return"><dt>Restituisce</dt><dd>il valore di ritorno della funzione <a class="el" href="io__file_8h.html#a77c49b87f96e6abbebfe50a84b7efd84">load_game_from_file</a>. </dd></dl>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 load game\n&quot;</span>)</div>
+<div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a> load game\n&quot;)</div>
+<div class="line">    return <a class="code" href="io__file_8cc.html#a77c49b87f96e6abbebfe50a84b7efd84">load_game_from_file</a> ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>, filename, <a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>, <a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a> ) ;</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="af1c6f007dae07fb8eecce4c664a8fcb1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool opponent_round </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Funzione privata che consente al secondo giocatore o al AI, di memorizzare una coppia valida nella tabella mov, agli indici riga, colonna opportuni. </p>
+<dl class="section return"><dt>Restituisce</dt><dd>false se occorrono complicazioni durante l'esecuzione delle funzioni: <a class="el" href="movements_8h.html#a8d312079de155515dca7e89bb7d65771">sort_unlocked</a>, <a class="el" href="movements_8h.html#ac1ab19e53ac2166573cb5e81edd4df9a">count_pairs_removable</a> o se il gioco termina (<a class="el" href="game_8h.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a>). Altrimenti true. </dd></dl>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 opponent round\n&quot;</span>)</div>
+<div class="line"></div>
+<div class="line">    static <span class="keywordtype">int</span> dummy = <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a> ;</div>
+<div class="line">    if (( <a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> == h_h )&amp;&amp;(<a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a>))</div>
+<div class="line">    {</div>
+<div class="line">        <a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a> = (<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>+1)%2 ;</div>
+<div class="line">        <span class="keywordflow">if</span> ( <a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a> == 0 )</div>
+<div class="line">        {</div>
+<div class="line">            <a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>++ ;</div>
+<div class="line">            <a class="code" href="game_8cc.html#a6d71742a4f6bf95ed5a9f35e5b24f0c0">refresh_scores</a>() ;</div>
+<div class="line">        }</div>
+<div class="line"></div>
+<div class="line"><span class="comment">/*debug se row troppo grande*/</span></div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (( <a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> == h_c )&amp;&amp;(playing))</div>
+<div class="line">    {</div>
+<div class="line">        <a class="code" href="gui_8cc.html#a66894b02aa54394e24efddd4e0a8618c">refresh_turn_label</a>(<span class="keyword">true</span>) ;</div>
+<div class="line">        <span class="keywordflow">if</span> ( <a class="code" href="movements_8cc.html#a67f3cffb618ec20b6b7fd8e88e2966dd">extract_pair</a> ( &amp;<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1] ) )</div>
+<div class="line">        {</div>
+<div class="line">            <a class="code" href="gui_8cc.html#ababb1e75110f02986338b4fbce1cc8b9">refresh_pair_removed</a>( p_ai, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[row][1].t1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[row][1].t2 ) ;</div>
+<div class="line"></div>
+<div class="line">            <a class="code" href="game_8cc.html#a6d71742a4f6bf95ed5a9f35e5b24f0c0">refresh_scores</a>() ;</div>
+<div class="line"></div>
+<div class="line">            <a class="code" href="cube_8cc.html#a2ac814685fc40e4f78c8556c8e1112ce">reset_cell</a> ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[row][1].x1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[row][1].y1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[row][1].z1 ) ;</div>
+<div class="line">            <a class="code" href="cube_8cc.html#a2ac814685fc40e4f78c8556c8e1112ce">reset_cell</a> ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[row][1].x2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[row][1].y2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[row][1].z2 ) ;</div>
+<div class="line"></div>
+<div class="line">            dummy = <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a> ;</div>
+<div class="line">            <a class="code" href="cube_8cc.html#a114c4b91c4c350e48f9821efb2bf264d">fill_cell</a> ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[row][1].x1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[row][1].y1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[row][1].z1, dummy ) ;</div>
+<div class="line">            <a class="code" href="cube_8cc.html#a114c4b91c4c350e48f9821efb2bf264d">fill_cell</a> ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[row][1].x2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[row][1].y2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[row][1].z2, dummy ) ;</div>
+<div class="line"></div>
+<div class="line">            row++ ;</div>
+<div class="line"></div>
+<div class="line">            <span class="keywordflow">if</span> ( row == <a class="code" href="game_8cc.html#a26971deff94cc6872e8bc340303923be">max_couple_row</a>-1)</div>
+<div class="line">            {</div>
+<div class="line">                        <a class="code" href="game_8cc.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a>();</div>
+<div class="line">                        <span class="keywordflow">return</span> true ;</div>
+<div class="line">            }</div>
+<div class="line">            <span class="keywordflow">else</span></div>
+<div class="line">            {</div>
+<div class="line">                <a class="code" href="gui_8cc.html#a66894b02aa54394e24efddd4e0a8618c">refresh_turn_label</a>(<span class="keyword">false</span>);</div>
+<div class="line">                <a class="code" href="cube_8cc.html#a4f894e1b050b78df900502f825671049">check_cube</a> () ;</div>
+<div class="line">                <a class="code" href="movements_8cc.html#a0c6790abf4708d31085f7f9f1ce5cf11">refresh_unlocked</a> () ;</div>
+<div class="line">                <span class="keywordflow">if</span> ( !<a class="code" href="movements_8cc.html#a8d312079de155515dca7e89bb7d65771">sort_unlocked</a> () )</div>
+<div class="line">                {</div>
+<div class="line">                    <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D3 opponent round\n&quot;</span>)</div>
+<div class="line">                    <a class="code" href="debug__macros_8h.html#a7c7b4a73697cde8a842bb82959be2811">D6</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a7c7b4a73697cde8a842bb82959be2811">D6</a> sort <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a> returned false\n&quot;)</div>
+<div class="line">                    return false ;</div>
+<div class="line">                }</div>
+<div class="line">                if ( <a class="code" href="movements_8cc.html#ac1ab19e53ac2166573cb5e81edd4df9a">count_pairs_removable</a> (3) == -1 )</div>
+<div class="line">                {</div>
+<div class="line">                    <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D3 opponent round\n&quot;</span>)</div>
+<div class="line">                    <a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a> count pairs removable returned -1\n&quot;)</div>
+<div class="line">                    return false ;</div>
+<div class="line">                }</div>
+<div class="line">                <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a> ( &quot;playground&quot; ) ;</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+<div class="line">        else</div>
+<div class="line">        {</div>
+<div class="line">            <a class="code" href="game_8cc.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a>() ;</div>
+<div class="line">            <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D3 opponent round\n&quot;</span>)</div>
+<div class="line">            <a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a> returned false\n&quot;)</div>
+<div class="line">            return false ;</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line"></div>
+<div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a> opponent round\n&quot;)</div>
+<div class="line"></div>
+<div class="line">    return true ;</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a6d71742a4f6bf95ed5a9f35e5b24f0c0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void refresh_scores </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Funzione che visitando l'intera partita mossa per mossa calcola il punteggio di ogni giocatore e lo pone in due variabili statiche al file che pero' passa per riferimento costante alla funzione <a class="el" href="gui_8h.html#a71a1ac39fe89b4eaf3a7d4b0bc8c4633">refresh_scores_labels</a>, per stamparle a video. </p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    <a class="code" href="debug__macros_8h.html#a975397c373ae2a9dc28d0297fa18da56">D2</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D2 refresh scores\n&quot;</span>)</div>
+<div class="line"></div>
+<div class="line">    if ( <a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a> )</div>
+<div class="line">    {</div>
+<div class="line">        <a class="code" href="game_8cc.html#ac4270932e53ca1f01055730603581ed5">_score1</a> = 0 ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a54340bce4f156f70290ea284f25165ce">_score2</a> = 0 ;</div>
+<div class="line">        <span class="keywordflow">for</span> ( <span class="keywordtype">int</span> c = 0 ; c &lt; 2 ; c++ )</div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> r = 0 ; r &lt;= <a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a> ; r++ )</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordflow">if</span> ( ( c == 0 )&amp;&amp;( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].t1 &gt;= 0 )&amp;&amp;( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].t1 &lt; <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a> ) )</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keywordtype">int</span> temp = <a class="code" href="movements_8cc.html#a1e53b7a83063093036cd2956d3cf5698">tile_value</a>(<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].t1) ;</div>
+<div class="line">                    <span class="keywordflow">if</span> (temp &gt;=1)</div>
+<div class="line">                        <a class="code" href="game_8cc.html#ac4270932e53ca1f01055730603581ed5">_score1</a> += temp ;</div>
+<div class="line">                }</div>
+<div class="line">                <span class="keywordflow">if</span> ( ( c == 1 )&amp;&amp;( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].t1 &gt;= 0 )&amp;&amp;( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].t1 &lt; <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a> ) )</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keywordtype">int</span> temp = <a class="code" href="movements_8cc.html#a1e53b7a83063093036cd2956d3cf5698">tile_value</a>(<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].t1) ;</div>
+<div class="line">                    <span class="keywordflow">if</span> (temp &gt;=1)</div>
+<div class="line">                        <a class="code" href="game_8cc.html#a54340bce4f156f70290ea284f25165ce">_score2</a> += temp ;</div>
+<div class="line">                }</div>
+<div class="line"></div>
+<div class="line">            }</div>
+<div class="line"></div>
+<div class="line">        <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D3 refresh scores\n&quot;</span>)</div>
+<div class="line">        <a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a> <a class="code" href="game_8cc.html#ac4270932e53ca1f01055730603581ed5">_score1</a>=&quot;&lt;&lt;<a class="code" href="game_8cc.html#ac4270932e53ca1f01055730603581ed5">_score1</a>&lt;&lt;&quot; <a class="code" href="game_8cc.html#a54340bce4f156f70290ea284f25165ce">_score2</a>=&quot;&lt;&lt;<a class="code" href="game_8cc.html#a54340bce4f156f70290ea284f25165ce">_score2</a>&lt;&lt;endl)</div>
+<div class="line"></div>
+<div class="line">        <a class="code" href="gui_8cc.html#a71a1ac39fe89b4eaf3a7d4b0bc8c4633">refresh_scores_labels</a>( <a class="code" href="game_8cc.html#ac4270932e53ca1f01055730603581ed5">_score1</a>, <a class="code" href="game_8cc.html#a54340bce4f156f70290ea284f25165ce">_score2</a> ) ;</div>
+<div class="line">    }</div>
+<div class="line"></div>
+<div class="line">    <a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a> refresh scores\n&quot;)</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a7c6eb3e4a7b7a457376c13e5bd2488e7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void reset_row </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Funzione che pulisce la riga della tabella mov all' indice di riga statico globale. </p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 reset row\n&quot;</span>)</div>
+<div class="line"></div>
+<div class="line">    if ( <a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a> )</div>
+<div class="line">    {</div>
+<div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].t1 = -1 ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].t2 = -1 ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].name1 = NULL ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>].name2 = NULL ;</div>
+<div class="line">    }</div>
+<div class="line"></div>
+<div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D10 reset row\n&quot;</span>)</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="af558e3f525b0074b822ee6927b4467e9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool save_game </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Funzione che passa al modulo io_file, i dati necessari per salvare la partita. </p>
+<dl class="section return"><dt>Restituisce</dt><dd>il valore di ritorno della funzione <a class="el" href="io__file_8h.html#a6f1b5e4cb147bb248c1a3070af68f420">save_game_on_file</a>. </dd></dl>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 save game\n&quot;</span>)</div>
+<div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a> save game\n&quot;)</div>
+<div class="line">    return <a class="code" href="io__file_8cc.html#a6f1b5e4cb147bb248c1a3070af68f420">save_game_on_file</a> ( const_cast&lt;const couple**&gt;(<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>), filename, <a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>, <a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a> ) ;</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ad39fcaf7ee3bceadee96b0da22919849"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool start_game </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Funzione che predispone l'avvio della partita. </p>
+<dl class="section return"><dt>Restituisce</dt><dd>false se occorrono complicazioni durante l'esecuzione della funzione: <a class="el" href="cube_8h.html#a68c1c8abe5c9433974f91ead0876dd9d">mix_cube</a>, o se e' gia in corso una partita non ancora terminata. Altrimenti true. </dd></dl>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 start game\n&quot;</span>)</div>
+<div class="line"></div>
+<div class="line">    if (!<a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a>)</div>
+<div class="line">    {</div>
+<div class="line">        playing = true ;</div>
+<div class="line">        <a class="code" href="cube_8cc.html#a056de1638f5f15c8d84d62147bbcbd9c">initialize_cube</a> () ;</div>
+<div class="line">        <a class="code" href="cube_8cc.html#a5868d7cab0526716b1a6cb88acfe2787">fill_cube</a> () ;</div>
+<div class="line">        <span class="keywordflow">if</span> ( !<a class="code" href="cube_8cc.html#a68c1c8abe5c9433974f91ead0876dd9d">mix_cube</a> () )</div>
+<div class="line">        {</div>
+<div class="line">            <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D3 start game\n&quot;</span>)</div>
+<div class="line">            <a class="code" href="debug__macros_8h.html#a0381ddba03c006e8a496ae3f55070825">D7</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a0381ddba03c006e8a496ae3f55070825">D7</a> mix <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a> returned false\n&quot;)</div>
+<div class="line">            return false ;</div>
+<div class="line">        }</div>
+<div class="line">        else</div>
+<div class="line">        {</div>
+<div class="line">            <a class="code" href="cube_8cc.html#a4f894e1b050b78df900502f825671049">check_cube</a> () ;</div>
+<div class="line">            <a class="code" href="movements_8cc.html#a0c6790abf4708d31085f7f9f1ce5cf11">refresh_unlocked</a> () ;</div>
+<div class="line">            <span class="comment">/*</span></div>
+<div class="line"><span class="comment">             * qui non controllo il valore di ritorno di sort unlocked</span></div>
+<div class="line"><span class="comment">             * perche&#39; count pairs removable non puo ritornare -1 (dato</span></div>
+<div class="line"><span class="comment">             * che la partita deve ancora iniziare) e forzare la sort</span></div>
+<div class="line"><span class="comment">             * unlocked a ritornare false.</span></div>
+<div class="line"><span class="comment">             */</span></div>
+<div class="line">            <a class="code" href="movements_8cc.html#a8d312079de155515dca7e89bb7d65771">sort_unlocked</a> () ;</div>
+<div class="line"></div>
+<div class="line">            <a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a> = 0 ;</div>
+<div class="line">            <a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a> = 0 ;</div>
+<div class="line">            <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a> = <span class="keyword">new</span> couple *[<a class="code" href="game_8cc.html#a26971deff94cc6872e8bc340303923be">max_couple_row</a>] ;</div>
+<div class="line">            <span class="keywordflow">for</span> ( <span class="keywordtype">int</span> x = 0 ; x &lt; <a class="code" href="game_8cc.html#a26971deff94cc6872e8bc340303923be">max_couple_row</a> ; x++ )</div>
+<div class="line">                <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[x] = <span class="keyword">new</span> couple[2] ;</div>
+<div class="line"></div>
+<div class="line">            <span class="keywordflow">for</span> ( <span class="keywordtype">int</span> r = 0 ; r &lt; <a class="code" href="game_8cc.html#a26971deff94cc6872e8bc340303923be">max_couple_row</a> ; r++ )</div>
+<div class="line">                <span class="keywordflow">for</span> ( <span class="keywordtype">int</span> c = 0 ; c &lt; 2 ; c++ )</div>
+<div class="line">                {</div>
+<div class="line">                    <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].t1 = -1 ;</div>
+<div class="line">                    <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].t2 = -1 ;</div>
+<div class="line">                    <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].name1 = NULL ;</div>
+<div class="line">                    <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].name2 = NULL ;</div>
+<div class="line">                }</div>
+<div class="line"></div>
+<div class="line">            <a class="code" href="gui_8cc.html#a069e7212b25e5b8067dca2e396d2e864">reset_highlighted_cell</a>() ;</div>
+<div class="line">            <a class="code" href="gui_8cc.html#a953a10527fc3533c62a160d6ad324fe3">display_tiles</a>() ;</div>
+<div class="line">            <a class="code" href="gui_8cc.html#a66894b02aa54394e24efddd4e0a8618c">refresh_turn_label</a>(<span class="keyword">false</span>);</div>
+<div class="line">            <a class="code" href="game_8cc.html#a6d71742a4f6bf95ed5a9f35e5b24f0c0">refresh_scores</a>() ;</div>
+<div class="line"></div>
+<div class="line">            <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D10 start game\n&quot;</span>)</div>
+<div class="line"></div>
+<div class="line">            return true ;</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line">    else</div>
+<div class="line">    {</div>
+<div class="line">        <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D10 start game returned false\n&quot;</span>)</div>
+<div class="line"></div>
+<div class="line">        return false ;</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a5817aa88950e75d367e13635d2a72a8f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void undo_last_two_couples </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Funzione che rimette in gioco le ultime 4 tessere rimosse e reinizializza la zona di struttura dati dove erano memorizzate. </p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 undo last two couples\n&quot;</span>)</div>
+<div class="line"></div>
+<div class="line">    if (( <a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a> &gt;= 1 )&amp;&amp;(!<a class="code" href="gui_8cc.html#a38ec949d4b21e41328cbd5c945ace68c">lock_undo</a>))</div>
+<div class="line">    {</div>
+<div class="line">        <a class="code" href="game_8cc.html#a6d71742a4f6bf95ed5a9f35e5b24f0c0">refresh_scores</a>() ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>-- ;</div>
+<div class="line">        <span class="keywordflow">if</span> ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].t1 != -1 )</div>
+<div class="line">            <a class="code" href="cube_8cc.html#a114c4b91c4c350e48f9821efb2bf264d">fill_cell</a>(<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].x1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].y1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].z1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].t1);</div>
+<div class="line">        <span class="keywordflow">if</span> ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].t2 != -1 )</div>
+<div class="line">            <a class="code" href="cube_8cc.html#a114c4b91c4c350e48f9821efb2bf264d">fill_cell</a>(<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].x2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].y2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].z2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].t2);</div>
+<div class="line">        <span class="keywordflow">if</span> ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].t1 != -1 )</div>
+<div class="line">            <a class="code" href="cube_8cc.html#a114c4b91c4c350e48f9821efb2bf264d">fill_cell</a>(<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].x1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].y1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].z1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].t1);</div>
+<div class="line">        <span class="keywordflow">if</span> ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].t2 != -1 )</div>
+<div class="line">            <a class="code" href="cube_8cc.html#a114c4b91c4c350e48f9821efb2bf264d">fill_cell</a>(<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].x2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].y2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].z2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].t2);</div>
+<div class="line"></div>
+<div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].t1 = -1 ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].name1 = NULL ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].t2 = -1 ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].name2 = NULL ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].t1 = -1 ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].name1 = NULL ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].t2 = -1 ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].name2 = NULL ;</div>
+<div class="line"></div>
+<div class="line">        <a class="code" href="gui_8cc.html#a069e7212b25e5b8067dca2e396d2e864">reset_highlighted_cell</a>() ;</div>
+<div class="line"></div>
+<div class="line">        <a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a> = 0 ;</div>
+<div class="line"></div>
+<div class="line">        <a class="code" href="cube_8cc.html#a4f894e1b050b78df900502f825671049">check_cube</a> () ;</div>
+<div class="line">        <a class="code" href="movements_8cc.html#a0c6790abf4708d31085f7f9f1ce5cf11">refresh_unlocked</a> () ;</div>
+<div class="line">        <span class="comment">/*</span></div>
+<div class="line"><span class="comment">         * non controllo il valore di ritorno della sort unlocked perche&#39;</span></div>
+<div class="line"><span class="comment">         * se ho appena inserito 4 tessere nel cubo, la count pairs removable,</span></div>
+<div class="line"><span class="comment">         * non puo&#39; ritornare -1 e forzare la sort unlocked a ritornare false,</span></div>
+<div class="line"><span class="comment">         * quindi non bisogna controllare la fine del gioco in questo punto.</span></div>
+<div class="line"><span class="comment">         */</span></div>
+<div class="line">        <a class="code" href="movements_8cc.html#a8d312079de155515dca7e89bb7d65771">sort_unlocked</a> () ;</div>
+<div class="line"></div>
+<div class="line">        <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a>(<span class="stringliteral">&quot;playground&quot;</span>) ;</div>
+<div class="line">    }</div>
+<div class="line"></div>
+<div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D10 undo last two couples\n&quot;</span>)</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2>Documentazione delle variabili</h2>
+<a class="anchor" id="ac4270932e53ca1f01055730603581ed5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int _score1 = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Punteggio del primo giocatore </p>
+
+</div>
+</div>
+<a class="anchor" id="a54340bce4f156f70290ea284f25165ce"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int _score2 = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Punteggio del secondo giocatore </p>
+
+</div>
+</div>
+<a class="anchor" id="afb52e720f5f0c483db5861f9e42e924e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int col = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Indice di colonna della tabella mov </p>
+
+</div>
+</div>
+<a class="anchor" id="a26971deff94cc6872e8bc340303923be"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int max_couple_row = <a class="el" href="cube_8h.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a>/4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Costante che indica il numero massimo di righe nella tabella mov. </p>
+
+</div>
+</div>
+<a class="anchor" id="aa81af6873000d183cbda5b4d0dd7fd22"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">game mode = h_c</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Variabile che indica la modalita' di gioco: umano vs umano o umano vs ai. </p>
+
+</div>
+</div>
+<a class="anchor" id="a393611d05133138bb732c017eb5e6782"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">couple** mov</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Core della tabella mov. </p>
+
+</div>
+</div>
+<a class="anchor" id="a0448fec049217e428b9ec21c03e51d52"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool playing = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Booleano che indica se si sta' giocando o meno. </p>
+
+</div>
+</div>
+<a class="anchor" id="af1d3cff2e4538e23400e260bae3dadad"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int row = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Indice di riga della tabella mov </p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generato Dom 14 Set 2014 00:51:26 per Mahjong da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.1.2
+</small></address>
+</body>
+</html>
