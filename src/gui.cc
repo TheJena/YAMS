@@ -33,26 +33,26 @@ struct colour {
                 double b ;
               } ;
 
-static const char* I_AUTUMN            = "./autumn.png" ;
-static const char* I_BAMBOO            = "./bamboo.png" ;
-static const char* I_BAMBOO_FOREST     = "./bamboo_forest.png" ;
-static const char* I_CHRYSANTEMUM      = "./chrysantemum.png" ;
-static const char* I_CIRCLE            = "./circle.png" ;
-static const char* I_CROSS             = "./cross.png" ;
-static const char* I_EAST              = "./east.png" ;
-static const char* I_GREEN_DRAGON      = "./green_dragon.png" ;
-static const char* I_NORTH             = "./north.png" ;
-static const char* I_ORCHID            = "./orchid.png" ;
-static const char* I_PLUMB              = "./plumb.png" ;
-static const char* I_RED_DRAGON        = "./red_dragon.png" ;
-static const char* I_SPRING            = "./spring.png" ;
-static const char* I_SUD               = "./sud.png" ;
-static const char* I_SUMMER            = "./summer.png" ;
-static const char* I_TILE              = "./tile_shape.png" ;
-static const char* I_WEST              = "./west.png" ;
-static const char* I_WHITE_DRAGON      = "./white_dragon.png" ;
-static const char* I_WINTER            = "./winter.png" ;
-static const char* I_DUMMY             = "./dummy.png" ;
+static const char* I_AUTUMN            = "../img/autumn.png" ;
+static const char* I_BAMBOO            = "../img/bamboo.png" ;
+static const char* I_BAMBOO_FOREST     = "../img/bamboo_forest.png" ;
+static const char* I_CHRYSANTEMUM      = "../img/chrysantemum.png" ;
+static const char* I_CIRCLE            = "../img/circle.png" ;
+static const char* I_CROSS             = "../img/cross.png" ;
+static const char* I_EAST              = "../img/east.png" ;
+static const char* I_GREEN_DRAGON      = "../img/green_dragon.png" ;
+static const char* I_NORTH             = "../img/north.png" ;
+static const char* I_ORCHID            = "../img/orchid.png" ;
+static const char* I_PLUMB             = "../img/plumb.png" ;
+static const char* I_RED_DRAGON        = "../img/red_dragon.png" ;
+static const char* I_SPRING            = "../img/spring.png" ;
+static const char* I_SUD               = "../img/sud.png" ;
+static const char* I_SUMMER            = "../img/summer.png" ;
+static const char* I_TILE              = "../img/tile_shape.png" ;
+static const char* I_WEST              = "../img/west.png" ;
+static const char* I_WHITE_DRAGON      = "../img/white_dragon.png" ;
+static const char* I_WINTER            = "../img/winter.png" ;
+static const char* I_DUMMY             = "../img/dummy.png" ;
 static const char* F_GLADE             = "./gui.glade" ;
 static const char* W_newgame           = "window_new_game" ;
 static const char* W_savegame          = "window_save_game" ;
@@ -260,8 +260,8 @@ void refresh_scores_labels( const int &score1, const int &score2 )
     _score1 = score1 ;
     _score2 = score2 ;
 
-    D3(cerr<<"refresh scores label"<<endl)
-    D4(cerr<<"_score1="<<_score1<<" "<<"_score2="<<_score2<<endl)
+    D3(cerr<<"D3 refresh scores label"<<endl)
+    D4(cerr<<"D4 _score1="<<_score1<<" "<<"_score2="<<_score2<<endl)
 
     char text_pl1[MAXLUN] ;
     char text_pl2[MAXLUN] ;
@@ -282,8 +282,8 @@ void refresh_down_label ( const int & couples )
 {
     D2(cerr<<"D2 refresh down label\n")
 
-    D3(cerr<<"refresh down label"<<endl)
-    D4(cerr<<"couples="<<couples<<endl)
+    D3(cerr<<"D3 refresh down label"<<endl)
+    D4(cerr<<"D4 couples="<<couples<<endl)
 
     if ((playing)&&( play_ground == tiles ))
     {
@@ -346,8 +346,8 @@ void refresh_pair_removed( const p_player &temp, const int &a, const int &b )
 {
     D2(cerr<<"D2 refresh pair removed\n")
 
-    D3(cerr<<"refresh pair removed"<<endl)
-    D4(cerr<<"temp="<<temp<<" a="<<a<<" b="<<b<<endl)
+    D3(cerr<<"D3 refresh pair removed"<<endl)
+    D4(cerr<<"D4 temp="<<temp<<" a="<<a<<" b="<<b<<endl)
 
     if ( ( temp == p_ai ) || ( temp == p_human2 ) )
     {
@@ -412,8 +412,8 @@ void set_highlighted_cell ( const int &n, const int &x, const int &y, const int 
 {
     D1(cerr<<"D1 set highlighted cell\n")
 
-    D3(cerr<<"highlighted cell"<<endl)
-    D4(cerr<<"n="<<n<<" x="<<x<<" y="<<y<<" z="<<z<<endl)
+    D3(cerr<<"D3 highlighted cell"<<endl)
+    D4(cerr<<"D4 n="<<n<<" x="<<x<<" y="<<y<<" z="<<z<<endl)
 
     if ( n == 1 )
     {
@@ -506,8 +506,8 @@ extern "C" gboolean draw_play_ground ( GtkWidget * widget,
 {
     D2(cerr<<"D2 draw play ground\n")
 
-    D3(cerr<<"draw play ground"<<endl)
-    D4(cerr<<"play_ground="<<play_ground<<endl)
+    D3(cerr<<"D3 draw play ground"<<endl)
+    D4(cerr<<"D4 play_ground="<<play_ground<<endl)
 
     switch ( play_ground )
     {
@@ -650,8 +650,8 @@ extern "C" gboolean handler_set_save_game ( GtkWidget * widget,
     else
         gtk_label_set_text ( label_from_name("label_down"), "an error occurred while saving" ) ;
 
-    D3(cerr<<"handler set save game"<<endl)
-    D4(cerr<<"filename="<<filename<<endl)
+    D3(cerr<<"D3 handler set save game"<<endl)
+    D4(cerr<<"D4 filename="<<filename<<endl)
 
     gtk_widget_hide ( gtk_widget_get_toplevel(widget) ) ;
 
@@ -672,16 +672,16 @@ extern "C" gboolean handler_set_load_game ( GtkWidget * widget,
     if ( load_game ( filename ) )
     {
         gtk_label_set_text ( label_from_name("label_down"), "file loaded successfully" ) ;
-        D5(cerr<<"caricamento da file eseguito correttamente"<<endl)
+        D5(cerr<<"D5 caricamento da file eseguito correttamente"<<endl)
     }
     else
     {
         gtk_label_set_text ( label_from_name("label_down"), "an error occurred while loading" ) ;
-        D5(cerr<<"errore durante il caricamento da file"<<endl)
+        D5(cerr<<"D5 errore durante il caricamento da file"<<endl)
     }
 
-    D3(cerr<<"handler set load game"<<endl)
-    D4(cerr<<"filename="<<filename<<endl)
+    D3(cerr<<"D3 handler set load game"<<endl)
+    D4(cerr<<"D4 filename="<<filename<<endl)
 
     gtk_widget_hide ( gtk_widget_get_toplevel(widget) ) ;
 
@@ -710,8 +710,8 @@ extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
         {
             if ( !mix_cube () )
             {
-                D3(cerr<<"handler button pressed event"<<endl)
-                D7(cerr<<"mix cube returned false"<<endl)
+                D3(cerr<<"D3 handler button pressed event"<<endl)
+                D7(cerr<<"D7 mix cube returned false"<<endl)
                 return TRUE ;
             }
             else
@@ -720,8 +720,8 @@ extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
                 refresh_unlocked() ;
                 if ( !sort_unlocked() )
                 {
-                    D3(cerr<<"handler button pressed event"<<endl)
-                    D6(cerr<<"sort unlocked returned false"<<endl)
+                    D3(cerr<<"D3 handler button pressed event"<<endl)
+                    D6(cerr<<"D6 sort unlocked returned false"<<endl)
                     return TRUE ;
                 }
                 redraw_widget ( "playground" ) ;
@@ -849,8 +849,8 @@ extern "C" gboolean handler_set_new_game ( GtkWidget * widget,
     if ( mode == h_h )
         ai = airhead ;
 
-    D3(cerr<<"handler set new game"<<endl)
-    D4(cerr<<"level="<<level<<" mode="<<mode<<" ai="<<ai<<" lock mix="<<
+    D3(cerr<<"D3 handler set new game"<<endl)
+    D4(cerr<<"D4 level="<<level<<" mode="<<mode<<" ai="<<ai<<" lock mix="<<
              lock_mix<<" lock undo="<<lock_undo<<endl)
 
     start_game () ;
@@ -883,8 +883,8 @@ extern "C" gboolean handler_click_on_widget (GtkWidget *widget,
     if ( mode == h_c )
         if ( !remove_dummies() )
         {
-            D3(cerr<<"handler click on widget"<<endl)
-            D8(cerr<<"remove dummies returned false"<<endl)
+            D3(cerr<<"D3 handler click on widget"<<endl)
+            D8(cerr<<"D8 remove dummies returned false"<<endl)
             return TRUE ;
         }
 
@@ -912,9 +912,9 @@ extern "C" gboolean handler_click_on_widget (GtkWidget *widget,
                     {
                         if ( !insert_half_pair( cube[x][y][z].num, x, y, z ) )
                         {
-                            D3(cerr<<"handler click on widget"<<endl)
-                            D8(cerr<<"insert half pair returned false"<<endl)
-                            gtk_label_set_text ( label_from_name("label_down"), "an error occurred because of data corruption, please start a new game" ) ;
+                            D3(cerr<<"D3 handler click on widget"<<endl)
+                            D8(cerr<<"D8 insert half pair returned false"<<endl)
+                            gtk_label_set_text ( label_from_name("label_down"), "-" ) ;
                             return TRUE ;
                         }
                         quit = true ;
@@ -924,8 +924,8 @@ extern "C" gboolean handler_click_on_widget (GtkWidget *widget,
 
     if ( !quit )
     {
-        D3(cerr<<"handler click on widget"<<endl)
-        D8(cerr<<"quit was false"<<endl)
+        D3(cerr<<"D3 handler click on widget"<<endl)
+        D8(cerr<<"D8 quit was false"<<endl)
         reset_highlighted_cell() ;
         reset_row() ;
         redraw_widget ( "playground" ) ;
@@ -1347,7 +1347,7 @@ static int number_from_string ( const char * word )
 
     const char output = word[i-1];
 
-    D3(cerr<<"number from string"<<endl)
+    D3(cerr<<"D3 number from string"<<endl)
     D4(cerr<<word<<" returned "<<output-'0'<<endl)
 
 

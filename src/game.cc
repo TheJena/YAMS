@@ -43,8 +43,8 @@ bool start_game ()
         fill_cube () ;
         if ( !mix_cube () )
         {
-            D3(cerr<<"start game\n")
-            D7(cerr<<"mix cube returned false\n")
+            D3(cerr<<"D3 start game\n")
+            D7(cerr<<"D7 mix cube returned false\n")
             return false ;
         }
         else
@@ -157,19 +157,33 @@ void refresh_scores()
 {
     D2(cerr<<"D2 refresh scores\n")
 
-    _score1 = 0 ;
-    _score2 = 0 ;
-    for ( int c = 0 ; c < 2 ; c++ )
-        for (int r = 0 ; r < max_couple_row ; r++ )
-        {
-            if ( ( c == 0 )&&( mov[r][c].t1 != -1 ) )
-                _score1 += tile_value(mov[r][c].t1) ;
+    if ( playing )
+    {
+        _score1 = 0 ;
+        _score2 = 0 ;
+        for ( int c = 0 ; c < 2 ; c++ )
+            for (int r = 0 ; r <= row ; r++ )
+            {
+                if ( ( c == 0 )&&( mov[r][c].t1 >= 0 )&&( mov[r][c].t1 < TILES ) )
+                {
+                    int temp = tile_value(mov[r][c].t1) ;
+                    if (temp >=1)
+                        _score1 += temp ;
+                }
+                if ( ( c == 1 )&&( mov[r][c].t1 >= 0 )&&( mov[r][c].t1 < TILES ) )
+                {
+                    int temp = tile_value(mov[r][c].t1) ;
+                    if (temp >=1)
+                        _score2 += temp ;
+                }
 
-            if ( ( c == 1 )&&( mov[r][c].t1 != -1 ) )
-                _score2 += tile_value(mov[r][c].t1) ;
-        }
+            }
 
-    refresh_scores_labels( _score1, _score2 ) ;
+        D3(cerr<<"D3 refresh scores\n")
+        D8(cerr<<"D8 _score1="<<_score1<<" _score2="<<_score2<<endl)
+
+        refresh_scores_labels( _score1, _score2 ) ;
+    }
 
     D9(cerr<<"D9 refresh scores\n")
 }
@@ -178,10 +192,13 @@ void reset_row()
 {
     D1(cerr<<"D1 reset row\n")
 
-    mov[row][col].t1 = -1 ;
-    mov[row][col].t2 = -1 ;
-    mov[row][col].name1 = NULL ;
-    mov[row][col].name2 = NULL ;
+    if ( playing )
+    {
+        mov[row][col].t1 = -1 ;
+        mov[row][col].t2 = -1 ;
+        mov[row][col].name1 = NULL ;
+        mov[row][col].name2 = NULL ;
+    }
 
     D10(cerr<<"D10 reset row\n")
 }
@@ -190,7 +207,8 @@ bool insert_half_pair ( const int &num, const int &x, const int &y, const int &z
 {
     D1(cerr<<"D1 insert half pair\n")
 
-/*debug se row troppo grande*/
+    if ( row == max_couple_row-1 )
+        end_game() ;
 
     if ( mode == h_c )
         col = 0 ;
@@ -208,8 +226,8 @@ bool insert_half_pair ( const int &num, const int &x, const int &y, const int &z
 
         if ( !check_couple ( ) )
         {
-            D3(cerr<<"insert half pair\n")
-            D8(cerr<<"check couple returned false1")
+            D3(cerr<<"D3 insert half pair\n")
+            D8(cerr<<"D8 check couple returned false1\n")
             return false ;
         }
     }
@@ -226,8 +244,8 @@ bool insert_half_pair ( const int &num, const int &x, const int &y, const int &z
 
         if ( !check_couple ( ) )
         {
-            D3(cerr<<"insert half pair\n")
-            D8(cerr<<"check couple returned false2")
+            D3(cerr<<"D3 insert half pair\n")
+            D8(cerr<<"D8 check couple returned false2\n")
             return false ;
         }
     }
@@ -243,6 +261,8 @@ void end_game ()
 
     if ( playing )
     {
+        refresh_scores() ;
+        refresh_scores_labels(_score1, _score2) ;
         reset_highlighted_cell() ;
         clear_pair_removed () ;
         display_end () ;
@@ -254,7 +274,6 @@ void end_game ()
         row = 0 ;
         col = 0 ;
         playing = false ;
-        refresh_down_label(0) ;
     }
 
     D10(cerr<<"D10 end game\n")
@@ -266,6 +285,7 @@ static bool check_couple ( )
 {
     D2(cerr<<"D2 check couple\n")
 
+    if ( playing )
     {
         if ( ( mov[row][col].t1 != mov[row][col].t2 )&&(mov[row][col].name1 != NULL)&&(mov[row][col].name2 != NULL)&&
              ( ( ( strcmp ( mov[row][col].name1, mov[row][col].name2 ) == 0 ) )
@@ -281,7 +301,6 @@ static bool check_couple ( )
                     lock_mix = false ;
             }
 
-            refresh_scores() ;
 
             reset_cell ( mov[row][col].x1, mov[row][col].y1, mov[row][col].z1 ) ;
             reset_cell ( mov[row][col].x2, mov[row][col].y2, mov[row][col].z2 ) ;
@@ -302,14 +321,14 @@ static bool check_couple ( )
             refresh_unlocked () ;
             if ( !sort_unlocked () )
             {
-                D3(cerr<<"check couple\n")
-                D6(cerr<<"sort unlocked returned false\n")
+                D3(cerr<<"D3 check couple\n")
+                D6(cerr<<"D6 sort unlocked returned false\n")
                 return false ;
             }
             if ( count_pairs_removable(3) == -1 )
             {
-                D3(cerr<<"check couple\n")
-                D8(cerr<<"count pairs removable returned -1\n")
+                D3(cerr<<"D3 check couple\n")
+                D8(cerr<<"D8 count pairs removable returned -1\n")
                 return false ;
             }
             redraw_widget ( "playground" ) ;
@@ -318,8 +337,8 @@ static bool check_couple ( )
 
             if ( !opponent_round () )
             {
-                D3(cerr<<"check couple\n")
-                D8(cerr<<"opponent round returned false\n")
+                D3(cerr<<"D3 check couple\n")
+                D8(cerr<<"D8 opponent round returned false\n")
                 return false ;
             }
         }
@@ -334,6 +353,7 @@ static bool check_couple ( )
                reset_highlighted_cell() ;
             }
         }
+        D9(cerr<<"D9 check couple\n")
 
     return true ;
     }
@@ -348,15 +368,18 @@ static bool opponent_round ()
     D1(cerr<<"D1 opponent round\n")
 
     static int dummy = TILES ;
-    if ( mode == h_h )
+    if (( mode == h_h )&&(playing))
     {
         col = (col+1)%2 ;
         if ( col == 0 )
+        {
             row++ ;
+            refresh_scores() ;
+        }
 
 /*debug se row troppo grande*/
     }
-    else if ( mode == h_c )
+    else if (( mode == h_c )&&(playing))
     {
         refresh_turn_label(true) ;
         if ( extract_pair ( &mov[row][1] ) )
@@ -374,10 +397,10 @@ static bool opponent_round ()
 
             row++ ;
 
-            if ( row == max_couple_row)
+            if ( row == max_couple_row-1)
             {
                         end_game();
-                            
+                        return true ;
             }
             else
             {
@@ -386,14 +409,14 @@ static bool opponent_round ()
                 refresh_unlocked () ;
                 if ( !sort_unlocked () )
                 {
-                    D3(cerr<<"opponent round\n")
-                    D6(cerr<<"sort unlocked returned false\n")
+                    D3(cerr<<"D3 opponent round\n")
+                    D6(cerr<<"D6 sort unlocked returned false\n")
                     return false ;
                 }
                 if ( count_pairs_removable (3) == -1 )
                 {
-                    D3(cerr<<"opponent round\n")
-                    D8(cerr<<"count pairs removable returned -1\n")
+                    D3(cerr<<"D3 opponent round\n")
+                    D8(cerr<<"D8 count pairs removable returned -1\n")
                     return false ;
                 }
                 redraw_widget ( "playground" ) ;
@@ -402,8 +425,8 @@ static bool opponent_round ()
         else
         {
             end_game() ;
-            D3(cerr<<"opponent round\n")
-            D8(cerr<<"returned false\n")
+            D3(cerr<<"D3 opponent round\n")
+            D8(cerr<<"D8 returned false\n")
             return false ;
         }
     }

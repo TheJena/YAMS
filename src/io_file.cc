@@ -36,8 +36,8 @@ bool save_game_on_file ( const couple** mov, char * filename,
     ofstream out_file( filename ) ;
     if ( !out_file )
     {
-        D3(cerr<<"save game on file"<<endl)
-        D8(cerr<<"returned false on file opening"<<endl)
+        D3(cerr<<"D3 save game on file"<<endl)
+        D8(cerr<<"D8 returned false on file opening"<<endl)
         return false ;
     }
 
@@ -91,8 +91,8 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
     end_game() ;
     if ( !start_game() )
     {
-        D3(cerr<<"load game from file"<<endl)
-        D8(cerr<<"start game returned false"<<endl)
+        D3(cerr<<"D3 load game from file"<<endl)
+        D8(cerr<<"D8 start game returned false"<<endl)
         end_game() ;
         return false ;
     }
@@ -100,8 +100,8 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
     ifstream in_file ( filename ) ;
     if ( !in_file )
     {
-        D3(cerr<<"load game from file"<<endl)
-        D8(cerr<<"returned false on file opening"<<endl)
+        D3(cerr<<"D3 load game from file"<<endl)
+        D8(cerr<<"D8 returned false on file opening"<<endl)
         return false ;
     }
 
@@ -117,8 +117,8 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
     assert( file_intsize != NULL ) ;
     if ( intsize != (*file_intsize))
     {
-        D3(cerr<<"load game from file"<<endl)
-        D8(cerr<<"returned false because of different size of int"<<endl)
+        D3(cerr<<"D3 load game from file"<<endl)
+        D8(cerr<<"D8 returned false because of different size of int"<<endl)
         return false ;
     }
 
@@ -131,8 +131,8 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
     assert( file_dim_X != NULL ) ;
     if ( dim_X != (*file_dim_X) )
     {
-        D3(cerr<<"load game from file"<<endl)
-        D8(cerr<<"returned false because of different dim_X"<<endl)
+        D3(cerr<<"D3 load game from file"<<endl)
+        D8(cerr<<"D8 returned false because of different dim_X"<<endl)
         return false ;
     }
     in_file.read ( buffer, intsize ) ;
@@ -140,8 +140,8 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
     assert( file_dim_Y != NULL ) ;
     if ( dim_Y != (*file_dim_Y) )
     {
-        D3(cerr<<"load game from file"<<endl)
-        D8(cerr<<"returned false because of different dim_Y"<<endl)
+        D3(cerr<<"D3 load game from file"<<endl)
+        D8(cerr<<"D8 returned false because of different dim_Y"<<endl)
         return false ;
     }
     in_file.read ( buffer, intsize ) ;
@@ -149,8 +149,8 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
     assert( file_dim_Z != NULL ) ;
     if ( dim_Z != (*file_dim_Z) )
     {
-        D3(cerr<<"load game from file"<<endl)
-        D8(cerr<<"returned false because of different dim_Z"<<endl)
+        D3(cerr<<"D3 load game from file"<<endl)
+        D8(cerr<<"D8 returned false because of different dim_Z"<<endl)
         return false ;
     }
 
@@ -163,8 +163,8 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
     assert( file_SEEDVALUE != NULL ) ;
     if ( SEEDVALUE != (*file_SEEDVALUE) )
     {
-        D3(cerr<<"load game from file"<<endl)
-        D8(cerr<<"returned false because of different SEEDVALUE"<<endl)
+        D3(cerr<<"D3 load game from file"<<endl)
+        D8(cerr<<"D8 returned false because of different SEEDVALUE"<<endl)
         return false ;
     }
     in_file.read ( buffer, intsize ) ;
@@ -172,8 +172,8 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
     assert( file_WINDVALUE != NULL ) ;
     if ( WINDVALUE != (*file_WINDVALUE) )
     {
-        D3(cerr<<"load game from file"<<endl)
-        D8(cerr<<"returned false because of different WINDVALUE"<<endl)
+        D3(cerr<<"D3 load game from file"<<endl)
+        D8(cerr<<"D8 returned false because of different WINDVALUE"<<endl)
         return false ;
     }
     in_file.read ( buffer, intsize ) ;
@@ -181,8 +181,8 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
     assert( file_DRAGONVALUE != NULL ) ;
     if ( DRAGONVALUE != (*file_DRAGONVALUE) )
     {
-        D3(cerr<<"load game from file"<<endl)
-        D8(cerr<<"returned false because of different DRAGONVALUE"<<endl)
+        D3(cerr<<"D3 load game from file"<<endl)
+        D8(cerr<<"D8 returned false because of different DRAGONVALUE"<<endl)
         return false ;
     };
     in_file.read ( buffer, intsize ) ;
@@ -190,8 +190,8 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
     assert( file_SEASONVALUE != NULL ) ;
     if ( SEASONVALUE != (*file_SEASONVALUE) )
     {
-        D3(cerr<<"load game from file"<<endl)
-        D8(cerr<<"returned false because of different SEASONVALUE"<<endl)
+        D3(cerr<<"D3 load game from file"<<endl)
+        D8(cerr<<"D8 returned false because of different SEASONVALUE"<<endl)
         return false ;
     }
     in_file.read ( buffer, intsize ) ;
@@ -199,8 +199,8 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
     assert( file_FLOWERVALUE != NULL ) ;
     if ( FLOWERVALUE != (*file_FLOWERVALUE) )
     {
-        D3(cerr<<"load game from file"<<endl)
-        D8(cerr<<"returned false because of different FLOWERVALUE"<<endl)
+        D3(cerr<<"D3 load game from file"<<endl)
+        D8(cerr<<"D8 returned false because of different FLOWERVALUE"<<endl)
         return false ;
     }
 
