@@ -1,9 +1,18 @@
+/**
+ * @file
+ * File che contiene l'implementazione del modulo MOVEMENTS. Qui vengono
+ * definite le funzioni che operano sulla struttura dati unlocked.
+ */
 /*inizio implementazione modulo_MOVEMENTS*/
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
 #include <ctime>
 
+/**
+ * Struttura che identifica una coppia di tessere candidate alla rimozione o al
+ * salvataggio o alla verifica.
+ */
 #define struct_couple           // perche' couple serve a movements.h che pero'
 #include "data_structures.h"    // non la puo' contenere a causa di conflitti in
 #undef struct_couple            // altri file in cui e' incluso ma couple e' gia
@@ -33,8 +42,20 @@ static tile *    unlocked[FREE] ;
 /*inizio implementazione struttura dati privata*/
 
 /*inizio prototipi funzioni private*/
+/**
+ * Funzione privata che controlla se una coppia e' valida per essere rimossa,
+ * o meglio salvata o meno.
+ * @param[in] a, b puntatori alle tessere della coppia in input.
+ * @param[out] first, second puntatori alle tessere a e b se la coppia e' valida
+ * @return true se la coppia e valida o false altrimenti.
+ */
 static bool check_pair ( tile* a, tile* b, tile* &first, tile* &second ) ;
 
+/**
+ * Funzione privata che ordina in ordine alfabetico un sotto array passatole.
+ * @param[in] out puntatore all'array
+ * @param[in] start, end indici che delimitano il sotto array da ordinare.
+ */
 static void sort_sub_array ( tile ** out, int start, int end ) ;
 /*fine prototipi funzioni private*/
 

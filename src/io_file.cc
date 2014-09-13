@@ -1,3 +1,8 @@
+/**
+ * @file
+ * File che contiene l'implementazione del modulo IOFILE. Qui vengono definite
+ * le funzioni che operano su tale struttura dati.
+ */
 /*inizio implementazione modulo_IOFILE*/
 #include <fstream>
 #include <iostream>
@@ -21,6 +26,12 @@ static const int MAXWORD = 20 ;
 /*fine implementazione struttura dati privata*/
 
 /*inizio prototipi funzioni private*/
+/**
+ * Funzione privata che controlla la validita' del nome del file binario su cui
+ * si vuole salvare la partita.
+ * @param[in,out] filename nome eventualmente aggiustato se non conforme a
+ * quanto aspettato.
+ */
 static void check_filename ( char * filename ) ;
 /*fine prototipi funzioni private*/
 

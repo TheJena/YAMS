@@ -10,7 +10,7 @@ Mahjong: $(OBJECTFILES)
 
 -include dependencies
 
-.PHONY: depend clean cleanall debug
+.PHONY: depend clean cleanall debug doc
 
 depend:
 	g++ -MM ./*.cc > dependencies
@@ -25,3 +25,5 @@ debug:
 	g++ -g -D DEBUG_MODE -c $(SOURCEFILES) $(LDFLAGS) $(CXXFLAGS)
 	g++ -g -D DEBUG_MODE -o Mahjong_debug $(OBJECTFILES) $(LDFLAGS) $(CXXFLAGS)
 	rm -f ./Mahjong
+doc:
+	doxygen Doxyfile
