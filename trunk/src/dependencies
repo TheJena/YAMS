@@ -1,0 +1,12 @@
+cube.o: cube.cc data_structures.h debug_macros.h cube.h gui.h game.h \
+ movements.h
+game.o: game.cc debug_macros.h game.h data_structures.h io_file.h cube.h \
+ movements.h gui.h
+gui.o: gui.cc debug_macros.h io_file.h data_structures.h gui.h cube.h \
+ game.h movements.h
+io_file.o: io_file.cc debug_macros.h io_file.h data_structures.h gui.h \
+ cube.h game.h movements.h
+mahjong.o: mahjong.cc debug_macros.h gui.h data_structures.h cube.h \
+ io_file.h
+movements.o: movements.cc data_structures.h debug_macros.h cube.h \
+ movements.h gui.h game.h
