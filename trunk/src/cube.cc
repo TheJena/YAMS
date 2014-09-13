@@ -95,8 +95,8 @@ bool mix_cube ()
 
     if ( !remove_dummies() )
     {
-        D3(cerr<<"mix cube"<<endl)
-        D8(cerr<<"remove dummies returned false"<<endl)
+        D3(cerr<<"D3 mix cube"<<endl)
+        D8(cerr<<"D8 remove dummies returned false"<<endl)
         return false ;
     }
 
@@ -333,14 +333,14 @@ bool remove_dummies()
     refresh_unlocked () ;
     if ( !sort_unlocked () )
     {
-        D3(cerr<<"remove_dummies"<<endl)
-        D8(cerr<<"sort unlocked returned false"<<endl)
+        D3(cerr<<"D3 remove_dummies"<<endl)
+        D8(cerr<<"D8 sort unlocked returned false"<<endl)
         return false ;
     }
     if ( count_pairs_removable(0) == -1 )
     {
-        D3(cerr<<"remove_dummies"<<endl)
-        D8(cerr<<"count pairs removable returned -1"<<endl)
+        D3(cerr<<"D3 remove_dummies"<<endl)
+        D8(cerr<<"D8 count pairs removable returned -1"<<endl)
         return false ;
     }
     redraw_widget("playground") ;

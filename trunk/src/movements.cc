@@ -112,8 +112,8 @@ bool extract_pair ( couple *  pair )
     {
         case airhead :      if ( !airhead_extraction( first, second, exit ) )
                             {
-                                D3(cerr<<"extract pair"<<endl)
-                                D8(cerr<<"airhead extraction returned false1"<<endl)
+                                D3(cerr<<"D3 extract pair"<<endl)
+                                D8(cerr<<"D8 airhead extraction returned false1"<<endl)
                                 return false ;
                             }
                             break ;
@@ -142,8 +142,8 @@ bool extract_pair ( couple *  pair )
                             {
                                 if ( !airhead_extraction( first, second, exit ) )
                                 {
-                                    D3(cerr<<"extract pair"<<endl)
-                                    D8(cerr<<"airhead extraction returned false2"<<endl)
+                                    D3(cerr<<"D3 extract pair"<<endl)
+                                    D8(cerr<<"D8 airhead extraction returned false2"<<endl)
                                     return false ;
                                 }
                             }
@@ -284,8 +284,8 @@ bool sort_unlocked()
 
     if ( count_pairs_removable(0) == -1 )
     {
-        D3(cerr<<"sort unlocked"<<endl)
-        D6(cerr<<"returned false because"<<
+        D3(cerr<<"D3 sort unlocked"<<endl)
+        D6(cerr<<"D6 returned false because"<<
                  " count pairs removable returned -1"<<endl)
         return false ;
     }
