@@ -6,6 +6,7 @@
 /*inizio implementazione modulo_GUI*/
 #include <iostream>
 #include <cstring>
+#include <cstdlib>
 #include "debug_macros.h"
 #include "io_file.h"                // include gia' la definizione struct_couple
 #include "gui.h"        //include gia le definizioni enum_layout e enum_p_player
@@ -961,6 +962,7 @@ extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
 	}
     else if ( widget == (widget_from_name ( "menuitem_man" ) ) )
     {
+        system("iceweasel ../doc/html/index.html &") ;
 	}
     else if ( widget == (widget_from_name ( "menuitem_about" ) ) )
     {
