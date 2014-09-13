@@ -1,8 +1,18 @@
+/**
+ * @file
+ * File che contiene l'implementazione del modulo CUBE. Qui vengono definite le
+ * funzioni che operano su tale struttura dati, appunto la cube, nonche' la
+ * struttura dati stessa.
+ */
 /*inizio implementazione modulo_CUBE*/
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
 
+/**
+ * Struttura che identifica una coppia di tessere candidate alla rimozione o al
+ * salvataggio o alla verifica.
+ */
 #define struct_couple           // perche' couple serve a movements.h che pero'
 #include "data_structures.h"    // non la puo' contenere a causa di conflitti in
 #undef struct_couple            // altri file in cui e' incluso ma couple e' gia
@@ -26,27 +36,82 @@ tile *** cube = NULL ;
 /*fine implementazione struttura dati pubblica*/
 
 /*inizio prototipi funzioni private*/
+/**
+ * Funzione privata che date due tessere in input restituisce le tessere
+ * adiacenti attraverso puntatori.
+ * @param[in,out] a, b puntatori alle due tessere della coppia, possono essere
+ * scambiati tra loro a seconda della convenienza.
+ * @param[in] xa, ya, za, xb, yb, zb coordinate delle due tessere della coppia.
+ * @param[out] left_a, right_a, under_a, left_b, right_b, under_b puntatori alle
+ * tessere immediatamente a sinistra / destra / o sotto alle tessere della
+ * coppia, se per caso le tessere della coppia sono cosi' vicine da avere
+ * puntatori a tessere comuni, questi ultimi vengono posti tutti a NULL eccetto
+ * uno.
+ */
 static void initialize_neighbor ( tile * &left_a, tile * &right_a, tile * &under_a,
                            tile * &left_b, tile * &right_b, tile * &under_b,
                            const int &xa, const int &ya, const int &za,
                            const int &xb, const int &yb, const int &zb,
                            tile * &a, tile * &b ) ;
 
+/**
+ * Funzione privata che aggiorna i campi della tessera indicanti se essa
+ * e' o meno bloccata da altre tessere.
+ * @param[in] x, y, z coordinate della tessera.
+ */
 static void check_cell ( const int &x, const int &y, const int &z ) ;
 
+/**
+ * Funzione privata che controlla la presenza di una tessera all'immediata
+ * sinistra di quella passata in input.
+ * @param[in] x, y, z coordinate della tessera.
+ * @return true se la tessera in input e' removibile o false altrimenti.
+ */
 static bool left_cell ( const int &x, const int &y, const int &z ) ;
 
+/**
+ * Funzione privata che controlla la presenza di una tessera all'immediata
+ * destra di quella passata in input.
+ * @param[in] x, y, z coordinate della tessera.
+ * @return true se la tessera in input e' removibile o false altrimenti.
+ */
 static bool right_cell ( const int &x, const int &y, const int &z ) ;
 
+/**
+ * Funzione privata che scambia due tessere. O meglio scambia tutti i campi
+ * delle che le contengono.
+ * @param[in] x1, y1, z1, x2, y2, z2 coordinate delle tessere.
+ */
 static void swap_tiles ( const int &x1, const int &y1, const int &z1,
                   const int &x2, const int &y2, const int &z2, int &i ) ;
 
+/**
+ * Funzione privata che popola il tavolo da gioco con le tessere in disposizione
+ * easy o piramidale.
+ * @param[in,out] last numero identificativo della prima e dell' ultima tessera.
+ */
 static void fill_easy_layout ( int &last ) ;
 
+/**
+ * Funzione privata che popola il tavolo da gioco con le tessere in disposizione
+ * medium o a nuvola.
+ * @param[in,out] last numero identificativo della prima e dell' ultima tessera.
+ */
 static void fill_medium_layout ( int &last ) ;
 
+/**
+ * Funzione privata che popola il tavolo da gioco con le tessere in disposizione
+ * difficult o sala del trono.
+ * @param[in,out] last numero identificativo della prima e dell' ultima tessera.
+ */
 static void fill_difficult_layout ( int &last ) ;
 
+/**
+ * Funzione privata che popola un piano orizzontale rettangolare con le tessere
+ * che puo'contenere.
+ * @param[in] x1, x2, y1, y2, z coordinate dei 2 vertici opposti del rettangolo.
+ * @param[in,out] last numero identificativo della prima e dell' ultima tessera.
+ */
 static void fill_floor( const int &x1, const int &x2, const int &y1, const int &y2,
                  const int &z, int &last ) ;
 /*fine  prototipi funzioni private*/

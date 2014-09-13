@@ -1,3 +1,9 @@
+/**
+ * @file
+ * File che contiene l'implementazione del modulo GAME. Qui vengono definite le
+ * funzioni che operano sulla struttura dati mov, nonche' la struttura dati
+ * stessa.
+ */
 /*inizio implementazione modulo_GAME*/
 #include <iostream>
 #include <cstring>
@@ -17,16 +23,50 @@ bool playing = false ;
 /*fine implementazione struttura dati pubblica*/
 
 /*inizio implementazione struttura dati privata*/
+/**
+ * Punteggio del primo giocatore
+ */
 static int _score1 = 0 ;
+
+/**
+ * Punteggio del secondo giocatore
+ */
 static int _score2 = 0 ;
+
+/**
+ * Indice di riga della tabella mov
+ */
 static int row = 0 ;
+
+/**
+ * Indice di colonna della tabella mov
+ */
 static int col = 0 ;
+
+/**
+ * Core della tabella mov.
+ */
 static couple ** mov ;
 /*fine implementazione struttura dati privata*/
 
 /*inizio prototipi funzioni private*/
+/**
+ * Funzione privata che verifica se agli indici di riga, colonna e' presente una
+ * coppia valida o meno, quindi decide se spostare gli indici o reinizializzare
+ * la zona dove era memorizzata la coppia.
+ * @return false se occorrono complicazioni durante l'esecuzione delle funzioni:
+ * ::sort_unlocked, ::count_pairs_removable e ::opponent_round. Altrimenti true.
+ */
 static bool check_couple ( ) ;
 
+
+/**
+ * Funzione privata che consente al secondo giocatore o al AI, di memorizzare
+ * una coppia valida nella tabella mov, agli indici riga, colonna opportuni.
+ * @return false se occorrono complicazioni durante l'esecuzione delle funzioni:
+ * ::sort_unlocked, ::count_pairs_removable o se il gioco termina (::end_game).
+ * Altrimenti true.
+ */
 static bool opponent_round () ;
 /*fine prototipi funzioni private*/
 

@@ -1,3 +1,8 @@
+/**
+ * @file
+ * File che contiene l'implementazione del modulo GUI. Qui vengono definite le
+ * funzioni che operano sulla parte grafica dell' applicazione.
+ */
 /*inizio implementazione modulo_GUI*/
 #include <iostream>
 #include <cstring>
@@ -8,7 +13,14 @@
 #include "game.h"      // include gia' le definizioni struct__string e enum_game
 #include "movements.h"                //include gia'le definizioni enum_computer
 
+/**
+ * Enumerato che identifica il tipo di tessera: numerica o dipinta.
+ */
 #define enum_tile_type
+/**
+ * Enumerato che identifica la schermata da stampare nell'area centrale della
+ * finestra.
+ */
 #define enum_event_box
 #include "data_structures.h"
 #undef enum_tile_type
@@ -27,6 +39,9 @@ int last_removed_pl2_b = -1 ;     // removed by ai or player 2
 /*fine implementazione struttura dati pubblica*/
 
 /*inizio struttura dati privata*/
+/**
+ * Struttura dati che memorizza un colore secondo le componenti Red Green Blue
+ */
 struct colour {
                 double r ;
                 double g ;
@@ -72,79 +87,202 @@ static const colour sand =          { 244.0/255, 164.0/255, 96.0/255 } ;
 static const colour white =         { 255.0/255, 255.0/255, 255.0/255 } ;
 static const colour yellow =        { 255.0/255, 255.0/255, 0.0/255 } ;
 
+/**
+ * Costante privata che identifica il numero massimo di caratteri di una
+ * generica stringa.
+ */
 static const int MAXLUN = 100 ;
+
+/**
+ * Costante privata che identifica il numero massimo di caratteri di una
+ * linea da stampare nell' area centrale dello schermo.
+ */
 static const int MAXLINE = 80 ;
 
+/**
+ * Variabile privata che indica il punteggio del primo giocatore.
+ */
 static int _score1 = 0 ;
+
+/**
+ * Variabile privata che indica il punteggio del secondo giocatore.
+ */
 static int _score2 = 0 ;
+
+/**
+ * Variabile privata che indica la coordinata x della prima cella da evidenziare.
+ */
 static int h_x1 = -1 ;
+
+/**
+ * Variabile privata che indica la coordinata y della prima cella da evidenziare.
+ */
 static int h_y1 = -1 ;
+
+/**
+ * Variabile privata che indica la coordinata z della prima cella da evidenziare.
+ */
 static int h_z1 = -1 ;
+
+/**
+ * Variabile privata che indica la coordinata x della seconda cella da evidenziare.
+ */
 static int h_x2 = -1 ;
+
+/**
+ * Variabile privata che indica la coordinata y della seconda cella da evidenziare.
+ */
 static int h_y2 = -1 ;
+
+/**
+ * Variabile privata che indica la coordinata z della seconda cella da evidenziare.
+ */
 static int h_z2 = -1 ;
 
 static GtkBuilder * builder ;
+
+/**
+ * Variabile privata che indica cosa stampare al centro dello schermo.
+ */
 static event_box play_ground = rules ;
 /*fine struttura dati privata*/
 
 /*inizio prototipi funzioni handler*/
+/**
+ * Handler che disegna a lato le tessere rimosse
+ */
 extern "C" gboolean draw_removed_tiles  ( GtkWidget * widget,
                                           cairo_t * cr,
                                           gpointer user_data ) ;
 
+/**
+ * Handler che disegna il tavolo di gioco
+ */
 extern "C" gboolean draw_play_ground ( GtkWidget * widget,
                                        cairo_t * cr,
                                        gpointer user_data ) ;
 
+/**
+ * Handler che nasconde la finestra genitore.
+ */
 extern "C" gboolean handler_hide_window ( GtkWidget * widget,
                                            GdkEvent * event,
                                            gpointer user_data) ;
 
+/**
+ * Handler che chiama la funzione ::save_game.
+ */
 extern "C" gboolean handler_set_save_game ( GtkWidget * widget,
                                             GdkEvent * event,
                                             gpointer user_data) ;
 
+/**
+ * Handler che chiama la funzione ::load_game.
+ */
 extern "C" gboolean handler_set_load_game ( GtkWidget * widget,
                                             GdkEvent * event,
                                             gpointer user_data) ;
 
+/**
+ * Handler che riconosce quale widget lo ha chiamato ed agisce di conseguenza...
+ * - avviando una nuova partita,
+ * - mescolando le tessere,
+ * - tornando indietro di una mossa,
+ * - suggerendo una coppia removibile,
+ * - mostrando le regole,
+ * - caricando una partita da file,
+ * - salvando una partita su file,
+ * - aprendo il manuale / la documentazione,
+ * - mostrando le generalita' del programma.
+ */
 extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
                                                    GdkEvent * event,
                                                    gpointer user_data ) ;
 
+/**
+ * Handler che acquisisce le disposizioni per la nuova partita.
+ */
 extern "C" gboolean handler_set_new_game ( GtkWidget * widget,
                                            GdkEvent * event,
                                            gpointer user_data) ;
 
+/**
+ * Handler che informa l' applicazione che un click e' stato rilasciato sulla
+ * superficie di gioco.
+ */
 extern "C" gboolean handler_click_on_widget (GtkWidget *widget,
                GdkEventButton  *event,
                gpointer   user_data) ;
 
+/**
+ * Handler che predispone alla chiusura del programma.
+ */
 extern "C" gboolean handler_delete_event ( GtkWidget * widget,
                                            GdkEvent * event,
                                            gpointer user_data)  ;
 /*fine prototipi funzioni handler*/
 
 /*inizio prototipi funzioni private*/
+/**
+ * Funzione privata che disegna un testo sulla superficie di gioco.
+ * @param[in] bg colore sfondo
+ * @param[in] text_color colore testo
+ * @param[out] widget widget chiamante e da ridisegnare
+ * @param[out] cr contesto grafico di cairo
+ * @param[in] title titolo del testo
+ * @param[in] _line matrice contenente il testo
+ * @param[in] h_title altezza titolo
+ * @param[in] h_text altezza testo
+ */
 static void draw_text_on_play_ground ( const colour &bg, const colour &text_color,
                                 GtkWidget * &widget, cairo_t * &cr,
                                 char* title, char _line[][MAXLINE],
                                 const int &h_title, const int &h_text      );
 
+/**
+ * Funzione privata che disegna su una tessera la disposizione del seme a
+ * seconda del numero della tessera.
+ * @param[out] cr contesto cairo
+ * @param[in] _obj superficie da disegnare
+ * @param[in] num numero in base al quale disporre le superfici affinche
+ * disegnino il numero stesso. ( da 1 a 9 )
+ */
 static void draw_number_on_tile ( cairo_t * &cr_tile,
                            cairo_surface_t * &_obj,
                            const int &num ) ;
 
+/**
+ * Funzione privata intermedia per disegnare una tessera
+ * @param[out] context contesto cairo
+ * @param[out] surf1 superficie dove importare l'immagine della tessera vuota
+ * @param[out] surf2 superficie dove importare la superficie ritornata dalla
+ * funzione ::number_on_tile
+ * @param[in] num numero identificativo della tessera
+ * @param[in] image_name nome dell' immagine da porre sopra alla tessera vuota
+ * @param[in] tt tipo di tessera: numerica o dipinta
+ */
 static void sub_paint_tile ( cairo_t * &context, cairo_surface_t * &surf1,
                       cairo_surface_t * &surf2, const int &num,
                       const char * &image_name, const tile_type &tt ) ;
 
+
+/**
+ * Funzione privata per disegnare una tessera
+ * @param[in] num numero identificativo della tessera
+ * @param[in] x, y, z coordinate della tessera
+ * @return un puntatore a superficie
+ */
 static cairo_surface_t * paint_tile (  const int &num,
                                 const int &x,
                                 const int &y,
                                 const int &z ) ;
 
+/**
+ * Funzione privata per disegnare un numero su una tessera
+ * @param[out] _obj superficie su cui disegnare
+ * @param[in] number numero identificativo della tessera
+ * @return un puntatore a superficie
+ */
 static cairo_surface_t * number_on_tile (  cairo_surface_t * _obj,
                                     const int &number ) ;
 
@@ -156,16 +294,43 @@ static GtkWidget * widget_from_name ( const char * name ) ;
 
 static GtkToggleButton * tb_from_name ( const char * name ) ;
 
+/**
+ * Funzione privata che controlla se le coordinate passate in input sono interne
+ * all' area della tessera passata per puntatore.
+ * @param[in] punt puntatore alla tessera
+ * @param[in] x, y coordinate da verificare
+ * @return true se le coordinate sono interne alla faccia superiore della
+ * tessera, false altrimenti.
+ */
 static bool check_position ( const tile * punt, const int &x, const int &y ) ;
 
+/**
+ * Funzione privata che estrae dal nome della tessera il numero di semi che
+ * bisogna disegnarci sopra.
+ * @param[in] word nome tessera
+ * @return un numero da 1 a 9
+ */
 static int number_from_string ( const char * word ) ;
 
+/**
+ * Funzione privata per calcolare le coordinate del piano di gioco cui stampare
+ * la tessera.
+ * @param[in] _dx, dy distanze di offset dallo spigolo in alto a sinistra cui
+ * disegnare la tessera
+ * @param[in] x, y, z coordinate della tessera
+ */
 static void calculate_coor_x_y ( const int &x,
                           const int &y,
                           const int &z,
                           int &_dx,
                           int &_dy ) ;
 
+/**
+ * Funzione privata che assegna ad ogni tessera le coordinate dei vertici
+ * opposti del quadrato che rappresenta la faccia superiore della tessera.
+ * @param[in] punt puntatore alla tessera
+ * @param[in] x, y coordinate vertici opposti faccia superiore tessera
+ */
 static void set_coor_tile ( tile * punt, const int &x, const int &y ) ;
 /*fine prototipi funzioni private*/
 
