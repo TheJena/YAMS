@@ -6,6 +6,7 @@ LDFLAGS=-export-dynamic `pkg-config --libs gtk+-3.0`
 
 Mahjong: $(OBJECTFILES)
 	g++ -o Mahjong $(OBJECTFILES) $(LDFLAGS) $(CXXFLAGS)
+	rm -f ./Mahjong_debug
 
 -include dependencies
 
