@@ -1,35 +1,41 @@
-using namespace std ;
+/*inizio header modulo_GAME*/
 
-enum p_player { p_human1, p_human2, p_ai } ;
+#define struct__string
+#define enum_game
+#include "data_structures.h"
+#undef struct__string
+#undef enum_game
+
+/*inizio interfaccia*/
+
+/*inizio struttura dati pubblica*/
+extern _string * name ;
+
+extern game mode ;
 
 extern const int max_couple_row ;
 
-extern int _score1 ;
-extern int _score2 ;
-
 extern bool playing ;
-extern bool lock_undo ;
+/*fine struttura dati pubblica*/
 
+/*inizio prototipi funzioni pubbliche*/
 bool start_game () ;
 
-bool save_game( char * filename ) ;
+bool save_game(char * filename ) ;
 
 bool load_game( char * filename ) ;
 
 void undo_last_two_couples () ;
 
-void refresh_scores( int &score1, int &score2) ;
-
-bool check_couple ( ) ;
-
-void clear_pair_removed () ;
-
-void refresh_pair_removed( const p_player &temp, const int &a, const int &b ) ;
-
-bool opponent_round () ;
+void refresh_scores() ;
 
 void reset_row() ;
 
 bool insert_half_pair ( const int &num, const int &x, const int &y, const int &z ) ;
 
 void end_game () ;
+/*fine prototipi funzioni pubbliche*/
+
+/*fine interfaccia*/
+
+/*fine header modulo_GAME*/

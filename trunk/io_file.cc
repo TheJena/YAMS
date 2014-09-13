@@ -1,48 +1,46 @@
+/*inizio implementazione modulo_IOFILE*/
 #include <fstream>
-#include "gui.h"
-#include "game.h"
+#include <iostream>
 #include "debug_macros.h"
+#include "io_file.h"                // include gia' la definizione struct_couple
+#include "gui.h"        //include gia le definizioni enum_layout e enum_p_player
+#include "cube.h"                       //include gia la definizione struct_tile
+#include "game.h"      // include gia' le definizioni struct__string e enum_game
+#include "movements.h"                //include gia'le definizioni enum_computer
+
 
 using namespace std ;
 
-const char* F_TILES = "./tiles_names.dat" ;
-const int MAXWORD = 20 ;
+/*inizio implementazione struttura dati pubblica*/
+_string * name = NULL ;
+/*fine implementazione struttura dati pubblica*/
 
-void check_filename ( char * filename )
-{
-    int x ;
-    for ( x = 0 ; x<MAXWORD ; x++ )
-    {
-        if (( filename[x] == '.' ) || ( filename[x] == '\0' ) )
-            break ;
-    }
-    if ( x < MAXWORD-5 )
-    {
-        filename[x]   = '.' ;
-        filename[x+1] = 'd' ;
-        filename[x+2] = 'a' ;
-        filename[x+3] = 't' ;
-        filename[x+4] = '\0' ;
-    }
-    else
-    {
-        filename[MAXWORD-5] = '.' ;
-        filename[MAXWORD-4] = 'd' ;
-        filename[MAXWORD-3] = 'a' ;
-        filename[MAXWORD-2] = 't' ;
-        filename[MAXWORD-1] = '\0' ;
-    }
-}
+/*inizio implementazione struttura dati privata*/
+static const char* F_TILES = "./tiles_names.dat" ;
+static const int MAXWORD = 20 ;
+/*fine implementazione struttura dati privata*/
 
+/*inizio prototipi funzioni private*/
+static void check_filename ( char * filename ) ;
+/*fine prototipi funzioni private*/
+
+/*inizio implementazione funzioni pubbliche*/
 bool save_game_on_file ( const couple** mov, char * filename,
                          const int &row, const int &col )
 {
+    D1(cerr<<"D1 save game on file\n")
+
     check_filename( filename ) ;
     remove_dummies() ;
 
     ofstream out_file( filename ) ;
     if ( !out_file )
+    {
+        D3(cerr<<"save game on file"<<endl)
+        D8(cerr<<"returned false on file opening"<<endl)
         return false ;
+    }
+
 
     const int intsize = sizeof(int) ;
     out_file.write( reinterpret_cast<char*>(const_cast<int*>(&intsize)), intsize ) ;
@@ -80,21 +78,32 @@ bool save_game_on_file ( const couple** mov, char * filename,
             out_file.write(reinterpret_cast<char*>(const_cast<couple*>(&mov[x][y])), sizeof(couple) ) ;
 
     out_file.close();
+
+    D10(cerr<<"D10 save game on file\n")
+
     return true ;
 }
 
 bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &col )
 {
+    D1(cerr<<"D1 load game from file\n")
+
     end_game() ;
     if ( !start_game() )
     {
+        D3(cerr<<"load game from file"<<endl)
+        D8(cerr<<"start game returned false"<<endl)
         end_game() ;
         return false ;
     }
 
     ifstream in_file ( filename ) ;
     if ( !in_file )
+    {
+        D3(cerr<<"load game from file"<<endl)
+        D8(cerr<<"returned false on file opening"<<endl)
         return false ;
+    }
 
     const int intsize = sizeof(int) ;
     char buffer[intsize] ;
@@ -105,8 +114,13 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
      */
     in_file.read( buffer, intsize ) ;
     int * file_intsize = reinterpret_cast<int*>(buffer) ;
+    assert( file_intsize != NULL ) ;
     if ( intsize != (*file_intsize))
+    {
+        D3(cerr<<"load game from file"<<endl)
+        D8(cerr<<"returned false because of different size of int"<<endl)
         return false ;
+    }
 
     /*
      * controllo che le dimensioni dello spazio tridimensionale
@@ -114,16 +128,31 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
      */
     in_file.read ( buffer, intsize ) ;
     int * file_dim_X = reinterpret_cast<int*>(buffer) ;
+    assert( file_dim_X != NULL ) ;
     if ( dim_X != (*file_dim_X) )
+    {
+        D3(cerr<<"load game from file"<<endl)
+        D8(cerr<<"returned false because of different dim_X"<<endl)
         return false ;
+    }
     in_file.read ( buffer, intsize ) ;
     int * file_dim_Y = reinterpret_cast<int*>(buffer) ;
+    assert( file_dim_Y != NULL ) ;
     if ( dim_Y != (*file_dim_Y) )
+    {
+        D3(cerr<<"load game from file"<<endl)
+        D8(cerr<<"returned false because of different dim_Y"<<endl)
         return false ;
+    }
     in_file.read ( buffer, intsize ) ;
     int * file_dim_Z = reinterpret_cast<int*>(buffer) ;
+    assert( file_dim_Z != NULL ) ;
     if ( dim_Z != (*file_dim_Z) )
+    {
+        D3(cerr<<"load game from file"<<endl)
+        D8(cerr<<"returned false because of different dim_Z"<<endl)
         return false ;
+    }
 
     /*
      * controllo che i valori delle tessere
@@ -131,57 +160,91 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
      */
     in_file.read ( buffer, intsize ) ;
     int * file_SEEDVALUE = reinterpret_cast<int*>(buffer) ;
+    assert( file_SEEDVALUE != NULL ) ;
     if ( SEEDVALUE != (*file_SEEDVALUE) )
+    {
+        D3(cerr<<"load game from file"<<endl)
+        D8(cerr<<"returned false because of different SEEDVALUE"<<endl)
         return false ;
+    }
     in_file.read ( buffer, intsize ) ;
     int * file_WINDVALUE = reinterpret_cast<int*>(buffer) ;
+    assert( file_WINDVALUE != NULL ) ;
     if ( WINDVALUE != (*file_WINDVALUE) )
+    {
+        D3(cerr<<"load game from file"<<endl)
+        D8(cerr<<"returned false because of different WINDVALUE"<<endl)
         return false ;
+    }
     in_file.read ( buffer, intsize ) ;
     int * file_DRAGONVALUE = reinterpret_cast<int*>(buffer) ;
+    assert( file_DRAGONVALUE != NULL ) ;
     if ( DRAGONVALUE != (*file_DRAGONVALUE) )
+    {
+        D3(cerr<<"load game from file"<<endl)
+        D8(cerr<<"returned false because of different DRAGONVALUE"<<endl)
         return false ;
+    };
     in_file.read ( buffer, intsize ) ;
     int * file_SEASONVALUE = reinterpret_cast<int*>(buffer) ;
+    assert( file_SEASONVALUE != NULL ) ;
     if ( SEASONVALUE != (*file_SEASONVALUE) )
+    {
+        D3(cerr<<"load game from file"<<endl)
+        D8(cerr<<"returned false because of different SEASONVALUE"<<endl)
         return false ;
+    }
     in_file.read ( buffer, intsize ) ;
     int * file_FLOWERVALUE = reinterpret_cast<int*>(buffer) ;
+    assert( file_FLOWERVALUE != NULL ) ;
     if ( FLOWERVALUE != (*file_FLOWERVALUE) )
+    {
+        D3(cerr<<"load game from file"<<endl)
+        D8(cerr<<"returned false because of different FLOWERVALUE"<<endl)
         return false ;
+    }
 
     /*superati i controlli soprastanti si puo' procedere col caricamento*/
     in_file.read ( buffer, intsize ) ;
     int * file_last_removed_pl1_a = reinterpret_cast<int*>(buffer) ;
+    assert( file_last_removed_pl1_a != NULL ) ;
     last_removed_pl1_a = *(file_last_removed_pl1_a) ;
     in_file.read ( buffer, intsize ) ;
     int * file_last_removed_pl1_b = reinterpret_cast<int*>(buffer) ;
+    assert( file_last_removed_pl1_b != NULL ) ;
     last_removed_pl1_b = *(file_last_removed_pl1_b) ;
     in_file.read ( buffer, intsize ) ;
     int * file_last_removed_pl2_a = reinterpret_cast<int*>(buffer) ;
+    assert( file_last_removed_pl2_a != NULL ) ;
     last_removed_pl2_a = *(file_last_removed_pl2_a) ;
     in_file.read ( buffer, intsize ) ;
     int * file_last_removed_pl2_b = reinterpret_cast<int*>(buffer) ;
+    assert( file_last_removed_pl2_b != NULL ) ;
     last_removed_pl2_b = *(file_last_removed_pl2_b) ;
 
     in_file.read ( buffer, intsize ) ;
     int * file_row = reinterpret_cast<int*>(buffer) ;
+    assert( file_row != NULL ) ;
     row = *(file_row) ;
     in_file.read ( buffer, intsize ) ;
     int * file_col = reinterpret_cast<int*>(buffer) ;
+    assert( file_col != NULL ) ;
     col = *(file_col) ;
 
     char layout_buffer[sizeof(layout)] ;
     in_file.read ( layout_buffer, sizeof(layout)) ;
     layout * file_level = reinterpret_cast<layout*>(layout_buffer) ;
+    assert( file_level != NULL ) ;
     level = *(file_level) ;
     char computer_buffer[sizeof(computer)] ;
     in_file.read ( computer_buffer, sizeof(computer)) ;
     computer * file_ai = reinterpret_cast<computer*>(computer_buffer) ;
+    assert( file_ai != NULL ) ;
     ai = *(file_ai) ;
     char game_buffer[sizeof(game)] ;
     in_file.read ( game_buffer, sizeof(game)) ;
     game * file_mode = reinterpret_cast<game*>(game_buffer) ;
+    assert( file_mode != NULL ) ;
     mode = *(file_mode) ;
 
     char tile_buffer[sizeof(tile)] ;
@@ -192,6 +255,7 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
             {
                 in_file.read( tile_buffer, sizeof(tile)) ;
                 file_tile = reinterpret_cast<tile*>(tile_buffer) ;
+                assert( file_tile != NULL ) ;
                 cube[x][y][z] = *(file_tile) ;
             }
     check_cube() ;
@@ -205,11 +269,12 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
         {
             in_file.read( couple_buffer, sizeof(couple)) ;
             file_couple = reinterpret_cast<couple*>(couple_buffer) ;
+            assert( file_couple != NULL ) ;
             mov[x][y] = *(file_couple) ;
         }
     reset_highlighted_cell() ;
     display_tiles() ;
-    refresh_scores(_score1, _score2) ;
+    refresh_scores() ;
     if ( col == 1 )
         refresh_turn_label( true ) ;
     else if ( col == 0 )
@@ -217,6 +282,9 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
 
 
     in_file.close() ;
+
+    D10(cerr<<"D10 load game from file\n")
+
     return true ;
 }
 
@@ -275,3 +343,36 @@ void delete_tiles_names ()
 
     D10(cerr<<"D10 delete tiles names\n")
 }
+/*fine implementazione funzioni pubbliche*/
+
+/*inizio implementazione funzioni private*/
+static void check_filename ( char * filename )
+{
+    D1(cerr<<"D1 check filename\n")
+    int x ;
+    for ( x = 0 ; x<MAXWORD ; x++ )
+    {
+        if (( filename[x] == '.' ) || ( filename[x] == '\0' ) )
+            break ;
+    }
+    if ( x < MAXWORD-5 )
+    {
+        filename[x]   = '.' ;
+        filename[x+1] = 'd' ;
+        filename[x+2] = 'a' ;
+        filename[x+3] = 't' ;
+        filename[x+4] = '\0' ;
+    }
+    else
+    {
+        filename[MAXWORD-5] = '.' ;
+        filename[MAXWORD-4] = 'd' ;
+        filename[MAXWORD-3] = 'a' ;
+        filename[MAXWORD-2] = 't' ;
+        filename[MAXWORD-1] = '\0' ;
+    }
+    D10(cerr<<"D10 check filename\n")
+}
+/*fine implementazione funzioni private*/
+
+/*fine implementazione modulo_IOFILE*/

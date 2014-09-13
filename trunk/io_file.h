@@ -1,24 +1,23 @@
-using namespace std ;
+/*inizio header modulo_IOFILE*/
 
-struct couple   {
-                    int t1 ;
-                    const char * name1 ;
-                    int x1 ;
-                    int y1 ;
-                    int z1 ;
+#define struct_couple
+#include "data_structures.h"
+#undef struct_couple
 
-                    int t2 ;
-                    const char * name2 ;
-                    int x2 ;
-                    int y2 ;
-                    int z2 ;
-                } ;
+/*inizio interfaccia*/
+
+/*inizio prototipi funzioni pubbliche*/
+
+bool save_game_on_file ( const couple** mov, char * filename,
+                         const int &row, const int &col ) ;
+
+bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &col ) ;
 
 void import_tiles_names () ;
 
 void delete_tiles_names () ;
+/*fine prototipi funzioni pubbliche*/
 
-bool save_game_on_file ( const couple ** mov, char * filename,
-                         const int &row, const int &col ) ;
+/*fine interfaccia*/
 
-bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &col ) ;
+/*fine header modulo_IOFILE*/
