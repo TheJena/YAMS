@@ -73,6 +73,7 @@ static const char* F_GLADE             = "./gui.glade" ;
 static const char* W_newgame           = "window_new_game" ;
 static const char* W_savegame          = "window_save_game" ;
 static const char* W_loadgame          = "window_load_game" ;
+static const char* W_about             = "window_about" ;
 
 static const colour black =         {   0.0/255,   0.0/255,   0.0/255 } ;
 static const colour blue_persia =   {  28.0/255,  57.0/255, 187.0/255 } ;
@@ -1026,6 +1027,8 @@ extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
 	}
     else if ( widget == (widget_from_name ( "menuitem_about" ) ) )
     {
+        GtkWidget * w_about = widget_from_name ( W_about ) ;
+        gtk_widget_show ( w_about ) ;
 	}
 
     D10(cerr<<"D10 handler button pressed event\n")
@@ -1041,7 +1044,7 @@ extern "C" gboolean handler_set_new_game ( GtkWidget * widget,
 
     end_game ();
 
-/*handler per rendere effettive le disposizioni per la nuova partita*/
+    /*handler per rendere effettive le disposizioni per la nuova partita*/
     if      ( gtk_toggle_button_get_active ( tb_from_name ( "rb_easy" ) ) )
         level = easy ;
     else if ( gtk_toggle_button_get_active ( tb_from_name ( "rb_medium" ) ) )
@@ -1082,7 +1085,7 @@ extern "C" gboolean handler_set_new_game ( GtkWidget * widget,
 
     start_game () ;
 
-/*alla fine nascondo la finestra*/
+    /*alla fine nascondo la finestra*/
     GtkWidget * w_new_game = widget_from_name ( W_newgame ) ;
     gtk_widget_hide ( w_new_game ) ;
 
@@ -1383,7 +1386,7 @@ static cairo_surface_t * paint_tile ( const int &num,
 
     cairo_surface_t * temp = NULL ;
     cairo_surface_t * _surface_from_png = NULL ;
-    if ( num < =35 )
+    if ( num <= 35 )
     {
         sub_paint_tile( context, _surface_from_png, temp, num, I_CIRCLE,
                         tt_number ) ;

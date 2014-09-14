@@ -94,22 +94,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">/*inizio prototipi funzioni pubbliche*/</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="io__file_8cc.html#a6f1b5e4cb147bb248c1a3070af68f420">save_game_on_file</a> ( <span class="keyword">const</span> couple** <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>, <span class="keywordtype">char</span> * filename,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                         <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>, <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a> ) ;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                         <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>, <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>       ) ;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="io__file_8cc.html#a77c49b87f96e6abbebfe50a84b7efd84">load_game_from_file</a> ( couple** &amp;<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>, <span class="keyword">const</span> <span class="keywordtype">char</span> * filename, <span class="keywordtype">int</span> &amp;<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>, <span class="keywordtype">int</span> &amp;<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a> ) ;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keywordtype">void</span> <a class="code" href="io__file_8cc.html#aaf99ed1394384acc869d73a5eb20ffab">import_tiles_names</a> () ;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordtype">void</span> <a class="code" href="io__file_8cc.html#a3edc1ee8e472230d3fb6fe14f0f9130d">delete_tiles_names</a> () ;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">/*fine prototipi funzioni pubbliche*/</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">/*fine interfaccia*/</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">/*fine header modulo_IOFILE*/</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="io__file_8cc.html#a77c49b87f96e6abbebfe50a84b7efd84">load_game_from_file</a> ( couple** &amp;<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>, <span class="keyword">const</span> <span class="keywordtype">char</span> * filename,</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                           <span class="keywordtype">int</span> &amp;<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>, <span class="keywordtype">int</span> &amp;<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>                    ) ;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">void</span> <a class="code" href="io__file_8cc.html#aaf99ed1394384acc869d73a5eb20ffab">import_tiles_names</a> () ;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">void</span> <a class="code" href="io__file_8cc.html#a3edc1ee8e472230d3fb6fe14f0f9130d">delete_tiles_names</a> () ;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">/*fine prototipi funzioni pubbliche*/</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">/*fine interfaccia*/</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">/*fine header modulo_IOFILE*/</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generato Dom 14 Set 2014 00:51:26 per Mahjong da &#160;<a href="http://www.doxygen.org/index.html">
+Generato Dom 14 Set 2014 11:58:55 per Mahjong da &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

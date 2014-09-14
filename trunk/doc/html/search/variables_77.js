@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['w_5fabout',['W_about',['../gui_8cc.html#a2dfa925e9964f2685ee14f3bdec7a585',1,'gui.cc']]],
   ['w_5floadgame',['W_loadgame',['../gui_8cc.html#a1ba6ebeaa5d2f923808bfcd9c047af10',1,'gui.cc']]],
   ['w_5fnewgame',['W_newgame',['../gui_8cc.html#abe92f610d3aab7ba8e98ef0ed92280a7',1,'gui.cc']]],
   ['w_5fsavegame',['W_savegame',['../gui_8cc.html#a9ceaf4359c09ca527befdd3b30345386',1,'gui.cc']]],

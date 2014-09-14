@@ -115,7 +115,7 @@ Variabili</h2></td></tr>
 <tr class="memitem:af73c15f79e771441c611bd9933877bf2"><td class="memItemLeft" align="right" valign="top">computer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="movements_8h.html#af73c15f79e771441c611bd9933877bf2">ai</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Descrizione dettagliata</h2>
-<div class="textblock"><p>File che contiene l'interfaccia del modulo MOVEMENTS. Qui vengono dichiarate le funzioni che operano sulla struttura dati unlocked. </p>
+<div class="textblock"><p>File che contiene l'interfaccia del modulo MOVEMENTS. Qui vengono dichiarate le funzioni che operano sulla struttura dati unlocked[]. </p>
 </div><h2>Documentazione delle definizioni</h2>
 <a class="anchor" id="a5af346ecd3725577dbd969265dba575a"></a>
 <div class="memitem">
@@ -168,13 +168,13 @@ Variabili</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Restituisce</dt><dd>se l' estrazione e' avvenuta con successo ( erano ancora presenti tessere removibili) o meno ( erano finite, quindi il gioco e' terminato). </dd></dl>
+<dl class="section return"><dt>Restituisce</dt><dd>se l' estrazione e' avvenuta con successo (erano ancora presenti tessere removibili) o meno (erano finite, quindi il gioco e' terminato). </dd></dl>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a975397c373ae2a9dc28d0297fa18da56">D2</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D2 airhead extraction\n&quot;</span>)</div>
 <div class="line"></div>
 <div class="line">    srand ( time(0) ) ;</div>
 <div class="line"></div>
-<div class="line">    if ( <a class="code" href="movements_8cc.html#ac1ab19e53ac2166573cb5e81edd4df9a">count_pairs_removable</a>(0) &gt;= 1)</div>
+<div class="line">    if ( <a class="code" href="movements_8cc.html#ac1ab19e53ac2166573cb5e81edd4df9a">count_pairs_removable</a> (0) &gt;= 1 )</div>
 <div class="line">    {</div>
 <div class="line">        <span class="keywordtype">int</span> temp = 0 ;</div>
 <div class="line">        <span class="keywordflow">do</span></div>
@@ -185,12 +185,14 @@ Variabili</h2></td></tr>
 <div class="line"><span class="comment">                 * evito di dover controllare che le</span></div>
 <div class="line"><span class="comment">                 * celle attigue non siano fuori dall&#39;array</span></div>
 <div class="line"><span class="comment">                 */</span></div>
-<div class="line">                temp = 1 + rand()%(<a class="code" href="movements_8cc.html#ab0a805e203bc1d80ae2144a15ac2084d">FREE</a>-2) ;</div>
+<div class="line">                temp = 1 + rand()%( <a class="code" href="movements_8cc.html#ab0a805e203bc1d80ae2144a15ac2084d">FREE</a>-2 ) ;</div>
 <div class="line">            } <span class="keywordflow">while</span> ( <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[temp] == NULL ) ;</div>
 <div class="line">            <span class="keywordflow">if</span> ( <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[temp-1] != NULL )</div>
-<div class="line">                exit = <a class="code" href="movements_8cc.html#ae6ea84b766997de8ded162adc0c4f150">check_pair</a>(<a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[temp], <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[temp-1], first, second);</div>
+<div class="line">                exit = <a class="code" href="movements_8cc.html#ae6ea84b766997de8ded162adc0c4f150">check_pair</a>( <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[temp], <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[temp-1],</div>
+<div class="line">                                   first, second                     ) ;</div>
 <div class="line">            <span class="keywordflow">if</span> ( ( !exit ) &amp;&amp; ( <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[temp+1] != NULL ) )</div>
-<div class="line">                exit = <a class="code" href="movements_8cc.html#ae6ea84b766997de8ded162adc0c4f150">check_pair</a>(<a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[temp], <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[temp+1], first, second);</div>
+<div class="line">                exit = <a class="code" href="movements_8cc.html#ae6ea84b766997de8ded162adc0c4f150">check_pair</a>( <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[temp], <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[temp+1],</div>
+<div class="line">                                   first, second                     ) ;</div>
 <div class="line">        } <span class="keywordflow">while</span> ( ! exit ) ;</div>
 <div class="line"></div>
 <div class="line">        <a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D9 airhead extraction returned true\n&quot;</span>)</div>
@@ -199,7 +201,7 @@ Variabili</h2></td></tr>
 <div class="line">    }</div>
 <div class="line">    else</div>
 <div class="line">    {</div>
-<div class="line">        <a class="code" href="game_8cc.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a>() ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a> () ;</div>
 <div class="line"></div>
 <div class="line">        <a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D9 airhead extraction returned false\n&quot;</span>)</div>
 <div class="line"></div>
@@ -291,14 +293,14 @@ Variabili</h2></td></tr>
 <div class="line">    for ( <span class="keywordtype">int</span> i = 1 ; i &lt; <a class="code" href="movements_8cc.html#ab0a805e203bc1d80ae2144a15ac2084d">FREE</a> ; i++ )</div>
 <div class="line">    {</div>
 <div class="line">        <span class="keywordflow">if</span> ( ( <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[i-1] != NULL )&amp;&amp;( <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[i] != NULL )&amp;&amp;</div>
-<div class="line">             (<a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[i-1]-&gt;num != <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[i]-&gt;num )            )</div>
+<div class="line">             ( <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[i-1]-&gt;num != <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[i]-&gt;num )            )</div>
 <div class="line">        {</div>
-<div class="line">            assert(<a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[i-1]!= NULL) ;</div>
-<div class="line">            assert(<a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[i]!= NULL) ;</div>
+<div class="line">            assert(<a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[i-1] != NULL) ;</div>
+<div class="line">            assert(<a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[i] != NULL) ;</div>
 <div class="line">            <span class="keywordflow">if</span> ( ( 0 == strcmp( <a class="code" href="game_8h.html#af63b296d18a03f7e91badc96a015fac7">name</a>[<a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[i-1]-&gt;num].word,</div>
-<div class="line">                                <a class="code" href="game_8h.html#af63b296d18a03f7e91badc96a015fac7">name</a>[<a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[i]-&gt;num].word))    ||</div>
+<div class="line">                                <a class="code" href="game_8h.html#af63b296d18a03f7e91badc96a015fac7">name</a>[<a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[i]-&gt;num].word   ) ) ||</div>
 <div class="line">                 ( ( <a class="code" href="movements_8cc.html#a983b47fd27e78a38e5a4e38ea5a2913c">between</a> (136, <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[i-1]-&gt;num, 139 ) ) &amp;&amp;</div>
-<div class="line">                   ( <a class="code" href="movements_8cc.html#a983b47fd27e78a38e5a4e38ea5a2913c">between</a> (136, <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[i]-&gt;num  , 139 ) ) ) ||</div>
+<div class="line">                   ( <a class="code" href="movements_8cc.html#a983b47fd27e78a38e5a4e38ea5a2913c">between</a> (136, <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[i]-&gt;num  , 139 ) ) )  ||</div>
 <div class="line">                 ( ( <a class="code" href="movements_8cc.html#a983b47fd27e78a38e5a4e38ea5a2913c">between</a> (140, <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[i-1]-&gt;num, 143 ) ) &amp;&amp;</div>
 <div class="line">                   ( <a class="code" href="movements_8cc.html#a983b47fd27e78a38e5a4e38ea5a2913c">between</a> (140, <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[i]-&gt;num  , 143 ) ) ) )</div>
 <div class="line">            {</div>
@@ -310,13 +312,11 @@ Variabili</h2></td></tr>
 <div class="line"></div>
 <div class="line">    <span class="keywordflow">if</span> ( couples &lt; 0)</div>
 <div class="line">    {</div>
-<div class="line">        <span class="comment">/*debug here*/</span> ;</div>
-<div class="line"></div>
 <div class="line">        <a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D9 count pairs removable returned 0&quot;</span>&lt;&lt;</div>
 <div class="line">                 <span class="stringliteral">&quot; because of negative couples\n&quot;</span>)</div>
 <div class="line"></div>
+<div class="line">        <a class="code" href="game_8cc.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a> () ;</div>
 <div class="line">        return 0 ;</div>
-<div class="line">        <a class="code" href="game_8cc.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a>() ;</div>
 <div class="line">    }</div>
 <div class="line">    else if ( couples == 0 )</div>
 <div class="line">    {</div>
@@ -330,10 +330,10 @@ Variabili</h2></td></tr>
 <div class="line">        }</div>
 <div class="line">        else</div>
 <div class="line">        {</div>
-<div class="line">            <a class="code" href="cube_8cc.html#a68c1c8abe5c9433974f91ead0876dd9d">mix_cube</a>() ;</div>
-<div class="line">            <a class="code" href="cube_8cc.html#a4f894e1b050b78df900502f825671049">check_cube</a>() ;</div>
-<div class="line">            <a class="code" href="movements_8cc.html#a0c6790abf4708d31085f7f9f1ce5cf11">refresh_unlocked</a>() ;</div>
-<div class="line">            <a class="code" href="movements_8cc.html#a8d312079de155515dca7e89bb7d65771">sort_unlocked</a>() ;</div>
+<div class="line">            <a class="code" href="cube_8cc.html#a68c1c8abe5c9433974f91ead0876dd9d">mix_cube</a> () ;</div>
+<div class="line">            <a class="code" href="cube_8cc.html#a4f894e1b050b78df900502f825671049">check_cube</a> () ;</div>
+<div class="line">            <a class="code" href="movements_8cc.html#a0c6790abf4708d31085f7f9f1ce5cf11">refresh_unlocked</a> () ;</div>
+<div class="line">            <a class="code" href="movements_8cc.html#a8d312079de155515dca7e89bb7d65771">sort_unlocked</a> () ;</div>
 <div class="line"></div>
 <div class="line">            <a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D9 count pairs removable call a recursion\n&quot;</span>)</div>
 <div class="line"></div>
@@ -384,46 +384,50 @@ Variabili</h2></td></tr>
 <div class="line">        <span class="keywordflow">case</span> airhead :      <span class="keywordflow">if</span> ( !<a class="code" href="movements_8cc.html#aee2b7d0df85d62ee1a1da987afd6832c">airhead_extraction</a>( first, second, exit ) )</div>
 <div class="line">                            {</div>
 <div class="line">                                <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D3 extract pair&quot;</span>&lt;&lt;endl)</div>
-<div class="line">                                <a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a> airhead extraction returned false1&quot;&lt;&lt;endl)</div>
+<div class="line">                                <a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a> airhead extraction returned false1&quot;</div>
+<div class="line">                                   &lt;&lt;endl)</div>
 <div class="line">                                return false ;</div>
 <div class="line">                            }</div>
 <div class="line">                            break ;</div>
 <div class="line"></div>
-<div class="line">        case greedy :       for ( <span class="keywordtype">int</span> h = 1 ; ((h&lt;<a class="code" href="movements_8cc.html#ab0a805e203bc1d80ae2144a15ac2084d">FREE</a>)&amp;&amp;(!exit)) ; h++ )</div>
+<div class="line">        case greedy :       for ( <span class="keywordtype">int</span> h = 1 ; (( h &lt; <a class="code" href="movements_8cc.html#ab0a805e203bc1d80ae2144a15ac2084d">FREE</a> )&amp;&amp;( !exit )) ; h++ )</div>
 <div class="line">                            {</div>
-<div class="line">                                <span class="keywordflow">if</span> ((<a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[h-1]!=NULL )&amp;&amp;(<a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[h]!=NULL))</div>
+<div class="line">                                <span class="keywordflow">if</span> ( ( <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[h-1] != NULL )&amp;&amp;</div>
+<div class="line">                                     ( <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[h]   != NULL )   )</div>
 <div class="line">                                    exit = <a class="code" href="movements_8cc.html#ae6ea84b766997de8ded162adc0c4f150">check_pair</a>( <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[h-1],</div>
 <div class="line">                                                       <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[h], first,</div>
 <div class="line">                                                       second ) ;</div>
 <div class="line">                            }</div>
 <div class="line">                            <span class="keywordflow">if</span> ( !exit )</div>
-<div class="line">                                <a class="code" href="game_8cc.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a>() ;</div>
+<div class="line">                                <a class="code" href="game_8cc.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a> () ;</div>
 <div class="line">                            break ;</div>
 <div class="line"></div>
-<div class="line">        <span class="keywordflow">case</span> thoughtful :   <span class="keywordflow">for</span> ( <span class="keywordtype">int</span> h = 1 ; ((h&lt;<a class="code" href="movements_8cc.html#ab0a805e203bc1d80ae2144a15ac2084d">FREE</a>)&amp;&amp;(!exit)) ; h++ )</div>
+<div class="line">        <span class="keywordflow">case</span> thoughtful :   <span class="keywordflow">for</span> ( <span class="keywordtype">int</span> h = 1 ; (( h &lt; <a class="code" href="movements_8cc.html#ab0a805e203bc1d80ae2144a15ac2084d">FREE</a> )&amp;&amp;( !exit )) ; h++ )</div>
 <div class="line">                            {</div>
-<div class="line">                                <span class="keywordflow">if</span> ((<a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[h-1]!=NULL )&amp;&amp;(<a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[h]!=NULL))</div>
+<div class="line">                                <span class="keywordflow">if</span> ( ( <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[h-1] != NULL )&amp;&amp;</div>
+<div class="line">                                     ( <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[h]   != NULL)    )</div>
 <div class="line">                                    exit = <a class="code" href="movements_8cc.html#ae6ea84b766997de8ded162adc0c4f150">check_pair</a>( <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[h-1],</div>
 <div class="line">                                                       <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[h], first,</div>
 <div class="line">                                                       second ) ;</div>
-<div class="line">                                <span class="keywordflow">if</span> (exit)</div>
+<div class="line">                                <span class="keywordflow">if</span> ( exit )</div>
 <div class="line">                                    <a class="code" href="cube_8cc.html#a0d1f86853c912caec788eba2a346b98b">check_convenience</a> ( first, second, exit ) ;</div>
 <div class="line">                            }</div>
 <div class="line">                            <span class="keywordflow">if</span> ( !exit )</div>
 <div class="line">                            {</div>
-<div class="line">                                <span class="keywordflow">if</span> ( !<a class="code" href="movements_8cc.html#aee2b7d0df85d62ee1a1da987afd6832c">airhead_extraction</a>( first, second, exit ) )</div>
+<div class="line">                                <span class="keywordflow">if</span> ( !<a class="code" href="movements_8cc.html#aee2b7d0df85d62ee1a1da987afd6832c">airhead_extraction</a> (first, second, exit) )</div>
 <div class="line">                                {</div>
 <div class="line">                                    <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D3 extract pair&quot;</span>&lt;&lt;endl)</div>
-<div class="line">                                    <a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a> airhead extraction returned false2&quot;&lt;&lt;endl)</div>
+<div class="line">                                    <a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a> airhead extraction returned&quot;&lt;&lt;</div>
+<div class="line">                                       &quot; false2&quot;&lt;&lt;endl)</div>
 <div class="line">                                    return false ;</div>
 <div class="line">                                }</div>
 <div class="line">                            }</div>
 <div class="line">                            break ;</div>
 <div class="line">    } ;</div>
 <div class="line"></div>
-<div class="line">    assert(pair!=NULL) ;</div>
-<div class="line">    assert(first!=NULL) ;</div>
-<div class="line">    assert(second!=NULL) ;</div>
+<div class="line">    assert(pair != NULL) ;</div>
+<div class="line">    assert(first != NULL) ;</div>
+<div class="line">    assert(second != NULL) ;</div>
 <div class="line"></div>
 <div class="line">    pair-&gt;t1    = first-&gt;num ;</div>
 <div class="line">    pair-&gt;name1 = <a class="code" href="game_8h.html#af63b296d18a03f7e91badc96a015fac7">name</a>[ first-&gt;num ].word ;</div>
@@ -436,7 +440,7 @@ Variabili</h2></td></tr>
 <div class="line">    <a class="code" href="gui_8cc.html#a8c97ed9e56d6d00d8e301c26c89eb411">set_highlighted_cell</a> ( 1, pair-&gt;x1, pair-&gt;y1, pair-&gt;z1 ) ;</div>
 <div class="line">    <a class="code" href="gui_8cc.html#a8c97ed9e56d6d00d8e301c26c89eb411">set_highlighted_cell</a> ( 2, pair-&gt;x2, pair-&gt;y2, pair-&gt;z2 ) ;</div>
 <div class="line"></div>
-<div class="line">    <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a>(&quot;playground&quot;) ;</div>
+<div class="line">    <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a> ( &quot;playground&quot; ) ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a> extract pair\n&quot;)</div>
 <div class="line"></div>
@@ -465,17 +469,18 @@ Variabili</h2></td></tr>
 <div class="line">        <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[x] = NULL ;</div>
 <div class="line"></div>
 <div class="line"></div>
-<div class="line">        <span class="keywordtype">int</span> u = 0 ;</div>
-<div class="line">        for ( <span class="keywordtype">int</span> x = 0 ; x &lt; <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a> ; x++)</div>
-<div class="line">            for ( <span class="keywordtype">int</span> y = 0 ; y &lt; <a class="code" href="cube_8cc.html#a4f511715fea77e31059762323c8242d9">dim_Y</a> ; y++)</div>
-<div class="line">                for ( <span class="keywordtype">int</span> z = 0 ; z &lt; <a class="code" href="cube_8cc.html#adab0a000e20e650547135aaac6f1e204">dim_Z</a> ; z++)</div>
-<div class="line">                    if ( ( !<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].empty ) &amp;&amp; ( !<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].lock ) )</div>
-<div class="line">                    {</div>
-<div class="line">                        <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[u] = &amp;(<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z]) ;</div>
-<div class="line">                        assert(<a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[u]!=NULL) ;</div>
-<div class="line">                        u++ ;</div>
-<div class="line">                    }</div>
-<div class="line"><span class="comment">/*debug se u &gt; FREE*/</span></div>
+<div class="line">    <span class="keywordtype">int</span> u = 0 ;</div>
+<div class="line">    for ( <span class="keywordtype">int</span> x = 0 ; x &lt; <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a> ; x++ )</div>
+<div class="line">        for ( <span class="keywordtype">int</span> y = 0 ; y &lt; <a class="code" href="cube_8cc.html#a4f511715fea77e31059762323c8242d9">dim_Y</a> ; y++ )</div>
+<div class="line">            for ( <span class="keywordtype">int</span> z = 0 ; z &lt; <a class="code" href="cube_8cc.html#adab0a000e20e650547135aaac6f1e204">dim_Z</a> ; z++ )</div>
+<div class="line">                if ( ( !<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].empty ) &amp;&amp; ( !<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].lock ) )</div>
+<div class="line">                {</div>
+<div class="line">                    <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[u] = &amp;(<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z]) ;</div>
+<div class="line">                    assert(<a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[u] != NULL) ;</div>
+<div class="line">                    u++ ;</div>
+<div class="line">                }</div>
+<div class="line">    assert(u &lt;= <a class="code" href="movements_8cc.html#ab0a805e203bc1d80ae2144a15ac2084d">FREE</a>) ;</div>
+<div class="line">        </div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D10 refresh unlocked\n&quot;</span>)</div>
 <div class="line">}</div>
@@ -494,7 +499,7 @@ Variabili</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Funzione che ordina per valori decrescenti i puntatori alle tessere removibili </p>
+<p>Funzione che ordina per valori decrescenti i puntatori alle tessere removibili. </p>
 <dl class="section return"><dt>Restituisce</dt><dd>false se la funzione: <a class="el" href="movements_8h.html#ac1ab19e53ac2166573cb5e81edd4df9a">count_pairs_removable</a> ritorna -1. Altrimenti true. </dd></dl>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a975397c373ae2a9dc28d0297fa18da56">D2</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D2 sort unlocked\n&quot;</span>)</div>
@@ -515,7 +520,7 @@ Variabili</h2></td></tr>
 <div class="line">        }</div>
 <div class="line">        <span class="keywordflow">else</span></div>
 <div class="line">        {</div>
-<div class="line">        assert(<a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[i]!=NULL) ;</div>
+<div class="line">        assert(<a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[i] != NULL) ;</div>
 <div class="line">        temp = <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[i]-&gt;value ;</div>
 <div class="line"></div>
 <div class="line">        <span class="keywordflow">if</span>      ( temp == <a class="code" href="movements_8cc.html#a95139108e4b19e2552e5387d350d22eb">SEEDVALUE</a> )</div>
@@ -528,8 +533,8 @@ Variabili</h2></td></tr>
 <div class="line">            n_season++ ;</div>
 <div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( temp == <a class="code" href="movements_8cc.html#aa28548d00d639d29da96132448bff7fa">FLOWERVALUE</a> )</div>
 <div class="line">            n_flower++ ;</div>
-<div class="line">        else</div>
-<div class="line">            ; <span class="comment">/*debuggare questo caso*/</span>     </div>
+<div class="line">        <span class="keywordflow">else</span></div>
+<div class="line">            <span class="keywordflow">return</span> false ;  </div>
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line"></div>
@@ -554,7 +559,7 @@ Variabili</h2></td></tr>
 <div class="line">        <span class="keywordflow">if</span> ( <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[j] == NULL )</div>
 <div class="line">            continue ;</div>
 <div class="line"></div>
-<div class="line">        assert(<a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[j]!=NULL) ;</div>
+<div class="line">        assert(<a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[j] != NULL) ;</div>
 <div class="line">        temp = <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[j]-&gt;value ;</div>
 <div class="line"></div>
 <div class="line">        <span class="keywordflow">if</span>      ( ( temp == <a class="code" href="movements_8cc.html#a95139108e4b19e2552e5387d350d22eb">SEEDVALUE</a> )&amp;&amp;( n_seed &lt;= max_seed ) )</div>
@@ -582,8 +587,8 @@ Variabili</h2></td></tr>
 <div class="line">            _output[n_flower] = <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[j] ;</div>
 <div class="line">            n_flower++ ;</div>
 <div class="line">        }</div>
-<div class="line">        else</div>
-<div class="line">            ; <span class="comment">/*debuggare questo caso*/</span></div>
+<div class="line">        <span class="keywordflow">else</span></div>
+<div class="line">            <span class="keywordflow">return</span> false ;</div>
 <div class="line"></div>
 <div class="line">        <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a>[j] = NULL ;</div>
 <div class="line">    }</div>
@@ -676,10 +681,11 @@ Variabili</h2></td></tr>
 <div class="line">    if ( name_position &lt;= 143 )</div>
 <div class="line">        return <a class="code" href="movements_8cc.html#aa28548d00d639d29da96132448bff7fa">FLOWERVALUE</a> ;</div>
 <div class="line">    else</div>
-<div class="line">    <span class="comment">/* attenzione errore di gestione della memoria</span></div>
-<div class="line"><span class="comment">     */</span></div>
-<div class="line"><span class="comment">/*debug se name_position eccede l&#39;array*/</span></div>
+<div class="line">    {</div>
+<div class="line">        <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D3 tile value&quot;</span>&lt;&lt;endl)</div>
+<div class="line">        <a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a> attenzione numero identificativo tessera &gt;= <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a>&quot;&lt;&lt;endl)</div>
 <div class="line">        return -1 ;</div>
+<div class="line">    }</div>
 <div class="line">}</div>
 </div><!-- fragment -->
 </div>
@@ -766,7 +772,7 @@ Variabili</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generato Dom 14 Set 2014 00:51:27 per Mahjong da &#160;<a href="http://www.doxygen.org/index.html">
+Generato Dom 14 Set 2014 11:58:55 per Mahjong da &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

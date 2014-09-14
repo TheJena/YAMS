@@ -145,7 +145,7 @@ Variabili</h2></td></tr>
 <div class="line">    int x ;</div>
 <div class="line">    for ( x = 0 ; x&lt;<a class="code" href="io__file_8cc.html#a661c2ffc9f278d18673b662b34b253ec">MAXWORD</a> ; x++ )</div>
 <div class="line">    {</div>
-<div class="line">        <span class="keywordflow">if</span> (( filename[x] == <span class="charliteral">&#39;.&#39;</span> ) || ( filename[x] == <span class="charliteral">&#39;\0&#39;</span> ) )</div>
+<div class="line">        <span class="keywordflow">if</span> ( ( filename[x] == <span class="charliteral">&#39;.&#39;</span> ) || ( filename[x] == <span class="charliteral">&#39;\0&#39;</span> ) )</div>
 <div class="line">            break ;</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">if</span> ( x &lt; MAXWORD-5 )</div>
@@ -246,7 +246,7 @@ Variabili</h2></td></tr>
 <div class="line">        file.get ( temp ) ;</div>
 <div class="line">    }</div>
 <div class="line">    file.get ( temp ) ;</div>
-<div class="line">    file.close () ;</div>
+<div class="line">    file.close() ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D10 import tiles names\n&quot;</span>)</div>
 <div class="line">}</div>
@@ -301,12 +301,12 @@ Variabili</h2></td></tr>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 load game from file\n&quot;</span>)</div>
 <div class="line"></div>
-<div class="line">    <a class="code" href="game_8cc.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a>() ;</div>
-<div class="line">    if ( !<a class="code" href="game_8cc.html#ad39fcaf7ee3bceadee96b0da22919849">start_game</a>() )</div>
+<div class="line">    <a class="code" href="game_8cc.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a> () ;</div>
+<div class="line">    if ( !<a class="code" href="game_8cc.html#ad39fcaf7ee3bceadee96b0da22919849">start_game</a> () )</div>
 <div class="line">    {</div>
 <div class="line">        <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D3 load game from file&quot;</span>&lt;&lt;endl)</div>
 <div class="line">        <a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a> start game returned false&quot;&lt;&lt;endl)</div>
-<div class="line">        <a class="code" href="game_8cc.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a>() ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a> () ;</div>
 <div class="line">        return false ;</div>
 <div class="line">    }</div>
 <div class="line"></div>
@@ -318,7 +318,7 @@ Variabili</h2></td></tr>
 <div class="line">        return false ;</div>
 <div class="line">    }</div>
 <div class="line"></div>
-<div class="line">    const <span class="keywordtype">int</span> intsize = sizeof(<span class="keywordtype">int</span>) ;</div>
+<div class="line">    const <span class="keywordtype">int</span> intsize = sizeof ( <span class="keywordtype">int</span> ) ;</div>
 <div class="line">    <span class="keywordtype">char</span> buffer[intsize] ;</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">/*</span></div>
@@ -326,9 +326,9 @@ Variabili</h2></td></tr>
 <div class="line"><span class="comment">     * sia la stessa usata per scrivere il file binario</span></div>
 <div class="line"><span class="comment">     */</span></div>
 <div class="line">    in_file.read( buffer, intsize ) ;</div>
-<div class="line">    <span class="keywordtype">int</span> * file_intsize = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;(buffer) ;</div>
+<div class="line">    <span class="keywordtype">int</span> * file_intsize = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;( buffer ) ;</div>
 <div class="line">    assert( file_intsize != NULL ) ;</div>
-<div class="line">    if ( intsize != (*file_intsize))</div>
+<div class="line">    if ( intsize != (*file_intsize) )</div>
 <div class="line">    {</div>
 <div class="line">        <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D3 load game from file&quot;</span>&lt;&lt;endl)</div>
 <div class="line">        <a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a> returned false because of different size of <span class="keywordtype">int</span>&quot;&lt;&lt;endl)</div>
@@ -340,7 +340,7 @@ Variabili</h2></td></tr>
 <div class="line"><span class="comment">     * siano le stesse usate per scrivere il file binario</span></div>
 <div class="line"><span class="comment">     */</span></div>
 <div class="line">    in_file.read ( buffer, intsize ) ;</div>
-<div class="line">    <span class="keywordtype">int</span> * file_dim_X = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;(buffer) ;</div>
+<div class="line">    <span class="keywordtype">int</span> * file_dim_X = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;( buffer ) ;</div>
 <div class="line">    assert( file_dim_X != NULL ) ;</div>
 <div class="line">    if ( <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a> != (*file_dim_X) )</div>
 <div class="line">    {</div>
@@ -349,7 +349,7 @@ Variabili</h2></td></tr>
 <div class="line">        return false ;</div>
 <div class="line">    }</div>
 <div class="line">    in_file.read ( buffer, intsize ) ;</div>
-<div class="line">    <span class="keywordtype">int</span> * file_dim_Y = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;(buffer) ;</div>
+<div class="line">    <span class="keywordtype">int</span> * file_dim_Y = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;( buffer ) ;</div>
 <div class="line">    assert( file_dim_Y != NULL ) ;</div>
 <div class="line">    if ( <a class="code" href="cube_8cc.html#a4f511715fea77e31059762323c8242d9">dim_Y</a> != (*file_dim_Y) )</div>
 <div class="line">    {</div>
@@ -358,7 +358,7 @@ Variabili</h2></td></tr>
 <div class="line">        return false ;</div>
 <div class="line">    }</div>
 <div class="line">    in_file.read ( buffer, intsize ) ;</div>
-<div class="line">    <span class="keywordtype">int</span> * file_dim_Z = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;(buffer) ;</div>
+<div class="line">    <span class="keywordtype">int</span> * file_dim_Z = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;( buffer ) ;</div>
 <div class="line">    assert( file_dim_Z != NULL ) ;</div>
 <div class="line">    if ( <a class="code" href="cube_8cc.html#adab0a000e20e650547135aaac6f1e204">dim_Z</a> != (*file_dim_Z) )</div>
 <div class="line">    {</div>
@@ -372,7 +372,7 @@ Variabili</h2></td></tr>
 <div class="line"><span class="comment">     * siano gli stessi usati per scrivere il file binario</span></div>
 <div class="line"><span class="comment">     */</span></div>
 <div class="line">    in_file.read ( buffer, intsize ) ;</div>
-<div class="line">    <span class="keywordtype">int</span> * file_SEEDVALUE = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;(buffer) ;</div>
+<div class="line">    <span class="keywordtype">int</span> * file_SEEDVALUE = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;( buffer ) ;</div>
 <div class="line">    assert( file_SEEDVALUE != NULL ) ;</div>
 <div class="line">    if ( <a class="code" href="movements_8cc.html#a95139108e4b19e2552e5387d350d22eb">SEEDVALUE</a> != (*file_SEEDVALUE) )</div>
 <div class="line">    {</div>
@@ -381,7 +381,7 @@ Variabili</h2></td></tr>
 <div class="line">        return false ;</div>
 <div class="line">    }</div>
 <div class="line">    in_file.read ( buffer, intsize ) ;</div>
-<div class="line">    <span class="keywordtype">int</span> * file_WINDVALUE = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;(buffer) ;</div>
+<div class="line">    <span class="keywordtype">int</span> * file_WINDVALUE = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;( buffer ) ;</div>
 <div class="line">    assert( file_WINDVALUE != NULL ) ;</div>
 <div class="line">    if ( <a class="code" href="movements_8cc.html#a4e7b70ca085072a35b41ce03c60865a1">WINDVALUE</a> != (*file_WINDVALUE) )</div>
 <div class="line">    {</div>
@@ -390,7 +390,7 @@ Variabili</h2></td></tr>
 <div class="line">        return false ;</div>
 <div class="line">    }</div>
 <div class="line">    in_file.read ( buffer, intsize ) ;</div>
-<div class="line">    <span class="keywordtype">int</span> * file_DRAGONVALUE = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;(buffer) ;</div>
+<div class="line">    <span class="keywordtype">int</span> * file_DRAGONVALUE = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;( buffer ) ;</div>
 <div class="line">    assert( file_DRAGONVALUE != NULL ) ;</div>
 <div class="line">    if ( <a class="code" href="movements_8cc.html#aaa1fd110eeb8be74ff13442f0f6c00ab">DRAGONVALUE</a> != (*file_DRAGONVALUE) )</div>
 <div class="line">    {</div>
@@ -399,7 +399,7 @@ Variabili</h2></td></tr>
 <div class="line">        return false ;</div>
 <div class="line">    };</div>
 <div class="line">    in_file.read ( buffer, intsize ) ;</div>
-<div class="line">    <span class="keywordtype">int</span> * file_SEASONVALUE = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;(buffer) ;</div>
+<div class="line">    <span class="keywordtype">int</span> * file_SEASONVALUE = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;( buffer ) ;</div>
 <div class="line">    assert( file_SEASONVALUE != NULL ) ;</div>
 <div class="line">    if ( <a class="code" href="movements_8cc.html#a7ab690a4796436e64fb45093ec1382ac">SEASONVALUE</a> != (*file_SEASONVALUE) )</div>
 <div class="line">    {</div>
@@ -408,7 +408,7 @@ Variabili</h2></td></tr>
 <div class="line">        return false ;</div>
 <div class="line">    }</div>
 <div class="line">    in_file.read ( buffer, intsize ) ;</div>
-<div class="line">    <span class="keywordtype">int</span> * file_FLOWERVALUE = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;(buffer) ;</div>
+<div class="line">    <span class="keywordtype">int</span> * file_FLOWERVALUE = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;( buffer ) ;</div>
 <div class="line">    assert( file_FLOWERVALUE != NULL ) ;</div>
 <div class="line">    if ( <a class="code" href="movements_8cc.html#aa28548d00d639d29da96132448bff7fa">FLOWERVALUE</a> != (*file_FLOWERVALUE) )</div>
 <div class="line">    {</div>
@@ -419,44 +419,44 @@ Variabili</h2></td></tr>
 <div class="line"></div>
 <div class="line">    <span class="comment">/*superati i controlli soprastanti si puo&#39; procedere col caricamento*/</span></div>
 <div class="line">    in_file.read ( buffer, intsize ) ;</div>
-<div class="line">    <span class="keywordtype">int</span> * file_last_removed_pl1_a = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;(buffer) ;</div>
+<div class="line">    <span class="keywordtype">int</span> * file_last_removed_pl1_a = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;( buffer ) ;</div>
 <div class="line">    assert( file_last_removed_pl1_a != NULL ) ;</div>
 <div class="line">    <a class="code" href="gui_8cc.html#a1afd2571d3e206f0eff16fa0101c8dbb">last_removed_pl1_a</a> = *(file_last_removed_pl1_a) ;</div>
 <div class="line">    in_file.read ( buffer, intsize ) ;</div>
-<div class="line">    <span class="keywordtype">int</span> * file_last_removed_pl1_b = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;(buffer) ;</div>
+<div class="line">    <span class="keywordtype">int</span> * file_last_removed_pl1_b = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;( buffer ) ;</div>
 <div class="line">    assert( file_last_removed_pl1_b != NULL ) ;</div>
 <div class="line">    <a class="code" href="gui_8cc.html#a42e5eabdaad39a47d55f5f7f4ce791eb">last_removed_pl1_b</a> = *(file_last_removed_pl1_b) ;</div>
 <div class="line">    in_file.read ( buffer, intsize ) ;</div>
-<div class="line">    <span class="keywordtype">int</span> * file_last_removed_pl2_a = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;(buffer) ;</div>
+<div class="line">    <span class="keywordtype">int</span> * file_last_removed_pl2_a = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;( buffer ) ;</div>
 <div class="line">    assert( file_last_removed_pl2_a != NULL ) ;</div>
 <div class="line">    <a class="code" href="gui_8cc.html#af8131f7a5b2344529b2d39686c614dfa">last_removed_pl2_a</a> = *(file_last_removed_pl2_a) ;</div>
 <div class="line">    in_file.read ( buffer, intsize ) ;</div>
-<div class="line">    <span class="keywordtype">int</span> * file_last_removed_pl2_b = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;(buffer) ;</div>
+<div class="line">    <span class="keywordtype">int</span> * file_last_removed_pl2_b = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;( buffer ) ;</div>
 <div class="line">    assert( file_last_removed_pl2_b != NULL ) ;</div>
 <div class="line">    <a class="code" href="gui_8cc.html#aec19629e3eb67374a99cf2a8165d68c5">last_removed_pl2_b</a> = *(file_last_removed_pl2_b) ;</div>
 <div class="line"></div>
 <div class="line">    in_file.read ( buffer, intsize ) ;</div>
-<div class="line">    <span class="keywordtype">int</span> * file_row = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;(buffer) ;</div>
+<div class="line">    <span class="keywordtype">int</span> * file_row = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;( buffer ) ;</div>
 <div class="line">    assert( file_row != NULL ) ;</div>
 <div class="line">    <a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a> = *(file_row) ;</div>
 <div class="line">    in_file.read ( buffer, intsize ) ;</div>
-<div class="line">    <span class="keywordtype">int</span> * file_col = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;(buffer) ;</div>
+<div class="line">    <span class="keywordtype">int</span> * file_col = reinterpret_cast&lt;<span class="keywordtype">int</span>*&gt;( buffer ) ;</div>
 <div class="line">    assert( file_col != NULL ) ;</div>
 <div class="line">    <a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a> = *(file_col) ;</div>
 <div class="line"></div>
 <div class="line">    <span class="keywordtype">char</span> layout_buffer[sizeof(layout)] ;</div>
-<div class="line">    in_file.read ( layout_buffer, sizeof(layout)) ;</div>
-<div class="line">    layout * file_level = reinterpret_cast&lt;layout*&gt;(layout_buffer) ;</div>
+<div class="line">    in_file.read ( layout_buffer, sizeof(layout) ) ;</div>
+<div class="line">    layout * file_level = reinterpret_cast&lt;layout*&gt;( layout_buffer ) ;</div>
 <div class="line">    assert( file_level != NULL ) ;</div>
 <div class="line">    <a class="code" href="gui_8cc.html#a71be07c441cb1611b74365630b82e529">level</a> = *(file_level) ;</div>
 <div class="line">    <span class="keywordtype">char</span> computer_buffer[sizeof(computer)] ;</div>
-<div class="line">    in_file.read ( computer_buffer, sizeof(computer)) ;</div>
-<div class="line">    computer * file_ai = reinterpret_cast&lt;computer*&gt;(computer_buffer) ;</div>
+<div class="line">    in_file.read ( computer_buffer, sizeof(computer) ) ;</div>
+<div class="line">    computer * file_ai = reinterpret_cast&lt;computer*&gt;( computer_buffer ) ;</div>
 <div class="line">    assert( file_ai != NULL ) ;</div>
 <div class="line">    <a class="code" href="movements_8cc.html#af73c15f79e771441c611bd9933877bf2">ai</a> = *(file_ai) ;</div>
 <div class="line">    <span class="keywordtype">char</span> game_buffer[sizeof(game)] ;</div>
-<div class="line">    in_file.read ( game_buffer, sizeof(game)) ;</div>
-<div class="line">    game * file_mode = reinterpret_cast&lt;game*&gt;(game_buffer) ;</div>
+<div class="line">    in_file.read ( game_buffer, sizeof(game) ) ;</div>
+<div class="line">    game * file_mode = reinterpret_cast&lt;game*&gt;( game_buffer ) ;</div>
 <div class="line">    assert( file_mode != NULL ) ;</div>
 <div class="line">    <a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> = *(file_mode) ;</div>
 <div class="line"></div>
@@ -466,28 +466,28 @@ Variabili</h2></td></tr>
 <div class="line">        for ( <span class="keywordtype">int</span> y = 0 ; y &lt; <a class="code" href="cube_8cc.html#a4f511715fea77e31059762323c8242d9">dim_Y</a> ; y++ )</div>
 <div class="line">            for ( <span class="keywordtype">int</span> z = 0 ; z &lt; <a class="code" href="cube_8cc.html#adab0a000e20e650547135aaac6f1e204">dim_Z</a> ; z++ )</div>
 <div class="line">            {</div>
-<div class="line">                in_file.read( tile_buffer, <span class="keyword">sizeof</span>(tile)) ;</div>
-<div class="line">                file_tile = <span class="keyword">reinterpret_cast&lt;</span>tile*<span class="keyword">&gt;</span>(tile_buffer) ;</div>
+<div class="line">                in_file.read( tile_buffer, <span class="keyword">sizeof</span> ( tile ) ) ;</div>
+<div class="line">                file_tile = <span class="keyword">reinterpret_cast&lt;</span>tile*<span class="keyword">&gt;</span>( tile_buffer ) ;</div>
 <div class="line">                assert( file_tile != NULL ) ;</div>
 <div class="line">                <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z] = *(file_tile) ;</div>
 <div class="line">            }</div>
-<div class="line">    <a class="code" href="cube_8cc.html#a4f894e1b050b78df900502f825671049">check_cube</a>() ;</div>
-<div class="line">    <a class="code" href="movements_8cc.html#a0c6790abf4708d31085f7f9f1ce5cf11">refresh_unlocked</a>() ;</div>
-<div class="line">    <a class="code" href="movements_8cc.html#a8d312079de155515dca7e89bb7d65771">sort_unlocked</a>() ;</div>
+<div class="line">    <a class="code" href="cube_8cc.html#a4f894e1b050b78df900502f825671049">check_cube</a> () ;</div>
+<div class="line">    <a class="code" href="movements_8cc.html#a0c6790abf4708d31085f7f9f1ce5cf11">refresh_unlocked</a> () ;</div>
+<div class="line">    <a class="code" href="movements_8cc.html#a8d312079de155515dca7e89bb7d65771">sort_unlocked</a> () ;</div>
 <div class="line"></div>
 <div class="line">    <span class="keywordtype">char</span> couple_buffer[<span class="keyword">sizeof</span>(couple)] ;</div>
 <div class="line">    couple * file_couple = NULL ;</div>
 <div class="line">    <span class="keywordflow">for</span> ( <span class="keywordtype">int</span> x = 0 ; x &lt; <a class="code" href="game_8cc.html#a26971deff94cc6872e8bc340303923be">max_couple_row</a> ; x++ )</div>
 <div class="line">        <span class="keywordflow">for</span> ( <span class="keywordtype">int</span> y = 0 ; y &lt; 2 ; y++ )</div>
 <div class="line">        {</div>
-<div class="line">            in_file.read( couple_buffer, <span class="keyword">sizeof</span>(couple)) ;</div>
-<div class="line">            file_couple = <span class="keyword">reinterpret_cast&lt;</span>couple*<span class="keyword">&gt;</span>(couple_buffer) ;</div>
+<div class="line">            in_file.read( couple_buffer, <span class="keyword">sizeof</span> ( couple ) ) ;</div>
+<div class="line">            file_couple = <span class="keyword">reinterpret_cast&lt;</span>couple*<span class="keyword">&gt;</span>( couple_buffer ) ;</div>
 <div class="line">            assert( file_couple != NULL ) ;</div>
 <div class="line">            <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[x][y] = *(file_couple) ;</div>
 <div class="line">        }</div>
-<div class="line">    <a class="code" href="gui_8cc.html#a069e7212b25e5b8067dca2e396d2e864">reset_highlighted_cell</a>() ;</div>
-<div class="line">    <a class="code" href="gui_8cc.html#a953a10527fc3533c62a160d6ad324fe3">display_tiles</a>() ;</div>
-<div class="line">    <a class="code" href="game_8cc.html#a6d71742a4f6bf95ed5a9f35e5b24f0c0">refresh_scores</a>() ;</div>
+<div class="line">    <a class="code" href="gui_8cc.html#a069e7212b25e5b8067dca2e396d2e864">reset_highlighted_cell</a> () ;</div>
+<div class="line">    <a class="code" href="gui_8cc.html#a953a10527fc3533c62a160d6ad324fe3">display_tiles</a> () ;</div>
+<div class="line">    <a class="code" href="game_8cc.html#a6d71742a4f6bf95ed5a9f35e5b24f0c0">refresh_scores</a> () ;</div>
 <div class="line">    <span class="keywordflow">if</span> ( <a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a> == 1 )</div>
 <div class="line">        <a class="code" href="gui_8cc.html#a66894b02aa54394e24efddd4e0a8618c">refresh_turn_label</a>( <span class="keyword">true</span> ) ;</div>
 <div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( <a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a> == 0 )</div>
@@ -552,7 +552,7 @@ Variabili</h2></td></tr>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 save game on file\n&quot;</span>)</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="io__file_8cc.html#afffc0ec7fbe130f0cdade1e6f56db0b8">check_filename</a>( filename ) ;</div>
-<div class="line">    <a class="code" href="cube_8cc.html#a1110dd053d1efc136f8ca21d94337298">remove_dummies</a>() ;</div>
+<div class="line">    <a class="code" href="cube_8cc.html#a1110dd053d1efc136f8ca21d94337298">remove_dummies</a> () ;</div>
 <div class="line"></div>
 <div class="line">    ofstream out_file( filename ) ;</div>
 <div class="line">    if ( !out_file )</div>
@@ -563,42 +563,66 @@ Variabili</h2></td></tr>
 <div class="line">    }</div>
 <div class="line"></div>
 <div class="line"></div>
-<div class="line">    const <span class="keywordtype">int</span> intsize = sizeof(<span class="keywordtype">int</span>) ;</div>
-<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;(const_cast&lt;<span class="keywordtype">int</span>*&gt;(&amp;intsize)), intsize ) ;</div>
+<div class="line">    const <span class="keywordtype">int</span> intsize = sizeof ( <span class="keywordtype">int</span> ) ;</div>
+<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;( const_cast&lt;<span class="keywordtype">int</span>*&gt;( &amp;intsize ) ),</div>
+<div class="line">                    intsize ) ;</div>
 <div class="line"></div>
-<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;(const_cast&lt;<span class="keywordtype">int</span>*&gt;(&amp;<a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a>)), intsize ) ;</div>
-<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;(const_cast&lt;<span class="keywordtype">int</span>*&gt;(&amp;<a class="code" href="cube_8cc.html#a4f511715fea77e31059762323c8242d9">dim_Y</a>)), intsize ) ;</div>
-<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;(const_cast&lt;<span class="keywordtype">int</span>*&gt;(&amp;<a class="code" href="cube_8cc.html#adab0a000e20e650547135aaac6f1e204">dim_Z</a>)), intsize ) ;</div>
+<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;( const_cast&lt;<span class="keywordtype">int</span>*&gt;( &amp;<a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a>) ),</div>
+<div class="line">                    intsize ) ;</div>
+<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;( const_cast&lt;<span class="keywordtype">int</span>*&gt;( &amp;<a class="code" href="cube_8cc.html#a4f511715fea77e31059762323c8242d9">dim_Y</a>) ),</div>
+<div class="line">                    intsize ) ;</div>
+<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;( const_cast&lt;<span class="keywordtype">int</span>*&gt;( &amp;<a class="code" href="cube_8cc.html#adab0a000e20e650547135aaac6f1e204">dim_Z</a>) ),</div>
+<div class="line">                    intsize ) ;</div>
 <div class="line"></div>
-<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;(const_cast&lt;<span class="keywordtype">int</span>*&gt;(&amp;<a class="code" href="movements_8cc.html#a95139108e4b19e2552e5387d350d22eb">SEEDVALUE</a>)), intsize ) ;</div>
-<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;(const_cast&lt;<span class="keywordtype">int</span>*&gt;(&amp;<a class="code" href="movements_8cc.html#a4e7b70ca085072a35b41ce03c60865a1">WINDVALUE</a>)), intsize ) ;</div>
-<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;(const_cast&lt;<span class="keywordtype">int</span>*&gt;(&amp;<a class="code" href="movements_8cc.html#aaa1fd110eeb8be74ff13442f0f6c00ab">DRAGONVALUE</a>)), intsize ) ;</div>
-<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;(const_cast&lt;<span class="keywordtype">int</span>*&gt;(&amp;<a class="code" href="movements_8cc.html#a7ab690a4796436e64fb45093ec1382ac">SEASONVALUE</a>)), intsize ) ;</div>
-<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;(const_cast&lt;<span class="keywordtype">int</span>*&gt;(&amp;<a class="code" href="movements_8cc.html#aa28548d00d639d29da96132448bff7fa">FLOWERVALUE</a>)), intsize ) ;</div>
+<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;( const_cast&lt;<span class="keywordtype">int</span>*&gt;( &amp;<a class="code" href="movements_8cc.html#a95139108e4b19e2552e5387d350d22eb">SEEDVALUE</a>) ),</div>
+<div class="line">                    intsize ) ;</div>
+<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;( const_cast&lt;<span class="keywordtype">int</span>*&gt;( &amp;<a class="code" href="movements_8cc.html#a4e7b70ca085072a35b41ce03c60865a1">WINDVALUE</a>) ),</div>
+<div class="line">                    intsize ) ;</div>
+<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;( const_cast&lt;<span class="keywordtype">int</span>*&gt;( &amp;<a class="code" href="movements_8cc.html#aaa1fd110eeb8be74ff13442f0f6c00ab">DRAGONVALUE</a>) ),</div>
+<div class="line">                    intsize ) ;</div>
+<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;( const_cast&lt;<span class="keywordtype">int</span>*&gt;( &amp;<a class="code" href="movements_8cc.html#a7ab690a4796436e64fb45093ec1382ac">SEASONVALUE</a>) ),</div>
+<div class="line">                    intsize ) ;</div>
+<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;( const_cast&lt;<span class="keywordtype">int</span>*&gt;( &amp;<a class="code" href="movements_8cc.html#aa28548d00d639d29da96132448bff7fa">FLOWERVALUE</a>) ),</div>
+<div class="line">                    intsize ) ;</div>
 <div class="line"></div>
-<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;(const_cast&lt;<span class="keywordtype">int</span>*&gt;(&amp;<a class="code" href="gui_8cc.html#a1afd2571d3e206f0eff16fa0101c8dbb">last_removed_pl1_a</a>)), intsize ) ;</div>
-<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;(const_cast&lt;<span class="keywordtype">int</span>*&gt;(&amp;<a class="code" href="gui_8cc.html#a42e5eabdaad39a47d55f5f7f4ce791eb">last_removed_pl1_b</a>)), intsize ) ;</div>
-<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;(const_cast&lt;<span class="keywordtype">int</span>*&gt;(&amp;<a class="code" href="gui_8cc.html#af8131f7a5b2344529b2d39686c614dfa">last_removed_pl2_a</a>)), intsize ) ;</div>
-<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;(const_cast&lt;<span class="keywordtype">int</span>*&gt;(&amp;<a class="code" href="gui_8cc.html#aec19629e3eb67374a99cf2a8165d68c5">last_removed_pl2_b</a>)), intsize ) ;</div>
+<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;( const_cast&lt;<span class="keywordtype">int</span>*&gt;</div>
+<div class="line">                                             ( &amp;<a class="code" href="gui_8cc.html#a1afd2571d3e206f0eff16fa0101c8dbb">last_removed_pl1_a</a>) ),</div>
+<div class="line">                    intsize ) ;</div>
+<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;( const_cast&lt;<span class="keywordtype">int</span>*&gt;</div>
+<div class="line">                                             ( &amp;<a class="code" href="gui_8cc.html#a42e5eabdaad39a47d55f5f7f4ce791eb">last_removed_pl1_b</a>) ),</div>
+<div class="line">                    intsize ) ;</div>
+<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;( const_cast&lt;<span class="keywordtype">int</span>*&gt;</div>
+<div class="line">                                             ( &amp;<a class="code" href="gui_8cc.html#af8131f7a5b2344529b2d39686c614dfa">last_removed_pl2_a</a>) ),</div>
+<div class="line">                    intsize ) ;</div>
+<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;( const_cast&lt;<span class="keywordtype">int</span>*&gt;</div>
+<div class="line">                                             ( &amp;<a class="code" href="gui_8cc.html#aec19629e3eb67374a99cf2a8165d68c5">last_removed_pl2_b</a>) ),</div>
+<div class="line">                    intsize ) ;</div>
 <div class="line"></div>
-<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;(const_cast&lt;<span class="keywordtype">int</span>*&gt;(&amp;<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>)), intsize ) ;</div>
-<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;(const_cast&lt;<span class="keywordtype">int</span>*&gt;(&amp;<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>)), intsize ) ;</div>
+<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;( const_cast&lt;<span class="keywordtype">int</span>*&gt;( &amp;<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>) ),</div>
+<div class="line">                    intsize ) ;</div>
+<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;( const_cast&lt;<span class="keywordtype">int</span>*&gt;( &amp;<a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a>) ),</div>
+<div class="line">                    intsize ) ;</div>
 <div class="line"></div>
-<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;(&amp;<a class="code" href="gui_8cc.html#a71be07c441cb1611b74365630b82e529">level</a>),     sizeof(layout) ) ;</div>
-<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;(&amp;<a class="code" href="movements_8cc.html#af73c15f79e771441c611bd9933877bf2">ai</a>),        sizeof(computer) ) ;</div>
-<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;(&amp;<a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a>),      sizeof(game) ) ;</div>
+<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;( &amp;<a class="code" href="gui_8cc.html#a71be07c441cb1611b74365630b82e529">level</a> ),</div>
+<div class="line">                    sizeof ( layout ) ) ;</div>
+<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;( &amp;<a class="code" href="movements_8cc.html#af73c15f79e771441c611bd9933877bf2">ai</a> ),</div>
+<div class="line">                    sizeof ( computer ) ) ;</div>
+<div class="line">    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;( &amp;<a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> ),</div>
+<div class="line">                    sizeof ( game ) ) ;</div>
 <div class="line"></div>
 <div class="line">    for ( <span class="keywordtype">int</span> x = 0 ; x &lt; dim_X ; x++ )</div>
 <div class="line">        for ( <span class="keywordtype">int</span> y = 0 ; y &lt; dim_Y ; y++ )</div>
 <div class="line">            for ( <span class="keywordtype">int</span> z = 0 ; z &lt; dim_Z ; z++ )</div>
-<div class="line">                    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;(&amp;<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z]),</div>
-<div class="line">                                    sizeof(tile) ) ;</div>
+<div class="line">                    out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt; ( &amp;<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z] ),</div>
+<div class="line">                                    sizeof ( tile ) ) ;</div>
 <div class="line"></div>
 <div class="line">    for ( <span class="keywordtype">int</span> x = 0 ; x &lt; <a class="code" href="game_8cc.html#a26971deff94cc6872e8bc340303923be">max_couple_row</a> ; x++ )</div>
 <div class="line">        for ( <span class="keywordtype">int</span> y = 0 ; y &lt; 2 ; y++ )</div>
-<div class="line">            out_file.write(reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;(const_cast&lt;couple*&gt;(&amp;<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[x][y])), sizeof(couple) ) ;</div>
+<div class="line">            out_file.write( reinterpret_cast&lt;<span class="keywordtype">char</span>*&gt;(const_cast&lt;couple*&gt;</div>
+<div class="line">                                                    ( &amp;<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[x][y] ) ),</div>
+<div class="line">                            sizeof ( couple ) ) ;</div>
 <div class="line"></div>
-<div class="line">    out_file.close();</div>
+<div class="line">    out_file.close () ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a> save game on file\n&quot;)</div>
 <div class="line"></div>
@@ -625,6 +649,7 @@ Variabili</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Costante privata che contiene il nome del file binario contenente l' elenco dei nomi delle tessere. </p>
 
 </div>
 </div>
@@ -645,6 +670,7 @@ Variabili</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Costante privata che contiene il numero massimo di caratteri dei nomi delle tessere. </p>
 
 </div>
 </div>
@@ -663,7 +689,7 @@ Variabili</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generato Dom 14 Set 2014 00:51:26 per Mahjong da &#160;<a href="http://www.doxygen.org/index.html">
+Generato Dom 14 Set 2014 11:58:55 per Mahjong da &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
