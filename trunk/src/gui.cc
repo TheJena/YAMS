@@ -159,7 +159,7 @@ static event_box play_ground = rules ;
 /**
  * Handler che disegna a lato le tessere rimosse
  * @param[in] widget widget chiamante
- * @param[out] cr constesto di cairo
+ * @param[out] cr contesto di cairo
  * @param[in] user_data parametri aggiuntivi impostati dal chiamante
  */
 extern "C" gboolean draw_removed_tiles  ( GtkWidget * widget,
@@ -169,7 +169,7 @@ extern "C" gboolean draw_removed_tiles  ( GtkWidget * widget,
 /**
  * Handler che disegna il tavolo di gioco
  * @param[in] widget widget chiamante
- * @param[out] cr constesto di cairo
+ * @param[out] cr contesto di cairo
  * @param[in] user_data parametri aggiuntivi impostati dal chiamante
  */
 extern "C" gboolean draw_play_ground ( GtkWidget * widget,
