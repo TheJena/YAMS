@@ -90,6 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 <div class="contents">
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br/>
 <code>#include &lt;cstring&gt;</code><br/>
+<code>#include &lt;cstdlib&gt;</code><br/>
 <code>#include &quot;<a class="el" href="debug__macros_8h_source.html">debug_macros.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="io__file_8h_source.html">io_file.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="gui_8h_source.html">gui.h</a>&quot;</code><br/>
@@ -181,6 +182,7 @@ Variabili</h2></td></tr>
 <tr class="memitem:abe92f610d3aab7ba8e98ef0ed92280a7"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8cc.html#abe92f610d3aab7ba8e98ef0ed92280a7">W_newgame</a> = &quot;window_new_game&quot;</td></tr>
 <tr class="memitem:a9ceaf4359c09ca527befdd3b30345386"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8cc.html#a9ceaf4359c09ca527befdd3b30345386">W_savegame</a> = &quot;window_save_game&quot;</td></tr>
 <tr class="memitem:a1ba6ebeaa5d2f923808bfcd9c047af10"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8cc.html#a1ba6ebeaa5d2f923808bfcd9c047af10">W_loadgame</a> = &quot;window_load_game&quot;</td></tr>
+<tr class="memitem:a2dfa925e9964f2685ee14f3bdec7a585"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8cc.html#a2dfa925e9964f2685ee14f3bdec7a585">W_about</a> = &quot;window_about&quot;</td></tr>
 <tr class="memitem:a7c64c35bbd610144b8e20c07af5880ca"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="structcolour.html">colour</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8cc.html#a7c64c35bbd610144b8e20c07af5880ca">black</a> = { 0.0/255, 0.0/255, 0.0/255 }</td></tr>
 <tr class="memitem:ab9cbe485a11e250d2fe68bb2b7422562"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="structcolour.html">colour</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8cc.html#ab9cbe485a11e250d2fe68bb2b7422562">blue_persia</a> = { 28.0/255, 57.0/255, 187.0/255 }</td></tr>
 <tr class="memitem:a8f6b159f02d259e1cb0bd8addd142c78"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="structcolour.html">colour</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8cc.html#a8f6b159f02d259e1cb0bd8addd142c78">carmine</a> = { 150.0/255, 0.0/255, 24.0/255 }</td></tr>
@@ -341,7 +343,7 @@ Variabili</h2></td></tr>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 call gtk main\n&quot;</span>)</div>
 <div class="line"></div>
-<div class="line">    gtk_main () ;</div>
+<div class="line">    gtk_main() ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a> call gtk <a class="code" href="mahjong_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>\n&quot;)</div>
 <div class="line">}</div>
@@ -420,7 +422,7 @@ Variabili</h2></td></tr>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 check position\n&quot;</span>)</div>
 <div class="line"></div>
-<div class="line">    assert(punt!=NULL);</div>
+<div class="line">    assert(punt != NULL);</div>
 <div class="line"></div>
 <div class="line">    if ( ( punt-&gt;x1 ) &gt;= x )</div>
 <div class="line">        return false ;</div>
@@ -480,7 +482,7 @@ Variabili</h2></td></tr>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 display empty\n&quot;</span>)</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> = empty ;</div>
-<div class="line">    <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a> (&quot;playground&quot;) ;</div>
+<div class="line">    <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a> ( &quot;playground&quot; ) ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a> display empty\n&quot;)</div>
 <div class="line">}</div>
@@ -505,7 +507,7 @@ Variabili</h2></td></tr>
 <div class="line"></div>
 <div class="line">    <a class="code" href="game_8cc.html#a6d71742a4f6bf95ed5a9f35e5b24f0c0">refresh_scores</a>() ;</div>
 <div class="line">    <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> = end ;</div>
-<div class="line">    <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a> (&quot;playground&quot;) ;</div>
+<div class="line">    <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a> ( &quot;playground&quot; ) ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a> display end\n&quot;)</div>
 <div class="line">}</div>
@@ -529,7 +531,7 @@ Variabili</h2></td></tr>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 display rules\n&quot;</span>)</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> = rules ;</div>
-<div class="line">    <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a> (&quot;playground&quot;) ;</div>
+<div class="line">    <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a> ( &quot;playground&quot; ) ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a> display rules\n&quot;)</div>
 <div class="line">}</div>
@@ -553,7 +555,7 @@ Variabili</h2></td></tr>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 display tiles\n&quot;</span>)</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> = tiles ;</div>
-<div class="line">    <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a> (&quot;playground&quot;) ;</div>
+<div class="line">    <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a> ( &quot;playground&quot; ) ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a> display tiles\n&quot;)</div>
 <div class="line">}</div>
@@ -622,7 +624,7 @@ Variabili</h2></td></tr>
 <div class="line"><span class="comment">    * ^^^^^^^^^</span></div>
 <div class="line"><span class="comment">    */</span></div>
 <div class="line">    <span class="keywordflow">for</span> ( <span class="keywordtype">int</span> i=0 ; i&lt;10 ; i++ )</div>
-<div class="line">        point[i]=<span class="keyword">false</span> ;</div>
+<div class="line">        point[i] = <span class="keyword">false</span> ;</div>
 <div class="line">    <span class="keywordflow">switch</span> ( num )</div>
 <div class="line">    {</div>
 <div class="line">        <span class="keywordflow">case</span> 1: <a class="code" href="gui_8cc.html#a15abb4ae29738d2dd59f592b02ceccfd">P</a>(4) ;</div>
@@ -645,34 +647,34 @@ Variabili</h2></td></tr>
 <div class="line">                break ;</div>
 <div class="line">    } ;</div>
 <div class="line"></div>
-<div class="line">    <span class="keywordflow">if</span> (point[0])</div>
+<div class="line">    <span class="keywordflow">if</span> ( point[0] )</div>
 <div class="line">        cairo_set_source_surface ( cr_tile, _obj, 4, 4 ) ;</div>
 <div class="line">        cairo_paint ( cr_tile ) ;</div>
-<div class="line">    <span class="keywordflow">if</span> (point[1])</div>
+<div class="line">    <span class="keywordflow">if</span> ( point[1] )</div>
 <div class="line">        cairo_set_source_surface ( cr_tile, _obj, 19, 4 ) ;</div>
 <div class="line">        cairo_paint ( cr_tile ) ;</div>
-<div class="line">    <span class="keywordflow">if</span> (point[2])</div>
+<div class="line">    <span class="keywordflow">if</span> ( point[2] )</div>
 <div class="line">        cairo_set_source_surface ( cr_tile, _obj, 34, 4 ) ;</div>
 <div class="line">        cairo_paint ( cr_tile ) ;</div>
-<div class="line">    <span class="keywordflow">if</span> (point[3])</div>
+<div class="line">    <span class="keywordflow">if</span> ( point[3] )</div>
 <div class="line">        cairo_set_source_surface ( cr_tile, _obj, 4, 19 ) ;</div>
 <div class="line">        cairo_paint ( cr_tile ) ;</div>
-<div class="line">    <span class="keywordflow">if</span> (point[4])</div>
+<div class="line">    <span class="keywordflow">if</span> ( point[4] )</div>
 <div class="line">        cairo_set_source_surface ( cr_tile, _obj, 19, 19 ) ;</div>
 <div class="line">        cairo_paint ( cr_tile ) ;</div>
-<div class="line">    <span class="keywordflow">if</span> (point[5])</div>
+<div class="line">    <span class="keywordflow">if</span> ( point[5] )</div>
 <div class="line">        cairo_set_source_surface ( cr_tile, _obj, 34, 19 ) ;</div>
 <div class="line">        cairo_paint ( cr_tile ) ;</div>
-<div class="line">    <span class="keywordflow">if</span> (point[6])</div>
+<div class="line">    <span class="keywordflow">if</span> ( point[6] )</div>
 <div class="line">        cairo_set_source_surface ( cr_tile, _obj, 4, 34 ) ;</div>
 <div class="line">        cairo_paint ( cr_tile ) ;</div>
-<div class="line">    <span class="keywordflow">if</span> (point[7])</div>
+<div class="line">    <span class="keywordflow">if</span> ( point[7] )</div>
 <div class="line">        cairo_set_source_surface ( cr_tile, _obj, 19, 34 ) ;</div>
 <div class="line">        cairo_paint ( cr_tile ) ;</div>
-<div class="line">    <span class="keywordflow">if</span> (point[8])</div>
+<div class="line">    <span class="keywordflow">if</span> ( point[8] )</div>
 <div class="line">        cairo_set_source_surface ( cr_tile, _obj, 34, 34 ) ;</div>
 <div class="line">        cairo_paint ( cr_tile ) ;</div>
-<div class="line">    <span class="keywordflow">if</span> (point[9])</div>
+<div class="line">    <span class="keywordflow">if</span> ( point[9] )</div>
 <div class="line">        cairo_set_source_surface ( cr_tile, _obj, 19, 11 ) ;</div>
 <div class="line">        cairo_paint ( cr_tile ) ;</div>
 <div class="line"></div>
@@ -711,6 +713,14 @@ Variabili</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Handler che disegna il tavolo di gioco </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">widget</td><td>widget chiamante </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cr</td><td>constesto di cairo </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">user_data</td><td>parametri aggiuntivi impostati dal chiamante </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a975397c373ae2a9dc28d0297fa18da56">D2</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D2 draw play ground\n&quot;</span>)</div>
 <div class="line"></div>
@@ -720,8 +730,8 @@ Variabili</h2></td></tr>
 <div class="line">    switch ( <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> )</div>
 <div class="line">    {</div>
 <div class="line">        <span class="keywordflow">case</span> empty:</div>
-<div class="line">                    cairo_set_source_rgb(cr, <a class="code" href="gui_8cc.html#a4a7687a71bbde65541c51ed9a68576fe">sand</a>.<a class="code" href="structcolour.html#aec1c118c8b67a3911529dd573e5d7f79">r</a>, <a class="code" href="gui_8cc.html#a4a7687a71bbde65541c51ed9a68576fe">sand</a>.<a class="code" href="structcolour.html#a1a9e5fd626d7208a0af8c2b7552cd98f">g</a>, <a class="code" href="gui_8cc.html#a4a7687a71bbde65541c51ed9a68576fe">sand</a>.<a class="code" href="structcolour.html#aa02a4fc0faca4d1ca3d7532283862e84">b</a> ) ;</div>
-<div class="line">                    cairo_paint(cr) ;</div>
+<div class="line">                    cairo_set_source_rgb ( cr, <a class="code" href="gui_8cc.html#a4a7687a71bbde65541c51ed9a68576fe">sand</a>.<a class="code" href="structcolour.html#aec1c118c8b67a3911529dd573e5d7f79">r</a>, <a class="code" href="gui_8cc.html#a4a7687a71bbde65541c51ed9a68576fe">sand</a>.<a class="code" href="structcolour.html#a1a9e5fd626d7208a0af8c2b7552cd98f">g</a>, <a class="code" href="gui_8cc.html#a4a7687a71bbde65541c51ed9a68576fe">sand</a>.<a class="code" href="structcolour.html#aa02a4fc0faca4d1ca3d7532283862e84">b</a> ) ;</div>
+<div class="line">                    cairo_paint ( cr ) ;</div>
 <div class="line">                    break ;</div>
 <div class="line">        <span class="keywordflow">case</span> rules:</div>
 <div class="line">                    {</div>
@@ -742,35 +752,39 @@ Variabili</h2></td></tr>
 <div class="line">            {<span class="stringliteral">&quot;&quot;</span>}</div>
 <div class="line">            } ;</div>
 <div class="line">            <span class="comment">/*_______________max_lun_with_characters_______________*/</span></div>
-<div class="line">            <span class="comment">/*                       max lun with spaces                        */</span></div>
+<div class="line">            <span class="comment">/*                      max lun with spaces                       */</span></div>
 <div class="line">                    <a class="code" href="gui_8cc.html#abf584692e8430ffed9185bc4a1e5e35b">draw_text_on_play_ground</a> ( <a class="code" href="gui_8cc.html#ad9d1119151d4f1650f6c3eac5172deff">white</a>, <a class="code" href="gui_8cc.html#a91138a48023ad750a896428686235ba6">light_orange</a>, widget,</div>
 <div class="line">                                               cr, title, lines, 28, 18 ) ;</div>
 <div class="line">                    }</div>
 <div class="line">                    break ;</div>
 <div class="line">        <span class="keywordflow">case</span> tiles:</div>
 <div class="line">                    {</div>
-<div class="line">                    cairo_set_source_rgb(cr, <a class="code" href="gui_8cc.html#a60d4ceb3ed21cf2ea74af213983569c0">green_forest</a>.<a class="code" href="structcolour.html#aec1c118c8b67a3911529dd573e5d7f79">r</a>, <a class="code" href="gui_8cc.html#a60d4ceb3ed21cf2ea74af213983569c0">green_forest</a>.<a class="code" href="structcolour.html#a1a9e5fd626d7208a0af8c2b7552cd98f">g</a>, <a class="code" href="gui_8cc.html#a60d4ceb3ed21cf2ea74af213983569c0">green_forest</a>.<a class="code" href="structcolour.html#aa02a4fc0faca4d1ca3d7532283862e84">b</a> ) ;</div>
-<div class="line">                    cairo_paint(cr) ;</div>
+<div class="line">                    cairo_set_source_rgb ( cr, <a class="code" href="gui_8cc.html#a60d4ceb3ed21cf2ea74af213983569c0">green_forest</a>.<a class="code" href="structcolour.html#aec1c118c8b67a3911529dd573e5d7f79">r</a>, <a class="code" href="gui_8cc.html#a60d4ceb3ed21cf2ea74af213983569c0">green_forest</a>.<a class="code" href="structcolour.html#a1a9e5fd626d7208a0af8c2b7552cd98f">g</a>,</div>
+<div class="line">                                           <a class="code" href="gui_8cc.html#a60d4ceb3ed21cf2ea74af213983569c0">green_forest</a>.<a class="code" href="structcolour.html#aa02a4fc0faca4d1ca3d7532283862e84">b</a> ) ;</div>
+<div class="line">                    cairo_paint ( cr ) ;</div>
 <div class="line"></div>
 <div class="line">                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> z = 0 ; z &lt; <a class="code" href="cube_8cc.html#adab0a000e20e650547135aaac6f1e204">dim_Z</a> ; z++ )</div>
 <div class="line">                        <span class="keywordflow">for</span> ( <span class="keywordtype">int</span> y = 0 ; y &lt; <a class="code" href="cube_8cc.html#a4f511715fea77e31059762323c8242d9">dim_Y</a> ; y++ )</div>
 <div class="line">                            <span class="keywordflow">for</span> ( <span class="keywordtype">int</span> x = <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a>-1 ; x &gt;= 0 ; x-- )</div>
 <div class="line">                            {</div>
-<div class="line">                                <span class="keywordflow">if</span> (<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].empty)</div>
+<div class="line">                                <span class="keywordflow">if</span> ( <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].empty )</div>
 <div class="line">                                    continue ;</div>
 <div class="line"></div>
-<div class="line">                                cairo_surface_t* tile=<a class="code" href="gui_8cc.html#adb58e6720bc4d9aaa3e5d2f55ea392aa">paint_tile</a>(<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].num,</div>
-<div class="line">                                                                      x, y, z ) ;</div>
+<div class="line">                                cairo_surface_t* tile =</div>
+<div class="line">                                                 <a class="code" href="gui_8cc.html#adb58e6720bc4d9aaa3e5d2f55ea392aa">paint_tile</a> ( <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].num,</div>
+<div class="line">                                                              x, y, z ) ;</div>
 <div class="line">                                assert(tile != NULL );</div>
 <div class="line">                                <span class="keywordtype">int</span> coor_x, coor_y ;</div>
 <div class="line"></div>
 <div class="line">                                <a class="code" href="gui_8cc.html#a91de9fde97645d12aaffaf06ace7b286">calculate_coor_x_y</a> ( x, y, z, coor_x, coor_y ) ;</div>
 <div class="line"></div>
 <div class="line">                                <span class="keywordflow">if</span> ( <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].num &lt; <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a> )</div>
-<div class="line">                                    <a class="code" href="gui_8cc.html#ad1374732fac7a4fa82f52007e8db02e5">set_coor_tile</a> ( &amp;<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z], coor_x, coor_y ) ;</div>
+<div class="line">                                    <a class="code" href="gui_8cc.html#ad1374732fac7a4fa82f52007e8db02e5">set_coor_tile</a> ( &amp;<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z], coor_x,</div>
+<div class="line">                                                                    coor_y ) ;</div>
 <div class="line"></div>
-<div class="line">                                cairo_set_source_surface(cr, tile, coor_x, coor_y);</div>
-<div class="line">                                cairo_paint (cr) ;</div>
+<div class="line">                                cairo_set_source_surface ( cr, tile, coor_x,</div>
+<div class="line">                                                                     coor_y ) ;</div>
+<div class="line">                                cairo_paint ( cr ) ;</div>
 <div class="line"></div>
 <div class="line">                                cairo_surface_destroy ( tile ) ;</div>
 <div class="line">                            }</div>
@@ -778,40 +792,40 @@ Variabili</h2></td></tr>
 <div class="line">                    break ;</div>
 <div class="line">        <span class="keywordflow">case</span> end:</div>
 <div class="line">                    {</div>
-<div class="line">                    <a class="code" href="game_8cc.html#a6d71742a4f6bf95ed5a9f35e5b24f0c0">refresh_scores</a>() ;</div>
+<div class="line">                    <a class="code" href="game_8cc.html#a6d71742a4f6bf95ed5a9f35e5b24f0c0">refresh_scores</a> () ;</div>
 <div class="line">                    <span class="keyword">const</span> <span class="keywordtype">int</span> score_1 = <a class="code" href="gui_8cc.html#ac4270932e53ca1f01055730603581ed5">_score1</a> ;</div>
 <div class="line">                    <span class="keyword">const</span> <span class="keywordtype">int</span> score_2 = <a class="code" href="gui_8cc.html#a54340bce4f156f70290ea284f25165ce">_score2</a> ;</div>
-<div class="line">                    <span class="keywordflow">if</span> (( score_1 &gt; score_2 )&amp;&amp;( <a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> == h_c ))</div>
+<div class="line">                    <span class="keywordflow">if</span> ( ( score_1 &gt; score_2 )&amp;&amp;( <a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> == h_c ) )</div>
 <div class="line">                    {</div>
 <div class="line">                        <span class="keywordtype">char</span> title[] = <span class="stringliteral">&quot;Player 1 won against AI&quot;</span> ;</div>
 <div class="line">                        <a class="code" href="gui_8cc.html#abf584692e8430ffed9185bc4a1e5e35b">draw_text_on_play_ground</a> ( <a class="code" href="gui_8cc.html#a25ad47c423ba3fddd6c04046b94bfbb2">gold</a>, <a class="code" href="gui_8cc.html#a8f6b159f02d259e1cb0bd8addd142c78">carmine</a>, widget, cr,</div>
 <div class="line">                                                   title, NULL, 28, 0 ) ;</div>
 <div class="line">                    }</div>
-<div class="line">                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (( score_1 &lt; score_2 )&amp;&amp;( <a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> == h_c ))</div>
+<div class="line">                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( ( score_1 &lt; score_2 )&amp;&amp;( <a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> == h_c ) )</div>
 <div class="line">                    {</div>
 <div class="line">                        <span class="keywordtype">char</span> title[] = <span class="stringliteral">&quot;Player 1 lost against AI&quot;</span> ;</div>
 <div class="line">                        <a class="code" href="gui_8cc.html#abf584692e8430ffed9185bc4a1e5e35b">draw_text_on_play_ground</a> ( <a class="code" href="gui_8cc.html#a1b5be9bc86e77b529ccdedcab51da75c">coffe</a>, <a class="code" href="gui_8cc.html#ad9d1119151d4f1650f6c3eac5172deff">white</a>, widget, cr,</div>
 <div class="line">                                                   title, NULL, 28, 0 ) ;</div>
 <div class="line">                    }</div>
-<div class="line">                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (( score_1 == score_2 )&amp;&amp;( <a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> == h_c ))</div>
+<div class="line">                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( ( score_1 == score_2 )&amp;&amp;( <a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> == h_c ) )</div>
 <div class="line">                    {</div>
 <div class="line">                        <span class="keywordtype">char</span> title[] = <span class="stringliteral">&quot;Player 1 equalized AI&quot;</span> ;</div>
 <div class="line">                        <a class="code" href="gui_8cc.html#abf584692e8430ffed9185bc4a1e5e35b">draw_text_on_play_ground</a> ( <a class="code" href="gui_8cc.html#acd36f073a6abad5536ec459953de9e08">lapislazuli</a>, <a class="code" href="gui_8cc.html#a25ad47c423ba3fddd6c04046b94bfbb2">gold</a>, widget,cr,</div>
 <div class="line">                                                   title, NULL, 28, 0 ) ;</div>
 <div class="line">                    }</div>
-<div class="line">                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (( score_1 &gt; score_2 )&amp;&amp;( <a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> == h_h ))</div>
+<div class="line">                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( ( score_1 &gt; score_2 )&amp;&amp;( <a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> == h_h ) )</div>
 <div class="line">                    {</div>
 <div class="line">                        <span class="keywordtype">char</span> title[] = <span class="stringliteral">&quot;Player 1 won against Player 2&quot;</span> ;</div>
 <div class="line">                        <a class="code" href="gui_8cc.html#abf584692e8430ffed9185bc4a1e5e35b">draw_text_on_play_ground</a> ( <a class="code" href="gui_8cc.html#a0ab5ba22eb1ed8ad9a5a0ac8e1337b6e">ferrari</a>, <a class="code" href="gui_8cc.html#a30ef930b6841afefade01f41d0066539">peach</a>, widget, cr,</div>
 <div class="line">                                                   title, NULL, 28, 0 ) ;</div>
 <div class="line">                    }</div>
-<div class="line">                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (( score_1 &lt; score_2 )&amp;&amp;( <a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> == h_h ))</div>
+<div class="line">                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( ( score_1 &lt; score_2 )&amp;&amp;( <a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> == h_h ) )</div>
 <div class="line">                    {</div>
 <div class="line">                        <span class="keywordtype">char</span> title[] = <span class="stringliteral">&quot;Player 1 lost against Player 2&quot;</span> ;</div>
 <div class="line">                        <a class="code" href="gui_8cc.html#abf584692e8430ffed9185bc4a1e5e35b">draw_text_on_play_ground</a> ( <a class="code" href="gui_8cc.html#a8f6b159f02d259e1cb0bd8addd142c78">carmine</a>, <a class="code" href="gui_8cc.html#ad9d1119151d4f1650f6c3eac5172deff">white</a>, widget, cr,</div>
 <div class="line">                                                   title, NULL, 28, 0 ) ;</div>
 <div class="line">                    }</div>
-<div class="line">                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (( score_1 == score_2 )&amp;&amp;( <a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> == h_h ))</div>
+<div class="line">                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( ( score_1 == score_2 )&amp;&amp;( <a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> == h_h ) )</div>
 <div class="line">                    {</div>
 <div class="line">                        <span class="keywordtype">char</span> title[] = <span class="stringliteral">&quot;Player 1 equalized Player 2&quot;</span> ;</div>
 <div class="line">                        <a class="code" href="gui_8cc.html#abf584692e8430ffed9185bc4a1e5e35b">draw_text_on_play_ground</a>(<a class="code" href="gui_8cc.html#ab9cbe485a11e250d2fe68bb2b7422562">blue_persia</a>, <a class="code" href="gui_8cc.html#a5e7d6486579eec0c458103fcd05f16af">yellow</a>, widget,cr,</div>
@@ -858,13 +872,21 @@ Variabili</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Handler che disegna a lato le tessere rimosse </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">widget</td><td>widget chiamante </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cr</td><td>constesto di cairo </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">user_data</td><td>parametri aggiuntivi impostati dal chiamante </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a975397c373ae2a9dc28d0297fa18da56">D2</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D2 draw removed tiles\n&quot;</span>)</div>
 <div class="line"></div>
 <div class="line">    cairo_surface_t* tile = NULL ;</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">/*nota: 112 e&#39; la larghezza di due tessere vicine*/</span></div>
-<div class="line">    <span class="keywordtype">int</span> border_x = (gtk_widget_get_allocated_width ( widget ) - 112 )/2 ;</div>
+<div class="line">    <span class="keywordtype">int</span> border_x = ( gtk_widget_get_allocated_width ( widget ) - 112 ) /2 ;</div>
 <div class="line">    <span class="keywordtype">int</span> border_y = 50 ;</div>
 <div class="line"></div>
 <div class="line">    if ( ( <a class="code" href="gui_8cc.html#a1afd2571d3e206f0eff16fa0101c8dbb">last_removed_pl1_a</a> &gt;= 0 ) &amp;&amp; ( <a class="code" href="gui_8cc.html#a1afd2571d3e206f0eff16fa0101c8dbb">last_removed_pl1_a</a> &lt; <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a> ) &amp;&amp;</div>
@@ -875,13 +897,13 @@ Variabili</h2></td></tr>
 <div class="line">        tile = <a class="code" href="gui_8cc.html#adb58e6720bc4d9aaa3e5d2f55ea392aa">paint_tile</a> ( <a class="code" href="gui_8cc.html#a42e5eabdaad39a47d55f5f7f4ce791eb">last_removed_pl1_b</a>, -2, -2, -2 ) ;</div>
 <div class="line">        assert(tile != NULL );</div>
 <div class="line">        cairo_set_source_surface ( cr, tile, border_x+51, border_y ) ;</div>
-<div class="line">        cairo_paint(cr) ;</div>
+<div class="line">        cairo_paint ( cr ) ;</div>
 <div class="line">        cairo_surface_destroy ( tile ) ;</div>
 <div class="line"></div>
 <div class="line">        tile = <a class="code" href="gui_8cc.html#adb58e6720bc4d9aaa3e5d2f55ea392aa">paint_tile</a> ( <a class="code" href="gui_8cc.html#a1afd2571d3e206f0eff16fa0101c8dbb">last_removed_pl1_a</a>, -2, -2, -2 ) ;</div>
 <div class="line">        assert(tile != NULL );</div>
 <div class="line">        cairo_set_source_surface ( cr, tile, border_x, border_y ) ;</div>
-<div class="line">        cairo_paint(cr) ;</div>
+<div class="line">        cairo_paint ( cr ) ;</div>
 <div class="line">        cairo_surface_destroy ( tile ) ;</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">if</span> ( ( <a class="code" href="gui_8cc.html#af8131f7a5b2344529b2d39686c614dfa">last_removed_pl2_a</a> &gt;= 0 ) &amp;&amp; ( <a class="code" href="gui_8cc.html#af8131f7a5b2344529b2d39686c614dfa">last_removed_pl2_a</a> &lt; <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a> ) &amp;&amp;</div>
@@ -892,13 +914,13 @@ Variabili</h2></td></tr>
 <div class="line">        tile = <a class="code" href="gui_8cc.html#adb58e6720bc4d9aaa3e5d2f55ea392aa">paint_tile</a> ( <a class="code" href="gui_8cc.html#aec19629e3eb67374a99cf2a8165d68c5">last_removed_pl2_b</a>, -2, -2, -2 ) ;</div>
 <div class="line">        assert(tile != NULL );</div>
 <div class="line">        cairo_set_source_surface ( cr, tile, border_x+51, y ) ;</div>
-<div class="line">        cairo_paint(cr) ;</div>
+<div class="line">        cairo_paint( cr ) ;</div>
 <div class="line">        cairo_surface_destroy ( tile ) ;</div>
 <div class="line"></div>
 <div class="line">        tile = <a class="code" href="gui_8cc.html#adb58e6720bc4d9aaa3e5d2f55ea392aa">paint_tile</a> ( <a class="code" href="gui_8cc.html#af8131f7a5b2344529b2d39686c614dfa">last_removed_pl2_a</a>, -2, -2, -2 ) ;</div>
 <div class="line">        assert(tile != NULL );</div>
 <div class="line">        cairo_set_source_surface ( cr, tile, border_x, y ) ;</div>
-<div class="line">        cairo_paint(cr) ;</div>
+<div class="line">        cairo_paint ( cr ) ;</div>
 <div class="line">        cairo_surface_destroy ( tile ) ;</div>
 <div class="line">    }</div>
 <div class="line"></div>
@@ -1000,8 +1022,8 @@ Variabili</h2></td></tr>
 <div class="line">    static const <span class="keywordtype">int</span> line_x = 60 ;</div>
 <div class="line">    static const <span class="keywordtype">int</span> line_y = title_y + newline ;</div>
 <div class="line"></div>
-<div class="line">    cairo_set_source_rgb(cr, bg.r, bg.g, bg.b ) ;</div>
-<div class="line">    cairo_paint(cr) ;</div>
+<div class="line">    cairo_set_source_rgb (cr, bg.r, bg.g, bg.b ) ;</div>
+<div class="line">    cairo_paint ( cr ) ;</div>
 <div class="line"></div>
 <div class="line">    cairo_surface_t * surface ;</div>
 <div class="line">    cairo_t * cont ;</div>
@@ -1009,48 +1031,48 @@ Variabili</h2></td></tr>
 <div class="line">    cairo_font_extents_t fe;</div>
 <div class="line">    cairo_text_extents_t te;</div>
 <div class="line"></div>
-<div class="line">    surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,</div>
-<div class="line">                                          gtk_widget_get_allocated_width</div>
-<div class="line">                                                                   ( widget ),</div>
-<div class="line">                                          gtk_widget_get_allocated_height</div>
-<div class="line">                                                                   ( widget )) ;</div>
-<div class="line">    cont = cairo_create (surface);</div>
+<div class="line">    surface = cairo_image_surface_create ( CAIRO_FORMAT_ARGB32,</div>
+<div class="line">                                           gtk_widget_get_allocated_width</div>
+<div class="line">                                                                  ( widget ),</div>
+<div class="line">                                           gtk_widget_get_allocated_height</div>
+<div class="line">                                                                  ( widget ) ) ;</div>
+<div class="line">    cont = cairo_create ( surface ) ;</div>
 <div class="line"></div>
-<div class="line">    cairo_set_source_rgb(cont, text_color.r, text_color.g, text_color.b ) ;</div>
-<div class="line">    cairo_select_font_face (cont, &quot;sans-serif&quot;, CAIRO_FONT_SLANT_ITALIC,</div>
-<div class="line">                            CAIRO_FONT_WEIGHT_NORMAL);</div>
-<div class="line">    cairo_font_extents (cont, &amp;fe);</div>
+<div class="line">    cairo_set_source_rgb ( cont, text_color.r, text_color.g, text_color.b ) ;</div>
+<div class="line">    cairo_select_font_face ( cont, &quot;sans-serif&quot;, CAIRO_FONT_SLANT_ITALIC,</div>
+<div class="line">                             CAIRO_FONT_WEIGHT_NORMAL) ;</div>
+<div class="line">    cairo_font_extents ( cont, &amp;fe ) ;</div>
 <div class="line"></div>
 <div class="line">    if ( title != NULL )</div>
 <div class="line">    {</div>
 <div class="line"></div>
 <div class="line"></div>
-<div class="line">        cairo_set_font_size (cont, h_title);</div>
+<div class="line">        cairo_set_font_size ( cont, h_title );</div>
 <div class="line"></div>
 <div class="line">        <span class="keywordflow">if</span> ( _line == NULL )</div>
-<div class="line">            cairo_move_to (cont, 185, title_y);</div>
+<div class="line">            cairo_move_to ( cont, 185, title_y );</div>
 <div class="line">        <span class="keywordflow">else</span></div>
-<div class="line">            cairo_move_to (cont, title_x, title_y);</div>
-<div class="line">        cairo_text_extents (cont, title, &amp;te);</div>
-<div class="line">        cairo_show_text (cont, title);</div>
+<div class="line">            cairo_move_to ( cont, title_x, title_y );</div>
+<div class="line">        cairo_text_extents ( cont, title, &amp;te );</div>
+<div class="line">        cairo_show_text ( cont, title );</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">if</span> ( _line != NULL )</div>
 <div class="line">    {</div>
-<div class="line">        cairo_select_font_face (cont, <span class="stringliteral">&quot;sans-serif&quot;</span>, CAIRO_FONT_SLANT_NORMAL,</div>
-<div class="line">                                CAIRO_FONT_WEIGHT_NORMAL);</div>
-<div class="line">        cairo_set_font_size (cont, h_text);</div>
+<div class="line">        cairo_select_font_face ( cont, <span class="stringliteral">&quot;sans-serif&quot;</span>, CAIRO_FONT_SLANT_NORMAL,</div>
+<div class="line">                                 CAIRO_FONT_WEIGHT_NORMAL) ;</div>
+<div class="line">        cairo_set_font_size ( cont, h_text ) ;</div>
 <div class="line">        <span class="keywordflow">for</span> ( <span class="keywordtype">int</span> i = 0 ; i &lt; 13 ; i++ )</div>
 <div class="line">        {</div>
-<div class="line">            cairo_move_to (cont, line_x, line_y+newline*i);</div>
-<div class="line">            cairo_text_extents (cont, _line[i], &amp;te);</div>
-<div class="line">            cairo_show_text (cont, _line[i]);</div>
+<div class="line">            cairo_move_to ( cont, line_x, line_y+newline*i ) ;</div>
+<div class="line">            cairo_text_extents ( cont, _line[i], &amp;te ) ;</div>
+<div class="line">            cairo_show_text ( cont, _line[i] ) ;</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line">    cairo_set_source_surface ( cr, surface, 0, 0 ) ;</div>
-<div class="line">    cairo_paint(cr);</div>
+<div class="line">    cairo_paint ( cr ) ;</div>
 <div class="line"></div>
-<div class="line">    cairo_destroy (cont);</div>
-<div class="line">    cairo_surface_destroy (surface);</div>
+<div class="line">    cairo_destroy ( cont ) ;</div>
+<div class="line">    cairo_surface_destroy ( surface ) ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D10 draw text on play ground\n&quot;</span>)</div>
 <div class="line">}</div>
@@ -1083,7 +1105,7 @@ Variabili</h2></td></tr>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a> entry from <a class="code" href="game_8h.html#af63b296d18a03f7e91badc96a015fac7">name</a>\n&quot;)</div>
 <div class="line"></div>
-<div class="line">    return GTK_ENTRY(gtk_builder_get_object(<a class="code" href="gui_8cc.html#afa501dbb63ae6077ac8db76b560de42b">builder</a>, <a class="code" href="game_8h.html#af63b296d18a03f7e91badc96a015fac7">name</a> ) ) ;</div>
+<div class="line">    return GTK_ENTRY ( gtk_builder_get_object ( <a class="code" href="gui_8cc.html#afa501dbb63ae6077ac8db76b560de42b">builder</a>, <a class="code" href="game_8h.html#af63b296d18a03f7e91badc96a015fac7">name</a> ) ) ;</div>
 <div class="line">}</div>
 </div><!-- fragment -->
 </div>
@@ -1127,22 +1149,30 @@ Variabili</h2></td></tr>
 <li>caricando una partita da file,</li>
 <li>salvando una partita su file,</li>
 <li>aprendo il manuale / la documentazione,</li>
-<li>mostrando le generalita' del programma. </li>
+<li>mostrando le generalita' del programma. <dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">widget</td><td>widget chiamante </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">event</td><td>il bottone gdk che ha innescato il segnale </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">user_data</td><td>parametri aggiuntivi impostati dal chiamante </td></tr>
+  </table>
+  </dd>
+</dl>
+</li>
 </ul>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 handler button pressed event\n&quot;</span>)</div>
 <div class="line"></div>
-<div class="line">    if    ( ( widget == (<a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( &quot;new&quot; ) ) ) ||</div>
-<div class="line">            ( widget == (<a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( &quot;menuitem_new&quot; ) ) ) )</div>
+<div class="line">    if    ( ( widget == ( <a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( &quot;new&quot; ) ) ) ||</div>
+<div class="line">            ( widget == ( <a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( &quot;menuitem_new&quot; ) ) ) )</div>
 <div class="line">    {</div>
-<div class="line">        <a class="code" href="gui_8cc.html#a29725c0ccbcab5f6f9930bc8372b9665">display_empty</a>() ;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#a29725c0ccbcab5f6f9930bc8372b9665">display_empty</a> () ;</div>
 <div class="line">        GtkWidget * w_new_game = <a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <a class="code" href="gui_8cc.html#abe92f610d3aab7ba8e98ef0ed92280a7">W_newgame</a> ) ;</div>
 <div class="line">        gtk_widget_show ( w_new_game ) ;</div>
 <div class="line">    }</div>
-<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( ( widget == (<a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;mix&quot;</span> ) ) ) ||</div>
-<div class="line">              ( widget == (<a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;menuitem_mix&quot;</span> ) ) ) )</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( ( widget == ( <a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;mix&quot;</span> ) ) ) ||</div>
+<div class="line">              ( widget == ( <a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;menuitem_mix&quot;</span> ) ) ) )</div>
 <div class="line">    {</div>
-<div class="line">        <span class="keywordflow">if</span> ((<a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a>)&amp;&amp;( <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> == tiles )&amp;&amp;(!<a class="code" href="gui_8cc.html#aad21a67694236e8b04cfa41aad293253">lock_mix</a>))</div>
+<div class="line">        <span class="keywordflow">if</span> ( ( <a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a> )&amp;&amp;( <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> == tiles )&amp;&amp;( !<a class="code" href="gui_8cc.html#aad21a67694236e8b04cfa41aad293253">lock_mix</a> ))</div>
 <div class="line">        {</div>
 <div class="line">            <span class="keywordflow">if</span> ( !<a class="code" href="cube_8cc.html#a68c1c8abe5c9433974f91ead0876dd9d">mix_cube</a> () )</div>
 <div class="line">            {</div>
@@ -1152,9 +1182,9 @@ Variabili</h2></td></tr>
 <div class="line">            }</div>
 <div class="line">            else</div>
 <div class="line">            {</div>
-<div class="line">                <a class="code" href="cube_8cc.html#a4f894e1b050b78df900502f825671049">check_cube</a>() ;</div>
-<div class="line">                <a class="code" href="movements_8cc.html#a0c6790abf4708d31085f7f9f1ce5cf11">refresh_unlocked</a>() ;</div>
-<div class="line">                <span class="keywordflow">if</span> ( !<a class="code" href="movements_8cc.html#a8d312079de155515dca7e89bb7d65771">sort_unlocked</a>() )</div>
+<div class="line">                <a class="code" href="cube_8cc.html#a4f894e1b050b78df900502f825671049">check_cube</a> () ;</div>
+<div class="line">                <a class="code" href="movements_8cc.html#a0c6790abf4708d31085f7f9f1ce5cf11">refresh_unlocked</a> () ;</div>
+<div class="line">                <span class="keywordflow">if</span> ( !<a class="code" href="movements_8cc.html#a8d312079de155515dca7e89bb7d65771">sort_unlocked</a> () )</div>
 <div class="line">                {</div>
 <div class="line">                    <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D3 handler button pressed event&quot;</span>&lt;&lt;endl)</div>
 <div class="line">                    <a class="code" href="debug__macros_8h.html#a7c7b4a73697cde8a842bb82959be2811">D6</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a7c7b4a73697cde8a842bb82959be2811">D6</a> sort <a class="code" href="movements_8cc.html#add53a744140961284d8ab2cf817f4bb7">unlocked</a> returned false&quot;&lt;&lt;endl)</div>
@@ -1165,66 +1195,69 @@ Variabili</h2></td></tr>
 <div class="line">                <a class="code" href="gui_8cc.html#aad21a67694236e8b04cfa41aad293253">lock_mix</a> = true ;</div>
 <div class="line">            }</div>
 <div class="line">        }</div>
-<div class="line">        else if ((<a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a>)&amp;&amp;( <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> == tiles )&amp;&amp;( <a class="code" href="gui_8cc.html#aad21a67694236e8b04cfa41aad293253">lock_mix</a> ))</div>
+<div class="line">        else if ( ( <a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a> )&amp;&amp;( <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> == tiles )&amp;&amp;( <a class="code" href="gui_8cc.html#aad21a67694236e8b04cfa41aad293253">lock_mix</a> ))</div>
 <div class="line">        {</div>
-<div class="line">            gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a>(<span class="stringliteral">&quot;label_down&quot;</span>), <span class="stringliteral">&quot;mix not allowed just after a mix and vs ai different from airhead&quot;</span> ) ;</div>
+<div class="line">            gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a> ( <span class="stringliteral">&quot;label_down&quot;</span> ),</div>
+<div class="line">         <span class="stringliteral">&quot;mix not allowed just after a mix and vs ai different from airhead&quot;</span> ) ;</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
-<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( ( widget == (<a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;undo&quot;</span> ) ) ) ||</div>
-<div class="line">              ( widget == (<a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;menuitem_undo&quot;</span> ) ) ) )</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( ( widget == ( <a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;undo&quot;</span> ) ) ) ||</div>
+<div class="line">              ( widget == ( <a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;menuitem_undo&quot;</span> ) ) ) )</div>
 <div class="line">    {</div>
-<div class="line">        <span class="keywordflow">if</span> ((<a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a>)&amp;&amp;( <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> == tiles )&amp;&amp;(!<a class="code" href="gui_8cc.html#a38ec949d4b21e41328cbd5c945ace68c">lock_undo</a>))</div>
+<div class="line">        <span class="keywordflow">if</span> ( ( <a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a> )&amp;&amp;( <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> == tiles )&amp;&amp;( !<a class="code" href="gui_8cc.html#a38ec949d4b21e41328cbd5c945ace68c">lock_undo</a> ) )</div>
 <div class="line">        {</div>
 <div class="line">            <a class="code" href="game_8cc.html#a5817aa88950e75d367e13635d2a72a8f">undo_last_two_couples</a>() ;</div>
 <div class="line">            <a class="code" href="gui_8cc.html#ad0c3b4925225878be8e12b0c43678fb4">clear_pair_removed</a> () ;</div>
 <div class="line">            <a class="code" href="game_8cc.html#a6d71742a4f6bf95ed5a9f35e5b24f0c0">refresh_scores</a>() ;</div>
 <div class="line">        }</div>
-<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((<a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a>)&amp;&amp;( <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> == tiles )&amp;&amp;( <a class="code" href="gui_8cc.html#a38ec949d4b21e41328cbd5c945ace68c">lock_undo</a> ))</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( ( <a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a> )&amp;&amp;( <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> == tiles )&amp;&amp;( <a class="code" href="gui_8cc.html#a38ec949d4b21e41328cbd5c945ace68c">lock_undo</a> ) )</div>
 <div class="line">        {</div>
-<div class="line">            gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a>(<span class="stringliteral">&quot;label_down&quot;</span>), <span class="stringliteral">&quot;undo not allowed after mix and vs thoughtful ai&quot;</span> ) ;</div>
+<div class="line">            gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a> ( <span class="stringliteral">&quot;label_down&quot;</span> ),</div>
+<div class="line">                           <span class="stringliteral">&quot;undo not allowed after mix and vs thoughtful ai&quot;</span> ) ;</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
-<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( ( widget == (<a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;tip&quot;</span> ) ) ) ||</div>
-<div class="line">              ( widget == (<a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;menuitem_tip&quot;</span> ) ) ) )</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( ( widget == ( <a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;tip&quot;</span> ) ) ) ||</div>
+<div class="line">              ( widget == ( <a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;menuitem_tip&quot;</span> ) ) ) )</div>
 <div class="line">    {</div>
-<div class="line">        <span class="keywordflow">if</span> ((<a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a>)&amp;&amp;( <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> == tiles )&amp;&amp;( <a class="code" href="movements_8cc.html#af73c15f79e771441c611bd9933877bf2">ai</a> != thoughtful))</div>
+<div class="line">        <span class="keywordflow">if</span> ( ( <a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a> )&amp;&amp;( <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> == tiles )&amp;&amp;( <a class="code" href="movements_8cc.html#af73c15f79e771441c611bd9933877bf2">ai</a> != thoughtful ) )</div>
 <div class="line">        {</div>
 <div class="line">            tile * a = NULL ;</div>
 <div class="line">            tile * b = NULL ;</div>
 <div class="line">            <span class="keywordtype">bool</span> do_not_use = false ;</div>
 <div class="line">            <span class="keywordflow">if</span> ( <a class="code" href="movements_8cc.html#aee2b7d0df85d62ee1a1da987afd6832c">airhead_extraction</a> ( a, b, do_not_use ) )</div>
 <div class="line">            {</div>
-<div class="line">                assert(a!=NULL) ;</div>
-<div class="line">                assert(b!=NULL) ;</div>
+<div class="line">                assert(a != NULL) ;</div>
+<div class="line">                assert(b != NULL) ;</div>
 <div class="line">                <a class="code" href="cube_8cc.html#a0882113346c1b917216dd068660ddc71">find_coord</a> ( a-&gt;num, <a class="code" href="gui_8cc.html#aa1e7eff7e894e44ff773a0e00d70500b">h_x1</a>, <a class="code" href="gui_8cc.html#a37f76d3f8f8f2d7f3b29b10bee70254b">h_y1</a>, <a class="code" href="gui_8cc.html#aa88060e8d262393f68233de6bf4fdb55">h_z1</a> ) ;</div>
 <div class="line">                <a class="code" href="cube_8cc.html#a0882113346c1b917216dd068660ddc71">find_coord</a> ( b-&gt;num, <a class="code" href="gui_8cc.html#a4d2f08f57ecc303ca99881b65d322589">h_x2</a>, <a class="code" href="gui_8cc.html#af3288dc0bf3c3f61f298697263465e0c">h_y2</a>, <a class="code" href="gui_8cc.html#a2cf09dc07dba9e08a528ecd57c68ce9f">h_z2</a> ) ;</div>
 <div class="line">                <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a> ( <span class="stringliteral">&quot;playground&quot;</span> ) ;</div>
 <div class="line">            }</div>
 <div class="line">        }</div>
-<div class="line">        <span class="keywordflow">if</span> ((<a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a>)&amp;&amp;( <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> == tiles )&amp;&amp;( <a class="code" href="movements_8cc.html#af73c15f79e771441c611bd9933877bf2">ai</a> == thoughtful ))</div>
-<div class="line">            gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a>(<span class="stringliteral">&quot;label_down&quot;</span>), <span class="stringliteral">&quot;tips not allowed vs thoughtful ai&quot;</span> ) ;</div>
+<div class="line">        <span class="keywordflow">if</span> ( ( <a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a> )&amp;&amp;( <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> == tiles )&amp;&amp;( <a class="code" href="movements_8cc.html#af73c15f79e771441c611bd9933877bf2">ai</a> == thoughtful ) )</div>
+<div class="line">            gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a> ( <span class="stringliteral">&quot;label_down&quot;</span> ),</div>
+<div class="line">                                 <span class="stringliteral">&quot;tips not allowed vs thoughtful ai&quot;</span> ) ;</div>
 <div class="line">    }</div>
-<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( ( widget == (<a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;rules&quot;</span> ) ) ) ||</div>
-<div class="line">              ( widget == (<a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;menuitem_rules&quot;</span> ) ) ) )</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( ( widget == ( <a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;rules&quot;</span> ) ) ) ||</div>
+<div class="line">              ( widget == ( <a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;menuitem_rules&quot;</span> ) ) ) )</div>
 <div class="line">    {</div>
-<div class="line">        <span class="keywordflow">if</span> ((<a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a>)&amp;&amp;( <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> == tiles ))</div>
+<div class="line">        <span class="keywordflow">if</span> ( ( <a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a> )&amp;&amp;( <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> == tiles ) )</div>
 <div class="line">            <a class="code" href="gui_8cc.html#aecf3f2c22b1931b758e67de77987168e">display_rules</a>();</div>
-<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((<a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a>)&amp;&amp;( <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> == rules ))</div>
-<div class="line">            <a class="code" href="gui_8cc.html#a953a10527fc3533c62a160d6ad324fe3">display_tiles</a>() ;</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( ( <a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a> )&amp;&amp;( <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> == rules ) )</div>
+<div class="line">            <a class="code" href="gui_8cc.html#a953a10527fc3533c62a160d6ad324fe3">display_tiles</a> () ;</div>
 <div class="line"></div>
 <div class="line">        <span class="keywordflow">if</span> ( !<a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a> )</div>
-<div class="line">            <a class="code" href="gui_8cc.html#a29725c0ccbcab5f6f9930bc8372b9665">display_empty</a>() ;</div>
+<div class="line">            <a class="code" href="gui_8cc.html#a29725c0ccbcab5f6f9930bc8372b9665">display_empty</a> () ;</div>
 <div class="line">    }</div>
-<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( ( widget == (<a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;load&quot;</span> ) ) ) ||</div>
-<div class="line">              ( widget == (<a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;menuitem_load&quot;</span> ) ) ) )</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( ( widget == ( <a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;load&quot;</span> ) ) ) ||</div>
+<div class="line">              ( widget == ( <a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;menuitem_load&quot;</span> ) ) ) )</div>
 <div class="line">    {</div>
 <div class="line">        GtkWidget * w_load_game = <a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <a class="code" href="gui_8cc.html#a1ba6ebeaa5d2f923808bfcd9c047af10">W_loadgame</a> ) ;</div>
 <div class="line">        gtk_widget_show ( w_load_game ) ;</div>
 <div class="line">    }</div>
-<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( ( widget == (<a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;save&quot;</span> ) ) ) || </div>
-<div class="line">              ( widget == (<a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;menuitem_save&quot;</span> ) ) ) )</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( ( widget == ( <a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;save&quot;</span> ) ) ) || </div>
+<div class="line">              ( widget == ( <a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;menuitem_save&quot;</span> ) ) ) )</div>
 <div class="line">    {</div>
-<div class="line">        <span class="keywordflow">if</span> ((<a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a>)&amp;&amp;( <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> == tiles ))</div>
+<div class="line">        <span class="keywordflow">if</span> ( ( <a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a> )&amp;&amp;( <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> == tiles ) )</div>
 <div class="line">        {</div>
 <div class="line">            GtkWidget * w_save_game = <a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <a class="code" href="gui_8cc.html#a9ceaf4359c09ca527befdd3b30345386">W_savegame</a> ) ;</div>
 <div class="line">            gtk_widget_show ( w_save_game ) ;</div>
@@ -1232,9 +1265,12 @@ Variabili</h2></td></tr>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( widget == (<a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;menuitem_man&quot;</span> ) ) )</div>
 <div class="line">    {</div>
+<div class="line">        system(<span class="stringliteral">&quot;iceweasel ../doc/html/index.html &amp;&quot;</span>) ;</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( widget == (<a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <span class="stringliteral">&quot;menuitem_about&quot;</span> ) ) )</div>
 <div class="line">    {</div>
+<div class="line">        GtkWidget * w_about = <a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <a class="code" href="gui_8cc.html#a2dfa925e9964f2685ee14f3bdec7a585">W_about</a> ) ;</div>
+<div class="line">        gtk_widget_show ( w_about ) ;</div>
 <div class="line">    }</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D10 handler button pressed event\n&quot;</span>)</div>
@@ -1274,19 +1310,27 @@ Variabili</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Handler che informa l' applicazione che un click e' stato rilasciato sulla superficie di gioco. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">widget</td><td>widget chiamante </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">event</td><td>il bottone gdk che ha innescato il segnale </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">user_data</td><td>parametri aggiuntivi impostati dal chiamante </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 handler click on widget\n&quot;</span>)</div>
 <div class="line"></div>
 <div class="line">    if ( <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> != tiles )</div>
 <div class="line">        return TRUE ;</div>
 <div class="line"></div>
-<div class="line">    assert(event!=NULL) ;</div>
+<div class="line">    assert(event != NULL) ;</div>
 <div class="line"></div>
 <div class="line">    const <span class="keywordtype">int</span> _x = event-&gt;x ;</div>
 <div class="line">    const <span class="keywordtype">int</span> _y = event-&gt;y ;</div>
 <div class="line"></div>
 <div class="line">    if ( <a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> == h_c )</div>
-<div class="line">        if ( !<a class="code" href="cube_8cc.html#a1110dd053d1efc136f8ca21d94337298">remove_dummies</a>() )</div>
+<div class="line">        if ( !<a class="code" href="cube_8cc.html#a1110dd053d1efc136f8ca21d94337298">remove_dummies</a> () )</div>
 <div class="line">        {</div>
 <div class="line">            <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D3 handler click on widget&quot;</span>&lt;&lt;endl)</div>
 <div class="line">            <a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a> remove dummies returned false&quot;&lt;&lt;endl)</div>
@@ -1294,22 +1338,22 @@ Variabili</h2></td></tr>
 <div class="line">        }</div>
 <div class="line"></div>
 <div class="line">    <span class="keywordtype">bool</span> quit = false ;</div>
-<div class="line">    for ( <span class="keywordtype">int</span> z = <a class="code" href="cube_8cc.html#adab0a000e20e650547135aaac6f1e204">dim_Z</a>-1 ; (z &gt;= 0)&amp;&amp;(!quit) ; z-- )</div>
-<div class="line">        for ( <span class="keywordtype">int</span> y = 0 ; (y &lt; <a class="code" href="cube_8cc.html#a4f511715fea77e31059762323c8242d9">dim_Y</a>)&amp;&amp;(!quit) ; y++ )</div>
-<div class="line">            for ( <span class="keywordtype">int</span> x = 0 ; (x &lt; <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a>)&amp;&amp;(!quit) ; x++ )</div>
+<div class="line">    for ( <span class="keywordtype">int</span> z = <a class="code" href="cube_8cc.html#adab0a000e20e650547135aaac6f1e204">dim_Z</a>-1 ; (z &gt;= 0)&amp;&amp;( !quit ) ; z-- )</div>
+<div class="line">        for ( <span class="keywordtype">int</span> y = 0 ; (y &lt; <a class="code" href="cube_8cc.html#a4f511715fea77e31059762323c8242d9">dim_Y</a>)&amp;&amp;( !quit ) ; y++ )</div>
+<div class="line">            for ( <span class="keywordtype">int</span> x = 0 ; (x &lt; <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a>)&amp;&amp;( !quit ) ; x++ )</div>
 <div class="line">            {</div>
 <div class="line">                <span class="keywordflow">if</span> ( &amp;<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z] == NULL )</div>
 <div class="line">                {</div>
-<div class="line">                    <a class="code" href="cube_8cc.html#ae85bd2ae90d794501336a8b6fd3be192">delete_cube</a>() ;</div>
-<div class="line">                    <a class="code" href="cube_8cc.html#ab98b6cc142d337143d37beddfd1f82a7">create_cube</a>() ;</div>
+<div class="line">                    <a class="code" href="cube_8cc.html#ae85bd2ae90d794501336a8b6fd3be192">delete_cube</a> () ;</div>
+<div class="line">                    <a class="code" href="cube_8cc.html#ab98b6cc142d337143d37beddfd1f82a7">create_cube</a> () ;</div>
 <div class="line">                    <a class="code" href="gui_8cc.html#a71be07c441cb1611b74365630b82e529">level</a> = easy ;</div>
 <div class="line">                    <a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> = h_c ;</div>
 <div class="line">                    <a class="code" href="movements_8cc.html#af73c15f79e771441c611bd9933877bf2">ai</a> = airhead ;</div>
 <div class="line">                    <a class="code" href="gui_8cc.html#aad21a67694236e8b04cfa41aad293253">lock_mix</a> = false ;</div>
 <div class="line">                    <a class="code" href="gui_8cc.html#a38ec949d4b21e41328cbd5c945ace68c">lock_undo</a> = false ;</div>
-<div class="line">                    <a class="code" href="game_8cc.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a>() ;</div>
+<div class="line">                    <a class="code" href="game_8cc.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a> () ;</div>
 <div class="line">                    <a class="code" href="game_8cc.html#ad39fcaf7ee3bceadee96b0da22919849">start_game</a> () ;</div>
-<div class="line">                    <a class="code" href="gui_8cc.html#a953a10527fc3533c62a160d6ad324fe3">display_tiles</a>() ;</div>
+<div class="line">                    <a class="code" href="gui_8cc.html#a953a10527fc3533c62a160d6ad324fe3">display_tiles</a> () ;</div>
 <div class="line">                }</div>
 <div class="line">                <span class="keywordflow">if</span> ( ( !<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].empty )&amp;&amp;( !<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].lock ) )</div>
 <div class="line">                {</div>
@@ -1319,7 +1363,8 @@ Variabili</h2></td></tr>
 <div class="line">                        {</div>
 <div class="line">                            <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D3 handler click on widget&quot;</span>&lt;&lt;endl)</div>
 <div class="line">                            <a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a> insert half pair returned false&quot;&lt;&lt;endl)</div>
-<div class="line">                            gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a>(&quot;label_down&quot;), &quot;-&quot; ) ;</div>
+<div class="line">                            gtk_label_set_text (    <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a></div>
+<div class="line">                                                    ( &quot;label_down&quot; ), &quot;-&quot;    ) ;</div>
 <div class="line">                            return TRUE ;</div>
 <div class="line">                        }</div>
 <div class="line">                        quit = true ;</div>
@@ -1331,8 +1376,8 @@ Variabili</h2></td></tr>
 <div class="line">    {</div>
 <div class="line">        <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D3 handler click on widget&quot;</span>&lt;&lt;endl)</div>
 <div class="line">        <a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a> quit was false&quot;&lt;&lt;endl)</div>
-<div class="line">        <a class="code" href="gui_8cc.html#a069e7212b25e5b8067dca2e396d2e864">reset_highlighted_cell</a>() ;</div>
-<div class="line">        <a class="code" href="game_8cc.html#a7c6eb3e4a7b7a457376c13e5bd2488e7">reset_row</a>() ;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#a069e7212b25e5b8067dca2e396d2e864">reset_highlighted_cell</a> () ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a7c6eb3e4a7b7a457376c13e5bd2488e7">reset_row</a> () ;</div>
 <div class="line">        <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a> ( &quot;playground&quot; ) ;</div>
 <div class="line">    }</div>
 <div class="line"></div>
@@ -1373,6 +1418,14 @@ Variabili</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Handler che predispone alla chiusura del programma. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">widget</td><td>widget chiamante </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">event</td><td>il bottone gdk che ha innescato il segnale </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">user_data</td><td>parametri aggiuntivi impostati dal chiamante </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 handler delete event\n&quot;</span>)</div>
 <div class="line"></div>
@@ -1381,7 +1434,7 @@ Variabili</h2></td></tr>
 <div class="line">    if ( <a class="code" href="game_8h.html#af63b296d18a03f7e91badc96a015fac7">name</a> != NULL )</div>
 <div class="line">        <a class="code" href="io__file_8cc.html#a3edc1ee8e472230d3fb6fe14f0f9130d">delete_tiles_names</a> () ;</div>
 <div class="line">    if ( <a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a> )</div>
-<div class="line">        <a class="code" href="game_8cc.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a>() ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a> () ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="gui_8cc.html#aab082e5579b0e3b5ac93dcee582ba671">call_gtk_main_quit</a>() ;</div>
 <div class="line"></div>
@@ -1422,15 +1475,23 @@ Variabili</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Handler che nasconde la finestra genitore. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">widget</td><td>widget chiamante </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">event</td><td>il bottone gdk che ha innescato il segnale </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">user_data</td><td>parametri aggiuntivi impostati dal chiamante </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 handler hide window\n&quot;</span>)</div>
 <div class="line"></div>
-<div class="line">    gtk_widget_hide ( gtk_widget_get_toplevel(widget) ) ;</div>
+<div class="line">    gtk_widget_hide ( gtk_widget_get_toplevel ( widget ) ) ;</div>
 <div class="line"></div>
 <div class="line">    if ( <a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a> )</div>
-<div class="line">        <a class="code" href="gui_8cc.html#a953a10527fc3533c62a160d6ad324fe3">display_tiles</a>() ;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#a953a10527fc3533c62a160d6ad324fe3">display_tiles</a> () ;</div>
 <div class="line">    else</div>
-<div class="line">        <a class="code" href="gui_8cc.html#a29725c0ccbcab5f6f9930bc8372b9665">display_empty</a>() ;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#a29725c0ccbcab5f6f9930bc8372b9665">display_empty</a> () ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a> handler hide window\n&quot;)</div>
 <div class="line"></div>
@@ -1469,27 +1530,37 @@ Variabili</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Handler che chiama la funzione <a class="el" href="game_8h.html#a1e1dd2330c68191b8a43de87056b196a">load_game</a>. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">widget</td><td>widget chiamante </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">event</td><td>il bottone gdk che ha innescato il segnale </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">user_data</td><td>parametri aggiuntivi impostati dal chiamante </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 handler set load game\n&quot;</span>)</div>
 <div class="line"></div>
 <div class="line">    GtkEntry* aus = <a class="code" href="gui_8cc.html#ae21c3b92efaa8b61dd3fabbc4e103780">entry_from_name</a>( &quot;text_load_from_file&quot; ) ;</div>
-<div class="line">    <span class="keywordtype">char</span> * filename = const_cast&lt;<span class="keywordtype">char</span>*&gt;(gtk_entry_get_text( aus )) ;</div>
+<div class="line">    <span class="keywordtype">char</span> * filename = const_cast&lt;<span class="keywordtype">char</span>*&gt;( gtk_entry_get_text ( aus ) ) ;</div>
 <div class="line"></div>
 <div class="line">    if ( <a class="code" href="game_8cc.html#a1e1dd2330c68191b8a43de87056b196a">load_game</a> ( filename ) )</div>
 <div class="line">    {</div>
-<div class="line">        gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a>(<span class="stringliteral">&quot;label_down&quot;</span>), <span class="stringliteral">&quot;file loaded successfully&quot;</span> ) ;</div>
+<div class="line">        gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a> ( <span class="stringliteral">&quot;label_down&quot;</span> ),</div>
+<div class="line">                             <span class="stringliteral">&quot;file loaded successfully&quot;</span> ) ;</div>
 <div class="line">        <a class="code" href="debug__macros_8h.html#a520eee435cd4c48d09391d698163cda9">D5</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D5 caricamento da file eseguito correttamente&quot;</span>&lt;&lt;endl)</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">else</span></div>
 <div class="line">    {</div>
-<div class="line">        gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a>(<span class="stringliteral">&quot;label_down&quot;</span>), <span class="stringliteral">&quot;an error occurred while loading&quot;</span> ) ;</div>
+<div class="line">        gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a>( <span class="stringliteral">&quot;label_down&quot;</span> ),</div>
+<div class="line">                             <span class="stringliteral">&quot;an error occurred while loading&quot;</span> ) ;</div>
 <div class="line">        <a class="code" href="debug__macros_8h.html#a520eee435cd4c48d09391d698163cda9">D5</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D5 errore durante il caricamento da file&quot;</span>&lt;&lt;endl)</div>
 <div class="line">    }</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D3 handler set load game&quot;</span>&lt;&lt;endl)</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a529dfc3dc7bd423bdf6d912456f4c075">D4</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a529dfc3dc7bd423bdf6d912456f4c075">D4</a> filename=&quot;&lt;&lt;filename&lt;&lt;endl)</div>
 <div class="line"></div>
-<div class="line">    gtk_widget_hide ( gtk_widget_get_toplevel(widget) ) ;</div>
+<div class="line">    gtk_widget_hide ( gtk_widget_get_toplevel ( widget ) ) ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a> handler set load game\n&quot;)</div>
 <div class="line"></div>
@@ -1528,12 +1599,20 @@ Variabili</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Handler che acquisisce le disposizioni per la nuova partita. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">widget</td><td>widget chiamante </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">event</td><td>il bottone gdk che ha innescato il segnale </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">user_data</td><td>parametri aggiuntivi impostati dal chiamante </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 handler set new game\n&quot;</span>)</div>
 <div class="line"></div>
-<div class="line">    <a class="code" href="game_8cc.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a>();</div>
+<div class="line">    <a class="code" href="game_8cc.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a> ();</div>
 <div class="line"></div>
-<div class="line"><span class="comment">/*handler per rendere effettive le disposizioni per la nuova partita*/</span></div>
+<div class="line">    <span class="comment">/*handler per rendere effettive le disposizioni per la nuova partita*/</span></div>
 <div class="line">    if      ( gtk_toggle_button_get_active ( <a class="code" href="gui_8cc.html#ac9f7f76bacdd7ebabd0902c2bbf8a3b7">tb_from_name</a> ( &quot;rb_easy&quot; ) ) )</div>
 <div class="line">        <a class="code" href="gui_8cc.html#a71be07c441cb1611b74365630b82e529">level</a> = easy ;</div>
 <div class="line">    else if ( gtk_toggle_button_get_active ( <a class="code" href="gui_8cc.html#ac9f7f76bacdd7ebabd0902c2bbf8a3b7">tb_from_name</a> ( &quot;rb_medium&quot; ) ) )</div>
@@ -1574,11 +1653,11 @@ Variabili</h2></td></tr>
 <div class="line"></div>
 <div class="line">    <a class="code" href="game_8cc.html#ad39fcaf7ee3bceadee96b0da22919849">start_game</a> () ;</div>
 <div class="line"></div>
-<div class="line"><span class="comment">/*alla fine nascondo la finestra*/</span></div>
+<div class="line">    <span class="comment">/*alla fine nascondo la finestra*/</span></div>
 <div class="line">    GtkWidget * w_new_game = <a class="code" href="gui_8cc.html#a4bbffafa345ac66449949a88eac4017e">widget_from_name</a> ( <a class="code" href="gui_8cc.html#abe92f610d3aab7ba8e98ef0ed92280a7">W_newgame</a> ) ;</div>
 <div class="line">    gtk_widget_hide ( w_new_game ) ;</div>
 <div class="line"></div>
-<div class="line">    <a class="code" href="gui_8cc.html#a953a10527fc3533c62a160d6ad324fe3">display_tiles</a>() ;</div>
+<div class="line">    <a class="code" href="gui_8cc.html#a953a10527fc3533c62a160d6ad324fe3">display_tiles</a> () ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a> handler set new game\n&quot;)</div>
 <div class="line"></div>
@@ -1617,21 +1696,31 @@ Variabili</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Handler che chiama la funzione <a class="el" href="game_8h.html#af558e3f525b0074b822ee6927b4467e9">save_game</a>. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">widget</td><td>widget chiamante </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">event</td><td>il bottone gdk che ha innescato il segnale </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">user_data</td><td>parametri aggiuntivi impostati dal chiamante </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 handler set save game\n&quot;</span>)</div>
 <div class="line"></div>
 <div class="line">    GtkEntry* aus = <a class="code" href="gui_8cc.html#ae21c3b92efaa8b61dd3fabbc4e103780">entry_from_name</a>( &quot;text_save_on_file&quot; ) ;</div>
-<div class="line">    <span class="keywordtype">char</span> * filename = const_cast&lt;<span class="keywordtype">char</span>*&gt;(gtk_entry_get_text( aus )) ;</div>
+<div class="line">    <span class="keywordtype">char</span> * filename = const_cast&lt;<span class="keywordtype">char</span>*&gt;( gtk_entry_get_text ( aus ) ) ;</div>
 <div class="line"></div>
 <div class="line">    if ( <a class="code" href="game_8cc.html#af558e3f525b0074b822ee6927b4467e9">save_game</a> ( filename ) )</div>
-<div class="line">        gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a>(&quot;label_down&quot;), &quot;file saved successfully&quot; ) ;</div>
+<div class="line">        gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a> ( &quot;label_down&quot; ),</div>
+<div class="line">                             &quot;file saved successfully&quot; ) ;</div>
 <div class="line">    else</div>
-<div class="line">        gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a>(&quot;label_down&quot;), &quot;an error occurred while saving&quot; ) ;</div>
+<div class="line">        gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a> ( &quot;label_down&quot; ),</div>
+<div class="line">                             &quot;an error occurred while saving&quot; ) ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a> handler set save game&quot;&lt;&lt;endl)</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a529dfc3dc7bd423bdf6d912456f4c075">D4</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a529dfc3dc7bd423bdf6d912456f4c075">D4</a> filename=&quot;&lt;&lt;filename&lt;&lt;endl)</div>
 <div class="line"></div>
-<div class="line">    gtk_widget_hide ( gtk_widget_get_toplevel(widget) ) ;</div>
+<div class="line">    gtk_widget_hide ( gtk_widget_get_toplevel ( widget ) ) ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a> handler set save game\n&quot;)</div>
 <div class="line"></div>
@@ -1667,10 +1756,10 @@ Variabili</h2></td></tr>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 initialize gtk\n&quot;</span>)</div>
 <div class="line"></div>
-<div class="line">    gtk_init ( &amp;argc, &amp;argv) ;</div>
-<div class="line">    <a class="code" href="gui_8cc.html#afa501dbb63ae6077ac8db76b560de42b">builder</a> = gtk_builder_new () ;</div>
+<div class="line">    gtk_init ( &amp;argc, &amp;argv ) ;</div>
+<div class="line">    <a class="code" href="gui_8cc.html#afa501dbb63ae6077ac8db76b560de42b">builder</a> = gtk_builder_new() ;</div>
 <div class="line">    gtk_builder_add_from_file ( <a class="code" href="gui_8cc.html#afa501dbb63ae6077ac8db76b560de42b">builder</a>, <a class="code" href="gui_8cc.html#a38b552b3525bca48f9726174f738ca61">F_GLADE</a>, NULL ) ;</div>
-<div class="line">    gtk_builder_connect_signals(builder, NULL);</div>
+<div class="line">    gtk_builder_connect_signals ( builder, NULL ) ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a> initialize gtk\n&quot;)</div>
 <div class="line">}</div>
@@ -1703,7 +1792,7 @@ Variabili</h2></td></tr>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a> label from <a class="code" href="game_8h.html#af63b296d18a03f7e91badc96a015fac7">name</a>\n&quot;)</div>
 <div class="line"></div>
-<div class="line">    return GTK_LABEL(gtk_builder_get_object(<a class="code" href="gui_8cc.html#afa501dbb63ae6077ac8db76b560de42b">builder</a>, <a class="code" href="game_8h.html#af63b296d18a03f7e91badc96a015fac7">name</a> ) ) ;</div>
+<div class="line">    return GTK_LABEL ( gtk_builder_get_object ( <a class="code" href="gui_8cc.html#afa501dbb63ae6077ac8db76b560de42b">builder</a>, <a class="code" href="game_8h.html#af63b296d18a03f7e91badc96a015fac7">name</a> ) ) ;</div>
 <div class="line">}</div>
 </div><!-- fragment -->
 </div>
@@ -1752,7 +1841,7 @@ Variabili</h2></td></tr>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a> number from <span class="keywordtype">string</span>\n&quot;)</div>
 <div class="line"></div>
-<div class="line">    return (output-&#39;0&#39;) ;</div>
+<div class="line">    return ( output-&#39;0&#39; ) ;</div>
 <div class="line">}</div>
 </div><!-- fragment -->
 </div>
@@ -1805,10 +1894,10 @@ Variabili</h2></td></tr>
 <div class="line"></div>
 <div class="line">    cairo_t * cr_tile = cairo_create ( _surf_50x50 ) ;</div>
 <div class="line"></div>
-<div class="line">    cairo_set_source_rgb( cr_tile, <a class="code" href="gui_8cc.html#a30ef930b6841afefade01f41d0066539">peach</a>.r , <a class="code" href="gui_8cc.html#a30ef930b6841afefade01f41d0066539">peach</a>.g , <a class="code" href="gui_8cc.html#a30ef930b6841afefade01f41d0066539">peach</a>.b ) ;</div>
-<div class="line">    cairo_paint( cr_tile ) ;</div>
+<div class="line">    cairo_set_source_rgb ( cr_tile, <a class="code" href="gui_8cc.html#a30ef930b6841afefade01f41d0066539">peach</a>.r , <a class="code" href="gui_8cc.html#a30ef930b6841afefade01f41d0066539">peach</a>.g , <a class="code" href="gui_8cc.html#a30ef930b6841afefade01f41d0066539">peach</a>.b ) ;</div>
+<div class="line">    cairo_paint ( cr_tile ) ;</div>
 <div class="line"> </div>
-<div class="line">    <a class="code" href="gui_8cc.html#aa4c63ad57e7233d21211f0e02cfef393">draw_number_on_tile</a>( cr_tile, _obj, number ) ;</div>
+<div class="line">    <a class="code" href="gui_8cc.html#aa4c63ad57e7233d21211f0e02cfef393">draw_number_on_tile</a> ( cr_tile, _obj, number ) ;</div>
 <div class="line"></div>
 <div class="line">    cairo_destroy ( cr_tile ) ;</div>
 <div class="line"></div>
@@ -1883,7 +1972,8 @@ Variabili</h2></td></tr>
 <div class="line">    surface = cairo_image_surface_create ( CAIRO_FORMAT_ARGB32, 62, 62 ) ;</div>
 <div class="line">    context = cairo_create ( surface ) ;</div>
 <div class="line"></div>
-<div class="line">    cairo_surface_t * _surface_tile = cairo_image_surface_create_from_png ( <a class="code" href="gui_8cc.html#a8e79d5d4513e19ce7b82ec65148f5264">I_TILE</a> ) ;</div>
+<div class="line">    cairo_surface_t * _surface_tile = cairo_image_surface_create_from_png</div>
+<div class="line">                                                                    ( <a class="code" href="gui_8cc.html#a8e79d5d4513e19ce7b82ec65148f5264">I_TILE</a> ) ;</div>
 <div class="line">    cairo_set_source_surface ( context, _surface_tile , 0, 0 ) ;</div>
 <div class="line"></div>
 <div class="line">    cairo_surface_destroy ( _surface_tile ) ;</div>
@@ -1892,78 +1982,97 @@ Variabili</h2></td></tr>
 <div class="line"></div>
 <div class="line">    cairo_surface_t * temp = NULL ;</div>
 <div class="line">    cairo_surface_t * _surface_from_png = NULL ;</div>
-<div class="line">    if (num&lt;=35)</div>
+<div class="line">    if ( num &lt;= 35 )</div>
 <div class="line">    {</div>
-<div class="line">        <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a>( context, _surface_from_png, temp, num, <a class="code" href="gui_8cc.html#ac4084cf951509b8970162a9f90e83833">I_CIRCLE</a>, tt_number ) ;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a>( context, _surface_from_png, temp, num, <a class="code" href="gui_8cc.html#ac4084cf951509b8970162a9f90e83833">I_CIRCLE</a>,</div>
+<div class="line">                        tt_number ) ;</div>
 <div class="line">    }</div>
-<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (num&lt;=71)</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( num &lt;= 71 )</div>
 <div class="line">    {</div>
-<div class="line">        <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a>( context, _surface_from_png, temp, num, <a class="code" href="gui_8cc.html#ad12bb13063b6918460509653a25d75e6">I_BAMBOO</a>, tt_number ) ;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a>( context, _surface_from_png, temp, num, <a class="code" href="gui_8cc.html#ad12bb13063b6918460509653a25d75e6">I_BAMBOO</a>,</div>
+<div class="line">                        tt_number ) ;</div>
 <div class="line">    }</div>
-<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (num&lt;=107)</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( num &lt;= 107 )</div>
 <div class="line">    {</div>
-<div class="line">        <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a>( context, _surface_from_png, temp, num, <a class="code" href="gui_8cc.html#ac96beb40ca12f58925ec8c8d9a1d473b">I_CROSS</a>, tt_number ) ;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a>( context, _surface_from_png, temp, num, <a class="code" href="gui_8cc.html#ac96beb40ca12f58925ec8c8d9a1d473b">I_CROSS</a>,</div>
+<div class="line">                        tt_number ) ;</div>
 <div class="line">    }</div>
-<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(num&lt;=123)</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span>( num &lt;= 123 )</div>
 <div class="line">    {</div>
-<div class="line">        <span class="keyword">const</span> <span class="keywordtype">int</span> wind = (num-108)%4 ; <span class="comment">/*0==east 1==sud 2==west 3==north*/</span></div>
-<div class="line">        <span class="keywordflow">switch</span> (wind)</div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">int</span> wind = ( num - 108 ) % 4 ; <span class="comment">/*0==east 1==sud 2==west 3==north*/</span></div>
+<div class="line">        <span class="keywordflow">switch</span> ( wind )</div>
 <div class="line">        {</div>
-<div class="line">            <span class="keywordflow">case</span> 0: <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a>( context, _surface_from_png, temp, num, <a class="code" href="gui_8cc.html#ae4c8817ffea348d371dbcdbc6f4f28bc">I_EAST</a>, tt_image ) ;</div>
+<div class="line">            <span class="keywordflow">case</span> 0: <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a> ( context, _surface_from_png, temp, num,</div>
+<div class="line">                                     <a class="code" href="gui_8cc.html#ae4c8817ffea348d371dbcdbc6f4f28bc">I_EAST</a>, tt_image ) ;</div>
 <div class="line">                    break ;</div>
-<div class="line">            <span class="keywordflow">case</span> 1: <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a>( context, _surface_from_png, temp, num, <a class="code" href="gui_8cc.html#aa725868c63cdb7505a5e58b7b6e32c29">I_SUD</a>, tt_image ) ;</div>
+<div class="line">            <span class="keywordflow">case</span> 1: <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a> ( context, _surface_from_png, temp, num,</div>
+<div class="line">                                     <a class="code" href="gui_8cc.html#aa725868c63cdb7505a5e58b7b6e32c29">I_SUD</a>, tt_image ) ;</div>
 <div class="line">                    break ;</div>
-<div class="line">            <span class="keywordflow">case</span> 2: <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a>( context, _surface_from_png, temp, num, <a class="code" href="gui_8cc.html#aa9482887c7cc8878d9e0711ddb1272e1">I_WEST</a>, tt_image ) ;</div>
+<div class="line">            <span class="keywordflow">case</span> 2: <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a> ( context, _surface_from_png, temp, num,</div>
+<div class="line">                                     <a class="code" href="gui_8cc.html#aa9482887c7cc8878d9e0711ddb1272e1">I_WEST</a>, tt_image ) ;</div>
 <div class="line">                    break ;</div>
-<div class="line">            <span class="keywordflow">case</span> 3: <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a>( context, _surface_from_png, temp, num, <a class="code" href="gui_8cc.html#a7707f2b4b1d0e42595781a550c494191">I_NORTH</a>, tt_image ) ;</div>
+<div class="line">            <span class="keywordflow">case</span> 3: <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a> ( context, _surface_from_png, temp, num,</div>
+<div class="line">                                     <a class="code" href="gui_8cc.html#a7707f2b4b1d0e42595781a550c494191">I_NORTH</a>, tt_image ) ;</div>
 <div class="line">                    break ;</div>
 <div class="line">        };</div>
 <div class="line">    }</div>
-<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (num&lt;=135)</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( num &lt;= 135 )</div>
 <div class="line">    {</div>
-<div class="line">        <span class="keyword">const</span> <span class="keywordtype">int</span> dragon = (num-124)%3 <span class="comment">/*0==red 1==green 2==white*/</span>;</div>
-<div class="line">        <span class="keywordflow">switch</span> (dragon)</div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">int</span> dragon = ( num - 124 ) % 3 <span class="comment">/*0==red 1==green 2==white*/</span>;</div>
+<div class="line">        <span class="keywordflow">switch</span> ( dragon )</div>
 <div class="line">        {</div>
-<div class="line">            <span class="keywordflow">case</span> 0: <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a>( context, _surface_from_png, temp, num, <a class="code" href="gui_8cc.html#a6196e61fd8d7f134792cd521068ee014">I_RED_DRAGON</a>, tt_image ) ;</div>
+<div class="line">            <span class="keywordflow">case</span> 0: <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a> ( context, _surface_from_png, temp, num,</div>
+<div class="line">                                     <a class="code" href="gui_8cc.html#a6196e61fd8d7f134792cd521068ee014">I_RED_DRAGON</a>, tt_image ) ;</div>
 <div class="line">                    break ;</div>
-<div class="line">            <span class="keywordflow">case</span> 1: <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a>( context, _surface_from_png, temp, num, <a class="code" href="gui_8cc.html#a40f0664840af16803c749384a416d239">I_GREEN_DRAGON</a>, tt_image ) ;</div>
+<div class="line">            <span class="keywordflow">case</span> 1: <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a> ( context, _surface_from_png, temp, num,</div>
+<div class="line">                                     <a class="code" href="gui_8cc.html#a40f0664840af16803c749384a416d239">I_GREEN_DRAGON</a>, tt_image ) ;</div>
 <div class="line">                    break ;</div>
-<div class="line">            <span class="keywordflow">case</span> 2: <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a>( context, _surface_from_png, temp, num, <a class="code" href="gui_8cc.html#a6232b1bf3cb831b0757f213787bde608">I_WHITE_DRAGON</a>, tt_image ) ;</div>
+<div class="line">            <span class="keywordflow">case</span> 2: <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a> ( context, _surface_from_png, temp, num,</div>
+<div class="line">                                     <a class="code" href="gui_8cc.html#a6232b1bf3cb831b0757f213787bde608">I_WHITE_DRAGON</a>, tt_image ) ;</div>
 <div class="line">                    break ;</div>
 <div class="line">        };</div>
 <div class="line">    }</div>
-<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (num&lt;=143)</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( num &lt;= 143 )</div>
 <div class="line">    {</div>
-<div class="line">        <span class="keywordflow">switch</span> (num)</div>
+<div class="line">        <span class="keywordflow">switch</span> ( num )</div>
 <div class="line">        {</div>
 <div class="line">            <span class="keywordflow">case</span> 136:<span class="comment">/*spring*/</span></div>
-<div class="line">                     <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a>( context, _surface_from_png, temp, num, <a class="code" href="gui_8cc.html#a724d369a6bf8493ff7a28c7b57b4d901">I_SPRING</a>, tt_image ) ;</div>
+<div class="line">                     <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a> ( context, _surface_from_png, temp, num,</div>
+<div class="line">                                      <a class="code" href="gui_8cc.html#a724d369a6bf8493ff7a28c7b57b4d901">I_SPRING</a>, tt_image ) ;</div>
 <div class="line">                     break ;</div>
 <div class="line">            <span class="keywordflow">case</span> 137:<span class="comment">/*summer*/</span></div>
-<div class="line">                     <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a>( context, _surface_from_png, temp, num, <a class="code" href="gui_8cc.html#a18f4e38db6f5ca280e859d5a79ff279f">I_SUMMER</a>, tt_image ) ;</div>
+<div class="line">                     <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a> ( context, _surface_from_png, temp, num,</div>
+<div class="line">                                      <a class="code" href="gui_8cc.html#a18f4e38db6f5ca280e859d5a79ff279f">I_SUMMER</a>, tt_image ) ;</div>
 <div class="line">                     break ;</div>
 <div class="line">            <span class="keywordflow">case</span> 138:<span class="comment">/*autumn*/</span></div>
-<div class="line">                     <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a>( context, _surface_from_png, temp, num, <a class="code" href="gui_8cc.html#afd03595db5312032fc5cae6644772730">I_AUTUMN</a>, tt_image ) ;</div>
+<div class="line">                     <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a> ( context, _surface_from_png, temp, num,</div>
+<div class="line">                                      <a class="code" href="gui_8cc.html#afd03595db5312032fc5cae6644772730">I_AUTUMN</a>, tt_image ) ;</div>
 <div class="line">                     break ;</div>
 <div class="line">            <span class="keywordflow">case</span> 139:<span class="comment">/*winter*/</span></div>
-<div class="line">                     <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a>( context, _surface_from_png, temp, num, <a class="code" href="gui_8cc.html#a3a1324d21e7cab401033e65cb57bd345">I_WINTER</a>, tt_image ) ;</div>
+<div class="line">                     <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a> ( context, _surface_from_png, temp, num,</div>
+<div class="line">                                      <a class="code" href="gui_8cc.html#a3a1324d21e7cab401033e65cb57bd345">I_WINTER</a>, tt_image ) ;</div>
 <div class="line">                     break ;</div>
 <div class="line">            <span class="keywordflow">case</span> 140:<span class="comment">/*plumb*/</span></div>
-<div class="line">                     <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a>( context, _surface_from_png, temp, num, <a class="code" href="gui_8cc.html#a7549e0752e1f51d2a5b84b421d72a03a">I_PLUMB</a>, tt_image ) ;</div>
+<div class="line">                     <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a> ( context, _surface_from_png, temp, num,</div>
+<div class="line">                                      <a class="code" href="gui_8cc.html#a7549e0752e1f51d2a5b84b421d72a03a">I_PLUMB</a>, tt_image ) ;</div>
 <div class="line">                     break ;</div>
 <div class="line">            <span class="keywordflow">case</span> 141:<span class="comment">/*orchid*/</span></div>
-<div class="line">                     <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a>( context, _surface_from_png, temp, num, <a class="code" href="gui_8cc.html#adde6219c77c227425353dd7ba54c75b7">I_ORCHID</a>, tt_image ) ;</div>
+<div class="line">                     <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a> ( context, _surface_from_png, temp, num,</div>
+<div class="line">                                      <a class="code" href="gui_8cc.html#adde6219c77c227425353dd7ba54c75b7">I_ORCHID</a>, tt_image ) ;</div>
 <div class="line">                     break ;</div>
 <div class="line">            <span class="keywordflow">case</span> 142:<span class="comment">/*chrysantemum*/</span></div>
-<div class="line">                     <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a>( context, _surface_from_png, temp, num, <a class="code" href="gui_8cc.html#a201053e6bfc767ac96fc4c390fd1fd7e">I_CHRYSANTEMUM</a>, tt_image ) ;</div>
+<div class="line">                     <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a> ( context, _surface_from_png, temp, num,</div>
+<div class="line">                                      <a class="code" href="gui_8cc.html#a201053e6bfc767ac96fc4c390fd1fd7e">I_CHRYSANTEMUM</a>, tt_image ) ;</div>
 <div class="line">                     break ;</div>
 <div class="line">            <span class="keywordflow">case</span> 143:<span class="comment">/*bamboo_forest*/</span></div>
-<div class="line">                     <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a>( context, _surface_from_png, temp, num, <a class="code" href="gui_8cc.html#ac44223cab6f1cec425bc8e691b9389e5">I_BAMBOO_FOREST</a>, tt_image ) ;</div>
+<div class="line">                     <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a> ( context, _surface_from_png, temp, num,</div>
+<div class="line">                                      <a class="code" href="gui_8cc.html#ac44223cab6f1cec425bc8e691b9389e5">I_BAMBOO_FOREST</a>, tt_image ) ;</div>
 <div class="line">                     break ;</div>
 <div class="line">        }</div>
-<div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (( num == <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a> )||( num == <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a>+1 ))</div>
+<div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( ( num == <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a> )||( num == <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a>+1 ) )</div>
 <div class="line">    {</div>
-<div class="line">        <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a>( context, _surface_from_png, temp, num, <a class="code" href="gui_8cc.html#aef773059d1f4a897e5be824e16b19d5e">I_DUMMY</a>, tt_image ) ;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#a3a543ab731a5745657c5e47a3e7fc8b6">sub_paint_tile</a> ( context, _surface_from_png, temp, num,</div>
+<div class="line">                         <a class="code" href="gui_8cc.html#aef773059d1f4a897e5be824e16b19d5e">I_DUMMY</a>, tt_image ) ;</div>
 <div class="line">    }</div>
 <div class="line"></div>
 <div class="line">    <span class="keywordflow">if</span> ( temp != NULL )</div>
@@ -1987,7 +2096,7 @@ Variabili</h2></td></tr>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D9 paint tile\n&quot;</span>)</div>
 <div class="line"></div>
-<div class="line">    assert( surface != NULL ) ;</div>
+<div class="line">    assert(surface != NULL) ;</div>
 <div class="line"></div>
 <div class="line">    return ( surface ) ;</div>
 <div class="line">    <span class="comment">/* la surface la dealloco nella funzione chiamante*/</span></div>
@@ -2058,9 +2167,9 @@ Variabili</h2></td></tr>
 <div class="line">    <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a> refresh down label&quot;&lt;&lt;endl)</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a529dfc3dc7bd423bdf6d912456f4c075">D4</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a529dfc3dc7bd423bdf6d912456f4c075">D4</a> couples=&quot;&lt;&lt;couples&lt;&lt;endl)</div>
 <div class="line"></div>
-<div class="line">    if ((<a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a>)&amp;&amp;( <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> == tiles ))</div>
+<div class="line">    if ( ( <a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a> )&amp;&amp;( <a class="code" href="gui_8cc.html#a2a7242845b1e1fa5a538cda366c2e560">play_ground</a> == tiles ) )</div>
 <div class="line">    {</div>
-<div class="line">        assert(<a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a>==<span class="keyword">true</span>);</div>
+<div class="line">        assert(<a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a> == <span class="keyword">true</span>);</div>
 <div class="line"></div>
 <div class="line">        <span class="keywordtype">char</span> before[<a class="code" href="gui_8cc.html#ae68bf5715a32605dee2ba5beeb81fd66">MAXLUN</a>] = <span class="stringliteral">&quot;&quot;</span> ;</div>
 <div class="line">        <span class="keywordtype">char</span> after[<a class="code" href="gui_8cc.html#ae68bf5715a32605dee2ba5beeb81fd66">MAXLUN</a>] = <span class="stringliteral">&quot; removable couples left&quot;</span> ;</div>
@@ -2081,10 +2190,10 @@ Variabili</h2></td></tr>
 <div class="line"></div>
 <div class="line">        sprintf ( sum, <span class="stringliteral">&quot;%s %d %s&quot;</span>, before, couples, after ) ;</div>
 <div class="line"></div>
-<div class="line">        gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a>(<span class="stringliteral">&quot;label_down&quot;</span>), sum ) ;</div>
+<div class="line">        gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a> ( <span class="stringliteral">&quot;label_down&quot;</span> ), sum ) ;</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">else</span></div>
-<div class="line">    gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a>(<span class="stringliteral">&quot;label_down&quot;</span>), <span class="stringliteral">&quot; &quot;</span> ) ;</div>
+<div class="line">    gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a> ( <span class="stringliteral">&quot;label_down&quot;</span> ), <span class="stringliteral">&quot; &quot;</span> ) ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D9 refresh down label\n&quot;</span>)</div>
 <div class="line">}</div>
@@ -2145,7 +2254,7 @@ Variabili</h2></td></tr>
 <div class="line">        <a class="code" href="gui_8cc.html#a42e5eabdaad39a47d55f5f7f4ce791eb">last_removed_pl1_b</a> = b ;        <span class="comment">// removed by player 1</span></div>
 <div class="line">    }</div>
 <div class="line"></div>
-<div class="line">    <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a>(<span class="stringliteral">&quot;drawingarea_right&quot;</span>) ;</div>
+<div class="line">    <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a> ( <span class="stringliteral">&quot;drawingarea_right&quot;</span> ) ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D9 refresh pair removed\n&quot;</span>)</div>
 <div class="line">}</div>
@@ -2200,8 +2309,8 @@ Variabili</h2></td></tr>
 <div class="line">    sprintf ( text_pl1, &quot;%s%d%s&quot;, before, score1, after ) ;</div>
 <div class="line">    sprintf ( text_pl2, &quot;%s%d%s&quot;, before, score2, after ) ;</div>
 <div class="line"></div>
-<div class="line">    gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a>(&quot;score1&quot;), text_pl1 ) ;</div>
-<div class="line">    gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a>(&quot;score2&quot;), text_pl2 ) ;</div>
+<div class="line">    gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a> ( &quot;score1&quot; ), text_pl1 ) ;</div>
+<div class="line">    gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a> ( &quot;score2&quot; ), text_pl2 ) ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a> refresh scores label\n&quot;)</div>
 <div class="line">}</div>
@@ -2231,7 +2340,7 @@ Variabili</h2></td></tr>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a975397c373ae2a9dc28d0297fa18da56">D2</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D2 refresh turn label\n&quot;</span>)</div>
 <div class="line"></div>
-<div class="line">    if (<a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a>)</div>
+<div class="line">    if ( <a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a> )</div>
 <div class="line">    {</div>
 <div class="line">        <span class="keywordtype">char</span> pl_1[<a class="code" href="gui_8cc.html#ae68bf5715a32605dee2ba5beeb81fd66">MAXLUN</a>] = <span class="stringliteral">&quot;Player 1&quot;</span> ;</div>
 <div class="line">        <span class="keywordtype">char</span> pl_2a[<a class="code" href="gui_8cc.html#ae68bf5715a32605dee2ba5beeb81fd66">MAXLUN</a>] = <span class="stringliteral">&quot;Computer&quot;</span> ;</div>
@@ -2243,8 +2352,10 @@ Variabili</h2></td></tr>
 <div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( <a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> == h_h )</div>
 <div class="line">            pl_2 = pl_2b ;</div>
 <div class="line"></div>
-<div class="line">        <span class="keywordtype">char</span> markup_normal_string[<a class="code" href="gui_8cc.html#ae68bf5715a32605dee2ba5beeb81fd66">MAXLUN</a>] = <span class="stringliteral">&quot;&lt;span weight=\&quot;normal\&quot; size=\&quot;medium\&quot;&gt;&quot;</span> ;</div>
-<div class="line">        <span class="keywordtype">char</span> markup_bold_string[<a class="code" href="gui_8cc.html#ae68bf5715a32605dee2ba5beeb81fd66">MAXLUN</a>] = <span class="stringliteral">&quot;&lt;span weight=\&quot;bold\&quot; size=\&quot;larger\&quot;&gt;&quot;</span> ;</div>
+<div class="line">        <span class="keywordtype">char</span> markup_normal_string[<a class="code" href="gui_8cc.html#ae68bf5715a32605dee2ba5beeb81fd66">MAXLUN</a>] =</div>
+<div class="line">                                    <span class="stringliteral">&quot;&lt;span weight=\&quot;normal\&quot; size=\&quot;medium\&quot;&gt;&quot;</span> ;</div>
+<div class="line">        <span class="keywordtype">char</span> markup_bold_string[<a class="code" href="gui_8cc.html#ae68bf5715a32605dee2ba5beeb81fd66">MAXLUN</a>] =</div>
+<div class="line">                                      <span class="stringliteral">&quot;&lt;span weight=\&quot;bold\&quot; size=\&quot;larger\&quot;&gt;&quot;</span> ;</div>
 <div class="line">        <span class="keywordtype">char</span> end_markup[<a class="code" href="gui_8cc.html#ae68bf5715a32605dee2ba5beeb81fd66">MAXLUN</a>] = <span class="stringliteral">&quot;&lt;/span&gt;&quot;</span> ;</div>
 <div class="line"></div>
 <div class="line"></div>
@@ -2253,28 +2364,32 @@ Variabili</h2></td></tr>
 <div class="line">        <span class="comment">/*player 1*/</span></div>
 <div class="line">        strcat( markup_bold_string, pl_1 ) ;</div>
 <div class="line">        strcat( markup_bold_string, end_markup ) ;</div>
-<div class="line">        gtk_label_set_markup( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a>(<span class="stringliteral">&quot;player1&quot;</span>), markup_bold_string ) ;</div>
+<div class="line">        gtk_label_set_markup( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a> ( <span class="stringliteral">&quot;player1&quot;</span> ),</div>
+<div class="line">                              markup_bold_string             ) ;</div>
 <div class="line"></div>
 <div class="line">        strcat( markup_normal_string, pl_2 ) ;</div>
 <div class="line">        strcat( markup_normal_string, end_markup ) ;</div>
-<div class="line">        gtk_label_set_markup( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a>(<span class="stringliteral">&quot;player2&quot;</span>), markup_normal_string ) ;</div>
+<div class="line">        gtk_label_set_markup( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a> ( <span class="stringliteral">&quot;player2&quot;</span> ),</div>
+<div class="line">                              markup_normal_string           ) ;</div>
 <div class="line">        }</div>
 <div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( _switch == <span class="keyword">true</span> )</div>
 <div class="line">        {</div>
 <div class="line">        <span class="comment">/*player 2*/</span></div>
 <div class="line">        strcat( markup_normal_string, pl_1 ) ;</div>
 <div class="line">        strcat( markup_normal_string, end_markup ) ;</div>
-<div class="line">        gtk_label_set_markup( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a>(<span class="stringliteral">&quot;player1&quot;</span>), markup_normal_string ) ;</div>
+<div class="line">        gtk_label_set_markup( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a> ( <span class="stringliteral">&quot;player1&quot;</span> ),</div>
+<div class="line">                              markup_normal_string           ) ;</div>
 <div class="line"></div>
 <div class="line">        strcat( markup_bold_string, pl_2 ) ;</div>
 <div class="line">        strcat( markup_bold_string, end_markup ) ;</div>
-<div class="line">        gtk_label_set_markup( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a>(<span class="stringliteral">&quot;player2&quot;</span>), markup_bold_string ) ;</div>
+<div class="line">        gtk_label_set_markup( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a> ( <span class="stringliteral">&quot;player2&quot;</span> ),</div>
+<div class="line">                              markup_bold_string             ) ;</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">else</span></div>
 <div class="line">    {</div>
-<div class="line">        gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a>(<span class="stringliteral">&quot;player1&quot;</span>), <span class="stringliteral">&quot; &quot;</span> ) ;</div>
-<div class="line">        gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a>(<span class="stringliteral">&quot;player2&quot;</span>), <span class="stringliteral">&quot; &quot;</span> ) ;</div>
+<div class="line">        gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a> ( <span class="stringliteral">&quot;player1&quot;</span> ), <span class="stringliteral">&quot; &quot;</span> ) ;</div>
+<div class="line">        gtk_label_set_text ( <a class="code" href="gui_8cc.html#a7a91badc7d511d0c23bab04aa9c3fdaf">label_from_name</a> ( <span class="stringliteral">&quot;player2&quot;</span> ), <span class="stringliteral">&quot; &quot;</span> ) ;</div>
 <div class="line">    }</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D9 refresh turn label\n&quot;</span>)</div>
@@ -2359,7 +2474,7 @@ Variabili</h2></td></tr>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a975397c373ae2a9dc28d0297fa18da56">D2</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D2 set coor tile\n&quot;</span>)</div>
 <div class="line"></div>
-<div class="line">    assert( punt != NULL ) ;</div>
+<div class="line">    assert(punt != NULL) ;</div>
 <div class="line"></div>
 <div class="line">    punt-&gt;x1 = x + 10 ;</div>
 <div class="line">    punt-&gt;y1 = y ;</div>
@@ -2432,7 +2547,16 @@ Variabili</h2></td></tr>
 <div class="line">        <a class="code" href="gui_8cc.html#a4d2f08f57ecc303ca99881b65d322589">h_x2</a> = x ;</div>
 <div class="line">        <a class="code" href="gui_8cc.html#af3288dc0bf3c3f61f298697263465e0c">h_y2</a> = y ;</div>
 <div class="line">        <a class="code" href="gui_8cc.html#a2cf09dc07dba9e08a528ecd57c68ce9f">h_z2</a> = z ;</div>
-<div class="line">    } <span class="keywordflow">else</span> { <span class="comment">/*debug this case*/</span> ; }</div>
+<div class="line">    } <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">        <a class="code" href="gui_8cc.html#aa1e7eff7e894e44ff773a0e00d70500b">h_x1</a> = -1;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#a37f76d3f8f8f2d7f3b29b10bee70254b">h_y1</a> = -1 ;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#aa88060e8d262393f68233de6bf4fdb55">h_z1</a> = -1 ;</div>
+<div class="line"></div>
+<div class="line">        <a class="code" href="gui_8cc.html#a4d2f08f57ecc303ca99881b65d322589">h_x2</a> = -1 ;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#af3288dc0bf3c3f61f298697263465e0c">h_y2</a> = -1 ;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#a2cf09dc07dba9e08a528ecd57c68ce9f">h_z2</a> = -1 ;</div>
+<div class="line">    }</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D10 set highlighted cell\n&quot;</span>)</div>
 <div class="line">}</div>
@@ -2522,7 +2646,7 @@ Variabili</h2></td></tr>
 <div class="line">    <span class="keywordflow">else</span></div>
 <div class="line">    <span class="comment">/*debug this case*/</span> ;</div>
 <div class="line"></div>
-<div class="line">    cairo_paint( context ) ;</div>
+<div class="line">    cairo_paint ( context ) ;</div>
 <div class="line">    cairo_surface_destroy ( surf1 ) ;</div>
 <div class="line">    surf1 = NULL ;</div>
 <div class="line">    cairo_surface_destroy ( surf2 ) ;</div>
@@ -2590,7 +2714,7 @@ Variabili</h2></td></tr>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a> widget from <a class="code" href="game_8h.html#af63b296d18a03f7e91badc96a015fac7">name</a>\n&quot;)</div>
 <div class="line"></div>
-<div class="line">    return GTK_WIDGET(gtk_builder_get_object(<a class="code" href="gui_8cc.html#afa501dbb63ae6077ac8db76b560de42b">builder</a>, <a class="code" href="game_8h.html#af63b296d18a03f7e91badc96a015fac7">name</a> ) ) ;</div>
+<div class="line">    return GTK_WIDGET ( gtk_builder_get_object ( <a class="code" href="gui_8cc.html#afa501dbb63ae6077ac8db76b560de42b">builder</a>, <a class="code" href="game_8h.html#af63b296d18a03f7e91badc96a015fac7">name</a> ) ) ;</div>
 <div class="line">}</div>
 </div><!-- fragment -->
 </div>
@@ -3578,6 +3702,26 @@ Variabili</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a2dfa925e9964f2685ee14f3bdec7a585"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* W_about = &quot;window_about&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a1ba6ebeaa5d2f923808bfcd9c047af10"></a>
 <div class="memitem">
 <div class="memproto">
@@ -3681,7 +3825,7 @@ Variabili</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generato Dom 14 Set 2014 00:51:26 per Mahjong da &#160;<a href="http://www.doxygen.org/index.html">
+Generato Dom 14 Set 2014 11:58:55 per Mahjong da &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

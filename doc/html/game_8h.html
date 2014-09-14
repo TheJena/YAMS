@@ -162,9 +162,9 @@ Variabili</h2></td></tr>
 <div class="line"></div>
 <div class="line">    if ( <a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a> )</div>
 <div class="line">    {</div>
-<div class="line">        <a class="code" href="game_8cc.html#a6d71742a4f6bf95ed5a9f35e5b24f0c0">refresh_scores</a>() ;</div>
-<div class="line">        <a class="code" href="gui_8cc.html#a71a1ac39fe89b4eaf3a7d4b0bc8c4633">refresh_scores_labels</a>(<a class="code" href="game_8cc.html#ac4270932e53ca1f01055730603581ed5">_score1</a>, <a class="code" href="game_8cc.html#a54340bce4f156f70290ea284f25165ce">_score2</a>) ;</div>
-<div class="line">        <a class="code" href="gui_8cc.html#a069e7212b25e5b8067dca2e396d2e864">reset_highlighted_cell</a>() ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a6d71742a4f6bf95ed5a9f35e5b24f0c0">refresh_scores</a> () ;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#a71a1ac39fe89b4eaf3a7d4b0bc8c4633">refresh_scores_labels</a> ( <a class="code" href="game_8cc.html#ac4270932e53ca1f01055730603581ed5">_score1</a>, <a class="code" href="game_8cc.html#a54340bce4f156f70290ea284f25165ce">_score2</a> ) ;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#a069e7212b25e5b8067dca2e396d2e864">reset_highlighted_cell</a> () ;</div>
 <div class="line">        <a class="code" href="gui_8cc.html#ad0c3b4925225878be8e12b0c43678fb4">clear_pair_removed</a> () ;</div>
 <div class="line">        <a class="code" href="gui_8cc.html#aa71b9b7a6c50c446fb4e4bb3f0179e98">display_end</a> () ;</div>
 <div class="line"></div>
@@ -229,7 +229,7 @@ Variabili</h2></td></tr>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 insert half pair\n&quot;</span>)</div>
 <div class="line"></div>
 <div class="line">    if ( <a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a> == <a class="code" href="game_8cc.html#a26971deff94cc6872e8bc340303923be">max_couple_row</a>-1 )</div>
-<div class="line">        <a class="code" href="game_8cc.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a>() ;</div>
+<div class="line">        <a class="code" href="game_8cc.html#a4202fa5c5191c7e387d7570da6c8cd8c">end_game</a> () ;</div>
 <div class="line"></div>
 <div class="line">    if ( <a class="code" href="game_8cc.html#aa81af6873000d183cbda5b4d0dd7fd22">mode</a> == h_c )</div>
 <div class="line">        <a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a> = 0 ;</div>
@@ -324,16 +324,18 @@ Variabili</h2></td></tr>
 <div class="line">        <span class="keywordflow">for</span> ( <span class="keywordtype">int</span> c = 0 ; c &lt; 2 ; c++ )</div>
 <div class="line">            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> r = 0 ; r &lt;= <a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a> ; r++ )</div>
 <div class="line">            {</div>
-<div class="line">                <span class="keywordflow">if</span> ( ( c == 0 )&amp;&amp;( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].t1 &gt;= 0 )&amp;&amp;( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].t1 &lt; <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a> ) )</div>
+<div class="line">                <span class="keywordflow">if</span> ( ( c == 0 )&amp;&amp;( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].t1 &gt;= 0 )&amp;&amp;</div>
+<div class="line">                     ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].t1 &lt; <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a> )            )</div>
 <div class="line">                {</div>
-<div class="line">                    <span class="keywordtype">int</span> temp = <a class="code" href="movements_8cc.html#a1e53b7a83063093036cd2956d3cf5698">tile_value</a>(<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].t1) ;</div>
-<div class="line">                    <span class="keywordflow">if</span> (temp &gt;=1)</div>
+<div class="line">                    <span class="keywordtype">int</span> temp = <a class="code" href="movements_8cc.html#a1e53b7a83063093036cd2956d3cf5698">tile_value</a> ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].t1 ) ;</div>
+<div class="line">                    <span class="keywordflow">if</span> ( temp &gt;= 1 )</div>
 <div class="line">                        <a class="code" href="game_8cc.html#ac4270932e53ca1f01055730603581ed5">_score1</a> += temp ;</div>
 <div class="line">                }</div>
-<div class="line">                <span class="keywordflow">if</span> ( ( c == 1 )&amp;&amp;( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].t1 &gt;= 0 )&amp;&amp;( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].t1 &lt; <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a> ) )</div>
+<div class="line">                <span class="keywordflow">if</span> ( ( c == 1 )&amp;&amp;( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].t1 &gt;= 0 )&amp;&amp;</div>
+<div class="line">                     ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].t1 &lt; <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a> )            )</div>
 <div class="line">                {</div>
-<div class="line">                    <span class="keywordtype">int</span> temp = <a class="code" href="movements_8cc.html#a1e53b7a83063093036cd2956d3cf5698">tile_value</a>(<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].t1) ;</div>
-<div class="line">                    <span class="keywordflow">if</span> (temp &gt;=1)</div>
+<div class="line">                    <span class="keywordtype">int</span> temp = <a class="code" href="movements_8cc.html#a1e53b7a83063093036cd2956d3cf5698">tile_value</a> ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].t1 ) ;</div>
+<div class="line">                    <span class="keywordflow">if</span> ( temp &gt;= 1 )</div>
 <div class="line">                        <a class="code" href="game_8cc.html#a54340bce4f156f70290ea284f25165ce">_score2</a> += temp ;</div>
 <div class="line">                }</div>
 <div class="line"></div>
@@ -342,7 +344,7 @@ Variabili</h2></td></tr>
 <div class="line">        <a class="code" href="debug__macros_8h.html#ac9f9e36799ba12832fda1e6716a67167">D3</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D3 refresh scores\n&quot;</span>)</div>
 <div class="line">        <a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a> <a class="code" href="game_8cc.html#ac4270932e53ca1f01055730603581ed5">_score1</a>=&quot;&lt;&lt;<a class="code" href="game_8cc.html#ac4270932e53ca1f01055730603581ed5">_score1</a>&lt;&lt;&quot; <a class="code" href="game_8cc.html#a54340bce4f156f70290ea284f25165ce">_score2</a>=&quot;&lt;&lt;<a class="code" href="game_8cc.html#a54340bce4f156f70290ea284f25165ce">_score2</a>&lt;&lt;endl)</div>
 <div class="line"></div>
-<div class="line">        <a class="code" href="gui_8cc.html#a71a1ac39fe89b4eaf3a7d4b0bc8c4633">refresh_scores_labels</a>( <a class="code" href="game_8cc.html#ac4270932e53ca1f01055730603581ed5">_score1</a>, <a class="code" href="game_8cc.html#a54340bce4f156f70290ea284f25165ce">_score2</a> ) ;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#a71a1ac39fe89b4eaf3a7d4b0bc8c4633">refresh_scores_labels</a> ( <a class="code" href="game_8cc.html#ac4270932e53ca1f01055730603581ed5">_score1</a>, <a class="code" href="game_8cc.html#a54340bce4f156f70290ea284f25165ce">_score2</a> ) ;</div>
 <div class="line">    }</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a> refresh scores\n&quot;)</div>
@@ -397,7 +399,8 @@ Variabili</h2></td></tr>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 save game\n&quot;</span>)</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a> save game\n&quot;)</div>
-<div class="line">    return <a class="code" href="io__file_8cc.html#a6f1b5e4cb147bb248c1a3070af68f420">save_game_on_file</a> ( const_cast&lt;const couple**&gt;(<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>), filename, <a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>, <a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a> ) ;</div>
+<div class="line">    return <a class="code" href="io__file_8cc.html#a6f1b5e4cb147bb248c1a3070af68f420">save_game_on_file</a> ( const_cast&lt;const couple**&gt;( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a> ), filename, <a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>,</div>
+<div class="line">                               <a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a> ) ;</div>
 <div class="line">}</div>
 </div><!-- fragment -->
 </div>
@@ -419,7 +422,7 @@ Variabili</h2></td></tr>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 start game\n&quot;</span>)</div>
 <div class="line"></div>
-<div class="line">    if (!<a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a>)</div>
+<div class="line">    if ( !<a class="code" href="game_8cc.html#a0448fec049217e428b9ec21c03e51d52">playing</a> )</div>
 <div class="line">    {</div>
 <div class="line">        playing = true ;</div>
 <div class="line">        <a class="code" href="cube_8cc.html#a056de1638f5f15c8d84d62147bbcbd9c">initialize_cube</a> () ;</div>
@@ -457,10 +460,10 @@ Variabili</h2></td></tr>
 <div class="line">                    <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[r][c].name2 = NULL ;</div>
 <div class="line">                }</div>
 <div class="line"></div>
-<div class="line">            <a class="code" href="gui_8cc.html#a069e7212b25e5b8067dca2e396d2e864">reset_highlighted_cell</a>() ;</div>
-<div class="line">            <a class="code" href="gui_8cc.html#a953a10527fc3533c62a160d6ad324fe3">display_tiles</a>() ;</div>
-<div class="line">            <a class="code" href="gui_8cc.html#a66894b02aa54394e24efddd4e0a8618c">refresh_turn_label</a>(<span class="keyword">false</span>);</div>
-<div class="line">            <a class="code" href="game_8cc.html#a6d71742a4f6bf95ed5a9f35e5b24f0c0">refresh_scores</a>() ;</div>
+<div class="line">            <a class="code" href="gui_8cc.html#a069e7212b25e5b8067dca2e396d2e864">reset_highlighted_cell</a> () ;</div>
+<div class="line">            <a class="code" href="gui_8cc.html#a953a10527fc3533c62a160d6ad324fe3">display_tiles</a> () ;</div>
+<div class="line">            <a class="code" href="gui_8cc.html#a66894b02aa54394e24efddd4e0a8618c">refresh_turn_label</a> ( <span class="keyword">false</span> ) ;</div>
+<div class="line">            <a class="code" href="game_8cc.html#a6d71742a4f6bf95ed5a9f35e5b24f0c0">refresh_scores</a> () ;</div>
 <div class="line"></div>
 <div class="line">            <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D10 start game\n&quot;</span>)</div>
 <div class="line"></div>
@@ -493,18 +496,22 @@ Variabili</h2></td></tr>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 undo last two couples\n&quot;</span>)</div>
 <div class="line"></div>
-<div class="line">    if (( <a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a> &gt;= 1 )&amp;&amp;(!<a class="code" href="gui_8cc.html#a38ec949d4b21e41328cbd5c945ace68c">lock_undo</a>))</div>
+<div class="line">    if ( ( <a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a> &gt;= 1 )&amp;&amp;( !<a class="code" href="gui_8cc.html#a38ec949d4b21e41328cbd5c945ace68c">lock_undo</a> ) )</div>
 <div class="line">    {</div>
 <div class="line">        <a class="code" href="game_8cc.html#a6d71742a4f6bf95ed5a9f35e5b24f0c0">refresh_scores</a>() ;</div>
 <div class="line">        <a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>-- ;</div>
 <div class="line">        <span class="keywordflow">if</span> ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].t1 != -1 )</div>
-<div class="line">            <a class="code" href="cube_8cc.html#a114c4b91c4c350e48f9821efb2bf264d">fill_cell</a>(<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].x1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].y1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].z1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].t1);</div>
+<div class="line">            <a class="code" href="cube_8cc.html#a114c4b91c4c350e48f9821efb2bf264d">fill_cell</a> ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].x1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].y1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].z1,</div>
+<div class="line">                        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].t1 ) ;</div>
 <div class="line">        <span class="keywordflow">if</span> ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].t2 != -1 )</div>
-<div class="line">            <a class="code" href="cube_8cc.html#a114c4b91c4c350e48f9821efb2bf264d">fill_cell</a>(<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].x2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].y2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].z2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].t2);</div>
+<div class="line">            <a class="code" href="cube_8cc.html#a114c4b91c4c350e48f9821efb2bf264d">fill_cell</a> ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].x2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].y2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].z2,</div>
+<div class="line">                        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].t2 ) ;</div>
 <div class="line">        <span class="keywordflow">if</span> ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].t1 != -1 )</div>
-<div class="line">            <a class="code" href="cube_8cc.html#a114c4b91c4c350e48f9821efb2bf264d">fill_cell</a>(<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].x1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].y1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].z1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].t1);</div>
+<div class="line">            <a class="code" href="cube_8cc.html#a114c4b91c4c350e48f9821efb2bf264d">fill_cell</a> ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].x1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].y1, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].z1,</div>
+<div class="line">                        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].t1 ) ;</div>
 <div class="line">        <span class="keywordflow">if</span> ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].t2 != -1 )</div>
-<div class="line">            <a class="code" href="cube_8cc.html#a114c4b91c4c350e48f9821efb2bf264d">fill_cell</a>(<a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].x2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].y2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].z2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].t2);</div>
+<div class="line">            <a class="code" href="cube_8cc.html#a114c4b91c4c350e48f9821efb2bf264d">fill_cell</a> ( <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].x2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].y2, <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].z2,</div>
+<div class="line">                        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].t2 ) ;</div>
 <div class="line"></div>
 <div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].t1 = -1 ;</div>
 <div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][0].name1 = NULL ;</div>
@@ -515,7 +522,7 @@ Variabili</h2></td></tr>
 <div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].t2 = -1 ;</div>
 <div class="line">        <a class="code" href="game_8cc.html#a393611d05133138bb732c017eb5e6782">mov</a>[<a class="code" href="game_8cc.html#af1d3cff2e4538e23400e260bae3dadad">row</a>][1].name2 = NULL ;</div>
 <div class="line"></div>
-<div class="line">        <a class="code" href="gui_8cc.html#a069e7212b25e5b8067dca2e396d2e864">reset_highlighted_cell</a>() ;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#a069e7212b25e5b8067dca2e396d2e864">reset_highlighted_cell</a> () ;</div>
 <div class="line"></div>
 <div class="line">        <a class="code" href="game_8cc.html#afb52e720f5f0c483db5861f9e42e924e">col</a> = 0 ;</div>
 <div class="line"></div>
@@ -529,7 +536,7 @@ Variabili</h2></td></tr>
 <div class="line"><span class="comment">         */</span></div>
 <div class="line">        <a class="code" href="movements_8cc.html#a8d312079de155515dca7e89bb7d65771">sort_unlocked</a> () ;</div>
 <div class="line"></div>
-<div class="line">        <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a>(<span class="stringliteral">&quot;playground&quot;</span>) ;</div>
+<div class="line">        <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a> ( <span class="stringliteral">&quot;playground&quot;</span> ) ;</div>
 <div class="line">    }</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D10 undo last two couples\n&quot;</span>)</div>
@@ -592,7 +599,7 @@ Variabili</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generato Dom 14 Set 2014 00:51:26 per Mahjong da &#160;<a href="http://www.doxygen.org/index.html">
+Generato Dom 14 Set 2014 11:58:55 per Mahjong da &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

@@ -247,60 +247,60 @@ Variabili</h2></td></tr>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a975397c373ae2a9dc28d0297fa18da56">D2</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D2 check convenience\n&quot;</span>)</div>
 <div class="line"></div>
-<div class="line">    assert(a!=NULL) ;</div>
-<div class="line">    assert(b!=NULL) ;</div>
+<div class="line">    assert(a != NULL) ;</div>
+<div class="line">    assert(b != NULL) ;</div>
 <div class="line"></div>
 <div class="line">    <span class="keywordtype">int</span> xa, ya, za, xb, yb, zb ;</div>
 <div class="line">    <a class="code" href="cube_8cc.html#a0882113346c1b917216dd068660ddc71">find_coord</a> ( a-&gt;num, xa, ya, za ) ;</div>
 <div class="line">    <a class="code" href="cube_8cc.html#a0882113346c1b917216dd068660ddc71">find_coord</a> ( b-&gt;num, xb, yb, zb ) ;</div>
 <div class="line"></div>
-<div class="line">    tile * left_a=NULL;</div>
-<div class="line">    tile * right_a=NULL;</div>
-<div class="line">    tile * under_a=NULL;</div>
-<div class="line">    tile * left_b=NULL;</div>
-<div class="line">    tile * right_b=NULL;</div>
-<div class="line">    tile * under_b=NULL ;</div>
+<div class="line">    tile * left_a   = NULL ;</div>
+<div class="line">    tile * right_a  = NULL ;</div>
+<div class="line">    tile * under_a  = NULL ;</div>
+<div class="line">    tile * left_b   = NULL ;</div>
+<div class="line">    tile * right_b  = NULL ;</div>
+<div class="line">    tile * under_b  = NULL ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="cube_8cc.html#a0c0a551cfd5d543bd741b99e046d8f7a">initialize_neighbor</a> ( left_a, right_a, under_a,</div>
 <div class="line">                          left_b, right_b, under_b,</div>
-<div class="line">                          xa, ya, za, xb, yb, zb, a, b    ) ;</div>
+<div class="line">                          xa, ya, za, xb, yb, zb, a, b ) ;</div>
 <div class="line"></div>
 <div class="line">    <span class="keywordtype">int</span> temp_x, temp_y, temp_z ;</div>
 <div class="line"></div>
-<div class="line">    if ( (exit)&amp;&amp;( left_a != NULL )&amp;&amp;( left_a-&gt;value &gt; a-&gt;value ) )</div>
+<div class="line">    if ( ( exit )&amp;&amp;( left_a != NULL )&amp;&amp;( left_a-&gt;value &gt; a-&gt;value ) )</div>
 <div class="line">    {</div>
-<div class="line">        <a class="code" href="cube_8cc.html#a0882113346c1b917216dd068660ddc71">find_coord</a>( left_a-&gt;num, temp_x, temp_y, temp_z ) ;</div>
+<div class="line">        <a class="code" href="cube_8cc.html#a0882113346c1b917216dd068660ddc71">find_coord</a> ( left_a-&gt;num, temp_x, temp_y, temp_z ) ;</div>
 <div class="line">        <span class="keywordflow">if</span> ( ( temp_x-1 &gt;= 0 )&amp;&amp;( <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[temp_x-1][temp_y][temp_z].empty ) )</div>
 <div class="line">            exit = false ;</div>
 <div class="line">    }</div>
-<div class="line">    <span class="keywordflow">if</span> ( (exit)&amp;&amp;( right_a != NULL )&amp;&amp;( right_a-&gt;value &gt; a-&gt;value ) )</div>
+<div class="line">    <span class="keywordflow">if</span> ( ( exit )&amp;&amp;( right_a != NULL )&amp;&amp;( right_a-&gt;value &gt; a-&gt;value ) )</div>
 <div class="line">    {</div>
-<div class="line">        <a class="code" href="cube_8cc.html#a0882113346c1b917216dd068660ddc71">find_coord</a>( right_a-&gt;num, temp_x, temp_y, temp_z ) ;</div>
+<div class="line">        <a class="code" href="cube_8cc.html#a0882113346c1b917216dd068660ddc71">find_coord</a> ( right_a-&gt;num, temp_x, temp_y, temp_z ) ;</div>
 <div class="line">        <span class="keywordflow">if</span> ( ( temp_x+1 &lt; <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a> )&amp;&amp;( <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[temp_x+1][temp_y][temp_z].empty ) )</div>
 <div class="line">            exit = false ;</div>
 <div class="line">    }</div>
-<div class="line">    <span class="keywordflow">if</span> ( (exit)&amp;&amp;( under_a != NULL )&amp;&amp;( under_a-&gt;value &gt; a-&gt;value) )</div>
+<div class="line">    <span class="keywordflow">if</span> ( ( exit )&amp;&amp;( under_a != NULL )&amp;&amp;( under_a-&gt;value &gt; a-&gt;value) )</div>
 <div class="line">    {</div>
-<div class="line">        <a class="code" href="cube_8cc.html#a0882113346c1b917216dd068660ddc71">find_coord</a>( under_a-&gt;num, temp_x, temp_y, temp_z ) ;</div>
+<div class="line">        <a class="code" href="cube_8cc.html#a0882113346c1b917216dd068660ddc71">find_coord</a> ( under_a-&gt;num, temp_x, temp_y, temp_z ) ;</div>
 <div class="line">        <span class="keywordflow">if</span> ( ( ( temp_x-1 &gt;= 0 )&amp;&amp;( <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[temp_x-1][temp_y][temp_z].empty) ) ||</div>
-<div class="line">             ( ( temp_x+1 &lt; <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a>)&amp;&amp;(<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[temp_x+1][temp_y][temp_z].empty) )  )</div>
+<div class="line">             ( ( temp_x+1 &lt; <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a>)&amp;&amp;( <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[temp_x+1][temp_y][temp_z].empty) ) )</div>
 <div class="line">            exit = false ;</div>
 <div class="line">    }</div>
-<div class="line">    <span class="keywordflow">if</span> ( (exit)&amp;&amp;( left_b != NULL )&amp;&amp;( left_b-&gt;value &gt; b-&gt;value ) )</div>
+<div class="line">    <span class="keywordflow">if</span> ( ( exit )&amp;&amp;( left_b != NULL )&amp;&amp;( left_b-&gt;value &gt; b-&gt;value ) )</div>
 <div class="line">    {</div>
-<div class="line">        <a class="code" href="cube_8cc.html#a0882113346c1b917216dd068660ddc71">find_coord</a>( left_b-&gt;num, temp_x, temp_y, temp_z ) ;</div>
+<div class="line">        <a class="code" href="cube_8cc.html#a0882113346c1b917216dd068660ddc71">find_coord</a> ( left_b-&gt;num, temp_x, temp_y, temp_z ) ;</div>
 <div class="line">        <span class="keywordflow">if</span> ( ( temp_x-1 &gt;= 0 )&amp;&amp;( <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[temp_x-1][temp_y][temp_z].empty ) )</div>
 <div class="line">            exit = false ;</div>
 <div class="line">    }</div>
-<div class="line">    <span class="keywordflow">if</span> ( (exit)&amp;&amp;( right_b != NULL )&amp;&amp;( right_b-&gt;value &gt; b-&gt;value ) )</div>
+<div class="line">    <span class="keywordflow">if</span> ( ( exit )&amp;&amp;( right_b != NULL )&amp;&amp;( right_b-&gt;value &gt; b-&gt;value ) )</div>
 <div class="line">    {</div>
-<div class="line">        <a class="code" href="cube_8cc.html#a0882113346c1b917216dd068660ddc71">find_coord</a>( right_b-&gt;num, temp_x, temp_y, temp_z ) ;</div>
+<div class="line">        <a class="code" href="cube_8cc.html#a0882113346c1b917216dd068660ddc71">find_coord</a> ( right_b-&gt;num, temp_x, temp_y, temp_z ) ;</div>
 <div class="line">        <span class="keywordflow">if</span> ( ( temp_x+1 &lt; <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a> )&amp;&amp;( <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[temp_x+1][temp_y][temp_z].empty ) )</div>
 <div class="line">            exit = false ;</div>
 <div class="line">    }</div>
-<div class="line">    <span class="keywordflow">if</span> ( (exit)&amp;&amp;( under_b != NULL )&amp;&amp;( under_b-&gt;value &gt; b-&gt;value) )</div>
+<div class="line">    <span class="keywordflow">if</span> ( ( exit )&amp;&amp;( under_b != NULL )&amp;&amp;( under_b-&gt;value &gt; b-&gt;value) )</div>
 <div class="line">    {</div>
-<div class="line">        <a class="code" href="cube_8cc.html#a0882113346c1b917216dd068660ddc71">find_coord</a>( under_b-&gt;num, temp_x, temp_y, temp_z ) ;</div>
+<div class="line">        <a class="code" href="cube_8cc.html#a0882113346c1b917216dd068660ddc71">find_coord</a> ( under_b-&gt;num, temp_x, temp_y, temp_z ) ;</div>
 <div class="line">        <span class="keywordflow">if</span> ( ( ( temp_x-1 &gt;= 0 )&amp;&amp;( <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[temp_x-1][temp_y][temp_z].empty) ) ||</div>
 <div class="line">             ( ( temp_x+1 &lt; <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a>)&amp;&amp;(<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[temp_x+1][temp_y][temp_z].empty) )  )</div>
 <div class="line">            exit = false ;</div>
@@ -337,10 +337,12 @@ Variabili</h2></td></tr>
 <div class="line">            for ( <span class="keywordtype">int</span> z = <a class="code" href="cube_8cc.html#adab0a000e20e650547135aaac6f1e204">dim_Z</a>-1 ; z &gt;= 0 ; z--)</div>
 <div class="line">            {</div>
 <div class="line"></div>
-<div class="line">                <span class="keywordflow">if</span> ( ( ! <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].empty ) &amp;&amp; ( ! visited[x][y] )&amp;&amp;( <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].num &lt; <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a> ) )</div>
+<div class="line">                <span class="keywordflow">if</span> ( ( ! <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].empty )     &amp;&amp;</div>
+<div class="line">                     ( ! visited[x][y] )           &amp;&amp;</div>
+<div class="line">                     ( <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].num &lt; <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a> )    )</div>
 <div class="line">                {</div>
 <div class="line">                    visited[x][y] = true ;</div>
-<div class="line">                    <a class="code" href="cube_8cc.html#a010ca8829412929daacf1609212ef81c">check_cell</a> ( x,y,z ) ;</div>
+<div class="line">                    <a class="code" href="cube_8cc.html#a010ca8829412929daacf1609212ef81c">check_cell</a> ( x, y, z ) ;</div>
 <div class="line">                }</div>
 <div class="line">                <span class="keywordflow">else</span></div>
 <div class="line">                    <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].lock = true ;</div>
@@ -462,17 +464,21 @@ Variabili</h2></td></tr>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 fill cell\n&quot;</span>)</div>
 <div class="line"></div>
-<div class="line"><span class="comment">/*debug se valori x, y, z consoni*/</span></div>
-<div class="line">    <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].empty = false ;</div>
-<div class="line">    <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].num = last ;</div>
-<div class="line">    if ( last &lt; <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a> )</div>
-<div class="line">        <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].value = <a class="code" href="movements_8cc.html#a1e53b7a83063093036cd2956d3cf5698">tile_value</a> (last) ;</div>
-<div class="line">    else</div>
-<div class="line">        <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].value = 0 ;</div>
+<div class="line">    if ( ( x &gt;= 0 )&amp;&amp;( x &lt; <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a> )&amp;&amp;</div>
+<div class="line">         ( y &gt;= 0 )&amp;&amp;( y &lt; <a class="code" href="cube_8cc.html#a4f511715fea77e31059762323c8242d9">dim_Y</a> )&amp;&amp;</div>
+<div class="line">         ( z &gt;= 0 )&amp;&amp;( z &lt; <a class="code" href="cube_8cc.html#adab0a000e20e650547135aaac6f1e204">dim_Z</a> )  )</div>
+<div class="line">    {</div>
+<div class="line">        <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].empty = false ;</div>
+<div class="line">        <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].num = last ;</div>
+<div class="line">        <span class="keywordflow">if</span> ( last &lt; <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a> )</div>
+<div class="line">            <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].value = <a class="code" href="movements_8cc.html#a1e53b7a83063093036cd2956d3cf5698">tile_value</a> ( last ) ;</div>
+<div class="line">        <span class="keywordflow">else</span></div>
+<div class="line">            <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].value = 0 ;</div>
 <div class="line"></div>
-<div class="line">    last++ ;</div>
+<div class="line">        last++ ;</div>
+<div class="line">    }</div>
 <div class="line"></div>
-<div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a> fill cell\n&quot;)</div>
+<div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D10 fill cell\n&quot;</span>)</div>
 <div class="line">}</div>
 </div><!-- fragment -->
 </div>
@@ -498,16 +504,16 @@ Variabili</h2></td></tr>
 <div class="line">    switch ( <a class="code" href="gui_8cc.html#a71be07c441cb1611b74365630b82e529">level</a> )</div>
 <div class="line">    {</div>
 <div class="line">        <span class="keywordflow">case</span> easy:</div>
-<div class="line">                        <a class="code" href="cube_8cc.html#afe230565a82393af0fc18eae2c592faa">fill_easy_layout</a>( last ) ;                        </div>
+<div class="line">                        <a class="code" href="cube_8cc.html#afe230565a82393af0fc18eae2c592faa">fill_easy_layout</a> ( last ) ;                        </div>
 <div class="line">                        break ;</div>
 <div class="line">        <span class="keywordflow">case</span> medium:</div>
-<div class="line">                        <a class="code" href="cube_8cc.html#a2193c0abe20282a135b179555918e18a">fill_medium_layout</a>( last ) ;</div>
+<div class="line">                        <a class="code" href="cube_8cc.html#a2193c0abe20282a135b179555918e18a">fill_medium_layout</a> ( last ) ;</div>
 <div class="line">                        break ;</div>
 <div class="line">        <span class="keywordflow">case</span> difficult:</div>
-<div class="line">                        <a class="code" href="cube_8cc.html#a0c826723a2019549249c5e4456245b85">fill_difficult_layout</a>( last ) ;</div>
+<div class="line">                        <a class="code" href="cube_8cc.html#a0c826723a2019549249c5e4456245b85">fill_difficult_layout</a> ( last ) ;</div>
 <div class="line">                        break ;</div>
-<div class="line">    <span class="comment">/*debug se last != 144*/</span></div>
 <div class="line">    }</div>
+<div class="line">    assert(last == <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a>) ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D10 fill cube\n&quot;</span>)</div>
 <div class="line">}</div>
@@ -708,12 +714,18 @@ Variabili</h2></td></tr>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 fill floor\n&quot;</span>)</div>
 <div class="line"></div>
-<div class="line"><span class="comment">/*debug se valori x, y, z consoni*/</span></div>
-<div class="line">    for ( <span class="keywordtype">int</span> x = x1 ; x &lt;= x2 ; x++ )</div>
-<div class="line">        for ( <span class="keywordtype">int</span> y = y1 ; y &lt;=y2 ; y++ )</div>
-<div class="line">            <a class="code" href="cube_8cc.html#a114c4b91c4c350e48f9821efb2bf264d">fill_cell</a> ( x, y, z, last ) ;</div>
+<div class="line">    if ( ( x1 &gt;= 0 )&amp;&amp;( x1 &lt; <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a> )&amp;&amp;</div>
+<div class="line">         ( x2 &gt;= 0 )&amp;&amp;( x2 &lt; <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a> )&amp;&amp;</div>
+<div class="line">         ( y1 &gt;= 0 )&amp;&amp;( y1 &lt; <a class="code" href="cube_8cc.html#a4f511715fea77e31059762323c8242d9">dim_Y</a> )&amp;&amp;</div>
+<div class="line">         ( y2 &gt;= 0 )&amp;&amp;( y2 &lt; <a class="code" href="cube_8cc.html#a4f511715fea77e31059762323c8242d9">dim_Y</a> )&amp;&amp;</div>
+<div class="line">         ( z  &gt;= 0 )&amp;&amp;( z  &lt; <a class="code" href="cube_8cc.html#adab0a000e20e650547135aaac6f1e204">dim_Z</a> )   )</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">for</span> ( <span class="keywordtype">int</span> x = x1 ; x &lt;= x2 ; x++ )</div>
+<div class="line">            <span class="keywordflow">for</span> ( <span class="keywordtype">int</span> y = y1 ; y &lt;=y2 ; y++ )</div>
+<div class="line">                <a class="code" href="cube_8cc.html#a114c4b91c4c350e48f9821efb2bf264d">fill_cell</a> ( x, y, z, last ) ;</div>
+<div class="line">    }</div>
 <div class="line"></div>
-<div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a> fill floor\n&quot;)</div>
+<div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D10 fill floor\n&quot;</span>)</div>
 <div class="line">}</div>
 </div><!-- fragment -->
 </div>
@@ -856,9 +868,9 @@ Variabili</h2></td></tr>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 initialize cube\n&quot;</span>)</div>
 <div class="line"></div>
-<div class="line">    for ( <span class="keywordtype">int</span> x = 0 ; x &lt; <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a> ; x++)</div>
-<div class="line">        for ( <span class="keywordtype">int</span> y = 0 ; y &lt; <a class="code" href="cube_8cc.html#a4f511715fea77e31059762323c8242d9">dim_Y</a> ; y++)</div>
-<div class="line">            for ( <span class="keywordtype">int</span> z = 0 ; z &lt; <a class="code" href="cube_8cc.html#adab0a000e20e650547135aaac6f1e204">dim_Z</a> ; z++)</div>
+<div class="line">    for ( <span class="keywordtype">int</span> x = 0 ; x &lt; <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a> ; x++ )</div>
+<div class="line">        for ( <span class="keywordtype">int</span> y = 0 ; y &lt; <a class="code" href="cube_8cc.html#a4f511715fea77e31059762323c8242d9">dim_Y</a> ; y++ )</div>
+<div class="line">            for ( <span class="keywordtype">int</span> z = 0 ; z &lt; <a class="code" href="cube_8cc.html#adab0a000e20e650547135aaac6f1e204">dim_Z</a> ; z++ )</div>
 <div class="line">                <a class="code" href="cube_8cc.html#a2ac814685fc40e4f78c8556c8e1112ce">reset_cell</a> ( x, y, z ) ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a> initialize <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>\n&quot;)</div>
@@ -981,21 +993,21 @@ Variabili</h2></td></tr>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a975397c373ae2a9dc28d0297fa18da56">D2</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D2 initialize neighbor\n&quot;</span>)</div>
 <div class="line"></div>
-<div class="line">    if ((xa-1 &gt;= 0)&amp;&amp;( !<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[xa-1][ya][za].empty ))</div>
+<div class="line">    if ( ( xa-1 &gt;= 0 )&amp;&amp;( !<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[xa-1][ya][za].empty ) )</div>
 <div class="line">        left_a = &amp;(<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[xa-1][ya][za]) ;</div>
-<div class="line">    if ((xa+1 &lt; <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a>)&amp;&amp;( !<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[xa+1][ya][za].empty ))</div>
+<div class="line">    if ( ( xa+1 &lt; <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a> )&amp;&amp;( !<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[xa+1][ya][za].empty ) )</div>
 <div class="line">        right_a = &amp;(<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[xa+1][ya][za]) ;</div>
-<div class="line">    if ((za-1 &gt;= 0)&amp;&amp;( !<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[xa][ya][za-1].empty ))</div>
+<div class="line">    if ( ( za-1 &gt;= 0 )&amp;&amp;( !<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[xa][ya][za-1].empty ) )</div>
 <div class="line">        under_a = &amp;(<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[xa][ya][za-1]) ;</div>
 <div class="line"></div>
-<div class="line">    if ((xb-1 &gt;= 0)&amp;&amp;( !<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[xb-1][yb][zb].empty ))</div>
+<div class="line">    if ( ( xb-1 &gt;= 0 )&amp;&amp;( !<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[xb-1][yb][zb].empty ) )</div>
 <div class="line">        left_b = &amp;(<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[xb-1][yb][zb]) ;</div>
-<div class="line">    if ((xb+1 &lt; <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a>)&amp;&amp;( !<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[xb+1][yb][zb].empty ))</div>
+<div class="line">    if ( ( xb+1 &lt; <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a> )&amp;&amp;( !<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[xb+1][yb][zb].empty ) )</div>
 <div class="line">        right_b = &amp;(<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[xb+1][yb][zb]) ;</div>
-<div class="line">    if ((zb-1 &gt;= 0)&amp;&amp;( !<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[xb][yb][zb-1].empty ))</div>
+<div class="line">    if ( ( zb-1 &gt;= 0 )&amp;&amp;( !<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[xb][yb][zb-1].empty ) )</div>
 <div class="line">        under_b = &amp;(<a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[xb][yb][zb-1]) ;</div>
 <div class="line">    <span class="comment">/*controllo i casi particolari ed escludo le tessere comuni*/</span></div>
-<div class="line">    if (( left_a == right_b )||( left_b == right_a ))</div>
+<div class="line">    if ( ( left_a == right_b )||( left_b == right_a ) )</div>
 <div class="line">    {</div>
 <div class="line">        <span class="keywordflow">if</span> ( left_b == right_a )</div>
 <div class="line">        {</div>
@@ -1005,7 +1017,7 @@ Variabili</h2></td></tr>
 <div class="line">        }</div>
 <div class="line">        right_b = NULL ;</div>
 <div class="line">    } <span class="keywordflow">else</span> </div>
-<div class="line">    <span class="keywordflow">if</span> (( left_a == b )||(left_b == a))</div>
+<div class="line">    <span class="keywordflow">if</span> ( ( left_a == b )||( left_b == a) )</div>
 <div class="line">    {</div>
 <div class="line">        <span class="keywordflow">if</span> ( left_b ==a )</div>
 <div class="line">        {</div>
@@ -1153,7 +1165,7 @@ Variabili</h2></td></tr>
 <div class="line">                        i++ ;</div>
 <div class="line">                    }</div>
 <div class="line">                }</div>
-<div class="line"><span class="comment">/* debug se i &gt; n_tile */</span></div>
+<div class="line">        assert (i &lt;= n_tile) ;</div>
 <div class="line"></div>
 <div class="line">        <span class="keyword">const</span> <span class="keywordtype">int</span> min = n_tile * 4 ;</div>
 <div class="line">        <span class="keyword">const</span> <span class="keywordtype">int</span> max = n_tile * 7 ;</div>
@@ -1215,14 +1227,14 @@ Variabili</h2></td></tr>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a330bea9b36f638349fec0d06c8ab4c38">D1</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D1 remove dummies\n&quot;</span>)</div>
 <div class="line"></div>
-<div class="line">    for ( <span class="keywordtype">int</span> x = 0 ; x &lt; <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a> ; x++)</div>
-<div class="line">        for ( <span class="keywordtype">int</span> y = 0 ; y &lt; <a class="code" href="cube_8cc.html#a4f511715fea77e31059762323c8242d9">dim_Y</a> ; y++)</div>
-<div class="line">            for ( <span class="keywordtype">int</span> z = 0 ; z &lt; <a class="code" href="cube_8cc.html#adab0a000e20e650547135aaac6f1e204">dim_Z</a> ; z++)</div>
+<div class="line">    for ( <span class="keywordtype">int</span> x = 0 ; x &lt; <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a> ; x++ )</div>
+<div class="line">        for ( <span class="keywordtype">int</span> y = 0 ; y &lt; <a class="code" href="cube_8cc.html#a4f511715fea77e31059762323c8242d9">dim_Y</a> ; y++ )</div>
+<div class="line">            for ( <span class="keywordtype">int</span> z = 0 ; z &lt; <a class="code" href="cube_8cc.html#adab0a000e20e650547135aaac6f1e204">dim_Z</a> ; z++ )</div>
 <div class="line">            {</div>
 <div class="line">                <span class="keywordflow">if</span> ( <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].num &gt;= <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a> )</div>
 <div class="line">                    <a class="code" href="cube_8cc.html#a2ac814685fc40e4f78c8556c8e1112ce">reset_cell</a> ( x, y, z ) ;</div>
 <div class="line">            }</div>
-<div class="line">    <a class="code" href="gui_8cc.html#a069e7212b25e5b8067dca2e396d2e864">reset_highlighted_cell</a>() ;</div>
+<div class="line">    <a class="code" href="gui_8cc.html#a069e7212b25e5b8067dca2e396d2e864">reset_highlighted_cell</a> () ;</div>
 <div class="line">    <a class="code" href="cube_8cc.html#a4f894e1b050b78df900502f825671049">check_cube</a> () ;</div>
 <div class="line">    <a class="code" href="movements_8cc.html#a0c6790abf4708d31085f7f9f1ce5cf11">refresh_unlocked</a> () ;</div>
 <div class="line">    <span class="keywordflow">if</span> ( !<a class="code" href="movements_8cc.html#a8d312079de155515dca7e89bb7d65771">sort_unlocked</a> () )</div>
@@ -1237,7 +1249,7 @@ Variabili</h2></td></tr>
 <div class="line">        <a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a375c4cd325ac0c6ef77da753d0484680">D8</a> count pairs removable returned -1&quot;&lt;&lt;endl)</div>
 <div class="line">        return false ;</div>
 <div class="line">    }</div>
-<div class="line">    <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a>(&quot;playground&quot;) ;</div>
+<div class="line">    <a class="code" href="gui_8cc.html#a4773b5a38c2eb4d3cc1208c0872483e2">redraw_widget</a> ( &quot;playground&quot; ) ;</div>
 <div class="line"></div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a2ea5c213db390689e7b90d78309f00d0">D10</a> remove dummies\n&quot;)</div>
 <div class="line"></div>
@@ -1285,16 +1297,21 @@ Variabili</h2></td></tr>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    <a class="code" href="debug__macros_8h.html#a975397c373ae2a9dc28d0297fa18da56">D2</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D2 reset cell\n&quot;</span>)</div>
 <div class="line"></div>
-<div class="line">    <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].empty = true ;</div>
-<div class="line">    <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].lock  = true ;</div>
-<div class="line">    <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].num   = -1 ;</div>
-<div class="line">    <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].value =  0 ;</div>
-<div class="line">    <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].x1    = -1 ;</div>
-<div class="line">    <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].y1    = -1 ;</div>
-<div class="line">    <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].x2    = -1 ;</div>
-<div class="line">    <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].y2    = -1 ;</div>
+<div class="line">    if ( ( x &gt;= 0 )&amp;&amp;( x &lt; <a class="code" href="cube_8cc.html#af700fb75659a5a266ebf3013155aabd4">dim_X</a> )&amp;&amp;</div>
+<div class="line">         ( y &gt;= 0 )&amp;&amp;( y &lt; <a class="code" href="cube_8cc.html#a4f511715fea77e31059762323c8242d9">dim_Y</a> )&amp;&amp;</div>
+<div class="line">         ( z &gt;= 0 )&amp;&amp;( z &lt; <a class="code" href="cube_8cc.html#adab0a000e20e650547135aaac6f1e204">dim_Z</a> )  )</div>
+<div class="line">    {</div>
+<div class="line">        <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].empty = true ;</div>
+<div class="line">        <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].lock  = true ;</div>
+<div class="line">        <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].num   = -1 ;</div>
+<div class="line">        <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].value =  0 ;</div>
+<div class="line">        <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].x1    = -1 ;</div>
+<div class="line">        <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].y1    = -1 ;</div>
+<div class="line">        <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].x2    = -1 ;</div>
+<div class="line">        <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x][y][z].y2    = -1 ;</div>
+<div class="line">    }</div>
 <div class="line"></div>
-<div class="line">    <a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a>(cerr&lt;&lt;&quot;<a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a> reset cell\n&quot;)</div>
+<div class="line">    <a class="code" href="debug__macros_8h.html#a50828700c79da24cb536884bb7b71ba7">D9</a>(cerr&lt;&lt;<span class="stringliteral">&quot;D9 reset cell\n&quot;</span>)</div>
 <div class="line">}</div>
 </div><!-- fragment -->
 </div>
@@ -1418,7 +1435,7 @@ Variabili</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Funzione privata che scambia due tessere. O meglio scambia tutti i campi delle che le contengono. </p>
+<p>Funzione privata che scambia due tessere. O meglio scambia tutti i campi delle celle che le contengono. </p>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">x1,y1,z1,x2,y2,z2</td><td>coordinate delle tessere. </td></tr>
@@ -1431,10 +1448,14 @@ Variabili</h2></td></tr>
 <div class="line">    tile &amp;rif_a = <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x1][y1][z1] ;</div>
 <div class="line">    tile &amp;rif_b = <a class="code" href="cube_8cc.html#a9c7e833e00d7a833ef9dbda79155090c">cube</a>[x2][y2][z2] ;</div>
 <div class="line"></div>
-<div class="line">    assert(&amp;rif_a != NULL ) ;</div>
-<div class="line">    assert(&amp;rif_b != NULL ) ;</div>
+<div class="line">    assert(&amp;rif_a != NULL) ;</div>
+<div class="line">    assert(&amp;rif_b != NULL) ;</div>
 <div class="line"></div>
-<div class="line">    if ( (rif_a.empty)||(rif_b.empty)||(rif_a.num==rif_b.num)||(rif_a.num &gt;= <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a>)||(rif_b.num &gt;= <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a> ) )</div>
+<div class="line">    if ( ( rif_a.empty )            ||</div>
+<div class="line">         ( rif_b.empty )            ||</div>
+<div class="line">         ( rif_a.num == rif_b.num ) ||</div>
+<div class="line">         ( rif_a.num &gt;= <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a> )     ||</div>
+<div class="line">         ( rif_b.num &gt;= <a class="code" href="cube_8cc.html#a92679829e7c7b60dac4d1c89739ecb9b">TILES</a> )        )</div>
 <div class="line">        i-- ;</div>
 <div class="line">    else</div>
 <div class="line">    {</div>
@@ -1530,7 +1551,7 @@ Variabili</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generato Dom 14 Set 2014 00:51:26 per Mahjong da &#160;<a href="http://www.doxygen.org/index.html">
+Generato Dom 14 Set 2014 11:58:55 per Mahjong da &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
