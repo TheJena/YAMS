@@ -21,7 +21,16 @@ _string * name = NULL ;
 /*fine implementazione struttura dati pubblica*/
 
 /*inizio implementazione struttura dati privata*/
+/**
+ * Costante privata che contiene il nome del file binario contenente l' elenco
+ * dei nomi delle tessere.
+ */
 static const char* F_TILES = "./tiles_names.dat" ;
+
+/**
+ * Costante privata che contiene il numero massimo di caratteri dei nomi delle
+ * tessere.
+ */
 static const int MAXWORD = 20 ;
 /*fine implementazione struttura dati privata*/
 
@@ -37,12 +46,12 @@ static void check_filename ( char * filename ) ;
 
 /*inizio implementazione funzioni pubbliche*/
 bool save_game_on_file ( const couple** mov, char * filename,
-                         const int &row, const int &col )
+                         const int &row, const int &col      )
 {
     D1(cerr<<"D1 save game on file\n")
 
     check_filename( filename ) ;
-    remove_dummies() ;
+    remove_dummies () ;
 
     ofstream out_file( filename ) ;
     if ( !out_file )
@@ -53,58 +62,83 @@ bool save_game_on_file ( const couple** mov, char * filename,
     }
 
 
-    const int intsize = sizeof(int) ;
-    out_file.write( reinterpret_cast<char*>(const_cast<int*>(&intsize)), intsize ) ;
+    const int intsize = sizeof ( int ) ;
+    out_file.write( reinterpret_cast<char*>( const_cast<int*>( &intsize ) ),
+                    intsize ) ;
 
-    out_file.write( reinterpret_cast<char*>(const_cast<int*>(&dim_X)), intsize ) ;
-    out_file.write( reinterpret_cast<char*>(const_cast<int*>(&dim_Y)), intsize ) ;
-    out_file.write( reinterpret_cast<char*>(const_cast<int*>(&dim_Z)), intsize ) ;
+    out_file.write( reinterpret_cast<char*>( const_cast<int*>( &dim_X) ),
+                    intsize ) ;
+    out_file.write( reinterpret_cast<char*>( const_cast<int*>( &dim_Y) ),
+                    intsize ) ;
+    out_file.write( reinterpret_cast<char*>( const_cast<int*>( &dim_Z) ),
+                    intsize ) ;
 
-    out_file.write( reinterpret_cast<char*>(const_cast<int*>(&SEEDVALUE)), intsize ) ;
-    out_file.write( reinterpret_cast<char*>(const_cast<int*>(&WINDVALUE)), intsize ) ;
-    out_file.write( reinterpret_cast<char*>(const_cast<int*>(&DRAGONVALUE)), intsize ) ;
-    out_file.write( reinterpret_cast<char*>(const_cast<int*>(&SEASONVALUE)), intsize ) ;
-    out_file.write( reinterpret_cast<char*>(const_cast<int*>(&FLOWERVALUE)), intsize ) ;
+    out_file.write( reinterpret_cast<char*>( const_cast<int*>( &SEEDVALUE) ),
+                    intsize ) ;
+    out_file.write( reinterpret_cast<char*>( const_cast<int*>( &WINDVALUE) ),
+                    intsize ) ;
+    out_file.write( reinterpret_cast<char*>( const_cast<int*>( &DRAGONVALUE) ),
+                    intsize ) ;
+    out_file.write( reinterpret_cast<char*>( const_cast<int*>( &SEASONVALUE) ),
+                    intsize ) ;
+    out_file.write( reinterpret_cast<char*>( const_cast<int*>( &FLOWERVALUE) ),
+                    intsize ) ;
 
-    out_file.write( reinterpret_cast<char*>(const_cast<int*>(&last_removed_pl1_a)), intsize ) ;
-    out_file.write( reinterpret_cast<char*>(const_cast<int*>(&last_removed_pl1_b)), intsize ) ;
-    out_file.write( reinterpret_cast<char*>(const_cast<int*>(&last_removed_pl2_a)), intsize ) ;
-    out_file.write( reinterpret_cast<char*>(const_cast<int*>(&last_removed_pl2_b)), intsize ) ;
+    out_file.write( reinterpret_cast<char*>( const_cast<int*>
+                                             ( &last_removed_pl1_a) ),
+                    intsize ) ;
+    out_file.write( reinterpret_cast<char*>( const_cast<int*>
+                                             ( &last_removed_pl1_b) ),
+                    intsize ) ;
+    out_file.write( reinterpret_cast<char*>( const_cast<int*>
+                                             ( &last_removed_pl2_a) ),
+                    intsize ) ;
+    out_file.write( reinterpret_cast<char*>( const_cast<int*>
+                                             ( &last_removed_pl2_b) ),
+                    intsize ) ;
 
-    out_file.write( reinterpret_cast<char*>(const_cast<int*>(&row)), intsize ) ;
-    out_file.write( reinterpret_cast<char*>(const_cast<int*>(&col)), intsize ) ;
+    out_file.write( reinterpret_cast<char*>( const_cast<int*>( &row) ),
+                    intsize ) ;
+    out_file.write( reinterpret_cast<char*>( const_cast<int*>( &col) ),
+                    intsize ) ;
 
-    out_file.write( reinterpret_cast<char*>(&level),     sizeof(layout) ) ;
-    out_file.write( reinterpret_cast<char*>(&ai),        sizeof(computer) ) ;
-    out_file.write( reinterpret_cast<char*>(&mode),      sizeof(game) ) ;
+    out_file.write( reinterpret_cast<char*>( &level ),
+                    sizeof ( layout ) ) ;
+    out_file.write( reinterpret_cast<char*>( &ai ),
+                    sizeof ( computer ) ) ;
+    out_file.write( reinterpret_cast<char*>( &mode ),
+                    sizeof ( game ) ) ;
 
     for ( int x = 0 ; x < dim_X ; x++ )
         for ( int y = 0 ; y < dim_Y ; y++ )
             for ( int z = 0 ; z < dim_Z ; z++ )
-                    out_file.write( reinterpret_cast<char*>(&cube[x][y][z]),
-                                    sizeof(tile) ) ;
+                    out_file.write( reinterpret_cast<char*> ( &cube[x][y][z] ),
+                                    sizeof ( tile ) ) ;
 
     for ( int x = 0 ; x < max_couple_row ; x++ )
         for ( int y = 0 ; y < 2 ; y++ )
-            out_file.write(reinterpret_cast<char*>(const_cast<couple*>(&mov[x][y])), sizeof(couple) ) ;
+            out_file.write( reinterpret_cast<char*>(const_cast<couple*>
+                                                    ( &mov[x][y] ) ),
+                            sizeof ( couple ) ) ;
 
-    out_file.close();
+    out_file.close () ;
 
     D10(cerr<<"D10 save game on file\n")
 
     return true ;
 }
 
-bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &col )
+bool load_game_from_file ( couple** &mov, const char * filename,
+                           int &row, int &col                    )
 {
     D1(cerr<<"D1 load game from file\n")
 
-    end_game() ;
-    if ( !start_game() )
+    end_game () ;
+    if ( !start_game () )
     {
         D3(cerr<<"D3 load game from file"<<endl)
         D8(cerr<<"D8 start game returned false"<<endl)
-        end_game() ;
+        end_game () ;
         return false ;
     }
 
@@ -116,7 +150,7 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
         return false ;
     }
 
-    const int intsize = sizeof(int) ;
+    const int intsize = sizeof ( int ) ;
     char buffer[intsize] ;
 
     /*
@@ -124,9 +158,9 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
      * sia la stessa usata per scrivere il file binario
      */
     in_file.read( buffer, intsize ) ;
-    int * file_intsize = reinterpret_cast<int*>(buffer) ;
+    int * file_intsize = reinterpret_cast<int*>( buffer ) ;
     assert( file_intsize != NULL ) ;
-    if ( intsize != (*file_intsize))
+    if ( intsize != (*file_intsize) )
     {
         D3(cerr<<"D3 load game from file"<<endl)
         D8(cerr<<"D8 returned false because of different size of int"<<endl)
@@ -138,7 +172,7 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
      * siano le stesse usate per scrivere il file binario
      */
     in_file.read ( buffer, intsize ) ;
-    int * file_dim_X = reinterpret_cast<int*>(buffer) ;
+    int * file_dim_X = reinterpret_cast<int*>( buffer ) ;
     assert( file_dim_X != NULL ) ;
     if ( dim_X != (*file_dim_X) )
     {
@@ -147,7 +181,7 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
         return false ;
     }
     in_file.read ( buffer, intsize ) ;
-    int * file_dim_Y = reinterpret_cast<int*>(buffer) ;
+    int * file_dim_Y = reinterpret_cast<int*>( buffer ) ;
     assert( file_dim_Y != NULL ) ;
     if ( dim_Y != (*file_dim_Y) )
     {
@@ -156,7 +190,7 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
         return false ;
     }
     in_file.read ( buffer, intsize ) ;
-    int * file_dim_Z = reinterpret_cast<int*>(buffer) ;
+    int * file_dim_Z = reinterpret_cast<int*>( buffer ) ;
     assert( file_dim_Z != NULL ) ;
     if ( dim_Z != (*file_dim_Z) )
     {
@@ -170,7 +204,7 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
      * siano gli stessi usati per scrivere il file binario
      */
     in_file.read ( buffer, intsize ) ;
-    int * file_SEEDVALUE = reinterpret_cast<int*>(buffer) ;
+    int * file_SEEDVALUE = reinterpret_cast<int*>( buffer ) ;
     assert( file_SEEDVALUE != NULL ) ;
     if ( SEEDVALUE != (*file_SEEDVALUE) )
     {
@@ -179,7 +213,7 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
         return false ;
     }
     in_file.read ( buffer, intsize ) ;
-    int * file_WINDVALUE = reinterpret_cast<int*>(buffer) ;
+    int * file_WINDVALUE = reinterpret_cast<int*>( buffer ) ;
     assert( file_WINDVALUE != NULL ) ;
     if ( WINDVALUE != (*file_WINDVALUE) )
     {
@@ -188,7 +222,7 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
         return false ;
     }
     in_file.read ( buffer, intsize ) ;
-    int * file_DRAGONVALUE = reinterpret_cast<int*>(buffer) ;
+    int * file_DRAGONVALUE = reinterpret_cast<int*>( buffer ) ;
     assert( file_DRAGONVALUE != NULL ) ;
     if ( DRAGONVALUE != (*file_DRAGONVALUE) )
     {
@@ -197,7 +231,7 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
         return false ;
     };
     in_file.read ( buffer, intsize ) ;
-    int * file_SEASONVALUE = reinterpret_cast<int*>(buffer) ;
+    int * file_SEASONVALUE = reinterpret_cast<int*>( buffer ) ;
     assert( file_SEASONVALUE != NULL ) ;
     if ( SEASONVALUE != (*file_SEASONVALUE) )
     {
@@ -206,7 +240,7 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
         return false ;
     }
     in_file.read ( buffer, intsize ) ;
-    int * file_FLOWERVALUE = reinterpret_cast<int*>(buffer) ;
+    int * file_FLOWERVALUE = reinterpret_cast<int*>( buffer ) ;
     assert( file_FLOWERVALUE != NULL ) ;
     if ( FLOWERVALUE != (*file_FLOWERVALUE) )
     {
@@ -217,44 +251,44 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
 
     /*superati i controlli soprastanti si puo' procedere col caricamento*/
     in_file.read ( buffer, intsize ) ;
-    int * file_last_removed_pl1_a = reinterpret_cast<int*>(buffer) ;
+    int * file_last_removed_pl1_a = reinterpret_cast<int*>( buffer ) ;
     assert( file_last_removed_pl1_a != NULL ) ;
     last_removed_pl1_a = *(file_last_removed_pl1_a) ;
     in_file.read ( buffer, intsize ) ;
-    int * file_last_removed_pl1_b = reinterpret_cast<int*>(buffer) ;
+    int * file_last_removed_pl1_b = reinterpret_cast<int*>( buffer ) ;
     assert( file_last_removed_pl1_b != NULL ) ;
     last_removed_pl1_b = *(file_last_removed_pl1_b) ;
     in_file.read ( buffer, intsize ) ;
-    int * file_last_removed_pl2_a = reinterpret_cast<int*>(buffer) ;
+    int * file_last_removed_pl2_a = reinterpret_cast<int*>( buffer ) ;
     assert( file_last_removed_pl2_a != NULL ) ;
     last_removed_pl2_a = *(file_last_removed_pl2_a) ;
     in_file.read ( buffer, intsize ) ;
-    int * file_last_removed_pl2_b = reinterpret_cast<int*>(buffer) ;
+    int * file_last_removed_pl2_b = reinterpret_cast<int*>( buffer ) ;
     assert( file_last_removed_pl2_b != NULL ) ;
     last_removed_pl2_b = *(file_last_removed_pl2_b) ;
 
     in_file.read ( buffer, intsize ) ;
-    int * file_row = reinterpret_cast<int*>(buffer) ;
+    int * file_row = reinterpret_cast<int*>( buffer ) ;
     assert( file_row != NULL ) ;
     row = *(file_row) ;
     in_file.read ( buffer, intsize ) ;
-    int * file_col = reinterpret_cast<int*>(buffer) ;
+    int * file_col = reinterpret_cast<int*>( buffer ) ;
     assert( file_col != NULL ) ;
     col = *(file_col) ;
 
     char layout_buffer[sizeof(layout)] ;
-    in_file.read ( layout_buffer, sizeof(layout)) ;
-    layout * file_level = reinterpret_cast<layout*>(layout_buffer) ;
+    in_file.read ( layout_buffer, sizeof(layout) ) ;
+    layout * file_level = reinterpret_cast<layout*>( layout_buffer ) ;
     assert( file_level != NULL ) ;
     level = *(file_level) ;
     char computer_buffer[sizeof(computer)] ;
-    in_file.read ( computer_buffer, sizeof(computer)) ;
-    computer * file_ai = reinterpret_cast<computer*>(computer_buffer) ;
+    in_file.read ( computer_buffer, sizeof(computer) ) ;
+    computer * file_ai = reinterpret_cast<computer*>( computer_buffer ) ;
     assert( file_ai != NULL ) ;
     ai = *(file_ai) ;
     char game_buffer[sizeof(game)] ;
-    in_file.read ( game_buffer, sizeof(game)) ;
-    game * file_mode = reinterpret_cast<game*>(game_buffer) ;
+    in_file.read ( game_buffer, sizeof(game) ) ;
+    game * file_mode = reinterpret_cast<game*>( game_buffer ) ;
     assert( file_mode != NULL ) ;
     mode = *(file_mode) ;
 
@@ -264,28 +298,28 @@ bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &
         for ( int y = 0 ; y < dim_Y ; y++ )
             for ( int z = 0 ; z < dim_Z ; z++ )
             {
-                in_file.read( tile_buffer, sizeof(tile)) ;
-                file_tile = reinterpret_cast<tile*>(tile_buffer) ;
+                in_file.read( tile_buffer, sizeof ( tile ) ) ;
+                file_tile = reinterpret_cast<tile*>( tile_buffer ) ;
                 assert( file_tile != NULL ) ;
                 cube[x][y][z] = *(file_tile) ;
             }
-    check_cube() ;
-    refresh_unlocked() ;
-    sort_unlocked() ;
+    check_cube () ;
+    refresh_unlocked () ;
+    sort_unlocked () ;
 
     char couple_buffer[sizeof(couple)] ;
     couple * file_couple = NULL ;
     for ( int x = 0 ; x < max_couple_row ; x++ )
         for ( int y = 0 ; y < 2 ; y++ )
         {
-            in_file.read( couple_buffer, sizeof(couple)) ;
-            file_couple = reinterpret_cast<couple*>(couple_buffer) ;
+            in_file.read( couple_buffer, sizeof ( couple ) ) ;
+            file_couple = reinterpret_cast<couple*>( couple_buffer ) ;
             assert( file_couple != NULL ) ;
             mov[x][y] = *(file_couple) ;
         }
-    reset_highlighted_cell() ;
-    display_tiles() ;
-    refresh_scores() ;
+    reset_highlighted_cell () ;
+    display_tiles () ;
+    refresh_scores () ;
     if ( col == 1 )
         refresh_turn_label( true ) ;
     else if ( col == 0 )
@@ -334,7 +368,7 @@ void import_tiles_names ()
         file.get ( temp ) ;
     }
     file.get ( temp ) ;
-    file.close () ;
+    file.close() ;
 
     D10(cerr<<"D10 import tiles names\n")
 }
@@ -363,7 +397,7 @@ static void check_filename ( char * filename )
     int x ;
     for ( x = 0 ; x<MAXWORD ; x++ )
     {
-        if (( filename[x] == '.' ) || ( filename[x] == '\0' ) )
+        if ( ( filename[x] == '.' ) || ( filename[x] == '\0' ) )
             break ;
     }
     if ( x < MAXWORD-5 )

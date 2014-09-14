@@ -74,8 +74,8 @@
 
 #ifdef struct__string
 /**
- * Struttura che permette una piu' semplice gestione di una matrice di caratteri,
- * altrimenti detta, elenco di parole disposte in righe.
+ * Struttura che permette una piu' semplice gestione di una matrice di
+ * caratteri, altrimenti detta, elenco di parole disposte in righe.
  */
     struct _string  {
                         char * word ;
@@ -85,7 +85,7 @@
 #ifdef struct_tile
 /**
  * Struttura che identifica una cella del cubo (in pratica); a livello astratto
- * se il campo num e' compreso tra 0 e TILES-1 diventa invece una tessera.
+ * se il campo num e' compreso tra 0 e TILES-1 rappresenta invece una tessera.
  */
     struct tile {
                     bool    empty ;

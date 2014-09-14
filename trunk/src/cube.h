@@ -7,7 +7,7 @@
 
 /**
  * Struttura che identifica una cella del cubo (in pratica); a livello astratto
- * se il campo num e' compreso tra 0 e TILES-1 diventa invece una tessera.
+ * se il campo num e' compreso tra 0 e TILES-1 rappresenta invece una tessera.
  */
 #define struct_tile
 #include "data_structures.h"
@@ -81,11 +81,12 @@ void find_coord ( const int &num, int &_x, int &_y, int &_z ) ;
 
 /**
  * Funzione incaricata a settare una cella, affinche contenga una certa tessera.
- * @param[in] x, y, z interi che identificano la cella da riempire per coordinate.
+ * @param[in] x, y, z interi che identificano la cella da riempire per
+ * coordinate.
  * @param[in,out] last intero che setta la cella a contenere la tessera
  * identificata da tale numero, il parametro last viene inoltre incrementato.
  */
-void fill_cell ( const int &x, const int &y, const int &z, int &last) ;
+void fill_cell ( const int &x, const int &y, const int &z, int &last ) ;
 
 /**
  * Funzione incaricata a pulire completamente ogni campo della cella indicata.

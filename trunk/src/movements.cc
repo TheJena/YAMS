@@ -1,7 +1,7 @@
 /**
  * @file
  * File che contiene l'implementazione del modulo MOVEMENTS. Qui vengono
- * definite le funzioni che operano sulla struttura dati unlocked.
+ * definite le funzioni che operano sulla struttura dati unlocked[].
  */
 /*inizio implementazione modulo_MOVEMENTS*/
 #include <iostream>
@@ -37,7 +37,9 @@ computer ai = airhead ;
 /*fine implementazione struttura dati pubblica*/
 
 /*inizio implementazione struttura dati privata*/
-static const int FREE  = 12 * 8 ; // dim_X * dim_Y
+static const int FREE  = 12 * 8 ; // non e' pari a dim_X * dim_Y per motivi di
+                                  // compilazione, tuttavia dovrebbe essere:
+                                  // static const int FREE = dim_X*dim_Y ;
 static tile *    unlocked[FREE] ;
 /*inizio implementazione struttura dati privata*/
 
@@ -68,17 +70,18 @@ void refresh_unlocked ()
         unlocked[x] = NULL ;
 
 
-        int u = 0 ;
-        for ( int x = 0 ; x < dim_X ; x++)
-            for ( int y = 0 ; y < dim_Y ; y++)
-                for ( int z = 0 ; z < dim_Z ; z++)
-                    if ( ( !cube[x][y][z].empty ) && ( !cube[x][y][z].lock ) )
-                    {
-                        unlocked[u] = &(cube[x][y][z]) ;
-                        assert(unlocked[u]!=NULL) ;
-                        u++ ;
-                    }
-/*debug se u > FREE*/
+    int u = 0 ;
+    for ( int x = 0 ; x < dim_X ; x++ )
+        for ( int y = 0 ; y < dim_Y ; y++ )
+            for ( int z = 0 ; z < dim_Z ; z++ )
+                if ( ( !cube[x][y][z].empty ) && ( !cube[x][y][z].lock ) )
+                {
+                    unlocked[u] = &(cube[x][y][z]) ;
+                    assert(unlocked[u] != NULL) ;
+                    u++ ;
+                }
+    assert(u <= FREE) ;
+        
 
     D10(cerr<<"D10 refresh unlocked\n")
 }
@@ -89,7 +92,7 @@ bool airhead_extraction ( tile * &first, tile * &second, bool &exit )
 
     srand ( time(0) ) ;
 
-    if ( count_pairs_removable(0) >= 1)
+    if ( count_pairs_removable (0) >= 1 )
     {
         int temp = 0 ;
         do
@@ -100,12 +103,14 @@ bool airhead_extraction ( tile * &first, tile * &second, bool &exit )
                  * evito di dover controllare che le
                  * celle attigue non siano fuori dall'array
                  */
-                temp = 1 + rand()%(FREE-2) ;
+                temp = 1 + rand()%( FREE-2 ) ;
             } while ( unlocked[temp] == NULL ) ;
             if ( unlocked[temp-1] != NULL )
-                exit = check_pair(unlocked[temp], unlocked[temp-1], first, second);
+                exit = check_pair( unlocked[temp], unlocked[temp-1],
+                                   first, second                     ) ;
             if ( ( !exit ) && ( unlocked[temp+1] != NULL ) )
-                exit = check_pair(unlocked[temp], unlocked[temp+1], first, second);
+                exit = check_pair( unlocked[temp], unlocked[temp+1],
+                                   first, second                     ) ;
         } while ( ! exit ) ;
 
         D9(cerr<<"D9 airhead extraction returned true\n")
@@ -114,7 +119,7 @@ bool airhead_extraction ( tile * &first, tile * &second, bool &exit )
     }
     else
     {
-        end_game() ;
+        end_game () ;
 
         D9(cerr<<"D9 airhead extraction returned false\n")
 
@@ -134,46 +139,50 @@ bool extract_pair ( couple *  pair )
         case airhead :      if ( !airhead_extraction( first, second, exit ) )
                             {
                                 D3(cerr<<"D3 extract pair"<<endl)
-                                D8(cerr<<"D8 airhead extraction returned false1"<<endl)
+                                D8(cerr<<"D8 airhead extraction returned false1"
+                                   <<endl)
                                 return false ;
                             }
                             break ;
 
-        case greedy :       for ( int h = 1 ; ((h<FREE)&&(!exit)) ; h++ )
+        case greedy :       for ( int h = 1 ; (( h < FREE )&&( !exit )) ; h++ )
                             {
-                                if ((unlocked[h-1]!=NULL )&&(unlocked[h]!=NULL))
+                                if ( ( unlocked[h-1] != NULL )&&
+                                     ( unlocked[h]   != NULL )   )
                                     exit = check_pair( unlocked[h-1],
                                                        unlocked[h], first,
                                                        second ) ;
                             }
                             if ( !exit )
-                                end_game() ;
+                                end_game () ;
                             break ;
 
-        case thoughtful :   for ( int h = 1 ; ((h<FREE)&&(!exit)) ; h++ )
+        case thoughtful :   for ( int h = 1 ; (( h < FREE )&&( !exit )) ; h++ )
                             {
-                                if ((unlocked[h-1]!=NULL )&&(unlocked[h]!=NULL))
+                                if ( ( unlocked[h-1] != NULL )&&
+                                     ( unlocked[h]   != NULL)    )
                                     exit = check_pair( unlocked[h-1],
                                                        unlocked[h], first,
                                                        second ) ;
-                                if (exit)
+                                if ( exit )
                                     check_convenience ( first, second, exit ) ;
                             }
                             if ( !exit )
                             {
-                                if ( !airhead_extraction( first, second, exit ) )
+                                if ( !airhead_extraction (first, second, exit) )
                                 {
                                     D3(cerr<<"D3 extract pair"<<endl)
-                                    D8(cerr<<"D8 airhead extraction returned false2"<<endl)
+                                    D8(cerr<<"D8 airhead extraction returned"<<
+                                       " false2"<<endl)
                                     return false ;
                                 }
                             }
                             break ;
     } ;
 
-    assert(pair!=NULL) ;
-    assert(first!=NULL) ;
-    assert(second!=NULL) ;
+    assert(pair != NULL) ;
+    assert(first != NULL) ;
+    assert(second != NULL) ;
 
     pair->t1    = first->num ;
     pair->name1 = name[ first->num ].word ;
@@ -186,14 +195,14 @@ bool extract_pair ( couple *  pair )
     set_highlighted_cell ( 1, pair->x1, pair->y1, pair->z1 ) ;
     set_highlighted_cell ( 2, pair->x2, pair->y2, pair->z2 ) ;
 
-    redraw_widget("playground") ;
+    redraw_widget ( "playground" ) ;
 
     D9(cerr<<"D9 extract pair\n")
 
     return true ;
 }
 
-bool sort_unlocked()
+bool sort_unlocked ()
 {
     D2(cerr<<"D2 sort unlocked\n")
 
@@ -213,7 +222,7 @@ bool sort_unlocked()
         }
         else
         {
-        assert(unlocked[i]!=NULL) ;
+        assert(unlocked[i] != NULL) ;
         temp = unlocked[i]->value ;
 
         if      ( temp == SEEDVALUE )
@@ -227,7 +236,7 @@ bool sort_unlocked()
         else if ( temp == FLOWERVALUE )
             n_flower++ ;
         else
-            ; /*debuggare questo caso*/     
+            return false ;  
         }
     }
 
@@ -252,7 +261,7 @@ bool sort_unlocked()
         if ( unlocked[j] == NULL )
             continue ;
 
-        assert(unlocked[j]!=NULL) ;
+        assert(unlocked[j] != NULL) ;
         temp = unlocked[j]->value ;
 
         if      ( ( temp == SEEDVALUE )&&( n_seed <= max_seed ) )
@@ -281,7 +290,7 @@ bool sort_unlocked()
             n_flower++ ;
         }
         else
-            ; /*debuggare questo caso*/
+            return false ;
 
         unlocked[j] = NULL ;
     }
@@ -314,7 +323,7 @@ bool sort_unlocked()
         return true ;
 }
 
-int count_pairs_removable ( const int &count)
+int count_pairs_removable ( const int &count )
 {
     D2(cerr<<"D2 count pairs removable\n")
 
@@ -322,14 +331,14 @@ int count_pairs_removable ( const int &count)
     for ( int i = 1 ; i < FREE ; i++ )
     {
         if ( ( unlocked[i-1] != NULL )&&( unlocked[i] != NULL )&&
-             (unlocked[i-1]->num != unlocked[i]->num )            )
+             ( unlocked[i-1]->num != unlocked[i]->num )            )
         {
-            assert(unlocked[i-1]!= NULL) ;
-            assert(unlocked[i]!= NULL) ;
+            assert(unlocked[i-1] != NULL) ;
+            assert(unlocked[i] != NULL) ;
             if ( ( 0 == strcmp( name[unlocked[i-1]->num].word,
-                                name[unlocked[i]->num].word))    ||
+                                name[unlocked[i]->num].word   ) ) ||
                  ( ( between (136, unlocked[i-1]->num, 139 ) ) &&
-                   ( between (136, unlocked[i]->num  , 139 ) ) ) ||
+                   ( between (136, unlocked[i]->num  , 139 ) ) )  ||
                  ( ( between (140, unlocked[i-1]->num, 143 ) ) &&
                    ( between (140, unlocked[i]->num  , 143 ) ) ) )
             {
@@ -341,13 +350,11 @@ int count_pairs_removable ( const int &count)
 
     if ( couples < 0)
     {
-        /*debug here*/ ;
-
         D9(cerr<<"D9 count pairs removable returned 0"<<
                  " because of negative couples\n")
 
+        end_game () ;
         return 0 ;
-        end_game() ;
     }
     else if ( couples == 0 )
     {
@@ -361,10 +368,10 @@ int count_pairs_removable ( const int &count)
         }
         else
         {
-            mix_cube() ;
-            check_cube() ;
-            refresh_unlocked() ;
-            sort_unlocked() ;
+            mix_cube () ;
+            check_cube () ;
+            refresh_unlocked () ;
+            sort_unlocked () ;
 
             D9(cerr<<"D9 count pairs removable call a recursion\n")
 
@@ -396,7 +403,7 @@ bool between ( const int &min, const int &middle, const int &max )
         return false ;
 }
 
-int tile_value (const int &name_position)
+int tile_value ( const int &name_position )
 {
     D2(cerr<<"D2 tile value\n")
 
@@ -434,10 +441,11 @@ int tile_value (const int &name_position)
     if ( name_position <= 143 )
         return FLOWERVALUE ;
     else
-    /* attenzione errore di gestione della memoria
-     */
-/*debug se name_position eccede l'array*/
+    {
+        D3(cerr<<"D3 tile value"<<endl)
+        D8(cerr<<"D8 attenzione numero identificativo tessera >= TILES"<<endl)
         return -1 ;
+    }
 }
 /*fine implementazione funzioni pubbliche*/
 
@@ -446,8 +454,8 @@ static bool check_pair ( tile* a, tile* b, tile* &first, tile* &second )
 {
     D2(cerr<<"D2 check pair\n")
 
-    assert(a!=NULL);
-    assert(b!=NULL);
+    assert(a != NULL);
+    assert(b != NULL);
 
     if ( a->num == b->num )
         return false ;
@@ -457,13 +465,13 @@ static bool check_pair ( tile* a, tile* b, tile* &first, tile* &second )
         second = b ;
         return true ;
     } else
-    if ( ( between (136, a->num, 139 ) ) && ( between (136, b->num  , 139 ) ) )
+    if (( between ( 136, a->num, 139 ) ) && ( between ( 136, b->num  , 139 ) ))
     {
         first = a ;
         second = b ;
         return true ;
     } else
-    if ( ( between (140, a->num, 143 ) ) && ( between (140, b->num  , 143 ) ) )
+    if (( between ( 140, a->num, 143 ) ) && ( between ( 140, b->num  , 143 ) ))
     {
         first = a ;
         second = b ;
@@ -488,11 +496,12 @@ static void sort_sub_array ( tile ** out, int start, int end )
     for ( int i = start ; i<=end ; i++ )
         for ( int j = i+1 ; j<=end ; j++ )
         {
-            assert(out[i]!=NULL) ;
-            assert(out[j]!=NULL) ;
+            assert(out[i] != NULL) ;
+            assert(out[j] != NULL) ;
 
-            if ( (out[i]!=NULL)&&(out[j]!=NULL)&&
-                 (strcmp(name[out[i]->num].word, name[out[j]->num].word) > 0) )
+            if ( ( out[i] != NULL )&&( out[j] != NULL )&&
+                 ( strcmp ( name[out[i]->num].word,
+                            name[out[j]->num].word  ) > 0 ) )
             {
                 temp = out[i] ; 
                 out[i] = out[j] ;

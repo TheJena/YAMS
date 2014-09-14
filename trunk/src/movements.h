@@ -1,7 +1,7 @@
 /**
  * @file
- * File che contiene l'interfaccia del modulo MOVEMENTS. Qui vengono dichiarate le
- * funzioni che operano sulla struttura dati unlocked.
+ * File che contiene l'interfaccia del modulo MOVEMENTS. Qui vengono dichiarate
+ * le funzioni che operano sulla struttura dati unlocked[].
  */
 /*inizio header modulo_MOVEMENTS*/
 
@@ -59,8 +59,8 @@ void refresh_unlocked () ;
  * @param[in,out] exit booleano che indica il valore ritornato dalla funzione
  * ::check_pair, in conseguenza al calcolo della funzione
  * ::count_pairs_removable delle coppie ancora removibili.
- * @return se l' estrazione e' avvenuta con successo ( erano ancora presenti
- * tessere removibili) o meno ( erano finite, quindi il gioco e' terminato).
+ * @return se l' estrazione e' avvenuta con successo (erano ancora presenti
+ * tessere removibili) o meno (erano finite, quindi il gioco e' terminato).
  */
 bool airhead_extraction ( tile * &first, tile * &second, bool &exit ) ;
 
@@ -73,7 +73,7 @@ bool extract_pair ( couple *  pair ) ;
 
 /**
  * Funzione che ordina per valori decrescenti i puntatori alle tessere
- * removibili
+ * removibili.
  * @return false se la funzione: ::count_pairs_removable ritorna -1.
  * Altrimenti true.
  */
@@ -85,7 +85,7 @@ bool sort_unlocked() ;
  * @return 0 se il numero di tessere removibili e' negativo, -1 se pari a zero,
  * altrimenti il numero delle stesse.
  */
-int count_pairs_removable ( const int &count) ;
+int count_pairs_removable ( const int &count ) ;
 
 /**
  * Funzione che ritorna se un numero e' o meno compreso tra altri due.
@@ -100,7 +100,7 @@ bool between ( const int &min, const int &middle, const int &max ) ;
  * @param[in] name_position numero identificativo della tessera.
  * @return il valore della tessera o -1 se essa e' sconosciuta.
  */
-int tile_value (const int &name_position) ;
+int tile_value ( const int &name_position ) ;
 /*fine prototipi funzioni pubbliche*/
 
 /*fine interfaccia*/

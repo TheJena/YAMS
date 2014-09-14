@@ -20,8 +20,8 @@
 /**
  * intero senza segno che opportunamente settato attiva / disattiva le macro di
  * debug (in particolare per il tracing).
- * E' sufficiente porlo pari all' OR bit a bit dei numeri identificanti le macro,
- * per attivare le stesse.
+ * E' sufficiente porlo pari all' OR bit a bit dei numeri identificanti le
+ * macro, per attivare le stesse.
  */
 extern unsigned int MASK ;
 /*fine struttura dati pubblica*/
