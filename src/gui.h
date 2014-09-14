@@ -118,8 +118,8 @@ void clear_pair_removed () ;
  * @param[in] temp giocatore in questione.
  * @param[in] a, b interi identificativi delle due tessere.
  */
-void refresh_pair_removed( const p_player &temp, const int &a,
-                           const int &b ) ;
+void refresh_pair_removed ( const p_player &temp, const int &a,
+                            const int &b                        ) ;
 
 /**
  * Funzione che chiede la stampa a video dello sfondo vuoto.
@@ -147,7 +147,8 @@ void display_end () ;
  * @param[in] n indicatore di quale tra i due riquadri.
  * @param[in] x, y, z coordinate della cella.
  */
-void set_highlighted_cell ( const int &n, const int &x, const int &y, const int &z ) ;
+void set_highlighted_cell ( const int &n, const int &x, const int &y,
+                            const int &z                              ) ;
 
 /**
  * Funzione che rimuove i riquadri resettando le coordinate delle celle a valori

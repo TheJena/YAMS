@@ -25,7 +25,7 @@
  * @return false se fallisce il salvataggio, true altrimenti.
  */
 bool save_game_on_file ( const couple** mov, char * filename,
-                         const int &row, const int &col ) ;
+                         const int &row, const int &col       ) ;
 
 /**
  * Funzione che carica da file binario una partita.
@@ -36,7 +36,8 @@ bool save_game_on_file ( const couple** mov, char * filename,
  * @return false se fallisce il caricamento o se la partita che si vuole
  * importare non e' coerente coi parametri attuali di gioco, true altrimenti.
  */
-bool load_game_from_file ( couple** &mov, const char * filename, int &row, int &col ) ;
+bool load_game_from_file ( couple** &mov, const char * filename,
+                           int &row, int &col                    ) ;
 
 /**
  * Funzione che carica da file binario l' elenco dei nomi delle tessere.

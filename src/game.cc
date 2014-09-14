@@ -57,7 +57,7 @@ static couple ** mov ;
  * @return false se occorrono complicazioni durante l'esecuzione delle funzioni:
  * ::sort_unlocked, ::count_pairs_removable e ::opponent_round. Altrimenti true.
  */
-static bool check_couple ( ) ;
+static bool check_couple () ;
 
 
 /**
@@ -76,7 +76,7 @@ bool start_game ()
 {
     D1(cerr<<"D1 start game\n")
 
-    if (!playing)
+    if ( !playing )
     {
         playing = true ;
         initialize_cube () ;
@@ -114,10 +114,10 @@ bool start_game ()
                     mov[r][c].name2 = NULL ;
                 }
 
-            reset_highlighted_cell() ;
-            display_tiles() ;
-            refresh_turn_label(false);
-            refresh_scores() ;
+            reset_highlighted_cell () ;
+            display_tiles () ;
+            refresh_turn_label ( false ) ;
+            refresh_scores () ;
 
             D10(cerr<<"D10 start game\n")
 
@@ -132,14 +132,15 @@ bool start_game ()
     }
 }
 
-bool save_game(char * filename )
+bool save_game ( char * filename )
 {
     D1(cerr<<"D1 save game\n")
     D10(cerr<<"D10 save game\n")
-    return save_game_on_file ( const_cast<const couple**>(mov), filename, row, col ) ;
+    return save_game_on_file ( const_cast<const couple**>( mov ), filename, row,
+                               col ) ;
 }
 
-bool load_game( char * filename )
+bool load_game ( char * filename )
 {
     D1(cerr<<"D1 load game\n")
     D10(cerr<<"D10 load game\n")
@@ -151,18 +152,22 @@ void undo_last_two_couples ()
 {
     D1(cerr<<"D1 undo last two couples\n")
 
-    if (( row >= 1 )&&(!lock_undo))
+    if ( ( row >= 1 )&&( !lock_undo ) )
     {
         refresh_scores() ;
         row-- ;
         if ( mov[row][0].t1 != -1 )
-            fill_cell(mov[row][0].x1, mov[row][0].y1, mov[row][0].z1, mov[row][0].t1);
+            fill_cell ( mov[row][0].x1, mov[row][0].y1, mov[row][0].z1,
+                        mov[row][0].t1 ) ;
         if ( mov[row][0].t2 != -1 )
-            fill_cell(mov[row][0].x2, mov[row][0].y2, mov[row][0].z2, mov[row][0].t2);
+            fill_cell ( mov[row][0].x2, mov[row][0].y2, mov[row][0].z2,
+                        mov[row][0].t2 ) ;
         if ( mov[row][1].t1 != -1 )
-            fill_cell(mov[row][1].x1, mov[row][1].y1, mov[row][1].z1, mov[row][1].t1);
+            fill_cell ( mov[row][1].x1, mov[row][1].y1, mov[row][1].z1,
+                        mov[row][1].t1 ) ;
         if ( mov[row][1].t2 != -1 )
-            fill_cell(mov[row][1].x2, mov[row][1].y2, mov[row][1].z2, mov[row][1].t2);
+            fill_cell ( mov[row][1].x2, mov[row][1].y2, mov[row][1].z2,
+                        mov[row][1].t2 ) ;
 
         mov[row][0].t1 = -1 ;
         mov[row][0].name1 = NULL ;
@@ -173,7 +178,7 @@ void undo_last_two_couples ()
         mov[row][1].t2 = -1 ;
         mov[row][1].name2 = NULL ;
 
-        reset_highlighted_cell() ;
+        reset_highlighted_cell () ;
 
         col = 0 ;
 
@@ -187,13 +192,13 @@ void undo_last_two_couples ()
          */
         sort_unlocked () ;
 
-        redraw_widget("playground") ;
+        redraw_widget ( "playground" ) ;
     }
 
     D10(cerr<<"D10 undo last two couples\n")
 }
 
-void refresh_scores()
+void refresh_scores ()
 {
     D2(cerr<<"D2 refresh scores\n")
 
@@ -204,16 +209,18 @@ void refresh_scores()
         for ( int c = 0 ; c < 2 ; c++ )
             for (int r = 0 ; r <= row ; r++ )
             {
-                if ( ( c == 0 )&&( mov[r][c].t1 >= 0 )&&( mov[r][c].t1 < TILES ) )
+                if ( ( c == 0 )&&( mov[r][c].t1 >= 0 )&&
+                     ( mov[r][c].t1 < TILES )            )
                 {
-                    int temp = tile_value(mov[r][c].t1) ;
-                    if (temp >=1)
+                    int temp = tile_value ( mov[r][c].t1 ) ;
+                    if ( temp >= 1 )
                         _score1 += temp ;
                 }
-                if ( ( c == 1 )&&( mov[r][c].t1 >= 0 )&&( mov[r][c].t1 < TILES ) )
+                if ( ( c == 1 )&&( mov[r][c].t1 >= 0 )&&
+                     ( mov[r][c].t1 < TILES )            )
                 {
-                    int temp = tile_value(mov[r][c].t1) ;
-                    if (temp >=1)
+                    int temp = tile_value ( mov[r][c].t1 ) ;
+                    if ( temp >= 1 )
                         _score2 += temp ;
                 }
 
@@ -222,13 +229,13 @@ void refresh_scores()
         D3(cerr<<"D3 refresh scores\n")
         D8(cerr<<"D8 _score1="<<_score1<<" _score2="<<_score2<<endl)
 
-        refresh_scores_labels( _score1, _score2 ) ;
+        refresh_scores_labels ( _score1, _score2 ) ;
     }
 
     D9(cerr<<"D9 refresh scores\n")
 }
 
-void reset_row()
+void reset_row ()
 {
     D1(cerr<<"D1 reset row\n")
 
@@ -243,12 +250,13 @@ void reset_row()
     D10(cerr<<"D10 reset row\n")
 }
 
-bool insert_half_pair ( const int &num, const int &x, const int &y, const int &z )
+bool insert_half_pair ( const int &num, const int &x, const int &y,
+                        const int &z )
 {
     D1(cerr<<"D1 insert half pair\n")
 
     if ( row == max_couple_row-1 )
-        end_game() ;
+        end_game () ;
 
     if ( mode == h_c )
         col = 0 ;
@@ -301,9 +309,9 @@ void end_game ()
 
     if ( playing )
     {
-        refresh_scores() ;
-        refresh_scores_labels(_score1, _score2) ;
-        reset_highlighted_cell() ;
+        refresh_scores () ;
+        refresh_scores_labels ( _score1, _score2 ) ;
+        reset_highlighted_cell () ;
         clear_pair_removed () ;
         display_end () ;
 
@@ -327,12 +335,17 @@ static bool check_couple ( )
 
     if ( playing )
     {
-        if ( ( mov[row][col].t1 != mov[row][col].t2 )&&(mov[row][col].name1 != NULL)&&(mov[row][col].name2 != NULL)&&
-             ( ( ( strcmp ( mov[row][col].name1, mov[row][col].name2 ) == 0 ) )
-                     || ( ( between (136, mov[row][col].t1, 139 ) )
-                          && ( between (136, mov[row][col].t2  , 139 ) ) )
-                     || ( ( between (140, mov[row][col].t1, 143 ) )
-                          && ( between (140, mov[row][col].t2  , 143 ) ) ) ) )
+        if ( ( mov[row][col].t1 != mov[row][col].t2 )               &&
+             ( mov[row][col].name1 != NULL )                        &&
+             ( mov[row][col].name2 != NULL )                        &&
+             ( ( ( strcmp ( mov[row][col].name1,
+                            mov[row][col].name2 ) == 0 ) )      ||
+               ( ( between ( 136, mov[row][col].t1, 139 ) )&&
+                 ( between ( 136, mov[row][col].t2, 139 ) ) )   ||
+               ( ( between ( 140, mov[row][col].t1, 143 ) )&&
+                 ( between ( 140, mov[row][col].t2, 143 ) ) )
+             )
+           )
         {
             if ( ai != thoughtful )
             {
@@ -342,21 +355,26 @@ static bool check_couple ( )
             }
 
 
-            reset_cell ( mov[row][col].x1, mov[row][col].y1, mov[row][col].z1 ) ;
-            reset_cell ( mov[row][col].x2, mov[row][col].y2, mov[row][col].z2 ) ;
+            reset_cell ( mov[row][col].x1, mov[row][col].y1,
+                         mov[row][col].z1 ) ;
+            reset_cell ( mov[row][col].x2, mov[row][col].y2,
+                         mov[row][col].z2 ) ;
 
-            if ((mode == h_h)&&( col == 0 ))
+            if ( ( mode == h_h )&&( col == 0 ) )
             {
-                refresh_turn_label(true) ;
-                refresh_pair_removed( p_human1, mov[row][col].t1, mov[row][col].t2 ) ;
+                refresh_turn_label ( true ) ;
+                refresh_pair_removed ( p_human1, mov[row][col].t1,
+                                       mov[row][col].t2 ) ;
             }
-            if ((mode == h_h)&&( col == 1 ))
+            if ( (mode == h_h )&&( col == 1 ) )
             {
                 refresh_turn_label(false) ;
-                refresh_pair_removed( p_human2, mov[row][col].t1, mov[row][col].t2 ) ;
+                refresh_pair_removed ( p_human2, mov[row][col].t1,
+                                       mov[row][col].t2 ) ;
             }
             if ( mode == h_c )
-                refresh_pair_removed( p_human1, mov[row][col].t1, mov[row][col].t2 ) ;
+                refresh_pair_removed ( p_human1, mov[row][col].t1,
+                                       mov[row][col].t2 ) ;
             check_cube () ;
             refresh_unlocked () ;
             if ( !sort_unlocked () )
@@ -384,13 +402,14 @@ static bool check_couple ( )
         }
         else
         {
-            if ((mov[row][col].name1 != NULL)&&(mov[row][col].name2 != NULL))
+            if ( ( mov[row][col].name1 != NULL ) &&
+                 ( mov[row][col].name2 != NULL )    )
             {
                mov[row][col].t1 = -1 ;
                mov[row][col].name1 = NULL ;
                mov[row][col].t2 = -1 ;
                mov[row][col].name2 = NULL ;
-               reset_highlighted_cell() ;
+               reset_highlighted_cell () ;
             }
         }
         D9(cerr<<"D9 check couple\n")
@@ -408,43 +427,45 @@ static bool opponent_round ()
     D1(cerr<<"D1 opponent round\n")
 
     static int dummy = TILES ;
-    if (( mode == h_h )&&(playing))
+    if ( ( mode == h_h )&&( playing ) )
     {
-        col = (col+1)%2 ;
+        col = ( col + 1 ) % 2 ;
         if ( col == 0 )
         {
             row++ ;
-            refresh_scores() ;
+            refresh_scores () ;
         }
 
 /*debug se row troppo grande*/
     }
-    else if (( mode == h_c )&&(playing))
+    else if ( ( mode == h_c )&&( playing ) )
     {
-        refresh_turn_label(true) ;
+        refresh_turn_label ( true ) ;
         if ( extract_pair ( &mov[row][1] ) )
         {
             refresh_pair_removed( p_ai, mov[row][1].t1, mov[row][1].t2 ) ;
 
-            refresh_scores() ;
+            refresh_scores () ;
 
             reset_cell ( mov[row][1].x1, mov[row][1].y1, mov[row][1].z1 ) ;
             reset_cell ( mov[row][1].x2, mov[row][1].y2, mov[row][1].z2 ) ;
 
             dummy = TILES ;
-            fill_cell ( mov[row][1].x1, mov[row][1].y1, mov[row][1].z1, dummy ) ;
-            fill_cell ( mov[row][1].x2, mov[row][1].y2, mov[row][1].z2, dummy ) ;
+            fill_cell ( mov[row][1].x1, mov[row][1].y1, mov[row][1].z1,
+                        dummy ) ;
+            fill_cell ( mov[row][1].x2, mov[row][1].y2, mov[row][1].z2,
+                        dummy ) ;
 
             row++ ;
 
-            if ( row == max_couple_row-1)
+            if ( row == max_couple_row-1 )
             {
-                        end_game();
+                        end_game ();
                         return true ;
             }
             else
             {
-                refresh_turn_label(false);
+                refresh_turn_label ( false ) ;
                 check_cube () ;
                 refresh_unlocked () ;
                 if ( !sort_unlocked () )
@@ -453,7 +474,7 @@ static bool opponent_round ()
                     D6(cerr<<"D6 sort unlocked returned false\n")
                     return false ;
                 }
-                if ( count_pairs_removable (3) == -1 )
+                if ( count_pairs_removable(3) == -1 )
                 {
                     D3(cerr<<"D3 opponent round\n")
                     D8(cerr<<"D8 count pairs removable returned -1\n")
@@ -464,7 +485,7 @@ static bool opponent_round ()
         }
         else
         {
-            end_game() ;
+            end_game () ;
             D3(cerr<<"D3 opponent round\n")
             D8(cerr<<"D8 returned false\n")
             return false ;

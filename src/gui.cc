@@ -33,15 +33,15 @@ using namespace std ;
 layout level = easy ;
 bool lock_undo = false ;
 bool lock_mix = false ;
-int last_removed_pl1_a = -1 ;     // removed by player 1
-int last_removed_pl1_b = -1 ;     // removed by player 1
-int last_removed_pl2_a = -1 ;     // removed by ai or player 2
-int last_removed_pl2_b = -1 ;     // removed by ai or player 2
+int last_removed_pl1_a = -1 ;                       // removed by player 1
+int last_removed_pl1_b = -1 ;                       // removed by player 1
+int last_removed_pl2_a = -1 ;                       // removed by ai or player 2
+int last_removed_pl2_b = -1 ;                       // removed by ai or player 2
 /*fine implementazione struttura dati pubblica*/
 
 /*inizio struttura dati privata*/
 /**
- * Struttura dati che memorizza un colore secondo le componenti Red Green Blue
+ * Struttura dati che memorizza un colore secondo le componenti Red Green Blue.
  */
 struct colour {
                 double r ;
@@ -74,19 +74,19 @@ static const char* W_newgame           = "window_new_game" ;
 static const char* W_savegame          = "window_save_game" ;
 static const char* W_loadgame          = "window_load_game" ;
 
-static const colour black =         { 0.0/255, 0.0/255, 0.0/255 } ;
-static const colour blue_persia =   { 28.0/255, 57.0/255, 187.0/255 } ;
-static const colour carmine =       { 150.0/255, 0.0/255, 24.0/255 } ;
-static const colour coffe =         { 111.0/255, 78.0/255, 55.0/255 } ;
-static const colour ferrari =       { 204.0/255, 0.0/255, 0.0/255 } ;
-static const colour gold =          { 255.0/255, 215.0/255, 0.0/255 } ;
-static const colour green_forest =  { 34.0/255, 139.0/255, 34.0/255 } ;
-static const colour lapislazuli =   { 38.0/255, 97.0/255, 156.0/255 } ;
-static const colour light_orange =  { 255.0/255, 153.0/255, 0.0/255 } ;
+static const colour black =         {   0.0/255,   0.0/255,   0.0/255 } ;
+static const colour blue_persia =   {  28.0/255,  57.0/255, 187.0/255 } ;
+static const colour carmine =       { 150.0/255,   0.0/255,  24.0/255 } ;
+static const colour coffe =         { 111.0/255,  78.0/255,  55.0/255 } ;
+static const colour ferrari =       { 204.0/255,   0.0/255,   0.0/255 } ;
+static const colour gold =          { 255.0/255, 215.0/255,   0.0/255 } ;
+static const colour green_forest =  {  34.0/255, 139.0/255,  34.0/255 } ;
+static const colour lapislazuli =   {  38.0/255,  97.0/255, 156.0/255 } ;
+static const colour light_orange =  { 255.0/255, 153.0/255,   0.0/255 } ;
 static const colour peach =         { 255.0/255, 229.0/255, 180.0/255 } ;
-static const colour sand =          { 244.0/255, 164.0/255, 96.0/255 } ;
+static const colour sand =          { 244.0/255, 164.0/255,  96.0/255 } ;
 static const colour white =         { 255.0/255, 255.0/255, 255.0/255 } ;
-static const colour yellow =        { 255.0/255, 255.0/255, 0.0/255 } ;
+static const colour yellow =        { 255.0/255, 255.0/255,   0.0/255 } ;
 
 /**
  * Costante privata che identifica il numero massimo di caratteri di una
@@ -111,32 +111,38 @@ static int _score1 = 0 ;
 static int _score2 = 0 ;
 
 /**
- * Variabile privata che indica la coordinata x della prima cella da evidenziare.
+ * Variabile privata che indica la coordinata x della prima cella da
+ * evidenziare.
  */
 static int h_x1 = -1 ;
 
 /**
- * Variabile privata che indica la coordinata y della prima cella da evidenziare.
+ * Variabile privata che indica la coordinata y della prima cella da
+ * evidenziare.
  */
 static int h_y1 = -1 ;
 
 /**
- * Variabile privata che indica la coordinata z della prima cella da evidenziare.
+ * Variabile privata che indica la coordinata z della prima cella da
+ * evidenziare.
  */
 static int h_z1 = -1 ;
 
 /**
- * Variabile privata che indica la coordinata x della seconda cella da evidenziare.
+ * Variabile privata che indica la coordinata x della seconda cella da
+ * evidenziare.
  */
 static int h_x2 = -1 ;
 
 /**
- * Variabile privata che indica la coordinata y della seconda cella da evidenziare.
+ * Variabile privata che indica la coordinata y della seconda cella da
+ * evidenziare.
  */
 static int h_y2 = -1 ;
 
 /**
- * Variabile privata che indica la coordinata z della seconda cella da evidenziare.
+ * Variabile privata che indica la coordinata z della seconda cella da
+ * evidenziare.
  */
 static int h_z2 = -1 ;
 
@@ -151,6 +157,9 @@ static event_box play_ground = rules ;
 /*inizio prototipi funzioni handler*/
 /**
  * Handler che disegna a lato le tessere rimosse
+ * @param[in] widget widget chiamante
+ * @param[out] cr constesto di cairo
+ * @param[in] user_data parametri aggiuntivi impostati dal chiamante
  */
 extern "C" gboolean draw_removed_tiles  ( GtkWidget * widget,
                                           cairo_t * cr,
@@ -158,6 +167,9 @@ extern "C" gboolean draw_removed_tiles  ( GtkWidget * widget,
 
 /**
  * Handler che disegna il tavolo di gioco
+ * @param[in] widget widget chiamante
+ * @param[out] cr constesto di cairo
+ * @param[in] user_data parametri aggiuntivi impostati dal chiamante
  */
 extern "C" gboolean draw_play_ground ( GtkWidget * widget,
                                        cairo_t * cr,
@@ -165,6 +177,9 @@ extern "C" gboolean draw_play_ground ( GtkWidget * widget,
 
 /**
  * Handler che nasconde la finestra genitore.
+ * @param[in] widget widget chiamante
+ * @param[in] event il bottone gdk che ha innescato il segnale
+ * @param[in] user_data parametri aggiuntivi impostati dal chiamante
  */
 extern "C" gboolean handler_hide_window ( GtkWidget * widget,
                                            GdkEvent * event,
@@ -172,6 +187,9 @@ extern "C" gboolean handler_hide_window ( GtkWidget * widget,
 
 /**
  * Handler che chiama la funzione ::save_game.
+ * @param[in] widget widget chiamante
+ * @param[in] event il bottone gdk che ha innescato il segnale
+ * @param[in] user_data parametri aggiuntivi impostati dal chiamante
  */
 extern "C" gboolean handler_set_save_game ( GtkWidget * widget,
                                             GdkEvent * event,
@@ -179,6 +197,9 @@ extern "C" gboolean handler_set_save_game ( GtkWidget * widget,
 
 /**
  * Handler che chiama la funzione ::load_game.
+ * @param[in] widget widget chiamante
+ * @param[in] event il bottone gdk che ha innescato il segnale
+ * @param[in] user_data parametri aggiuntivi impostati dal chiamante
  */
 extern "C" gboolean handler_set_load_game ( GtkWidget * widget,
                                             GdkEvent * event,
@@ -195,6 +216,9 @@ extern "C" gboolean handler_set_load_game ( GtkWidget * widget,
  * - salvando una partita su file,
  * - aprendo il manuale / la documentazione,
  * - mostrando le generalita' del programma.
+ * @param[in] widget widget chiamante
+ * @param[in] event il bottone gdk che ha innescato il segnale
+ * @param[in] user_data parametri aggiuntivi impostati dal chiamante
  */
 extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
                                                    GdkEvent * event,
@@ -202,6 +226,9 @@ extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
 
 /**
  * Handler che acquisisce le disposizioni per la nuova partita.
+ * @param[in] widget widget chiamante
+ * @param[in] event il bottone gdk che ha innescato il segnale
+ * @param[in] user_data parametri aggiuntivi impostati dal chiamante
  */
 extern "C" gboolean handler_set_new_game ( GtkWidget * widget,
                                            GdkEvent * event,
@@ -210,17 +237,23 @@ extern "C" gboolean handler_set_new_game ( GtkWidget * widget,
 /**
  * Handler che informa l' applicazione che un click e' stato rilasciato sulla
  * superficie di gioco.
+ * @param[in] widget widget chiamante
+ * @param[in] event il bottone gdk che ha innescato il segnale
+ * @param[in] user_data parametri aggiuntivi impostati dal chiamante
  */
-extern "C" gboolean handler_click_on_widget (GtkWidget *widget,
-               GdkEventButton  *event,
-               gpointer   user_data) ;
+extern "C" gboolean handler_click_on_widget ( GtkWidget *widget,
+                                              GdkEventButton  *event,
+                                              gpointer   user_data    ) ;
 
 /**
  * Handler che predispone alla chiusura del programma.
+ * @param[in] widget widget chiamante
+ * @param[in] event il bottone gdk che ha innescato il segnale
+ * @param[in] user_data parametri aggiuntivi impostati dal chiamante
  */
 extern "C" gboolean handler_delete_event ( GtkWidget * widget,
                                            GdkEvent * event,
-                                           gpointer user_data)  ;
+                                           gpointer user_data  )  ;
 /*fine prototipi funzioni handler*/
 
 /*inizio prototipi funzioni private*/
@@ -235,10 +268,11 @@ extern "C" gboolean handler_delete_event ( GtkWidget * widget,
  * @param[in] h_title altezza titolo
  * @param[in] h_text altezza testo
  */
-static void draw_text_on_play_ground ( const colour &bg, const colour &text_color,
-                                GtkWidget * &widget, cairo_t * &cr,
-                                char* title, char _line[][MAXLINE],
-                                const int &h_title, const int &h_text      );
+static void draw_text_on_play_ground ( const colour &bg, const colour 
+                                       &text_color, GtkWidget * &widget,
+                                       cairo_t * &cr, char* title,
+                                       char _line[][MAXLINE],
+                                       const int &h_title, const int &h_text ) ;
 
 /**
  * Funzione privata che disegna su una tessera la disposizione del seme a
@@ -248,9 +282,8 @@ static void draw_text_on_play_ground ( const colour &bg, const colour &text_colo
  * @param[in] num numero in base al quale disporre le superfici affinche
  * disegnino il numero stesso. ( da 1 a 9 )
  */
-static void draw_number_on_tile ( cairo_t * &cr_tile,
-                           cairo_surface_t * &_obj,
-                           const int &num ) ;
+static void draw_number_on_tile ( cairo_t * &cr_tile, cairo_surface_t * &_obj,
+                                  const int &num ) ;
 
 /**
  * Funzione privata intermedia per disegnare una tessera
@@ -263,8 +296,8 @@ static void draw_number_on_tile ( cairo_t * &cr_tile,
  * @param[in] tt tipo di tessera: numerica o dipinta
  */
 static void sub_paint_tile ( cairo_t * &context, cairo_surface_t * &surf1,
-                      cairo_surface_t * &surf2, const int &num,
-                      const char * &image_name, const tile_type &tt ) ;
+                             cairo_surface_t * &surf2, const int &num,
+                             const char * &image_name, const tile_type &tt ) ;
 
 
 /**
@@ -273,10 +306,10 @@ static void sub_paint_tile ( cairo_t * &context, cairo_surface_t * &surf1,
  * @param[in] x, y, z coordinate della tessera
  * @return un puntatore a superficie
  */
-static cairo_surface_t * paint_tile (  const int &num,
-                                const int &x,
-                                const int &y,
-                                const int &z ) ;
+static cairo_surface_t * paint_tile ( const int &num,
+                                      const int &x,
+                                      const int &y,
+                                      const int &z    ) ;
 
 /**
  * Funzione privata per disegnare un numero su una tessera
@@ -285,7 +318,7 @@ static cairo_surface_t * paint_tile (  const int &num,
  * @return un puntatore a superficie
  */
 static cairo_surface_t * number_on_tile (  cairo_surface_t * _obj,
-                                    const int &number ) ;
+                                           const int &number       ) ;
 
 static GtkEntry * entry_from_name ( const char * name ) ;
 
@@ -321,10 +354,10 @@ static int number_from_string ( const char * word ) ;
  * @param[in] x, y, z coordinate della tessera
  */
 static void calculate_coor_x_y ( const int &x,
-                          const int &y,
-                          const int &z,
-                          int &_dx,
-                          int &_dy ) ;
+                                 const int &y,
+                                 const int &z,
+                                 int &_dx,
+                                 int &_dy ) ;
 
 /**
  * Funzione privata che assegna ad ogni tessera le coordinate dei vertici
@@ -340,7 +373,7 @@ void call_gtk_main()
 {
     D1(cerr<<"D1 call gtk main\n")
 
-    gtk_main () ;
+    gtk_main() ;
 
     D10(cerr<<"D10 call gtk main\n")
 }
@@ -358,19 +391,19 @@ void initialize_gtk ( int argc, char * argv[] )
 {
     D1(cerr<<"D1 initialize gtk\n")
 
-    gtk_init ( &argc, &argv) ;
-    builder = gtk_builder_new () ;
+    gtk_init ( &argc, &argv ) ;
+    builder = gtk_builder_new() ;
     gtk_builder_add_from_file ( builder, F_GLADE, NULL ) ;
-    gtk_builder_connect_signals(builder, NULL);
+    gtk_builder_connect_signals ( builder, NULL ) ;
 
     D10(cerr<<"D10 initialize gtk\n")
 }
 
-void refresh_turn_label ( bool _switch)
+void refresh_turn_label ( bool _switch )
 {
     D2(cerr<<"D2 refresh turn label\n")
 
-    if (playing)
+    if ( playing )
     {
         char pl_1[MAXLUN] = "Player 1" ;
         char pl_2a[MAXLUN] = "Computer" ;
@@ -382,8 +415,10 @@ void refresh_turn_label ( bool _switch)
         else if ( mode == h_h )
             pl_2 = pl_2b ;
 
-        char markup_normal_string[MAXLUN] = "<span weight=\"normal\" size=\"medium\">" ;
-        char markup_bold_string[MAXLUN] = "<span weight=\"bold\" size=\"larger\">" ;
+        char markup_normal_string[MAXLUN] =
+                                    "<span weight=\"normal\" size=\"medium\">" ;
+        char markup_bold_string[MAXLUN] =
+                                      "<span weight=\"bold\" size=\"larger\">" ;
         char end_markup[MAXLUN] = "</span>" ;
 
 
@@ -392,28 +427,32 @@ void refresh_turn_label ( bool _switch)
         /*player 1*/
         strcat( markup_bold_string, pl_1 ) ;
         strcat( markup_bold_string, end_markup ) ;
-        gtk_label_set_markup( label_from_name("player1"), markup_bold_string ) ;
+        gtk_label_set_markup( label_from_name ( "player1" ),
+                              markup_bold_string             ) ;
 
         strcat( markup_normal_string, pl_2 ) ;
         strcat( markup_normal_string, end_markup ) ;
-        gtk_label_set_markup( label_from_name("player2"), markup_normal_string ) ;
+        gtk_label_set_markup( label_from_name ( "player2" ),
+                              markup_normal_string           ) ;
         }
         else if ( _switch == true )
         {
         /*player 2*/
         strcat( markup_normal_string, pl_1 ) ;
         strcat( markup_normal_string, end_markup ) ;
-        gtk_label_set_markup( label_from_name("player1"), markup_normal_string ) ;
+        gtk_label_set_markup( label_from_name ( "player1" ),
+                              markup_normal_string           ) ;
 
         strcat( markup_bold_string, pl_2 ) ;
         strcat( markup_bold_string, end_markup ) ;
-        gtk_label_set_markup( label_from_name("player2"), markup_bold_string ) ;
+        gtk_label_set_markup( label_from_name ( "player2" ),
+                              markup_bold_string             ) ;
         }
     }
     else
     {
-        gtk_label_set_text ( label_from_name("player1"), " " ) ;
-        gtk_label_set_text ( label_from_name("player2"), " " ) ;
+        gtk_label_set_text ( label_from_name ( "player1" ), " " ) ;
+        gtk_label_set_text ( label_from_name ( "player2" ), " " ) ;
     }
 
     D9(cerr<<"D9 refresh turn label\n")
@@ -438,8 +477,8 @@ void refresh_scores_labels( const int &score1, const int &score2 )
     sprintf ( text_pl1, "%s%d%s", before, score1, after ) ;
     sprintf ( text_pl2, "%s%d%s", before, score2, after ) ;
 
-    gtk_label_set_text ( label_from_name("score1"), text_pl1 ) ;
-    gtk_label_set_text ( label_from_name("score2"), text_pl2 ) ;
+    gtk_label_set_text ( label_from_name ( "score1" ), text_pl1 ) ;
+    gtk_label_set_text ( label_from_name ( "score2" ), text_pl2 ) ;
 
     D9(cerr<<"D9 refresh scores label\n")
 }
@@ -451,9 +490,9 @@ void refresh_down_label ( const int & couples )
     D3(cerr<<"D3 refresh down label"<<endl)
     D4(cerr<<"D4 couples="<<couples<<endl)
 
-    if ((playing)&&( play_ground == tiles ))
+    if ( ( playing )&&( play_ground == tiles ) )
     {
-        assert(playing==true);
+        assert(playing == true);
 
         char before[MAXLUN] = "" ;
         char after[MAXLUN] = " removable couples left" ;
@@ -474,10 +513,10 @@ void refresh_down_label ( const int & couples )
 
         sprintf ( sum, "%s %d %s", before, couples, after ) ;
 
-        gtk_label_set_text ( label_from_name("label_down"), sum ) ;
+        gtk_label_set_text ( label_from_name ( "label_down" ), sum ) ;
     }
     else
-    gtk_label_set_text ( label_from_name("label_down"), " " ) ;
+    gtk_label_set_text ( label_from_name ( "label_down" ), " " ) ;
 
     D9(cerr<<"D9 refresh down label\n")
 }
@@ -526,7 +565,7 @@ void refresh_pair_removed( const p_player &temp, const int &a, const int &b )
         last_removed_pl1_b = b ;        // removed by player 1
     }
 
-    redraw_widget("drawingarea_right") ;
+    redraw_widget ( "drawingarea_right" ) ;
 
     D9(cerr<<"D9 refresh pair removed\n")
 }
@@ -536,7 +575,7 @@ void display_empty ()
     D1(cerr<<"D1 display empty\n")
 
     play_ground = empty ;
-    redraw_widget ("playground") ;
+    redraw_widget ( "playground" ) ;
 
     D10(cerr<<"D10 display empty\n")
 }
@@ -546,7 +585,7 @@ void display_tiles ()
     D1(cerr<<"D1 display tiles\n")
 
     play_ground = tiles ;
-    redraw_widget ("playground") ;
+    redraw_widget ( "playground" ) ;
 
     D10(cerr<<"D10 display tiles\n")
 }
@@ -556,7 +595,7 @@ void display_rules ()
     D1(cerr<<"D1 display rules\n")
 
     play_ground = rules ;
-    redraw_widget ("playground") ;
+    redraw_widget ( "playground" ) ;
 
     D10(cerr<<"D10 display rules\n")
 }
@@ -567,14 +606,15 @@ void display_end ()
 
     refresh_scores() ;
     play_ground = end ;
-    redraw_widget ("playground") ;
+    redraw_widget ( "playground" ) ;
 
     D10(cerr<<"D10 display end\n")
 }
 
 
 
-void set_highlighted_cell ( const int &n, const int &x, const int &y, const int &z )
+void set_highlighted_cell ( const int &n, const int &x, const int &y,
+                            const int &z )
 {
     D1(cerr<<"D1 set highlighted cell\n")
 
@@ -592,7 +632,16 @@ void set_highlighted_cell ( const int &n, const int &x, const int &y, const int 
         h_x2 = x ;
         h_y2 = y ;
         h_z2 = z ;
-    } else { /*debug this case*/ ; }
+    } else
+    {
+        h_x1 = -1;
+        h_y1 = -1 ;
+        h_z1 = -1 ;
+
+        h_x2 = -1 ;
+        h_y2 = -1 ;
+        h_z2 = -1 ;
+    }
 
     D10(cerr<<"D10 set highlighted cell\n")
 }
@@ -623,7 +672,7 @@ extern "C" gboolean draw_removed_tiles  ( GtkWidget * widget,
     cairo_surface_t* tile = NULL ;
 
     /*nota: 112 e' la larghezza di due tessere vicine*/
-    int border_x = (gtk_widget_get_allocated_width ( widget ) - 112 )/2 ;
+    int border_x = ( gtk_widget_get_allocated_width ( widget ) - 112 ) /2 ;
     int border_y = 50 ;
 
     if ( ( last_removed_pl1_a >= 0 ) && ( last_removed_pl1_a < TILES ) &&
@@ -634,13 +683,13 @@ extern "C" gboolean draw_removed_tiles  ( GtkWidget * widget,
         tile = paint_tile ( last_removed_pl1_b, -2, -2, -2 ) ;
         assert(tile != NULL );
         cairo_set_source_surface ( cr, tile, border_x+51, border_y ) ;
-        cairo_paint(cr) ;
+        cairo_paint ( cr ) ;
         cairo_surface_destroy ( tile ) ;
 
         tile = paint_tile ( last_removed_pl1_a, -2, -2, -2 ) ;
         assert(tile != NULL );
         cairo_set_source_surface ( cr, tile, border_x, border_y ) ;
-        cairo_paint(cr) ;
+        cairo_paint ( cr ) ;
         cairo_surface_destroy ( tile ) ;
     }
     if ( ( last_removed_pl2_a >= 0 ) && ( last_removed_pl2_a < TILES ) &&
@@ -651,13 +700,13 @@ extern "C" gboolean draw_removed_tiles  ( GtkWidget * widget,
         tile = paint_tile ( last_removed_pl2_b, -2, -2, -2 ) ;
         assert(tile != NULL );
         cairo_set_source_surface ( cr, tile, border_x+51, y ) ;
-        cairo_paint(cr) ;
+        cairo_paint( cr ) ;
         cairo_surface_destroy ( tile ) ;
 
         tile = paint_tile ( last_removed_pl2_a, -2, -2, -2 ) ;
         assert(tile != NULL );
         cairo_set_source_surface ( cr, tile, border_x, y ) ;
-        cairo_paint(cr) ;
+        cairo_paint ( cr ) ;
         cairo_surface_destroy ( tile ) ;
     }
 
@@ -678,8 +727,8 @@ extern "C" gboolean draw_play_ground ( GtkWidget * widget,
     switch ( play_ground )
     {
         case empty:
-                    cairo_set_source_rgb(cr, sand.r, sand.g, sand.b ) ;
-                    cairo_paint(cr) ;
+                    cairo_set_source_rgb ( cr, sand.r, sand.g, sand.b ) ;
+                    cairo_paint ( cr ) ;
                     break ;
         case rules:
                     {
@@ -700,35 +749,39 @@ extern "C" gboolean draw_play_ground ( GtkWidget * widget,
         	{""}
         	} ;
             /*_______________max_lun_with_characters_______________*/
-            /*                       max lun with spaces                        */
+            /*                      max lun with spaces                       */
                     draw_text_on_play_ground ( white, light_orange, widget,
                                                cr, title, lines, 28, 18 ) ;
                     }
                     break ;
         case tiles:
                     {
-                    cairo_set_source_rgb(cr, green_forest.r, green_forest.g, green_forest.b ) ;
-                    cairo_paint(cr) ;
+                    cairo_set_source_rgb ( cr, green_forest.r, green_forest.g,
+                                           green_forest.b ) ;
+                    cairo_paint ( cr ) ;
 
                     for (int z = 0 ; z < dim_Z ; z++ )
                         for ( int y = 0 ; y < dim_Y ; y++ )
                             for ( int x = dim_X-1 ; x >= 0 ; x-- )
                             {
-                                if (cube[x][y][z].empty)
+                                if ( cube[x][y][z].empty )
                                     continue ;
 
-                                cairo_surface_t* tile=paint_tile(cube[x][y][z].num,
-                                                                      x, y, z ) ;
+                                cairo_surface_t* tile =
+                                                 paint_tile ( cube[x][y][z].num,
+                                                              x, y, z ) ;
                                 assert(tile != NULL );
                                 int coor_x, coor_y ;
 
                                 calculate_coor_x_y ( x, y, z, coor_x, coor_y ) ;
 
                                 if ( cube[x][y][z].num < TILES )
-                                    set_coor_tile ( &cube[x][y][z], coor_x, coor_y ) ;
+                                    set_coor_tile ( &cube[x][y][z], coor_x,
+                                                                    coor_y ) ;
 
-                                cairo_set_source_surface(cr, tile, coor_x, coor_y);
-                                cairo_paint (cr) ;
+                                cairo_set_source_surface ( cr, tile, coor_x,
+                                                                     coor_y ) ;
+                                cairo_paint ( cr ) ;
 
                                 cairo_surface_destroy ( tile ) ;
                             }
@@ -736,40 +789,40 @@ extern "C" gboolean draw_play_ground ( GtkWidget * widget,
                     break ;
         case end:
                     {
-                    refresh_scores() ;
+                    refresh_scores () ;
                     const int score_1 = _score1 ;
                     const int score_2 = _score2 ;
-                    if (( score_1 > score_2 )&&( mode == h_c ))
+                    if ( ( score_1 > score_2 )&&( mode == h_c ) )
                     {
                         char title[] = "Player 1 won against AI" ;
                         draw_text_on_play_ground ( gold, carmine, widget, cr,
                                                    title, NULL, 28, 0 ) ;
                     }
-                    else if (( score_1 < score_2 )&&( mode == h_c ))
+                    else if ( ( score_1 < score_2 )&&( mode == h_c ) )
                     {
                         char title[] = "Player 1 lost against AI" ;
                         draw_text_on_play_ground ( coffe, white, widget, cr,
                                                    title, NULL, 28, 0 ) ;
                     }
-                    else if (( score_1 == score_2 )&&( mode == h_c ))
+                    else if ( ( score_1 == score_2 )&&( mode == h_c ) )
                     {
                         char title[] = "Player 1 equalized AI" ;
                         draw_text_on_play_ground ( lapislazuli, gold, widget,cr,
                                                    title, NULL, 28, 0 ) ;
                     }
-                    else if (( score_1 > score_2 )&&( mode == h_h ))
+                    else if ( ( score_1 > score_2 )&&( mode == h_h ) )
                     {
                         char title[] = "Player 1 won against Player 2" ;
                         draw_text_on_play_ground ( ferrari, peach, widget, cr,
                                                    title, NULL, 28, 0 ) ;
                     }
-                    else if (( score_1 < score_2 )&&( mode == h_h ))
+                    else if ( ( score_1 < score_2 )&&( mode == h_h ) )
                     {
                         char title[] = "Player 1 lost against Player 2" ;
                         draw_text_on_play_ground ( carmine, white, widget, cr,
                                                    title, NULL, 28, 0 ) ;
                     }
-                    else if (( score_1 == score_2 )&&( mode == h_h ))
+                    else if ( ( score_1 == score_2 )&&( mode == h_h ) )
                     {
                         char title[] = "Player 1 equalized Player 2" ;
                         draw_text_on_play_ground(blue_persia, yellow, widget,cr,
@@ -790,12 +843,12 @@ extern "C" gboolean handler_hide_window ( GtkWidget * widget,
 {
     D1(cerr<<"D1 handler hide window\n")
 
-    gtk_widget_hide ( gtk_widget_get_toplevel(widget) ) ;
+    gtk_widget_hide ( gtk_widget_get_toplevel ( widget ) ) ;
 
     if ( playing )
-        display_tiles() ;
+        display_tiles () ;
     else
-        display_empty() ;
+        display_empty () ;
 
     D10(cerr<<"D10 handler hide window\n")
 
@@ -809,17 +862,19 @@ extern "C" gboolean handler_set_save_game ( GtkWidget * widget,
     D1(cerr<<"D1 handler set save game\n")
 
     GtkEntry* aus = entry_from_name( "text_save_on_file" ) ;
-    char * filename = const_cast<char*>(gtk_entry_get_text( aus )) ;
+    char * filename = const_cast<char*>( gtk_entry_get_text ( aus ) ) ;
 
     if ( save_game ( filename ) )
-        gtk_label_set_text ( label_from_name("label_down"), "file saved successfully" ) ;
+        gtk_label_set_text ( label_from_name ( "label_down" ),
+                             "file saved successfully" ) ;
     else
-        gtk_label_set_text ( label_from_name("label_down"), "an error occurred while saving" ) ;
+        gtk_label_set_text ( label_from_name ( "label_down" ),
+                             "an error occurred while saving" ) ;
 
     D3(cerr<<"D3 handler set save game"<<endl)
     D4(cerr<<"D4 filename="<<filename<<endl)
 
-    gtk_widget_hide ( gtk_widget_get_toplevel(widget) ) ;
+    gtk_widget_hide ( gtk_widget_get_toplevel ( widget ) ) ;
 
     D10(cerr<<"D10 handler set save game\n")
 
@@ -833,23 +888,25 @@ extern "C" gboolean handler_set_load_game ( GtkWidget * widget,
     D1(cerr<<"D1 handler set load game\n")
 
     GtkEntry* aus = entry_from_name( "text_load_from_file" ) ;
-    char * filename = const_cast<char*>(gtk_entry_get_text( aus )) ;
+    char * filename = const_cast<char*>( gtk_entry_get_text ( aus ) ) ;
 
     if ( load_game ( filename ) )
     {
-        gtk_label_set_text ( label_from_name("label_down"), "file loaded successfully" ) ;
+        gtk_label_set_text ( label_from_name ( "label_down" ),
+                             "file loaded successfully" ) ;
         D5(cerr<<"D5 caricamento da file eseguito correttamente"<<endl)
     }
     else
     {
-        gtk_label_set_text ( label_from_name("label_down"), "an error occurred while loading" ) ;
+        gtk_label_set_text ( label_from_name( "label_down" ),
+                             "an error occurred while loading" ) ;
         D5(cerr<<"D5 errore durante il caricamento da file"<<endl)
     }
 
     D3(cerr<<"D3 handler set load game"<<endl)
     D4(cerr<<"D4 filename="<<filename<<endl)
 
-    gtk_widget_hide ( gtk_widget_get_toplevel(widget) ) ;
+    gtk_widget_hide ( gtk_widget_get_toplevel ( widget ) ) ;
 
     D10(cerr<<"D10 handler set load game\n")
 
@@ -862,17 +919,17 @@ extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
 {
     D1(cerr<<"D1 handler button pressed event\n")
 
-    if    ( ( widget == (widget_from_name ( "new" ) ) ) ||
-            ( widget == (widget_from_name ( "menuitem_new" ) ) ) )
+    if    ( ( widget == ( widget_from_name ( "new" ) ) ) ||
+            ( widget == ( widget_from_name ( "menuitem_new" ) ) ) )
     {
-        display_empty() ;
+        display_empty () ;
         GtkWidget * w_new_game = widget_from_name ( W_newgame ) ;
         gtk_widget_show ( w_new_game ) ;
 	}
-    else if ( ( widget == (widget_from_name ( "mix" ) ) ) ||
-              ( widget == (widget_from_name ( "menuitem_mix" ) ) ) )
+    else if ( ( widget == ( widget_from_name ( "mix" ) ) ) ||
+              ( widget == ( widget_from_name ( "menuitem_mix" ) ) ) )
     {
-        if ((playing)&&( play_ground == tiles )&&(!lock_mix))
+        if ( ( playing )&&( play_ground == tiles )&&( !lock_mix ))
         {
             if ( !mix_cube () )
             {
@@ -882,9 +939,9 @@ extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
             }
             else
             {
-                check_cube() ;
-                refresh_unlocked() ;
-                if ( !sort_unlocked() )
+                check_cube () ;
+                refresh_unlocked () ;
+                if ( !sort_unlocked () )
                 {
                     D3(cerr<<"D3 handler button pressed event"<<endl)
                     D6(cerr<<"D6 sort unlocked returned false"<<endl)
@@ -895,66 +952,69 @@ extern "C" gboolean handler_button_pressed_event ( GtkWidget * widget,
                 lock_mix = true ;
             }
         }
-        else if ((playing)&&( play_ground == tiles )&&( lock_mix ))
+        else if ( ( playing )&&( play_ground == tiles )&&( lock_mix ))
         {
-            gtk_label_set_text ( label_from_name("label_down"), "mix not allowed just after a mix and vs ai different from airhead" ) ;
+            gtk_label_set_text ( label_from_name ( "label_down" ),
+         "mix not allowed just after a mix and vs ai different from airhead" ) ;
         }
 	}
-    else if ( ( widget == (widget_from_name ( "undo" ) ) ) ||
-              ( widget == (widget_from_name ( "menuitem_undo" ) ) ) )
+    else if ( ( widget == ( widget_from_name ( "undo" ) ) ) ||
+              ( widget == ( widget_from_name ( "menuitem_undo" ) ) ) )
     {
-        if ((playing)&&( play_ground == tiles )&&(!lock_undo))
+        if ( ( playing )&&( play_ground == tiles )&&( !lock_undo ) )
         {
             undo_last_two_couples() ;
             clear_pair_removed () ;
             refresh_scores() ;
         }
-        else if ((playing)&&( play_ground == tiles )&&( lock_undo ))
+        else if ( ( playing )&&( play_ground == tiles )&&( lock_undo ) )
         {
-            gtk_label_set_text ( label_from_name("label_down"), "undo not allowed after mix and vs thoughtful ai" ) ;
+            gtk_label_set_text ( label_from_name ( "label_down" ),
+                           "undo not allowed after mix and vs thoughtful ai" ) ;
         }
 	}
-    else if ( ( widget == (widget_from_name ( "tip" ) ) ) ||
-              ( widget == (widget_from_name ( "menuitem_tip" ) ) ) )
+    else if ( ( widget == ( widget_from_name ( "tip" ) ) ) ||
+              ( widget == ( widget_from_name ( "menuitem_tip" ) ) ) )
     {
-        if ((playing)&&( play_ground == tiles )&&( ai != thoughtful))
+        if ( ( playing )&&( play_ground == tiles )&&( ai != thoughtful ) )
         {
             tile * a = NULL ;
             tile * b = NULL ;
             bool do_not_use = false ;
             if ( airhead_extraction ( a, b, do_not_use ) )
             {
-                assert(a!=NULL) ;
-                assert(b!=NULL) ;
+                assert(a != NULL) ;
+                assert(b != NULL) ;
                 find_coord ( a->num, h_x1, h_y1, h_z1 ) ;
                 find_coord ( b->num, h_x2, h_y2, h_z2 ) ;
                 redraw_widget ( "playground" ) ;
             }
         }
-        if ((playing)&&( play_ground == tiles )&&( ai == thoughtful ))
-            gtk_label_set_text ( label_from_name("label_down"), "tips not allowed vs thoughtful ai" ) ;
+        if ( ( playing )&&( play_ground == tiles )&&( ai == thoughtful ) )
+            gtk_label_set_text ( label_from_name ( "label_down" ),
+                                 "tips not allowed vs thoughtful ai" ) ;
 	}
-    else if ( ( widget == (widget_from_name ( "rules" ) ) ) ||
-              ( widget == (widget_from_name ( "menuitem_rules" ) ) ) )
+    else if ( ( widget == ( widget_from_name ( "rules" ) ) ) ||
+              ( widget == ( widget_from_name ( "menuitem_rules" ) ) ) )
     {
-        if ((playing)&&( play_ground == tiles ))
+        if ( ( playing )&&( play_ground == tiles ) )
             display_rules();
-        else if ((playing)&&( play_ground == rules ))
-            display_tiles() ;
+        else if ( ( playing )&&( play_ground == rules ) )
+            display_tiles () ;
 
         if ( !playing )
-            display_empty() ;
+            display_empty () ;
 	}
-    else if ( ( widget == (widget_from_name ( "load" ) ) ) ||
-              ( widget == (widget_from_name ( "menuitem_load" ) ) ) )
+    else if ( ( widget == ( widget_from_name ( "load" ) ) ) ||
+              ( widget == ( widget_from_name ( "menuitem_load" ) ) ) )
     {
         GtkWidget * w_load_game = widget_from_name ( W_loadgame ) ;
         gtk_widget_show ( w_load_game ) ;
 	}
-    else if ( ( widget == (widget_from_name ( "save" ) ) ) || 
-              ( widget == (widget_from_name ( "menuitem_save" ) ) ) )
+    else if ( ( widget == ( widget_from_name ( "save" ) ) ) || 
+              ( widget == ( widget_from_name ( "menuitem_save" ) ) ) )
     {
-        if ((playing)&&( play_ground == tiles ))
+        if ( ( playing )&&( play_ground == tiles ) )
         {
             GtkWidget * w_save_game = widget_from_name ( W_savegame ) ;
             gtk_widget_show ( w_save_game ) ;
@@ -979,7 +1039,7 @@ extern "C" gboolean handler_set_new_game ( GtkWidget * widget,
 {
     D1(cerr<<"D1 handler set new game\n")
 
-    end_game();
+    end_game ();
 
 /*handler per rendere effettive le disposizioni per la nuova partita*/
     if      ( gtk_toggle_button_get_active ( tb_from_name ( "rb_easy" ) ) )
@@ -1026,29 +1086,29 @@ extern "C" gboolean handler_set_new_game ( GtkWidget * widget,
     GtkWidget * w_new_game = widget_from_name ( W_newgame ) ;
     gtk_widget_hide ( w_new_game ) ;
 
-    display_tiles() ;
+    display_tiles () ;
 
     D10(cerr<<"D10 handler set new game\n")
 
     return TRUE ;
 }
 
-extern "C" gboolean handler_click_on_widget (GtkWidget *widget,
-               GdkEventButton  *event,
-               gpointer   user_data)
+extern "C" gboolean handler_click_on_widget ( GtkWidget *widget,
+                                              GdkEventButton  *event,
+                                              gpointer   user_data    )
 {
     D1(cerr<<"D1 handler click on widget\n")
 
     if ( play_ground != tiles )
         return TRUE ;
 
-    assert(event!=NULL) ;
+    assert(event != NULL) ;
 
     const int _x = event->x ;
     const int _y = event->y ;
 
     if ( mode == h_c )
-        if ( !remove_dummies() )
+        if ( !remove_dummies () )
         {
             D3(cerr<<"D3 handler click on widget"<<endl)
             D8(cerr<<"D8 remove dummies returned false"<<endl)
@@ -1056,22 +1116,22 @@ extern "C" gboolean handler_click_on_widget (GtkWidget *widget,
         }
 
     bool quit = false ;
-    for ( int z = dim_Z-1 ; (z >= 0)&&(!quit) ; z-- )
-        for ( int y = 0 ; (y < dim_Y)&&(!quit) ; y++ )
-            for ( int x = 0 ; (x < dim_X)&&(!quit) ; x++ )
+    for ( int z = dim_Z-1 ; (z >= 0)&&( !quit ) ; z-- )
+        for ( int y = 0 ; (y < dim_Y)&&( !quit ) ; y++ )
+            for ( int x = 0 ; (x < dim_X)&&( !quit ) ; x++ )
             {
                 if ( &cube[x][y][z] == NULL )
                 {
-                    delete_cube() ;
-                    create_cube() ;
+                    delete_cube () ;
+                    create_cube () ;
                     level = easy ;
                     mode = h_c ;
                     ai = airhead ;
                     lock_mix = false ;
                     lock_undo = false ;
-                    end_game() ;
+                    end_game () ;
                     start_game () ;
-                    display_tiles() ;
+                    display_tiles () ;
                 }
                 if ( ( !cube[x][y][z].empty )&&( !cube[x][y][z].lock ) )
                 {
@@ -1081,7 +1141,8 @@ extern "C" gboolean handler_click_on_widget (GtkWidget *widget,
                         {
                             D3(cerr<<"D3 handler click on widget"<<endl)
                             D8(cerr<<"D8 insert half pair returned false"<<endl)
-                            gtk_label_set_text ( label_from_name("label_down"), "-" ) ;
+                            gtk_label_set_text (    label_from_name
+                                                    ( "label_down" ), "-"    ) ;
                             return TRUE ;
                         }
                         quit = true ;
@@ -1093,8 +1154,8 @@ extern "C" gboolean handler_click_on_widget (GtkWidget *widget,
     {
         D3(cerr<<"D3 handler click on widget"<<endl)
         D8(cerr<<"D8 quit was false"<<endl)
-        reset_highlighted_cell() ;
-        reset_row() ;
+        reset_highlighted_cell () ;
+        reset_row () ;
         redraw_widget ( "playground" ) ;
     }
 
@@ -1114,7 +1175,7 @@ extern "C" gboolean handler_delete_event ( GtkWidget * widget,
     if ( name != NULL )
         delete_tiles_names () ;
     if ( playing )
-        end_game() ;
+        end_game () ;
 
     call_gtk_main_quit() ;
 
@@ -1125,10 +1186,11 @@ extern "C" gboolean handler_delete_event ( GtkWidget * widget,
 /*fine implementazione funzioni handler*/
 
 /*inizio implementazione funzioni private*/
-static void draw_text_on_play_ground ( const colour &bg, const colour &text_color,
-                                GtkWidget * &widget, cairo_t * &cr,
-                                char* title, char _line[][MAXLINE],
-                                const int &h_title, const int &h_text      )
+static void draw_text_on_play_ground ( const colour &bg, const colour
+                                       &text_color, GtkWidget * &widget,
+                                       cairo_t * &cr, char* title,
+                                       char _line[][MAXLINE], const int
+                                       &h_title, const int &h_text      )
 
 {
     D1(cerr<<"D1 draw text on play ground\n")
@@ -1140,8 +1202,8 @@ static void draw_text_on_play_ground ( const colour &bg, const colour &text_colo
     static const int line_x = 60 ;
     static const int line_y = title_y + newline ;
 
-    cairo_set_source_rgb(cr, bg.r, bg.g, bg.b ) ;
-	cairo_paint(cr) ;
+    cairo_set_source_rgb (cr, bg.r, bg.g, bg.b ) ;
+	cairo_paint ( cr ) ;
 
 	cairo_surface_t * surface ;
 	cairo_t * cont ;
@@ -1149,55 +1211,54 @@ static void draw_text_on_play_ground ( const colour &bg, const colour &text_colo
 	cairo_font_extents_t fe;
 	cairo_text_extents_t te;
 
-    surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
-                                          gtk_widget_get_allocated_width
-                                                                   ( widget ),
-                                          gtk_widget_get_allocated_height
-                                                                   ( widget )) ;
-	cont = cairo_create (surface);
+    surface = cairo_image_surface_create ( CAIRO_FORMAT_ARGB32,
+                                           gtk_widget_get_allocated_width
+                                                                  ( widget ),
+                                           gtk_widget_get_allocated_height
+                                                                  ( widget ) ) ;
+	cont = cairo_create ( surface ) ;
 
-	cairo_set_source_rgb(cont, text_color.r, text_color.g, text_color.b ) ;
-	cairo_select_font_face (cont, "sans-serif", CAIRO_FONT_SLANT_ITALIC,
-                            CAIRO_FONT_WEIGHT_NORMAL);
-	cairo_font_extents (cont, &fe);
+	cairo_set_source_rgb ( cont, text_color.r, text_color.g, text_color.b ) ;
+	cairo_select_font_face ( cont, "sans-serif", CAIRO_FONT_SLANT_ITALIC,
+                             CAIRO_FONT_WEIGHT_NORMAL) ;
+	cairo_font_extents ( cont, &fe ) ;
 
     if ( title != NULL )
     {
 
 
-    	cairo_set_font_size (cont, h_title);
+    	cairo_set_font_size ( cont, h_title );
 
         if ( _line == NULL )
-        	cairo_move_to (cont, 185, title_y);
+        	cairo_move_to ( cont, 185, title_y );
         else
-        	cairo_move_to (cont, title_x, title_y);
-	    cairo_text_extents (cont, title, &te);
-    	cairo_show_text (cont, title);
+        	cairo_move_to ( cont, title_x, title_y );
+	    cairo_text_extents ( cont, title, &te );
+    	cairo_show_text ( cont, title );
     }
     if ( _line != NULL )
     {
-	    cairo_select_font_face (cont, "sans-serif", CAIRO_FONT_SLANT_NORMAL,
-                                CAIRO_FONT_WEIGHT_NORMAL);
-	    cairo_set_font_size (cont, h_text);
+	    cairo_select_font_face ( cont, "sans-serif", CAIRO_FONT_SLANT_NORMAL,
+                                 CAIRO_FONT_WEIGHT_NORMAL) ;
+	    cairo_set_font_size ( cont, h_text ) ;
 	    for ( int i = 0 ; i < 13 ; i++ )
 	    {
-	        cairo_move_to (cont, line_x, line_y+newline*i);
-        	cairo_text_extents (cont, _line[i], &te);
-	        cairo_show_text (cont, _line[i]);
+	        cairo_move_to ( cont, line_x, line_y+newline*i ) ;
+        	cairo_text_extents ( cont, _line[i], &te ) ;
+	        cairo_show_text ( cont, _line[i] ) ;
 	    }
     }
 	cairo_set_source_surface ( cr, surface, 0, 0 ) ;
-	cairo_paint(cr);
+	cairo_paint ( cr ) ;
 
-	cairo_destroy (cont);
-	cairo_surface_destroy (surface);
+	cairo_destroy ( cont ) ;
+	cairo_surface_destroy ( surface ) ;
 
     D10(cerr<<"D10 draw text on play ground\n")
 }
 
-static void draw_number_on_tile ( cairo_t * &cr_tile,
-                           cairo_surface_t * &_obj,
-                           const int &num )
+static void draw_number_on_tile ( cairo_t * &cr_tile, cairo_surface_t * &_obj,
+                                  const int &num )
 {
     D2(cerr<<"D2 draw number on tile\n")
 
@@ -1214,7 +1275,7 @@ static void draw_number_on_tile ( cairo_t * &cr_tile,
     * ^^^^^^^^^
     */
     for ( int i=0 ; i<10 ; i++ )
-        point[i]=false ;
+        point[i] = false ;
     switch ( num )
     {
         case 1: P(4) ;
@@ -1237,34 +1298,34 @@ static void draw_number_on_tile ( cairo_t * &cr_tile,
                 break ;
     } ;
 
- 	if (point[0])
+ 	if ( point[0] )
         cairo_set_source_surface ( cr_tile, _obj, 4, 4 ) ;
         cairo_paint ( cr_tile ) ;
- 	if (point[1])
+ 	if ( point[1] )
         cairo_set_source_surface ( cr_tile, _obj, 19, 4 ) ;
         cairo_paint ( cr_tile ) ;
- 	if (point[2])
+ 	if ( point[2] )
         cairo_set_source_surface ( cr_tile, _obj, 34, 4 ) ;
         cairo_paint ( cr_tile ) ;
- 	if (point[3])
+ 	if ( point[3] )
         cairo_set_source_surface ( cr_tile, _obj, 4, 19 ) ;
         cairo_paint ( cr_tile ) ;
- 	if (point[4])
+ 	if ( point[4] )
         cairo_set_source_surface ( cr_tile, _obj, 19, 19 ) ;
         cairo_paint ( cr_tile ) ;
- 	if (point[5])
+ 	if ( point[5] )
         cairo_set_source_surface ( cr_tile, _obj, 34, 19 ) ;
         cairo_paint ( cr_tile ) ;
- 	if (point[6])
+ 	if ( point[6] )
         cairo_set_source_surface ( cr_tile, _obj, 4, 34 ) ;
         cairo_paint ( cr_tile ) ;
- 	if (point[7])
+ 	if ( point[7] )
         cairo_set_source_surface ( cr_tile, _obj, 19, 34 ) ;
         cairo_paint ( cr_tile ) ;
- 	if (point[8])
+ 	if ( point[8] )
         cairo_set_source_surface ( cr_tile, _obj, 34, 34 ) ;
         cairo_paint ( cr_tile ) ;
- 	if (point[9])
+ 	if ( point[9] )
         cairo_set_source_surface ( cr_tile, _obj, 19, 11 ) ;
         cairo_paint ( cr_tile ) ;
 
@@ -1272,8 +1333,8 @@ static void draw_number_on_tile ( cairo_t * &cr_tile,
 }
 
 static void sub_paint_tile ( cairo_t * &context, cairo_surface_t * &surf1,
-                      cairo_surface_t * &surf2, const int &num,
-                      const char * &image_name, const tile_type &tt )
+                             cairo_surface_t * &surf2, const int &num,
+                             const char * &image_name, const tile_type &tt )
 {
     D2(cerr<<"D2 sub paint tile\n")
 
@@ -1290,7 +1351,7 @@ static void sub_paint_tile ( cairo_t * &context, cairo_surface_t * &surf1,
     else
     /*debug this case*/ ;
 
-    cairo_paint( context ) ;
+    cairo_paint ( context ) ;
     cairo_surface_destroy ( surf1 ) ;
     surf1 = NULL ;
     cairo_surface_destroy ( surf2 ) ;
@@ -1299,10 +1360,10 @@ static void sub_paint_tile ( cairo_t * &context, cairo_surface_t * &surf1,
     D9(cerr<<"D9 sub paint tile\n")
 }
 
-static cairo_surface_t * paint_tile (  const int &num,
-                                const int &x,
-                                const int &y,
-                                const int &z )
+static cairo_surface_t * paint_tile ( const int &num,
+                                      const int &x,
+                                      const int &y,
+                                      const int &z )
 {
     D2(cerr<<"D2 paint tile\n")
 
@@ -1312,7 +1373,8 @@ static cairo_surface_t * paint_tile (  const int &num,
     surface = cairo_image_surface_create ( CAIRO_FORMAT_ARGB32, 62, 62 ) ;
     context = cairo_create ( surface ) ;
 
-    cairo_surface_t * _surface_tile = cairo_image_surface_create_from_png ( I_TILE ) ;
+    cairo_surface_t * _surface_tile = cairo_image_surface_create_from_png
+                                                                    ( I_TILE ) ;
     cairo_set_source_surface ( context, _surface_tile , 0, 0 ) ;
 
     cairo_surface_destroy ( _surface_tile ) ;
@@ -1321,78 +1383,97 @@ static cairo_surface_t * paint_tile (  const int &num,
 
     cairo_surface_t * temp = NULL ;
     cairo_surface_t * _surface_from_png = NULL ;
-    if (num<=35)
+    if ( num < =35 )
     {
-        sub_paint_tile( context, _surface_from_png, temp, num, I_CIRCLE, tt_number ) ;
+        sub_paint_tile( context, _surface_from_png, temp, num, I_CIRCLE,
+                        tt_number ) ;
     }
-    else if (num<=71)
+    else if ( num <= 71 )
     {
-        sub_paint_tile( context, _surface_from_png, temp, num, I_BAMBOO, tt_number ) ;
+        sub_paint_tile( context, _surface_from_png, temp, num, I_BAMBOO,
+                        tt_number ) ;
     }
-    else if (num<=107)
+    else if ( num <= 107 )
  	{
-        sub_paint_tile( context, _surface_from_png, temp, num, I_CROSS, tt_number ) ;
+        sub_paint_tile( context, _surface_from_png, temp, num, I_CROSS,
+                        tt_number ) ;
     }
-    else if(num<=123)
+    else if( num <= 123 )
     {
-        const int wind = (num-108)%4 ; /*0==east 1==sud 2==west 3==north*/
-        switch (wind)
+        const int wind = ( num - 108 ) % 4 ; /*0==east 1==sud 2==west 3==north*/
+        switch ( wind )
         {
-            case 0: sub_paint_tile( context, _surface_from_png, temp, num, I_EAST, tt_image ) ;
+            case 0: sub_paint_tile ( context, _surface_from_png, temp, num,
+                                     I_EAST, tt_image ) ;
                     break ;
-            case 1: sub_paint_tile( context, _surface_from_png, temp, num, I_SUD, tt_image ) ;
+            case 1: sub_paint_tile ( context, _surface_from_png, temp, num,
+                                     I_SUD, tt_image ) ;
                     break ;
-            case 2: sub_paint_tile( context, _surface_from_png, temp, num, I_WEST, tt_image ) ;
+            case 2: sub_paint_tile ( context, _surface_from_png, temp, num,
+                                     I_WEST, tt_image ) ;
                     break ;
-            case 3: sub_paint_tile( context, _surface_from_png, temp, num, I_NORTH, tt_image ) ;
+            case 3: sub_paint_tile ( context, _surface_from_png, temp, num,
+                                     I_NORTH, tt_image ) ;
                     break ;
         };
     }
-    else if (num<=135)
+    else if ( num <= 135 )
     {
-        const int dragon = (num-124)%3 /*0==red 1==green 2==white*/;
-        switch (dragon)
+        const int dragon = ( num - 124 ) % 3 /*0==red 1==green 2==white*/;
+        switch ( dragon )
         {
-            case 0: sub_paint_tile( context, _surface_from_png, temp, num, I_RED_DRAGON, tt_image ) ;
+            case 0: sub_paint_tile ( context, _surface_from_png, temp, num,
+                                     I_RED_DRAGON, tt_image ) ;
                     break ;
-            case 1: sub_paint_tile( context, _surface_from_png, temp, num, I_GREEN_DRAGON, tt_image ) ;
+            case 1: sub_paint_tile ( context, _surface_from_png, temp, num,
+                                     I_GREEN_DRAGON, tt_image ) ;
                     break ;
-            case 2: sub_paint_tile( context, _surface_from_png, temp, num, I_WHITE_DRAGON, tt_image ) ;
+            case 2: sub_paint_tile ( context, _surface_from_png, temp, num,
+                                     I_WHITE_DRAGON, tt_image ) ;
                     break ;
         };
     }
-    else if (num<=143)
+    else if ( num <= 143 )
     {
-        switch (num)
+        switch ( num )
         {
             case 136:/*spring*/
-                     sub_paint_tile( context, _surface_from_png, temp, num, I_SPRING, tt_image ) ;
+                     sub_paint_tile ( context, _surface_from_png, temp, num,
+                                      I_SPRING, tt_image ) ;
                      break ;
             case 137:/*summer*/
-                     sub_paint_tile( context, _surface_from_png, temp, num, I_SUMMER, tt_image ) ;
+                     sub_paint_tile ( context, _surface_from_png, temp, num,
+                                      I_SUMMER, tt_image ) ;
                      break ;
             case 138:/*autumn*/
-                     sub_paint_tile( context, _surface_from_png, temp, num, I_AUTUMN, tt_image ) ;
+                     sub_paint_tile ( context, _surface_from_png, temp, num,
+                                      I_AUTUMN, tt_image ) ;
                      break ;
             case 139:/*winter*/
-                     sub_paint_tile( context, _surface_from_png, temp, num, I_WINTER, tt_image ) ;
+                     sub_paint_tile ( context, _surface_from_png, temp, num,
+                                      I_WINTER, tt_image ) ;
                      break ;
             case 140:/*plumb*/
-                     sub_paint_tile( context, _surface_from_png, temp, num, I_PLUMB, tt_image ) ;
+                     sub_paint_tile ( context, _surface_from_png, temp, num,
+                                      I_PLUMB, tt_image ) ;
                      break ;
             case 141:/*orchid*/
-                     sub_paint_tile( context, _surface_from_png, temp, num, I_ORCHID, tt_image ) ;
+                     sub_paint_tile ( context, _surface_from_png, temp, num,
+                                      I_ORCHID, tt_image ) ;
                      break ;
             case 142:/*chrysantemum*/
-                     sub_paint_tile( context, _surface_from_png, temp, num, I_CHRYSANTEMUM, tt_image ) ;
+                     sub_paint_tile ( context, _surface_from_png, temp, num,
+                                      I_CHRYSANTEMUM, tt_image ) ;
                      break ;
             case 143:/*bamboo_forest*/
-                     sub_paint_tile( context, _surface_from_png, temp, num, I_BAMBOO_FOREST, tt_image ) ;
+                     sub_paint_tile ( context, _surface_from_png, temp, num,
+                                      I_BAMBOO_FOREST, tt_image ) ;
                      break ;
         }
-    } else if (( num == TILES )||( num == TILES+1 ))
+    } else if ( ( num == TILES )||( num == TILES+1 ) )
     {
-        sub_paint_tile( context, _surface_from_png, temp, num, I_DUMMY, tt_image ) ;
+        sub_paint_tile ( context, _surface_from_png, temp, num,
+                         I_DUMMY, tt_image ) ;
     }
 
     if ( temp != NULL )
@@ -1416,14 +1497,14 @@ static cairo_surface_t * paint_tile (  const int &num,
 
     D9(cerr<<"D9 paint tile\n")
 
-    assert( surface != NULL ) ;
+    assert(surface != NULL) ;
 
     return ( surface ) ;
     /* la surface la dealloco nella funzione chiamante*/
 }
 
 static cairo_surface_t * number_on_tile (  cairo_surface_t * _obj,
-                                    const int &number )
+                                           const int &number )
 {
     D2(cerr<<"D2 number on tile\n")
 
@@ -1432,10 +1513,10 @@ static cairo_surface_t * number_on_tile (  cairo_surface_t * _obj,
 
     cairo_t * cr_tile = cairo_create ( _surf_50x50 ) ;
 
-    cairo_set_source_rgb( cr_tile, peach.r , peach.g , peach.b ) ;
-    cairo_paint( cr_tile ) ;
+    cairo_set_source_rgb ( cr_tile, peach.r , peach.g , peach.b ) ;
+    cairo_paint ( cr_tile ) ;
  
-    draw_number_on_tile( cr_tile, _obj, number ) ;
+    draw_number_on_tile ( cr_tile, _obj, number ) ;
 
     cairo_destroy ( cr_tile ) ;
 
@@ -1453,7 +1534,7 @@ static GtkEntry * entry_from_name ( const char * name )
 
     D9(cerr<<"D9 entry from name\n")
 
-    return GTK_ENTRY(gtk_builder_get_object(builder, name ) ) ;
+    return GTK_ENTRY ( gtk_builder_get_object ( builder, name ) ) ;
 }
 
 static GtkLabel * label_from_name ( const char * name )
@@ -1462,7 +1543,7 @@ static GtkLabel * label_from_name ( const char * name )
 
     D9(cerr<<"D9 label from name\n")
 
-    return GTK_LABEL(gtk_builder_get_object(builder, name ) ) ;
+    return GTK_LABEL ( gtk_builder_get_object ( builder, name ) ) ;
 }
 
 static GtkWidget * widget_from_name ( const char * name )
@@ -1471,7 +1552,7 @@ static GtkWidget * widget_from_name ( const char * name )
 
     D9(cerr<<"D9 widget from name\n")
 
-    return GTK_WIDGET(gtk_builder_get_object(builder, name ) ) ;
+    return GTK_WIDGET ( gtk_builder_get_object ( builder, name ) ) ;
 }
 
 static GtkToggleButton * tb_from_name ( const char * name )
@@ -1487,7 +1568,7 @@ static bool check_position ( const tile * punt, const int &x, const int &y )
 {
     D1(cerr<<"D1 check position\n")
 
-    assert(punt!=NULL);
+    assert(punt != NULL);
 
     if ( ( punt->x1 ) >= x )
         return false ;
@@ -1520,14 +1601,14 @@ static int number_from_string ( const char * word )
 
     D9(cerr<<"D9 number from string\n")
 
-    return (output-'0') ;
+    return ( output-'0' ) ;
 }
 
 static void calculate_coor_x_y ( const int &x,
-                          const int &y,
-                          const int &z,
-                          int &_dx,
-                          int &_dy )
+                                 const int &y,
+                                 const int &z,
+                                 int &_dx,
+                                 int &_dy )
 {
     D2(cerr<<"D2 calculate coor x y\n")
 
@@ -1545,7 +1626,7 @@ static void set_coor_tile ( tile * punt, const int &x, const int &y )
 {
     D2(cerr<<"D2 set coor tile\n")
 
-    assert( punt != NULL ) ;
+    assert(punt != NULL) ;
 
     punt->x1 = x + 10 ;
     punt->y1 = y ;

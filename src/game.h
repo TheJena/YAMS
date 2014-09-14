@@ -53,14 +53,14 @@ bool start_game () ;
  * partita.
  * @return il valore di ritorno della funzione ::save_game_on_file.
  */
-bool save_game(char * filename ) ;
+bool save_game ( char * filename ) ;
 
 /**
  * Funzione che passa al modulo io_file, i dati necessari per caricare una
  * partita.
  * @return il valore di ritorno della funzione ::load_game_from_file.
  */
-bool load_game( char * filename ) ;
+bool load_game ( char * filename ) ;
 
 /**
  * Funzione che rimette in gioco le ultime 4 tessere rimosse e reinizializza
@@ -74,13 +74,13 @@ void undo_last_two_couples () ;
  * passa per riferimento costante alla funzione ::refresh_scores_labels, per
  * stamparle a video.
  */
-void refresh_scores() ;
+void refresh_scores () ;
 
 /**
  * Funzione che pulisce la riga della tabella mov all' indice di riga statico
  * globale.
  */
-void reset_row() ;
+void reset_row () ;
 
 /**
  * Funzione che inserice nella tabella mov, la tessera passata in input.
@@ -88,7 +88,8 @@ void reset_row() ;
  * coordinate della medesima.
  * @return il valore di ritorno della ::check_couple.
  */
-bool insert_half_pair ( const int &num, const int &x, const int &y, const int &z ) ;
+bool insert_half_pair ( const int &num, const int &x, const int &y,
+                        const int &z ) ;
 
 /**
  * Funzione che predispone il termine della partita.
