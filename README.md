@@ -10,7 +10,7 @@ http://algogroup.unimore.it/people/marko/courses/programmazione_II/).
 Usage
 =====
 
-First of all download and uncompress the archive:
+First of all [download](https://github.com/TheJena/YAMS/blob/master/mahjong.tar.gz?raw=true) and uncompress the archive:
 ```
 tar zxvf mahjong.tar.gz mahjong
 ```
