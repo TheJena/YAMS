@@ -3,7 +3,8 @@ YAMS (Yet Another Mahjong Solitaire)
 ========================
 The major purpose of YAMS is the "Programmazione 2" exam ("Programming 2" is
 a course about advanced skills in programming such as analysis, development
-of advanced algorithms, development and testing of applications written in C++
+of advanced algorithms, development and testing of applications written in C++.
+For more infos please visit
 http://algogroup.unimore.it/people/marko/courses/programmazione_II/).
 
 Usage
