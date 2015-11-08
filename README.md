@@ -1,6 +1,7 @@
 
 YAMS (Yet Another Mahjong Solitaire)
 ========================
+This project is a game, which uses mahjong tiles; what you have to do is collect pairs of tiles against computer in order to achieve the highest score. 
 The major purpose of YAMS is the "Programmazione 2" exam ("Programming 2" is
 a course about advanced skills in programming such as analysis, development
 of advanced algorithms, development and testing of applications written in C++.
