@@ -1,0 +1,1 @@
+that project is a game, that uses mahjong tiles, in which you have to collect pairs of tiles against computer in order to have the highest score.
